@@ -1,7 +1,7 @@
 /*                 modo MOBILE                   */
 
 body {
-    font-family: 'Times New Roman', Times, serif;
+    font-family: Arial, sans-serif;
     Background-color: black;
     color: white;
     font-size: 50%;
@@ -38,7 +38,6 @@ li {
     font-size: 2em;
     font-style: normal;
 }
-
 main {
     display: flex;
     flex-direction: column;
@@ -48,24 +47,21 @@ article , aside {
     margin: 1%;
     margin-right: 5%;
 }
-
 footer {
     background-color: gray;
 }
-
-
 a.btn {
-  display: inline-block;
-  background-color: #ffffff; /* blanco */
-  color: #000000;            /* letras negras */
-  text-decoration: none;
-  border: 1px solid #000000; /* borde negro */
-  padding: 10px 20px;
-  margin: 10px;
-  border-radius: 5px;
-  transition: all 0.3s ease;
+    display: inline-block;
+    background-color: white;
+    color: black;
+    text-decoration: none;
+    border: 1px solid grey;
+    padding: 10px 20px;
+    margin: 20px;
+    border-radius: 5px;
+    font-size: 2em; 
+    font-weight: bold;
 }
-
 
 
 /*                 pasar a modo DESKTOP          */
