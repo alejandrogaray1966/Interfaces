@@ -7,7 +7,7 @@ body{
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    height: 100vh
+    height: auto;
 }
 .titulo{
     font-weight: bold;
@@ -55,5 +55,3 @@ button{
     color: white;
     border-color: #9700CC;
 }
-
-

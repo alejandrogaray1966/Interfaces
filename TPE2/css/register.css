@@ -1,0 +1,272 @@
+/*
+|--------------------------------------------------------------------------
+| ESTILOS GENERALES
+|--------------------------------------------------------------------------
+*/
+body {
+    background-color: black; /* Un color de respaldo por si la imagen no carga */
+    background-image: url('../img/fondo/fondoL.jpg'); /* Ruta a tu imagen */
+    background-size: cover; /* Para que la imagen cubra todo el fondo */
+    backdrop-filter: blur(6px); /* Aplica el desenfoque */
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    overflow-y: auto;
+    transition: opacity 0.9s ease-in-out, transform 0.9s ease-in-out; /* Transiciones suaves */
+}
+
+body.fade-out {
+    opacity: 0;
+    transform: translateX(-100px); /* Se mueve ligeramente a la izquierda mientras se desvanece */
+}
+
+/*
+|--------------------------------------------------------------------------
+| CONTENEDOR PRINCIPAL (ADAPTADO PARA REGISTRO)
+|--------------------------------------------------------------------------
+*/
+.register-container {
+    position: relative; 
+    background-color: rgba(30, 7, 58, 0.85); /* Un poco más opaco para el fondo con más campos */
+    padding: 1% 3%;
+    border-radius: 8px;
+    box-shadow: 0px 4px 30px rgba(255, 255, 255, 0.25);
+    width: 28%; /* Aumentamos el ancho ligeramente para más campos */
+    max-width: 450px; /* Establecemos un máximo */
+    height: auto; /* Altura automática esencial para que se ajuste a los 7 campos */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px; 
+    margin-bottom: 50px;
+}
+
+/*
+|--------------------------------------------------------------------------
+| ENCABEZADO Y LOGO
+|--------------------------------------------------------------------------
+*/
+.header-logo img {
+    width: 200px; /* O el tamaño que prefieras */
+    height: auto; /* Mantiene la proporción */
+}
+
+.header-logo {
+    position: absolute; 
+    top: -20px; 
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10; 
+}
+
+h2 {
+    color: white;
+    font-size: 1.2rem;
+    margin-bottom: 3%;
+    text-align: left;
+}
+
+form {
+    width: 100%;
+}
+
+/*
+|--------------------------------------------------------------------------
+| ETIQUETAS Y CAMPOS DE FORMULARIO
+|--------------------------------------------------------------------------
+*/
+label {
+    color: white;
+    display: block;
+    margin-bottom: 1%;
+    font-size: 0.6rem; 
+}
+
+/* Selector unificado para todos los campos de texto/fecha/email/password */
+input[type="text"] , input[type="date"] , input[type="email"] , .password-container input {
+    width: 100%;
+    padding: 3%; 
+    margin-bottom: 3%; 
+    background-color: white;
+    border: none;
+    border-radius: 4px;
+    color: black;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+/*
+|--------------------------------------------------------------------------
+| REPETIR CONTRASEÑA E ICONOS (PASSWORD CONTAINER)
+|--------------------------------------------------------------------------
+*/
+
+/* Contenedor del campo de contraseña y el ícono */
+.password-container {
+    position: relative; 
+    width: 100%; 
+}
+
+/* El input dentro del contenedor */
+.password-container input {
+    box-sizing: border-box; 
+    padding-right: 40px; 
+}
+
+/* El ícono del ojo */
+.password-container .toggle-password {
+    position: absolute;
+    right: 10px; 
+    top: 50%; 
+    transform: translateY(-50%); 
+    cursor: pointer;
+    width: 20px; 
+    height: auto;
+}
+
+.password-container .toggle-password:hover {
+    transform: translateY(-50%) scale(1.28); 
+}
+
+/*
+|--------------------------------------------------------------------------|
+/* Google inserta el iframe dentro de tu #recaptcha-container */
+#recaptcha-container {
+    /* Define el ancho máximo que deseas que tenga tu widget */
+    width: 100%; 
+    /* Centra el widget si es necesario (asumiendo que está en un bloque) */
+    margin: 0 auto; 
+    /* Oculta lo que se desborde al escalar */
+    overflow: hidden; 
+}
+/* Aplica la escala al iframe de reCAPTCHA */
+#recaptcha-container iframe {
+    /* ESCALA: ajusta el valor, por ejemplo, 0.9 lo hace un 10% más pequeño */
+    /* Si quieres reducirlo *muy poquito*, prueba con un valor como 0.95 */
+    transform: scale(0.80); /* Esto lo reducirá un 20% */
+}
+
+/*
+|--------------------------------------------------------------------------
+| BOTÓN PRINCIPAL
+|--------------------------------------------------------------------------
+*/
+button[type="submit"] {
+    width: 100%;
+    padding: 3%; 
+    background-color: #00eba4;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 2%; 
+    margin-bottom: 3%;
+    transition: background-color 0.5s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #ff00d6;
+}
+
+/*
+|--------------------------------------------------------------------------
+| REGISTRO CON (SOCIAL ICONS)
+|--------------------------------------------------------------------------
+*/
+.social-login {
+    display: flex;
+    flex-direction: column; /* Change to column */
+    align-items: center; /* Center items horizontally */
+}
+
+.social-login span {
+    font-size: 0.8rem;
+    color: white;
+    text-align: center;
+    display: flex; /* Add Flexbox properties to the span itself */
+    align-items: center; /* Vertically center the text and lines */
+    justify-content: center;
+    width: 100%;
+    margin: 20px 0px 5px; /* Adds spacing above and below */
+}
+
+/* Create the lines using pseudoelements */
+.social-login span::before, .social-login span::after {
+    content: '';
+    flex-grow: 1; /* Makes the lines fill the available space */
+    height: 1px;
+    background-color: white; /* You can change this color */
+}
+
+/* Add spacing between the text and the lines */
+.social-login span::before {
+    margin-right: 15px;
+}
+
+.social-login span::after {
+    margin-left: 15px;
+}
+
+.social-login .social-icons {
+    display: flex;
+    flex-direction: row;
+}
+
+.social-login a img {
+    width: 35px; /* Add 'px' unit */
+    height: auto;
+    margin: 0px 20px;
+}
+
+.social-login a img:hover {
+    transform: scale(1.28); /* Aumenta el tamaño un 28% (35px * 1.28 ≈ 45px) */
+}
+
+/*
+|--------------------------------------------------------------------------
+| ENLACE FINAL
+|--------------------------------------------------------------------------
+*/
+p {
+    color: white;
+    text-align: center;
+    font-size: 0.8rem;
+    margin-top: 5%;
+}
+
+p a {
+    color: #00eba4;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.5s ease;
+}
+
+p a:hover {
+    color: #ff00d6;
+}
+
+/* --------------------------------------------------------------------------------------- */
+/*                          Media query para dispositivos móviles                          */
+/* --------------------------------------------------------------------------------------- */
+@media (max-width: 600px) {
+    .register-container {
+        width: 65%; /* Ancho más grande para llenar la pantalla en móvil */
+        height: auto; /* Altura automática para que se ajuste al contenido */
+    }
+}
+/* --------------------------------------------------------------------------------------- */
+/*                          Media query para tablets y pantallas medianas                  */
+/* --------------------------------------------------------------------------------------- */
+@media (min-width: 601px) and (max-width: 1024px) {
+    .register-container {
+        width: 45%; /* Ancho intermedio para tablets */
+        height: auto; /* Altura intermedia para tablets */
+    }
+}
+/* --------------------------------------------------------------------------------------- */

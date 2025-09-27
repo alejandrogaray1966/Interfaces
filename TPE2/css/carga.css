@@ -1,0 +1,123 @@
+/* --- Estilos para la Pantalla de Carga --- */
+#loading-screen {
+    display: flex; /* Estilos para centrar todo */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed; /* Para que cubra toda la pantalla */
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: black; /* Un color oscuro para un buen contraste */
+    color:  #00eba4;
+    font-family: Arial, Helvetica, sans-serif;
+    z-index: 1000;
+}
+
+/* --- Estilos para el Logo --- */
+#site-name {
+    display: flex; /* Mantenemos el contenedor como flex para que las letras floten bien */
+    width: fit-content; /* Evita que el logo ocupe todo el ancho si no es necesario */
+    margin-bottom: 20px; /* Separación del logo a la barra de progreso */
+}
+
+/* Cada letra en un span para animarlas individualmente */
+#site-name span {
+    /* Estilos iniciales para ocultar las letras o darles un efecto */
+    opacity: 0; 
+    font-size: 6em;
+    font-weight: bold;
+    display: inline-block; /* Importante para que transformaciones funcionen */
+}
+
+/* CLASE NUEVA: Solo la añadiremos con JS a cada span */
+.span-animate {
+    /* animation: appearUp 0.6s ease-out forwards; */ /* sin rebote efecto suave */
+    animation: appearUp 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.4) forwards; /* con rebote */
+    /* 'forwards' mantiene el estado final (opacity: 1) */
+}
+
+/* El JS asignará dinámicamente el 'animation-delay' o una clase para que aparezcan progresivamente. */
+@keyframes appearUp {
+    0% {
+        opacity: 0;
+        transform: translateY(60px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- Estilos para la Barra --- */
+#progress-bar-container {
+    width: 60%;
+    height: 15px;
+    background-color: #34495e; /* Fondo de la barra */
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* La barra de progreso que se llenará */
+#progress-bar {
+    width: 0%; /* Inicia en 0 */
+    height: 100%;
+    background-color:  #ff00d6; /* Color de avance (rosa) */
+    transition: width 0.1s linear; /* Suaviza el movimiento de la barra (IMPORTANTE) */
+}
+
+/* Texto que muestra el porcentaje */
+#progress-text {
+    margin-top: 10px;
+    font-size: 1.5em;
+    color: #ff00d6; /* Color que combine con la barra */
+}
+
+/* Clase para ocultar la pantalla de carga al final */
+.loaded {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none; /* Asegura que la pantalla no interfiera durante el desvanecimiento */
+    transition: opacity 1s, visibility 1s;
+}
+
+/* --------------------------------------------------------------------------------------- */
+/*                          Media query para dispositivos móviles                          */
+/* --------------------------------------------------------------------------------------- */
+
+@media screen and (max-width: 600px) {
+    
+    /* 1. Reducir el tamaño de las letras del logo */
+    #site-name span {
+        font-size: 2.8em; /* Nuevo tamaño para pantallas pequeñas */
+    }
+
+    /* 2. Opcional: Reducir el ancho de la barra para que no se pegue a los bordes */
+    #progress-bar-container {
+        width: 80%;
+    }
+
+    /* 3. Opcional: Reducir el tamaño de la fuente del porcentaje */
+    #progress-text {
+        font-size: 1.2em;
+    }
+}
+
+/* --------------------------------------------------------------------------------------- */
+/*                          Media query para tablets y pantallas medianas                  */
+/* --------------------------------------------------------------------------------------- */
+
+@media (min-width: 601px) and (max-width: 1024px) {
+    #site-name span {
+        font-size: 4.5em; /* Tamaño intermedio para tablets */
+    }
+
+    #progress-bar-container {
+        width: 70%; /* Ancho intermedio para tablets */
+    }
+
+    #progress-text {
+        font-size: 1.4em; /* Tamaño de fuente intermedio */
+    }
+}
+
+/* --- FIN DE ESTILOS PARA LA PANTALLA DE CARGA --- */
