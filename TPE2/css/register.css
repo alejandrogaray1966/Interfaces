@@ -134,20 +134,28 @@ input[type="text"] , input[type="date"] , input[type="email"] , .password-contai
 
 /*
 |--------------------------------------------------------------------------|
-/* Google inserta el iframe dentro de tu #recaptcha-container */
+| Google inserta el iframe dentro de tu #recaptcha-container               |
+|--------------------------------------------------------------------------|
+*/
 #recaptcha-container {
-    /* Define el ancho máximo que deseas que tenga tu widget */
-    width: 100%; 
-    /* Centra el widget si es necesario (asumiendo que está en un bloque) */
-    margin: 0 auto; 
-    /* Oculta lo que se desborde al escalar */
+    display: flex;
+    align-items: center;           /* centra verticalmente el contenido del contenedor */
+    justify-content: flex-start;  /* alinea el widget a la izquierda */
+    width: 100%;
+    margin: 0; 
     overflow: hidden; 
+    box-sizing: content-box; /* evita recortes inesperados por el scale */
 }
-/* Aplica la escala al iframe de reCAPTCHA */
+
+/* Aplica la escala al iframe de reCAPTCHA y fija el origen en la izquierda */
 #recaptcha-container iframe {
-    /* ESCALA: ajusta el valor, por ejemplo, 0.9 lo hace un 10% más pequeño */
-    /* Si quieres reducirlo *muy poquito*, prueba con un valor como 0.95 */
-    transform: scale(0.80); /* Esto lo reducirá un 20% */
+    transform: scale(0.80); /* Ajusta este valor si quieres más/menos reducción */
+    transform-origin: left center; /* mantiene la 'imagen' a la izquierda al escalar */
+    width: 304px;  /* ancho estándar del widget antes de escalar */
+    height: 78px;  /* alto estándar del widget antes de escalar */
+    border: none;
+    display: block;
+    margin: 0;
 }
 
 /*
@@ -260,6 +268,7 @@ p a:hover {
         height: auto; /* Altura automática para que se ajuste al contenido */
     }
 }
+
 /* --------------------------------------------------------------------------------------- */
 /*                          Media query para tablets y pantallas medianas                  */
 /* --------------------------------------------------------------------------------------- */
