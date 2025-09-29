@@ -7,12 +7,11 @@
     <link rel="icon" type="image/png" href="../img/favicon/iconoL.png">
     <link rel="stylesheet" href="../css/register.css"> 
 
-
     <!--------------- Función para LEER el Google reCAPTCHA -------------------------------->
         <script type="text/javascript">
             var onloadCallback = function() {
-                // Puedes quitar el alert si quieres
-                alert("g-recaptcha is ready!");
+                // Puedes quitar o mostrar el alert si quieres para ver si se carga bien
+                // alert("g-recaptcha is ready!");
                 // Llama a la función render con el ID del contenedor y tu clave
                 grecaptcha.render('recaptcha-container', {  
                         // ¡Usa la clave de prueba de Google aquí!
@@ -27,7 +26,6 @@
             async defer>
         </script>
     <!------------------------------ FIN Google reCAPTCHA ---------------------------->
-
 
 </head>
 <body>

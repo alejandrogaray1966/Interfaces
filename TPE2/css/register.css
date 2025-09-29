@@ -149,7 +149,7 @@ input[type="text"] , input[type="date"] , input[type="email"] , .password-contai
 
 /* Aplica la escala al iframe de reCAPTCHA y fija el origen en la izquierda */
 #recaptcha-container iframe {
-    transform: scale(0.80); /* Ajusta este valor si quieres más/menos reducción */
+    transform: scale(0.98); /* Ajusta este valor si quieres más/menos reducción */
     transform-origin: left center; /* mantiene la 'imagen' a la izquierda al escalar */
     width: 304px;  /* ancho estándar del widget antes de escalar */
     height: 78px;  /* alto estándar del widget antes de escalar */
@@ -267,6 +267,10 @@ p a:hover {
         width: 65%; /* Ancho más grande para llenar la pantalla en móvil */
         height: auto; /* Altura automática para que se ajuste al contenido */
     }
+    #recaptcha-container iframe {
+        transform: scale(0.73); /* Ajusta este valor si quieres más/menos reducción */
+        transform-origin: left center; /* mantiene la 'imagen' a la izquierda al escalar */
+    }
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -276,6 +280,10 @@ p a:hover {
     .register-container {
         width: 45%; /* Ancho intermedio para tablets */
         height: auto; /* Altura intermedia para tablets */
+    }
+    #recaptcha-container iframe {
+        transform: scale(0.83); /* Ajusta este valor si quieres más/menos reducción */
+        transform-origin: left center; /* mantiene la 'imagen' a la izquierda al escalar */
     }
 }
 /* --------------------------------------------------------------------------------------- */
