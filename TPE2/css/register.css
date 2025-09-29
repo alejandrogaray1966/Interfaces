@@ -99,6 +99,23 @@ input[type="text"] , input[type="date"] , input[type="email"] , .password-contai
     box-sizing: border-box;
 }
 
+/* 1. Elimina el 'outline' por defecto del navegador en el foco */
+input[type="text"]:focus , input[type="date"]:focus , input[type="email"]:focus , .password-container input:focus {
+    outline: none;
+}
+
+/* --------------------------- Estado de VALIDO (Verde) ------------------------*/
+/* 🟢 Cuando el campo requerido está en foco Y su contenido es válido */
+input[type="text"]:focus:valid , input[type="date"]:focus:valid , input[type="email"]:focus:valid , .password-container input:focus:valid {
+    border: 2px solid green; 
+}
+
+/* --------------------------- Estado de ERROR (Rojo) ------------------------*/
+/* 🔴 Cuando el campo requerido está en foco Y su contenido es inválido */
+input[type="text"]:focus:invalid , input[type="date"]:focus:invalid , input[type="email"]:focus:invalid , .password-container input:focus:invalid {
+    border: 2px solid red; 
+}
+
 /*
 |--------------------------------------------------------------------------
 | REPETIR CONTRASEÑA E ICONOS (PASSWORD CONTAINER)

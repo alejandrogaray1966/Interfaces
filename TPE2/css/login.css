@@ -1,4 +1,8 @@
-
+/*
+|--------------------------------------------------------------------------
+| ESTILOS GENERALES
+|--------------------------------------------------------------------------
+*/
 body {
     background-color: black; /* Un color de respaldo por si la imagen no carga */
     background-image: url('../img/fondo/fondoL.jpg'); /* Ruta a tu imagen */
@@ -18,6 +22,11 @@ body.fade-out {
     transform: translateX(-100px); /* Se mueve ligeramente a la izquierda mientras se desvanece */
 }
 
+/*
+|--------------------------------------------------------------------------
+| CONTENEDOR PRINCIPAL (ADAPTADO PARA LOGIN)
+|--------------------------------------------------------------------------
+*/
 .login-container {
     position: relative; 
     background-color: rgba(30, 7, 58, 0.75);
@@ -32,6 +41,11 @@ body.fade-out {
     align-items: center;
 }
 
+/*
+|--------------------------------------------------------------------------
+| ENCABEZADO Y LOGO
+|--------------------------------------------------------------------------
+*/
 .header-logo img {
     width: 200px; /* O el tamaño que prefieras */
     height: auto; /* Mantiene la proporción */
@@ -56,6 +70,11 @@ form {
     width: 100%;
 }
 
+/*
+|--------------------------------------------------------------------------
+| ETIQUETAS Y CAMPOS DE FORMULARIO
+|--------------------------------------------------------------------------
+*/
 label {
     color: white;
     display: block;
@@ -63,6 +82,7 @@ label {
     font-size: 0.6rem;
 }
 
+/* --------------------------- Input del EMAIL y la PASSWORD ------------------------*/
 input[type="email"] , .password-container input {
     width: 100%;
     padding: 3%;
@@ -79,6 +99,28 @@ input[type="email"] , .password-container input {
     padding-right: 40px; /* Deja espacio para el ícono */
 }
 
+/* 1. Elimina el 'outline' por defecto del navegador en el foco */
+input[type="email"]:focus , .password-container input:focus {
+    outline: none;
+}
+
+/* --------------------------- Estado de VALIDO (Verde) ------------------------*/
+/* 🟢 Cuando el campo requerido está en foco Y su contenido es válido */
+input[type="email"][required]:focus:valid , .password-container input[required]:focus:valid {
+    border: 2px solid green; 
+}
+
+/* --------------------------- Estado de ERROR (Rojo) ------------------------*/
+/* 🔴 Cuando el campo requerido está en foco Y su contenido es inválido */
+input[type="email"][required]:focus:invalid , .password-container input[required]:focus:invalid {
+    border: 2px solid red; 
+}
+
+/*
+|--------------------------------------------------------------------------
+| BOTÓN PRINCIPAL
+|--------------------------------------------------------------------------
+*/
 button[type="submit"] {
     width: 100%;
     padding: 3%;
@@ -124,6 +166,11 @@ a {
     cursor: pointer;
 }
 
+/*
+|--------------------------------------------------------------------------
+| REGISTRO CON (SOCIAL ICONS)
+|--------------------------------------------------------------------------
+*/
 .social-login {
     display: flex;
     flex-direction: column; /* Change to column */
@@ -173,6 +220,11 @@ a {
     transform: scale(1.28); /* Aumenta el tamaño un 28% (35px * 1.28 ≈ 45px) */
 }
 
+/*
+|--------------------------------------------------------------------------
+| ENLACE FINAL
+|--------------------------------------------------------------------------
+*/
 p {
     color: white;
     text-align: center;
