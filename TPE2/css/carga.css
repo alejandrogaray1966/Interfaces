@@ -21,12 +21,12 @@
 
 /* Cada letra en un span para animarlas individualmente */
 #site-name span {
-    font-family: "Libertinus Keyboard", system-ui;
+    font-family: "Squada One", sans-serif;
     font-weight: 400;
     font-style: normal;
     color:  #00eba4;
     opacity: 0; /* Estilos iniciales para ocultar las letras o darles un efecto */
-    font-size: 4em; /* Tamaño grande para el logo */
+    font-size: 9em; /* Tamaño grande para el logo */
     display: inline-block; /* Importante para que transformaciones funcionen */
 }
 
@@ -35,17 +35,18 @@
     /* animation: appearUp 0.6s ease-out forwards; */ /* sin rebote efecto suave */
     animation: appearUp 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.4) forwards; /* con rebote */
     /* 'forwards' mantiene el estado final (opacity: 1) */
+    will-change: transform, opacity; /* ayuda al navegador a optimizar la animación */
 }
 
-/* El JS asignará dinámicamente el 'animation-delay' o una clase para que aparezcan progresivamente. */
+/* El JS asignará dinámicamente el 'animation-delay' para que aparezcan progresivamente. */
 @keyframes appearUp {
     0% {
         opacity: 0;
-        transform: translateY(60px);
+        transform: translateY(120px) rotate(0deg);
     }
     100% {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateY(0) rotate(360deg);
     }
 }
 
@@ -88,7 +89,7 @@
 @media screen and (max-width: 600px) {
     /* 1. Reducir el tamaño de las letras del logo */
     #site-name span {
-        font-size: 2em; /* Nuevo tamaño para pantallas pequeñas */
+        font-size: 5em; /* Nuevo tamaño para pantallas pequeñas */
     }
     /* 2. Opcional: Reducir el ancho de la barra para que no se pegue a los bordes */
     #progress-bar-container {
@@ -106,7 +107,7 @@
 
 @media (min-width: 601px) and (max-width: 1024px) {
     #site-name span {
-        font-size: 3em; /* Tamaño intermedio para tablets */
+        font-size: 7em; /* Tamaño intermedio para tablets */
     }
     #progress-bar-container {
         width: 70%; /* Ancho intermedio para tablets */
