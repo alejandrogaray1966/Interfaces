@@ -1,55 +1,70 @@
-// Simulación de carga con barra de progreso y animación de letras
+// Simulación de carga con barra de progreso y animación de letras (realista)
 document.addEventListener('DOMContentLoaded', () => {
-    
+
     // 1. Obtener elementos del DOM
     const progressBar = document.getElementById('progress-bar');
     const progressText = document.getElementById('progress-text');
     const loadingScreen = document.getElementById('loading-screen');
     const siteNameSpans = document.querySelectorAll('#site-name span');
 
-    // 2. Parámetros de la simulación
-    const totalDuration = 5000; // 5000 ms = 5 segundos
-    const intervalTime = 50; // Intervalo de actualización (en ms)
-    const totalSteps = totalDuration / intervalTime;
+    // 2. Parámetros
+    const totalDuration = 5000; // 5 segundos "reales"
+    const lettersCount = siteNameSpans.length;
     let currentStep = 0;
-    let lastAnimatedLetter = -1; // Para controlar qué letras ya fueron animadas
-    
-    // 3. Función de actualización
-    const loadingInterval = setInterval(() => {
+    let lastAnimatedLetter = -1;
+
+    // 3. Secuencia de intervalos variables (ms de espera entre pasos)
+    //    👉 A veces rápido, a veces lento, con pausas incluidas
+    const intervals = [
+        10, 15, 20, 10, 15, 20, 30, 40 , 50, 50, 20, 30,        // inicio rápido
+        50, 70, 200, 250, 150, 200, 150, 50, 50, 20, 30,        // pequeña pausa
+        30, 40, 200, 60, 50, 300, 70, 80, 100, 500, 800,        // irregular
+        1000, 1400, 2000,                                       // lento lento
+        50 , 200, 250, 300, 250, 200, 150, 100, 50, 40,         // otro pequeña "traba"
+        20, 15, 10, 5, 5, 5, 5, 5, 5, 5, 5, 5                   // medio rápido
+    ];
+    let intervalIndex = 0;
+
+    // 4. Función de actualización
+    function updateProgress() {
         currentStep++;
 
-        // Calcular el porcentaje (de 0 a 100)
-        let percentage = Math.floor((currentStep / totalSteps) * 100);
-        
-        // Asegurarse de que no pase del 100%
+        // Calcular porcentaje (0 a 100)
+        let percentage = Math.floor((currentStep / 100) * 100);
         if (percentage > 100) percentage = 100;
 
-        // Actualizar la Barra y el Texto
+        // Actualizar barra y texto
         progressBar.style.width = percentage + '%';
         progressText.textContent = percentage + '%';
-        
-        // Efecto de las letras: Aparecer progresivamente
-        // Dividimos el total de letras (11) por el total de pasos para saber 
-        // cuándo "activar" la siguiente letra.
-        const lettersCount = siteNameSpans.length; // 11 letras
-        const stepPerLetter = totalSteps / lettersCount; 
+
+        // Animar letras progresivamente
+        const stepPerLetter = 100 / lettersCount;
         const letterIndex = Math.floor(currentStep / stepPerLetter);
+
         // Asegurarse de no exceder el índice
         if (letterIndex < lettersCount && letterIndex > lastAnimatedLetter) {
             // Solo aplica la animación si es una letra nueva
             siteNameSpans[letterIndex].classList.add('span-animate');
-            lastAnimatedLetter = letterIndex; // Actualiza el flag
+            lastAnimatedLetter = letterIndex;
         }
 
-        // 4. Finalizar la Carga
-        if (currentStep >= totalSteps) {
-            clearInterval(loadingInterval); // Detener el intervalo
-            // Una pequeña pausa antes de ocultar para que el 100% sea visible
+        // ¿Terminó?
+        if (percentage >= 100) {
             setTimeout(() => {
                 loadingScreen.classList.add('loaded');
                 window.location.href = 'html/register.html'; // Aquí podrías redirigir o mostrar el Home
             }, 500); // Espera 0.5 segundos con el 100%
+            return; // Detener el intervalo
         }
 
-    }, intervalTime);
+        // Calcular el próximo intervalo (si no hay más, usar 50ms por defecto)
+        const nextInterval = intervals[intervalIndex] || 50;
+        intervalIndex++;
+
+        setTimeout(updateProgress, nextInterval);
+    }
+
+    // 5. Iniciar la simulación
+    updateProgress();
 });
+
