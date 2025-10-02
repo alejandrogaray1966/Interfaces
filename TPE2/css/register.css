@@ -279,7 +279,7 @@ p a:hover {
 /* --------------------------------------------------------------------------------------- */
 /*                          Media query para dispositivos móviles                          */
 /* --------------------------------------------------------------------------------------- */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
     .register-container {
         width: 65%; /* Ancho más grande para llenar la pantalla en móvil */
         height: auto; /* Altura automática para que se ajuste al contenido */
@@ -293,7 +293,7 @@ p a:hover {
 /* --------------------------------------------------------------------------------------- */
 /*                          Media query para tablets y pantallas medianas                  */
 /* --------------------------------------------------------------------------------------- */
-@media (min-width: 601px) and (max-width: 1024px) {
+@media (min-width: 769px) and (max-width: 1024px) {
     .register-container {
         width: 45%; /* Ancho intermedio para tablets */
         height: auto; /* Altura intermedia para tablets */

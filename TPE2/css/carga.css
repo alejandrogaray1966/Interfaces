@@ -86,7 +86,7 @@
 /*                          Media query para dispositivos móviles                          */
 /* --------------------------------------------------------------------------------------- */
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 768px) {
     /* 1. Reducir el tamaño de las letras del logo */
     #site-name span {
         font-size: 5em; /* Nuevo tamaño para pantallas pequeñas */
@@ -105,7 +105,7 @@
 /*                          Media query para tablets y pantallas medianas                  */
 /* --------------------------------------------------------------------------------------- */
 
-@media (min-width: 601px) and (max-width: 1024px) {
+@media (min-width: 769px) and (max-width: 1024px) {
     #site-name span {
         font-size: 7em; /* Tamaño intermedio para tablets */
     }
