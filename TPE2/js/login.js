@@ -7,12 +7,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Obtiene el elemento del checkbox usando su ID
 const rememberMeCheckbox = document.getElementById('remember');
+// OBTENER EL ELEMENTO LABEL asociado al checkbox
+const rememberMeLabel = document.querySelector('label[for="remember"]'); // Selecciona la etiqueta con el atributo 'for="remember"'
+
+// Guardar el texto original para poder restaurarlo
+const originalLabelText = 'Recordarme'; 
+const newLabelText = 'Se le ha enviado un MAIL, revise su CORREO'; // Nuevo texto para el label
 
 // Declara la función que se ejecutará
 function mandarAlert() {
   // `this.checked` es `true` si el checkbox está marcado
   if (rememberMeCheckbox.checked) {
-      alert("Se le ha enviado un correo para recuperar su contraseña.");
+        // alert("Se le ha enviado un correo para recuperar su contraseña.");
+        rememberMeLabel.textContent = newLabelText;
+    } else {
+        // Si no está marcado (false), restaura el texto original
+        rememberMeLabel.textContent = originalLabelText;
   }
 }
 
