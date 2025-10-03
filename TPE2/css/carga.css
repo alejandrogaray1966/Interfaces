@@ -64,13 +64,17 @@
     width: 0%; /* Inicia en 0 */
     height: 100%;
     background-color:  #ff00d6; /* Color de avance (rosa) */
+    border-radius: 8px;
     transition: width 0.1s linear; /* Suaviza el movimiento de la barra (IMPORTANTE) */
 }
 
 /* Texto que muestra el porcentaje */
 #progress-text {
+    font-family: "Squada One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
     margin-top: 10px;
-    font-size: 1.5em;
+    font-size: 3em;
     color: #ff00d6; /* Color que combine con la barra */
 }
 
@@ -89,7 +93,7 @@
 @media screen and (max-width: 768px) {
     /* 1. Reducir el tamaño de las letras del logo */
     #site-name span {
-        font-size: 5em; /* Nuevo tamaño para pantallas pequeñas */
+        font-size: 4em; /* Nuevo tamaño para pantallas pequeñas */
     }
     /* 2. Opcional: Reducir el ancho de la barra para que no se pegue a los bordes */
     #progress-bar-container {
@@ -97,7 +101,7 @@
     }
     /* 3. Opcional: Reducir el tamaño de la fuente del porcentaje */
     #progress-text {
-        font-size: 1.2em;
+        font-size: 2em;
     }
 }
 
@@ -107,13 +111,13 @@
 
 @media (min-width: 769px) and (max-width: 1024px) {
     #site-name span {
-        font-size: 7em; /* Tamaño intermedio para tablets */
+        font-size: 6em; /* Tamaño intermedio para tablets */
     }
     #progress-bar-container {
         width: 70%; /* Ancho intermedio para tablets */
     }
     #progress-text {
-        font-size: 1.4em; /* Tamaño de fuente intermedio */
+        font-size: 2,5em; /* Tamaño de fuente intermedio */
     }
 }
 
