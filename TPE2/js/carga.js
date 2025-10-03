@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const siteNameSpans = document.querySelectorAll('#site-name span');
 
     // 2. Parámetros
-    const totalDuration = 5000; // 5 segundos "reales"
+    const totalDuration = 5000; // 50ms * 100 pasos = 5 segundos "reales"
     const lettersCount = siteNameSpans.length;
     let currentStep = 0;
     let lastAnimatedLetter = -1;
@@ -16,12 +16,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // 3. Secuencia de intervalos variables (ms de espera entre pasos)
     //    👉 A veces rápido, a veces lento, con pausas incluidas
     const intervals = [
-        10, 15, 20, 10, 15, 20, 30, 40 , 50, 50, 20, 30,        // inicio rápido
+        10, 15, 20, 10, 15, 20, 30, 40 , 50, 50, 20, 30,        // medio rápido
         50, 70, 200, 250, 150, 200, 150, 50, 50, 20, 30,        // pequeña pausa
         30, 40, 200, 60, 50, 300, 70, 80, 100, 500, 800,        // irregular
         1000, 1400, 2000,                                       // lento lento
         50 , 200, 250, 300, 250, 200, 150, 100, 50, 40,         // otro pequeña "traba"
-        20, 15, 10, 5, 5, 5, 5, 5, 5, 5, 5, 5                   // medio rápido
+        20, 15, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5                    // muy rápido
     ];
     let intervalIndex = 0;
 
@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (percentage >= 100) {
             setTimeout(() => {
                 loadingScreen.classList.add('loaded');
-                window.location.href = 'html/register.html'; // Aquí podrías redirigir o mostrar el Home
+                window.location.href = 'home.html'; // Aquí podrías redirigir o mostrar el Home
             }, 500); // Espera 0.5 segundos con el 100%
             return; // Detener el intervalo
         }

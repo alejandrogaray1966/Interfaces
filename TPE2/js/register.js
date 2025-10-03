@@ -58,11 +58,11 @@ document.addEventListener('DOMContentLoaded', () => {
             if (type === 'password') {
                 // La contraseña está oculta, muestra el ojo cerrado
                 // Asegúrate de que la ruta a tu imagen 'cerradoL.png' es correcta
-                this.src = '../img/icono/cerradoL.png'; 
+                this.src = 'img/icono/cerradoL.png'; 
             } else {
                 // La contraseña está visible, muestra el ojo abierto
                 // Asegúrate de que la ruta a tu imagen 'abiertoL.png' es correcta
-                this.src = '../img/icono/abiertoL.png'; 
+                this.src = 'img/icono/abiertoL.png'; 
             }
         });
     });
