@@ -2,32 +2,42 @@
 document.addEventListener('DOMContentLoaded', () => {
 
 // ------------------------------------------------------------------------------------------------
-// --------------------------- Alert cuando chequea -----------------------------------------------
+// --------------------------- Lógica para el enlace "¿Olvidaste tu contraseña?" ------------------
 // ------------------------------------------------------------------------------------------------
 
-// Obtiene el elemento del checkbox usando su ID
-const rememberMeCheckbox = document.getElementById('remember');
-// OBTENER EL ELEMENTO LABEL asociado al checkbox
-const rememberMeLabel = document.querySelector('label[for="remember"]'); // Selecciona la etiqueta con el atributo 'for="remember"'
+// Obtiene el elemento del párrafo/enlace de "¿Olvidaste tu contraseña?"
+const forgotPasswordLink = document.querySelector('p u'); 
 
-// Guardar el texto original para poder restaurarlo
-const originalLabelText = 'Recordarme'; 
-const newLabelText = 'Se le ha enviado un MAIL, revise su CORREO'; // Nuevo texto para el label
+// 💥 NUEVO: Obtener el contenedor donde se mostrará el mensaje
+const recoveryMessageContainer = document.getElementById('recovery-message');
 
-// Declara la función que se ejecutará
-function mandarAlert() {
-  // `this.checked` es `true` si el checkbox está marcado
-  if (rememberMeCheckbox.checked) {
-        // alert("Se le ha enviado un correo para recuperar su contraseña.");
-        rememberMeLabel.textContent = newLabelText;
-    } else {
-        // Si no está marcado (false), restaura el texto original
-        rememberMeLabel.textContent = originalLabelText;
-  }
+const newLabelText = 'Se le ha enviado un MAIL, revise su CORREO'; // Mensaje a mostrar
+
+// Declara la función que se ejecutará al hacer clic en "¿Olvidaste tu contraseña?"
+function mostrarMensajeRecuperacion(e) {
+    // 1. Previene la acción por defecto (si fuera un enlace funcional)
+    e.preventDefault(); 
+    
+    // 2. Inserta el nuevo texto en el contenedor
+    if (recoveryMessageContainer) {
+        recoveryMessageContainer.textContent = newLabelText;
+        
+        // Opcional: Podrías añadir una clase de estilo si quieres animación o color
+        // recoveryMessageContainer.classList.add('active-message');
+
+        // Opcional: Si quieres que el mensaje se borre después de 5 segundos
+        setTimeout(() => {
+            recoveryMessageContainer.textContent = '';
+            // recoveryMessageContainer.classList.remove('active-message');
+         }, 5000); 
+    }
 }
 
-// Añade el escuchador de eventos. Nota: no hay paréntesis en 'mandarAlert'
-rememberMeCheckbox.addEventListener('change', mandarAlert);
+// Añade el escuchador de eventos al enlace
+if (forgotPasswordLink) {
+    forgotPasswordLink.addEventListener('click', mostrarMensajeRecuperacion);
+}
+
 
 // ------------------------------------------------------------------------------------------------
 // --------------------------- Cambia ojo cerrado por abierto -------------------------------------

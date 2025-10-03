@@ -1,4 +1,16 @@
 /* --- Estilos para la Pantalla de Carga --- */
+
+body {
+    background-color: black; /* Un color de respaldo por si la imagen no carga */
+    background-image: url('../img/fondo/fondoL.jpg'); /* Ruta a tu imagen */
+    background-size: cover; /* Para que la imagen cubra todo el fondo */
+    backdrop-filter: blur(6px); /* Aplica el desenfoque */
+    font-family: Arial, Helvetica, sans-serif;
+    height: 100vh; /* Altura máxima del 100% de la ventana */
+    margin: 0;
+    overflow: hidden; /* Evita scrolls inesperados */
+}
+
 #loading-screen {
     display: flex; /* Estilos para centrar todo */
     flex-direction: column;
@@ -7,9 +19,14 @@
     position: fixed; /* Para que cubra toda la pantalla */
     top: 0; left: 0;
     width: 100%; height: 100%;
-    background-color: black; /* Un color oscuro para un buen contraste */
-    font-family: Arial, Helvetica, sans-serif;
     z-index: 100;
+}
+
+/* Clase para ocultar la pantalla de carga al final */
+.loaded {
+    opacity: 0;
+    transform: translateX(-100px); /* Se mueve ligeramente a la izquierda mientras se desvanece */
+    transition: opacity 0.9s ease, transform 0.9s ease; /* Transiciones suaves */
 }
 
 /* --- Estilos para el Logo --- */
@@ -76,14 +93,6 @@
     margin-top: 10px;
     font-size: 3em;
     color: #ff00d6; /* Color que combine con la barra */
-}
-
-/* Clase para ocultar la pantalla de carga al final */
-.loaded {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none; /* Asegura que la pantalla no interfiera durante el desvanecimiento */
-    transition: opacity 1s, visibility 1s;
 }
 
 /* --------------------------------------------------------------------------------------- */

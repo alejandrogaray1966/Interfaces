@@ -50,10 +50,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // ¿Terminó?
         if (percentage >= 100) {
+            loadingScreen.classList.add('loaded');
             setTimeout(() => {
-                loadingScreen.classList.add('loaded');
                 window.location.href = 'home.html'; // Aquí podrías redirigir o mostrar el Home
-            }, 500); // Espera 0.5 segundos con el 100%
+            }, 900); // Espera 0.9 segundos con el 100%
             return; // Detener el intervalo
         }
 

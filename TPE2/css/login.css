@@ -149,6 +149,19 @@ a {
     text-align: center;
 }
 
+/* Estilo para el nuevo contenedor del mensaje */
+.message-container {
+    text-align: center;     /* Esto centra el texto dentro del div */
+    font-size: 0.7em;       /* Para que no sea tan grande como un encabezado */
+    color: lightgreen;    /* O el color que desees para un mensaje de éxito */
+    font-weight: bold;      /* Opcional: para que resalte más */
+}
+
+/*
+|--------------------------------------------------------------------------
+| Recordarme (Checkbox)
+|--------------------------------------------------------------------------
+*/
 .remember-me {
     display: flex;
     align-items: center;
@@ -239,8 +252,16 @@ p a {
     transition: color 0.5s ease;
 }
 
-p a:hover {
+p a:hover , p u:hover {
     color: #ff00d6;
+}
+
+/* Estilo para hacer que el texto subrayado parezca clickeable */
+p u {
+    /* Cambia el cursor predeterminado a la mano o puntero */
+    cursor: pointer; 
+    /* Opcional: Podrías añadir un pequeño cambio de color para mayor feedback visual */
+    transition: color 0.5s ease;
 }
 
 /* Contenedor del campo de contraseña y el ícono */
