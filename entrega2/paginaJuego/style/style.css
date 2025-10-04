@@ -96,17 +96,17 @@ a, a:hover, a:active, a:visited, li{
 
 
 .game-btnPlay {
-    width: 20rem;
-    height: 5rem;
-    font-size: 2rem;
-    font-weight: 500;
+    width: 222px;
+    height: 69px;
+    font-size: 24px;
+    font-weight: 600;
     position: absolute; 
-    bottom: 5%;         
-    right: 12%; 
+    bottom: 56px;         
+    right: 335px;
     background-color: #9700CC;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
 }
 .game-btnPlay:hover {
     background-color: #FF00D6;
@@ -115,29 +115,55 @@ a, a:hover, a:active, a:visited, li{
 }
 
 .game-btn-settings {
+    background-color: transparent;
     position: absolute;
-    top: 5%;/* Distancia desde el borde superior */
-    right: 12%; /* Distancia desde el borde derecho (12.5rem de padding de .game-preview + 5px extra) */
-    z-index: 2; /* Asegura que estén por encima de la imagen */
-    display: flex; /* Para organizar los iconos en fila */
-    gap: 10px; /* Espacio entre los botones */
+    top: 56px;
+    right: 335px; 
+    z-index: 2; 
+    display: flex; 
+    gap: 24px; 
+    align-items: center;
 }
 
-.game-btn-settings button {
-   
+.game-btn-settings button  {
+    background-color: transparent;
+    color: #fff;
     cursor: pointer;
+    width: 40px;
+    height: 40px;
+    border:none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.game-btn-settings button img {
+    color: #fff;
+    width: 40px;
+    height: 40px;
 }
 
 .game-btn-secondary{
     position: absolute;
-    bottom:-10%;
-    right: 12%;
+    bottom:-32px;
+    right: 335px;
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    gap: 0.5rem
+    gap: 32px;
 
 }
+
+.game-btn-secondary button  {
+    background-color: transparent;
+     cursor: pointer;
+     width: 32px;
+     height: 32px;
+     border:none;
+ }
+
+
   
 .howToPlay-section {
     margin: 8rem 12.5rem 5rem 12.5rem;
@@ -207,8 +233,23 @@ a, a:hover, a:active, a:visited, li{
     object-fit: contain;
 }
 
-.demo-section {
-    margin: 2rem -16rem 2rem 16rem;
+.demo-title, .controls-title, .how-to-play-title, .community-title {
+    font-size: 32px;
+    font-family: Raleway, sans-serif;
+    font-weight: 500;
+    margin-bottom: 26px;
+}
+
+.demo-title{
+    margin-left: 335px;
+}
+
+.demo-container {
+    width: 1210px;
+    height: 682px;
+    margin-left: 335px;
+    margin-bottom: 64px;
+   
 }
 
 
@@ -216,7 +257,8 @@ a, a:hover, a:active, a:visited, li{
 
 /* Estilos generales de la sección */
 .community-section {
-    margin: 8rem 12.5rem 5rem 12.5rem;
+    margin-left: 227px;
+    margin-right: 267px;
     border-radius: 12px;
     padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -248,6 +290,11 @@ a, a:hover, a:active, a:visited, li{
     height: 40px;
     border-radius: 50%;
     object-fit: cover;
+}
+
+.imput-comentario {
+    width: 1354px;
+    height: 64px;
 }
 
 .form-comentario textarea {
