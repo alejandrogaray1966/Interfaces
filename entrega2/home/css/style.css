@@ -286,7 +286,7 @@ ul {
 .hero-contenido span,
 .hero-contenido p,
 .hero-contenido .btn-primario{
-    margin-bottom: 15px;
+    margin-bottom: 14px;
     opacity: 0;
     transition: opacity 1s;
 }
@@ -315,8 +315,11 @@ ul {
     left: 4%;
     text-align: left;
     z-index: 11;
-    width: 35vw;
+    width: 55vw;
 
+}
+.hero-contenido p{
+    width: 35vw;
 }
 
 .btn-primario {
@@ -378,49 +381,66 @@ ul {
     padding: 12px;
 }
     
-/*HOME seccion CARDS*/    
+/*HOME seccion CARDS*/  
+.home-cards{
+    display: flex;
+    justify-content: center;
+
+}  
 
 .contenedor.cards-horizontales{
-    width: 100vw;
+    width: 80vw;
     height: auto;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     margin-top: 64px;
     margin-bottom: 64px;
     align-items: center;
 }
 .categoria-verMas{
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     justify-content:space-between;
     align-items: center;
-    width: 75vw;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
 
 }
 
 .contenedor .cards-lista{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 24px;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
     justify-content: center;
-    width: 85vw;
 }
 .card-horizontal{
     height: 270px;
+    width: 465px;
 }
 .card-contenido-horizontal{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     padding: 12px 32px;
-    width: 100%;
+    width: 466px;
     background-color: #9700ccb3;
     border-radius: 20px;
     position: relative;
     bottom: 70px;
     align-items: center;
 
+}
+.nombre-categoria{
+    position: relative;
+    right: 510px;
+    width: 200px;
+}
+
+.span-verMas{
+    position: relative;
+    left: 633px;
+    width: 80px;
 }
 
 
