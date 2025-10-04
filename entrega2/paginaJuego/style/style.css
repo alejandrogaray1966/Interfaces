@@ -1,5 +1,5 @@
 /*----------------------------------
-    COMIENZ ESTILOS PAGINA JUEGO
+    COMIENZA ESTILOS PAGINA JUEGO
     ---------------------------------*/
 
 *{        
@@ -30,8 +30,8 @@ a, a:hover, a:active, a:visited, li{
     
     width: 1920px;
     height: auto;
-    background-image: url(../assets/bgJuego.jpg);
-    background-size:cover;
+    background-image: url(./../assets/backgroundJuego.png);
+    background-size:contain;
     background-position: center;
     overflow-x: hidden;
      
@@ -87,7 +87,6 @@ a, a:hover, a:active, a:visited, li{
 .game-preview{
   position: inherit;
   margin: 20px 200px 20px 200px;
-  
   width: 1430px;
   height: 682px;
   object-fit: cover;
@@ -166,22 +165,22 @@ a, a:hover, a:active, a:visited, li{
 
   
 .howToPlay-section {
-    margin: 8rem 12.5rem 5rem 12.5rem;
+    width: 1476px;
+    height: 425px;
+    margin: 64px 227px 64px 200px;
     display: flex; 
     flex-direction: row;
-    justify-content: space-between;
     align-items: flex-start;
-    gap: 1rem; 
+    gap: 180px; 
     
 }
 
 .controls-aside {
     display: flex; 
-
-    justify-content: space-between; 
     align-items: flex-start; 
-    gap: 1rem; 
-    width: 30%; 
+    gap: 18px; 
+    width: 650px; 
+    height: 263px;
 }
 
 .controls-container {
@@ -194,7 +193,7 @@ a, a:hover, a:active, a:visited, li{
 }
 
 .mouse-img img {
-    margin-top: 1.5rem;;
+    margin-top: 26px;
     width: 231px;
     height: 80px; 
     object-fit: contain; 
@@ -206,25 +205,26 @@ a, a:hover, a:active, a:visited, li{
     object-fit: contain; 
 }
 
-.howToPlay-section aside:last-child {
-    width: 40%;
+.howToPlay-section aside p {
+    font-size: 24px; 
+    font-weight: 300; 
+    margin-top: 26px; 
 }
 
 .howToPlay-section aside:last-child ul {
     list-style: none;
     padding: 0;
     margin: 0;
-    
-    margin-top: 1.5rem;
+    margin-top: 44px;
 }
 
 .howToPlay-section aside:last-child ul li {
     display: flex; 
-    align-items:flex-start; 
-    gap: 1.5rem; 
-    margin-bottom: 1rem;
-    font-size: 1.25rem;
-    font-weight: 300;
+    align-items:center; 
+    gap: 28px; 
+    margin-top: 44px;
+    font-size: 20px;
+    font-weight: 200;
 }
 
 .howToPlay-section aside:last-child ul li span {
@@ -249,10 +249,9 @@ a, a:hover, a:active, a:visited, li{
     height: 682px;
     margin-left: 335px;
     margin-bottom: 64px;
+    border-radius: 20px;
    
 }
-
-
 
 
 /* Estilos generales de la sección */
@@ -400,13 +399,10 @@ a, a:hover, a:active, a:visited, li{
     cursor: not-allowed;
 }
 
-/* -------------------
-   LISTA DE COMENTARIOS
-   ------------------- */
 
 /* Contenedor para la lista de comentarios que permite el scroll */
 .lista-comentarios {
-    max-height: 450px; /* Altura máxima antes de que aparezca el scroll */
+    max-height: 800px; /* Altura máxima antes de que aparezca el scroll */
     overflow-y: auto; /* Permite el scroll vertical */
     padding-right: 10px; /* Espacio para que la barra de scroll no se pegue al contenido */
     margin-top: 10px;
@@ -456,7 +452,7 @@ a, a:hover, a:active, a:visited, li{
     margin: 0;
 }
 
-/* Fila de los botones de interacción (likes, responder) */
+/* botones de interacción (likes, responder) */
 .lista-comentarios article > div > div:last-of-type {
     display: flex;
     gap: 10px;
