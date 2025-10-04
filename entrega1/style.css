@@ -1,0 +1,59 @@
+body{
+    margin: 0;;
+}
+
+.background{
+    background-image: url(BrackgrounHtml.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100vh
+}
+.titulo{
+    font-weight: bold;
+}
+.titulo, h3, p{
+    text-align: center;
+}
+
+h1, h2, h3, a, p{
+    color: white;
+}
+a{
+    text-decoration: none;
+}
+p{
+    font-size: 20px;
+}
+
+p, button{
+    margin: 0.7rem;
+}
+.figma-integrantes{
+    margin: 1rem 2rem 0 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+.cont-integrantes{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}  
+
+.cont-figma{
+    gap: 14px;
+    flex-direction: row;
+
+}
+button{
+    width: 248px;
+    height: 69px;
+    background-color: #9700CC;
+    border-radius: 20px;
+    font-size: 24px;
+    color: white;
+    border-color: #9700CC;
+}
+
+

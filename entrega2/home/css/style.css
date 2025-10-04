@@ -381,7 +381,7 @@ ul {
 /*HOME seccion CARDS*/    
 
 .contenedor.cards-horizontales{
-    width: 100%;
+    width: 100vw;
     height: auto;
     display: flex;
     flex-direction: column;
@@ -391,11 +391,11 @@ ul {
 }
 .categoria-verMas{
     display: flex;
-    justify-content:center;
+    justify-content:space-between;
     align-items: center;
-    width: 100%;
+    width: 75vw;
     margin-bottom: 16px;
-    gap: 1204px;
+
 }
 
 .contenedor .cards-lista{
@@ -404,8 +404,7 @@ ul {
     flex-wrap: wrap;
     gap: 24px;
     justify-content: center;
-
-    
+    width: 85vw;
 }
 .card-horizontal{
     height: 270px;
