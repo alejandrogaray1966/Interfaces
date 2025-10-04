@@ -58,7 +58,7 @@ body.fade-out {
 
 .header-logo {
     position: absolute; /* Posicionamos el contenedor del logo */
-    top: -25px; /* Ajusta este valor según la posición deseada */
+    top: -30px; /* Ajusta este valor según la posición deseada */
     left: 50%;
     transform: translateX(-50%);
     z-index: 10; /* La capa deseada */
@@ -100,6 +100,7 @@ input[type="email"] , .password-container input {
     border-radius: 4px;
     color: black;
     font-size: 20px;
+    font-weight: normal;
     box-sizing: border-box;
 }
 
@@ -301,24 +302,4 @@ p u {
 
 .password-container .toggle-password:hover {
     transform: translateY(-50%) scale(1.28); /* Aumenta el tamaño al pasar el cursor */
-}
-
-/* --------------------------------------------------------------------------------------- */
-/*                          Media query para dispositivos móviles                          */
-/* --------------------------------------------------------------------------------------- */
-@media (max-width: 768px) {
-    .login-container {
-        width: 65%; /* Ancho más grande para llenar la pantalla en móvil */
-        height: auto; /* Altura automática para que se ajuste al contenido */
-    }
-}
-
-/* --------------------------------------------------------------------------------------- */
-/*                          Media query para tablets y pantallas medianas                  */
-/* --------------------------------------------------------------------------------------- */
-@media (min-width: 769px) and (max-width: 1024px) {
-    .login-container {
-        width: 45%; /* Ancho intermedio para tablets */
-        height: auto; /* Altura intermedia para tablets */
-    }
 }
