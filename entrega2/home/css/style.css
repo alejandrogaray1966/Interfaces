@@ -13,6 +13,7 @@
     width: 100%;
     height: 100vh;
 }
+
 h1, h2{
     color: white;
     font-family: 'raleway', 'sans-serif';
@@ -584,6 +585,38 @@ ul {
 
 
 
+/* CARDS GRANDES*/
+
+.card-grande{
+    display: grid;
+    justify-content: center;
+}
+.contenedor.cards-grande .nombre-categoria{
+    left: 24px;
+}
+.card-contenido-grande{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    position: relative;
+    bottom: 211px;
+    padding-right: 32px;
+}
+
+.card-img-grande img{
+    width: 100%;
+    border-radius: 20px;
+    filter: brightness(0.5) saturate(1); 
+}
+.iconos-juego{
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+    bottom: 142px;
+    padding-right: 21px;
+}
+
+
 @media (max-width: 1510px){
     h1{
       font-size: 3.5rem;
@@ -618,17 +651,26 @@ ul {
         animation-name: autoRun-1510;
     }
 
-  .card-contenido-vertical{
-    bottom: 113px;
-  }
-  @keyframes autoRun-1510 {
-    from {
-      left: 100%;
+    .card-contenido-vertical{
+        bottom: 113px;
+     }
+    
+    @keyframes autoRun-1510 {
+       from {
+          left: 100%;
+        }
+       to {
+            left: -287px; 
+          }
+      }
+
+    .card-img-grande img{
+    width: 1250px;
     }
-    to {
-      left: -287px; 
+
+    .iconos-juego{
+        bottom: 115px;
     }
-  }
 }
 @media (max-width: 1275px){
     .hero-contenido{
@@ -677,6 +719,13 @@ ul {
             left: -237px;
          }
   }
+    .card-img-grande img{
+        width: 800px;
+    }
+
+    .iconos-juego{
+        bottom: 115px;
+    }
 }    
 @media (max-width: 850px){
 
