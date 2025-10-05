@@ -425,6 +425,12 @@ ul {
     overflow: hidden;
     transition: all 0.2s;
 }
+.card-horizontal .card-img-horizontal img{
+    opacity: 0.6;
+}
+.card-horizontal .card-img-horizontal img:hover{
+    opacity: 1;
+}
 
 .card-horizontal:hover{
     transform: scale(1.05);
