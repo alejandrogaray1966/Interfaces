@@ -493,8 +493,8 @@ ul {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  width: 338px; /* Base Width */
-  height: 499px; /* Base Height */
+  width: 338px; 
+  height: 499px; 
   border-radius: 20px;
   position: absolute;
   animation: autoRun-base 10s linear infinite;
@@ -563,7 +563,6 @@ ul {
   filter: grayscale(0);
 }
 
-/* --- Estilos para el contenido de tu card (Ejemplos) --- */
 
 
 .card-contenido-vertical {
