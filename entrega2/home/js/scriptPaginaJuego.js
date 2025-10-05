@@ -1,3 +1,5 @@
+
+//COMENTARIOS
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("form-comentario")
     const textarea = document.getElementById("texto-comentario")
