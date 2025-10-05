@@ -689,6 +689,7 @@ ul {
     }
     .contenedor .cards-lista {
         grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
     }
     .nombre-categoria {
         right: 0px;
@@ -696,6 +697,7 @@ ul {
     .span-verMas {
         left: 120px;
     }
+    .card-horizontal.card-3,
     .card-horizontal.card-4,
     .card-horizontal.card-5,
     .card-horizontal.card-6{
