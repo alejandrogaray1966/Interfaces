@@ -474,7 +474,8 @@ ul {
 
 .cards-verticales .categoria {
     position: relative;
-    left: 73px;
+    left: 237px;
+    top: 24px;
 }
 
 .cards-lista-verticales {
@@ -566,15 +567,12 @@ ul {
 
 
 .card-contenido-vertical {
-    display: grid;
-    grid-template-columns: 1fr 1fr;;
-    justify-content: space-between;
     padding: 12px 20px;
     width: 338px;
     background-color: #9700ccb3;
     border-radius: 20px;
     position: relative;
-    bottom: 130px;
+    bottom: 120px;
      align-items: baseline;;
 }
 
@@ -615,7 +613,7 @@ ul {
     }
 
   .card-contenido-vertical{
-    bottom: 125px;
+    bottom: 113px;
   }
   @keyframes autoRun-1510 {
     from {
