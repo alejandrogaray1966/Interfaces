@@ -4,8 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrarse</title>
-    <link rel="icon" type="image/png" href="../img/favicon/iconoL.png">
-    <link rel="stylesheet" href="../css/register.css"> 
+    <!-- import letra ROBOTO desde GOOGLE -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <!-- FIN import letra ROBOTO desde GOOGLE -->
+    <link rel="icon" type="image/png" href="img/favicon/iconoL.png">
+    <link rel="stylesheet" href="css/register.css"> 
 
     <!--------------- Función para LEER el Google reCAPTCHA -------------------------------->
         <script type="text/javascript">
@@ -31,7 +36,7 @@
 <body>
     <div class="register-container"> 
         <div class="header-logo">
-            <img src="../img/logo/logoL.png" alt="Logo de la página">
+            <img src="img/logo/logoL.png" alt="Logo de la página">
         </div>
         <form>
             <h2>Registrarse</h2>
@@ -46,12 +51,12 @@
             <label for="password">Contraseña *</label>
             <div class="password-container">
                 <input type="password" id="password" name="password" required>
-                <img src="../img/icono/cerradoL.png" alt="Imagen de un ojo" title="Mostrar/Ocultar contraseña" class="toggle-password" data-target="password">
+                <img src="img/icono/cerradoL.png" alt="Imagen de un ojo" title="Mostrar/Ocultar contraseña" class="toggle-password" data-target="password">
             </div>
             <label for="repeat-password">Repetir Contraseña *</label>
             <div class="password-container">
                 <input type="password" id="repeat-password" name="repeat-password" required>
-                <img src="../img/icono/cerradoL.png" alt="Imagen de un ojo" title="Mostrar/Ocultar contraseña" class="toggle-password" data-target="repeat-password">
+                <img src="img/icono/cerradoL.png" alt="Imagen de un ojo" title="Mostrar/Ocultar contraseña" class="toggle-password" data-target="repeat-password">
             </div>
 
             <!-------------- INI Google reCAPTCHA ----------------------------------------------------->
@@ -62,18 +67,18 @@
             <div class="social-login">
                 <span>Registro con</span>
                 <div class="social-icons">
-                    <a href="home.html">
-                        <img src="../img/icono/facebookL.png" alt="Imagen de Facebook" title="Ingresar con Facebook">
+                    <a href="html/carga.html">
+                        <img src="img/icono/facebookL.png" alt="Imagen de Facebook" title="Ingresar con Facebook">
                     </a>
-                    <a href="home.html">
-                        <img src="../img/icono/googleL.png" alt="Imagen de Google" title="Ingresar con Google">
+                    <a href="html/carga.html">
+                        <img src="img/icono/googleL.png" alt="Imagen de Google" title="Ingresar con Google">
                     </a>
                 </div>
             </div>
-            <p>¿Ya tienes cuenta? <a href="login.html" title="Ir a la página de inicio de sesión" id="login-link">Inicia Sesión</a></p>
+            <p>¿Ya tienes cuenta? <a href="html/login.html" title="Ir a la página de inicio de sesión" id="login-link">Inicia Sesión</a></p>
         </form>
     </div>
     <!-- JavaScript file -->
-    <script src="../js/register.js" defer></script> 
+    <script src="js/register.js" defer></script> 
 </body>
 </html>

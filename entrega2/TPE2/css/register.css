@@ -8,7 +8,11 @@ body {
     background-image: url('../img/fondo/fondoL.jpg'); /* Ruta a tu imagen */
     background-size: cover; /* Para que la imagen cubra todo el fondo */
     backdrop-filter: blur(6px); /* Aplica el desenfoque */
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Roboto", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -30,17 +34,17 @@ body.fade-out {
 */
 .register-container {
     position: relative; 
-    background-color: rgba(30, 7, 58, 0.85); /* Un poco más opaco para el fondo con más campos */
+    background-color: rgba(30, 7, 58, 0.75);
     padding: 1% 3%;
-    border-radius: 8px;
+    border-radius: 20px;
     box-shadow: 0px 4px 30px rgba(255, 255, 255, 0.25);
-    width: 28%; /* Aumentamos el ancho ligeramente para más campos */
-    max-width: 450px; /* Establecemos un máximo */
-    height: auto; /* Altura automática esencial para que se ajuste a los 7 campos */
+    width: 480px;
+    height: 960px;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     margin-top: 50px; 
     margin-bottom: 50px;
 }
@@ -51,27 +55,28 @@ body.fade-out {
 |--------------------------------------------------------------------------
 */
 .header-logo img {
-    width: 200px; /* O el tamaño que prefieras */
-    height: auto; /* Mantiene la proporción */
+    width: 290px; 
+    height: 59px;
 }
 
 .header-logo {
-    position: absolute; 
-    top: -20px; 
+    position: absolute; /* Posicionamos el contenedor del logo */
+    top: -30px; /* Ajusta este valor según la posición deseada */
     left: 50%;
     transform: translateX(-50%);
-    z-index: 10; 
+    z-index: 10; /* La capa deseada */
 }
 
 h2 {
     color: white;
-    font-size: 1.2rem;
+    font-size: 32px;
+    font-weight: bold;
     margin-bottom: 3%;
     text-align: left;
 }
 
 form {
-    width: 100%;
+    width: 353px;
 }
 
 /*
@@ -83,19 +88,22 @@ label {
     color: white;
     display: block;
     margin-bottom: 1%;
-    font-size: 0.6rem; 
+    font-size: 16px;
+    font-weight: normal;
 }
 
 /* Selector unificado para todos los campos de texto/fecha/email/password */
 input[type="text"] , input[type="date"] , input[type="email"] , .password-container input {
-    width: 100%;
-    padding: 3%; 
-    margin-bottom: 3%; 
+    width: 352px;
+    height: 54px;
+    padding: 3%;
+    margin-bottom: 3%;
     background-color: white;
     border: none;
     border-radius: 4px;
     color: black;
-    font-size: 1rem;
+    font-size: 20px;
+    font-weight: normal;
     box-sizing: border-box;
 }
 
@@ -137,11 +145,11 @@ input[type="text"]:focus:invalid , input[type="date"]:focus:invalid , input[type
 /* El ícono del ojo */
 .password-container .toggle-password {
     position: absolute;
-    right: 10px; 
-    top: 50%; 
-    transform: translateY(-50%); 
+    right: 10px; /* Distancia desde el borde derecho */
+    top: 50%; /* Centra verticalmente */
+    transform: translateY(-50%); /* Ajuste fino para el centrado vertical */
     cursor: pointer;
-    width: 20px; 
+    width: 20px; /* Ajusta el tamaño del ícono según sea necesario */
     height: auto;
 }
 
@@ -166,7 +174,7 @@ input[type="text"]:focus:invalid , input[type="date"]:focus:invalid , input[type
 
 /* Aplica la escala al iframe de reCAPTCHA y fija el origen en la izquierda */
 #recaptcha-container iframe {
-    transform: scale(0.98); /* Ajusta este valor si quieres más/menos reducción */
+    transform: scale(0.99); /* Ajusta este valor si quieres más/menos reducción */
     transform-origin: left center; /* mantiene la 'imagen' a la izquierda al escalar */
     width: 304px;  /* ancho estándar del widget antes de escalar */
     height: 78px;  /* alto estándar del widget antes de escalar */
@@ -181,16 +189,17 @@ input[type="text"]:focus:invalid , input[type="date"]:focus:invalid , input[type
 |--------------------------------------------------------------------------
 */
 button[type="submit"] {
-    width: 100%;
-    padding: 3%; 
+    width: 352px;
+    height: 54px;
+    padding: 3%;
     background-color: #00eba4;
     color: white;
     border: none;
-    border-radius: 4px;
-    font-size: 1rem;
+    border-radius: 8px;
+    font-size: 16px;
     font-weight: bold;
     cursor: pointer;
-    margin-top: 2%; 
+    margin-top: 2%;
     margin-bottom: 3%;
     transition: background-color 0.5s ease;
 }
@@ -211,14 +220,15 @@ button[type="submit"]:hover {
 }
 
 .social-login span {
-    font-size: 0.8rem;
+    font-size: 16px;
+    font-weight: normal;
     color: white;
     text-align: center;
     display: flex; /* Add Flexbox properties to the span itself */
     align-items: center; /* Vertically center the text and lines */
     justify-content: center;
     width: 100%;
-    margin: 20px 0px 5px; /* Adds spacing above and below */
+    margin: 20px 0px 10px; /* Adds spacing above and below */
 }
 
 /* Create the lines using pseudoelements */
@@ -245,8 +255,8 @@ button[type="submit"]:hover {
 
 .social-login a img {
     width: 35px; /* Add 'px' unit */
-    height: auto;
-    margin: 0px 20px;
+    height: 35px;
+    margin: 0px 23px;
 }
 
 .social-login a img:hover {
@@ -261,7 +271,8 @@ button[type="submit"]:hover {
 p {
     color: white;
     text-align: center;
-    font-size: 0.8rem;
+    font-size: 16px;
+    font-weight: normal;
     margin-top: 5%;
 }
 
@@ -275,32 +286,3 @@ p a {
 p a:hover {
     color: #ff00d6;
 }
-
-/* --------------------------------------------------------------------------------------- */
-/*                          Media query para dispositivos móviles                          */
-/* --------------------------------------------------------------------------------------- */
-@media (max-width: 768px) {
-    .register-container {
-        width: 65%; /* Ancho más grande para llenar la pantalla en móvil */
-        height: auto; /* Altura automática para que se ajuste al contenido */
-    }
-    #recaptcha-container iframe {
-        transform: scale(0.73); /* Ajusta este valor si quieres más/menos reducción */
-        transform-origin: left center; /* mantiene la 'imagen' a la izquierda al escalar */
-    }
-}
-
-/* --------------------------------------------------------------------------------------- */
-/*                          Media query para tablets y pantallas medianas                  */
-/* --------------------------------------------------------------------------------------- */
-@media (min-width: 769px) and (max-width: 1024px) {
-    .register-container {
-        width: 45%; /* Ancho intermedio para tablets */
-        height: auto; /* Altura intermedia para tablets */
-    }
-    #recaptcha-container iframe {
-        transform: scale(0.83); /* Ajusta este valor si quieres más/menos reducción */
-        transform-origin: left center; /* mantiene la 'imagen' a la izquierda al escalar */
-    }
-}
-/* --------------------------------------------------------------------------------------- */
