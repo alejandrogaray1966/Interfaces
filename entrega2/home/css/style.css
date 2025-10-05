@@ -18,7 +18,7 @@ h1, h2{
     font-family: 'raleway', 'sans-serif';
 }
 h1{
-    font-size: 4rem;
+    font-size: 5rem;
     font-weight: 700;
 }
 h2{
@@ -27,7 +27,7 @@ h2{
 
 p, a, span{
     color: white;
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     font-family:'Roboto','sans-serif';
 }
 a {
@@ -383,10 +383,12 @@ ul {
     
 /*HOME seccion CARDS*/  
 .home-cards{
-    display: flex;
+    display: grid;
     justify-content: center;
 
 }  
+
+/*CARDS Horizontales*/
 
 .contenedor.cards-horizontales{
     height: auto;
@@ -396,26 +398,38 @@ ul {
     margin-top: 64px;
     margin-bottom: 64px;
     align-items: center;
+    
+
 }
 .categoria-verMas{
     display: grid;
     grid-template-columns: 1fr 1fr;
-    justify-content:space-between;
     align-items: center;
     margin-bottom: 14px;
+    align-self: center;
 
 }
 
-.contenedor .cards-lista{
+.cards-lista{
     display: grid;
     grid-template-rows: 1fr 1fr;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 16px;
     justify-content: center;
+    transition: all .3s;
 }
+
 .card-horizontal{
     height: 270px;
     width: 465px;
+    overflow: hidden;
+    transition: all 0.2s;
+}
+
+.card-horizontal:hover{
+    transform: scale(1.05);
+    box-shadow: 0px 0px 30px 1px #00eba4;
+    border-radius: 20px;
 }
 .card-contenido-horizontal{
     display: flex;
@@ -438,12 +452,142 @@ ul {
 
 .span-verMas{
     position: relative;
-    left: 633px;
-    width: 80px;
+    left: 607px;
+    width: 90px;
+}
+
+/*CARDS Verticales*/
+/* --- Estilos para 1920px o más (Base) --- */
+/* Dimensiones de la tarjeta: 338px x 499px */
+/* Cantidad: 9 */
+
+.contenedor.cards-verticales {
+    width: 1426px;
+  display: flex;
+  flex-direction: column;
+  height: 700px; 
+  overflow: hidden; /* CLAVE: Oculta las tarjetas que se están moviendo fuera del área */
+  /* Opcional: Máscara de desvanecimiento para entrada/salida */
+  mask-image: linear-gradient(to right, transparent, #00eba4 4% 90%, transparent);
 }
 
 
+.cards-verticales .categoria {
+    position: relative;
+    left: 73px;
+}
+
+.cards-lista-verticales {
+  display: flex;
+  flex-direction: row;
+  /* min-width: 338px * 9 = 3042px */
+  min-width: 3042px; 
+  position: relative;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.card-vertical {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  width: 338px; /* Base Width */
+  height: 499px; /* Base Height */
+  border-radius: 20px;
+  position: absolute;
+  animation: autoRun-base 10s linear infinite;
+  transition: filter 1s;
+
+}
+.card-vertical .card-img-vetical img{
+  width: 338px;
+  height: 499px;
+  border-radius: 20px;
+}
+
+
+@keyframes autoRun-base {
+  from {
+    left: 100%;
+  }
+  to {
+    /* left: -338px */
+    left: -338px; 
+  }
+}
+
+.cards-lista-verticales .card-vertical:nth-child(1) {
+  animation-delay: -10s;
+}
+
+.cards-lista-verticales .card-vertical:nth-child(2) {
+  animation-delay: -8.8889s;
+}
+
+.cards-lista-verticales .card-vertical:nth-child(3) {
+  animation-delay: -7.7778s;
+}
+
+.cards-lista-verticales .card-vertical:nth-child(4) {
+  animation-delay: -6.6667s;
+}
+
+.cards-lista-verticales .card-vertical:nth-child(5) {
+  animation-delay: -5.5556s;
+}
+
+.cards-lista-verticales .card-vertical:nth-child(6) {
+  animation-delay: -4.4445s;
+}
+
+.cards-lista-verticales .card-vertical:nth-child(7) {
+  animation-delay: -3.3334s;
+}
+
+.cards-lista-verticales .card-vertical:nth-child(8) {
+  animation-delay: -2.2223s;
+}
+
+.cards-lista-verticales .card-vertical:nth-child(9) {
+  animation-delay: -1.1112s;
+}
+/* --- Estilos de Hover (Se mantienen) --- */
+.contenedor.cards-verticales:hover .card-vertical {
+  animation-play-state: paused;
+  filter: grayscale(1);
+}
+
+.contenedor.cards-verticales .card-vertical:hover {
+  filter: grayscale(0);
+}
+
+/* --- Estilos para el contenido de tu card (Ejemplos) --- */
+
+
+.card-contenido-vertical {
+    display: grid;
+    grid-template-columns: 1fr 1fr;;
+    justify-content: space-between;
+    padding: 12px 20px;
+    width: 338px;
+    background-color: #9700ccb3;
+    border-radius: 20px;
+    position: relative;
+    bottom: 130px;
+     align-items: baseline;;
+}
+
+
+
 @media (max-width: 1510px){
+    h1{
+      font-size: 3.5rem;
+    }
+    p, a, span{
+    font-size: 1.25rem;
+    }
     .card-horizontal{
         width: 400px;
         height: 231px;
@@ -461,8 +605,29 @@ ul {
     .span-verMas{
         left: 537px;
     }
+
+    .contenedor.cards-verticales {
+         width: 1250px;
+    }
+
+
+    .card-vertical {
+        animation-name: autoRun-1510;
+    }
+
+  .card-contenido-vertical{
+    bottom: 125px;
+  }
+  @keyframes autoRun-1510 {
+    from {
+      left: 100%;
+    }
+    to {
+      left: -287px; 
+    }
+  }
 }
-@media (max-width: 1250px){
+@media (max-width: 1275px){
     .hero-contenido{
         width: 37vw; 
     }
@@ -471,12 +636,16 @@ ul {
     }
      .hero-contenido p,
      .hero-contenido span{
-        font-size: 0.8rem;
+        font-size: 1rem;
     }
     .btn-primario{
         width: 200px;
     }
 
+    .contenedor.cards-horizontales {
+      margin-top: 30px;
+    }
+    
     .contenedor .cards-lista{
     grid-template-rows: 1fr 1fr 1fr;
     grid-template-columns: 1fr 1fr;
@@ -484,10 +653,27 @@ ul {
     }
     .nombre-categoria {
         right: 204px;
+        font-size: 1.5rem;
+
     }
     .span-verMas {
-        left: 330px;
-    }  
+      left: 330px;
+      font-size: 1rem;
+    }
+    .contenedor.cards-verticales {
+        width: 850px;
+    }
+    .card-vertical {
+    animation-name: autoRun-1275;
+    }
+     @keyframes autoRun-1275 {
+        from {
+           left: 100%;
+        }
+        to {
+            left: -237px;
+         }
+  }
 }    
 @media (max-width: 850px){
 
@@ -496,6 +682,7 @@ ul {
     }
 
     .hero-contenido p{
+        display: none;
         width: 50vw;
     }
     .btn-primario{
@@ -510,5 +697,24 @@ ul {
     .span-verMas {
         left: 120px;
     }
+    .card-horizontal.card-4,
+    .card-horizontal.card-5,
+    .card-horizontal.card-6{
+        display: none;
+    }
+    
+    .contenedor.cards-verticales {
+        width: 500px;
+    }
+  .card-vertical {
+    animation-name: autoRun-850;
+  }
+  @keyframes autoRun-850 {
+    from {
+      left: 100%;
+    }
+    to {
+      left: -169px; 
+    }
+  }
 }
-
