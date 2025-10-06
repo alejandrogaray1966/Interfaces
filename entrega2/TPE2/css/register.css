@@ -3,7 +3,7 @@
 | ESTILOS GENERALES
 |--------------------------------------------------------------------------
 */
-body {
+body.register-body {
     background-color: black; /* Un color de respaldo por si la imagen no carga */
     background-image: url('../img/fondo/fondoL.jpg'); /* Ruta a tu imagen */
     background-size: cover; /* Para que la imagen cubra todo el fondo */
@@ -22,7 +22,7 @@ body {
     transition: opacity 0.9s ease-in-out, transform 0.9s ease-in-out; /* Transiciones suaves */
 }
 
-body.fade-out {
+body.register-body.fade-out {
     opacity: 0;
     transform: translateX(-100px); /* Se mueve ligeramente a la izquierda mientras se desvanece */
 }
@@ -67,7 +67,7 @@ body.fade-out {
     z-index: 10; /* La capa deseada */
 }
 
-h2 {
+h2.form-title {
     color: white;
     font-size: 32px;
     font-weight: bold;
@@ -75,7 +75,7 @@ h2 {
     text-align: left;
 }
 
-form {
+form.register-form {
     width: 353px;
 }
 
@@ -84,7 +84,7 @@ form {
 | ETIQUETAS Y CAMPOS DE FORMULARIO
 |--------------------------------------------------------------------------
 */
-label {
+label.form-label {
     color: white;
     display: block;
     margin-bottom: 1%;
@@ -93,7 +93,7 @@ label {
 }
 
 /* Selector unificado para todos los campos de texto/fecha/email/password */
-input[type="text"] , input[type="date"] , input[type="email"] , .password-container input {
+input.form-input[type="text"] , input.form-input[type="date"] , input.form-input[type="email"] , .password-container input.form-input {
     width: 352px;
     height: 54px;
     padding: 3%;
@@ -108,19 +108,19 @@ input[type="text"] , input[type="date"] , input[type="email"] , .password-contai
 }
 
 /* 1. Elimina el 'outline' por defecto del navegador en el foco */
-input[type="text"]:focus , input[type="date"]:focus , input[type="email"]:focus , .password-container input:focus {
+input.form-input[type="text"]:focus , input.form-input[type="date"]:focus , input.form-input[type="email"]:focus , .password-container input.form-input:focus {
     outline: none;
 }
 
 /* --------------------------- Estado de VALIDO (Verde) ------------------------*/
 /* 🟢 Cuando el campo requerido está en foco Y su contenido es válido */
-input[type="text"]:focus:valid , input[type="date"]:focus:valid , input[type="email"]:focus:valid , .password-container input:focus:valid {
+input.form-input[type="text"]:focus:valid , input.form-input[type="date"]:focus:valid , input.form-input[type="email"]:focus:valid , .password-container input.form-input:focus:valid {
     border: 2px solid green; 
 }
 
 /* --------------------------- Estado de ERROR (Rojo) ------------------------*/
 /* 🔴 Cuando el campo requerido está en foco Y su contenido es inválido */
-input[type="text"]:focus:invalid , input[type="date"]:focus:invalid , input[type="email"]:focus:invalid , .password-container input:focus:invalid {
+input.form-input[type="text"]:focus:invalid , input.form-input[type="date"]:focus:invalid , input.form-input[type="email"]:focus:invalid , .password-container input.form-input:focus:invalid {
     border: 2px solid red; 
 }
 
@@ -137,7 +137,7 @@ input[type="text"]:focus:invalid , input[type="date"]:focus:invalid , input[type
 }
 
 /* El input dentro del contenedor */
-.password-container input {
+.password-container input.form-input {
     box-sizing: border-box; 
     padding-right: 40px; 
 }
@@ -188,7 +188,7 @@ input[type="text"]:focus:invalid , input[type="date"]:focus:invalid , input[type
 | BOTÓN PRINCIPAL
 |--------------------------------------------------------------------------
 */
-button[type="submit"] {
+button.register-button[type="submit"] {
     width: 352px;
     height: 54px;
     padding: 3%;
@@ -204,7 +204,7 @@ button[type="submit"] {
     transition: background-color 0.5s ease;
 }
 
-button[type="submit"]:hover {
+button.register-button[type="submit"]:hover {
     background-color: #ff00d6;
 }
 
@@ -219,7 +219,7 @@ button[type="submit"]:hover {
     align-items: center; /* Center items horizontally */
 }
 
-.social-login span {
+.social-login span.social-login-text {
     font-size: 16px;
     font-weight: normal;
     color: white;
@@ -232,7 +232,7 @@ button[type="submit"]:hover {
 }
 
 /* Create the lines using pseudoelements */
-.social-login span::before, .social-login span::after {
+.social-login span.social-login-text::before, .social-login span.social-login-text::after {
     content: '';
     flex-grow: 1; /* Makes the lines fill the available space */
     height: 1px;
@@ -240,11 +240,11 @@ button[type="submit"]:hover {
 }
 
 /* Add spacing between the text and the lines */
-.social-login span::before {
+.social-login span.social-login-text::before {
     margin-right: 15px;
 }
 
-.social-login span::after {
+.social-login span.social-login-text::after {
     margin-left: 15px;
 }
 
@@ -253,13 +253,19 @@ button[type="submit"]:hover {
     flex-direction: row;
 }
 
-.social-login a img {
+.social-login a.facebook-login img {
     width: 35px; /* Add 'px' unit */
     height: 35px;
     margin: 0px 23px;
 }
 
-.social-login a img:hover {
+.social-login a.google-login img {
+    width: 35px; /* Add 'px' unit */
+    height: 35px;
+    margin: 0px 23px;
+}
+
+.social-login a.facebook-login img:hover, .social-login a.google-login img:hover {
     transform: scale(1.28); /* Aumenta el tamaño un 28% (35px * 1.28 ≈ 45px) */
 }
 
@@ -268,7 +274,7 @@ button[type="submit"]:hover {
 | ENLACE FINAL
 |--------------------------------------------------------------------------
 */
-p {
+p.login-prompt {
     color: white;
     text-align: center;
     font-size: 16px;
@@ -276,13 +282,13 @@ p {
     margin-top: 5%;
 }
 
-p a {
+p.login-prompt a.login-link {
     color: #00eba4;
     text-decoration: none;
     font-weight: bold;
     transition: color 0.5s ease;
 }
 
-p a:hover {
+p.login-prompt a.login-link:hover {
     color: #ff00d6;
 }
