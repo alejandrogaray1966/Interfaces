@@ -470,9 +470,9 @@ ul {
 
 .contenedor.cards-verticales {
     width: 1426px;
+    height: 622px;
   display: flex;
   flex-direction: column;
-  height: 700px; 
   overflow: hidden; /* CLAVE: Oculta las tarjetas que se están moviendo fuera del área */
   /* Opcional: Máscara de desvanecimiento para entrada/salida */
   mask-image: linear-gradient(to right, transparent, #00eba4 4% 90%, transparent);
@@ -579,7 +579,7 @@ ul {
     background-color: #9700ccb3;
     border-radius: 20px;
     position: relative;
-    bottom: 120px;
+    bottom: 122px;
      align-items: baseline;;
 }
 
@@ -587,13 +587,21 @@ ul {
 
 /* CARDS GRANDES*/
 
+.contenedor.cards-grande{
+    display: grid;
+    justify-content: center;
+}
 .card-grande{
     display: grid;
     justify-content: center;
+    width: 1510px;
+    height: 950px;
 }
 .contenedor.cards-grande .nombre-categoria{
     left: 24px;
 }
+
+
 .card-contenido-grande{
     display: flex;
     flex-direction: column;
@@ -603,10 +611,26 @@ ul {
     padding-right: 32px;
 }
 
-.card-img-grande img{
+
+.card-grande .card-img-grande img{
     width: 100%;
     border-radius: 20px;
     filter: brightness(0.5) saturate(1); 
+}
+.card-grande:hover {
+  transform: scale(1.02);
+    transition: ease-in-out 0.3s;
+
+}
+.card-img-grande:hover{
+    border-radius: 20px;
+  background: #ffffff80;
+  color: #000;
+  outline: 1px solid rgb(255, 255, 255);
+  box-shadow: inset 0 0 80px whitesmoke, inset 20px 0 80px rgba(255, 0, 255, 0.747),
+    inset -20px 0 80px #0ff, inset 20px 0 300px #f0f, inset -20px 0 300px #0ff,
+    0 0 50px #fff, -10px 0 80px #f0f, 10px 0 80px #0ff;
+  transition: all ease-in-out 0.3s;
 }
 .iconos-juego{
     display: flex;
@@ -615,6 +639,7 @@ ul {
     bottom: 142px;
     padding-right: 21px;
 }
+
 
 
 @media (max-width: 1510px){
@@ -662,7 +687,10 @@ ul {
        to {
             left: -287px; 
           }
-      }
+    }
+    .card-grande{
+        width: 1250px;
+    }
 
     .card-img-grande img{
     width: 1250px;
@@ -719,6 +747,9 @@ ul {
             left: -237px;
          }
   }
+      .card-grande{
+        width: 800px;
+    }
     .card-img-grande img{
         width: 800px;
     }
@@ -771,4 +802,11 @@ ul {
       left: -169px; 
     }
   }
+        .card-grande{
+        width: 480px;
+    }
+    .card-img-grande img{
+        width: 480px;
+    }
+
 }
