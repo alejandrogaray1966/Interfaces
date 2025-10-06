@@ -825,7 +825,7 @@ ul {
     flex-direction: row;
     justify-content: space-around;
     width: 100%;
-    margin: 40px 80px;
+    margin: 70px 100px 60px 100px
 }
 
 .fat-footer .footer-title{
@@ -838,26 +838,78 @@ ul {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 16px;
+    gap: 20px;
     font-size: 24px;
 }
 
 .footer-lista-navegacion, .footer-lista-legal, .footer-lista-sobreNosotros{
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 20px;
     font-weight: 300;
 }
 .footer-lista-redes{
+    margin-top: 16px;
     display: flex;
     flex-direction: row;
     gap: 36px;
+    
 }
+
+.footer-lista-redes img{
+    width: 24px;
+    height: 24px;
+    object-fit: cover;
+    box-shadow:#0000001a 0px 1px 3px 0px, #0000001a 0px 1px 2px 0px;
+}
+
 
 .footer>ul :last-child>div{
     height: 70px;
     object-fit: cover;
 }
+
+.inputSuscripcion {
+    margin-top: 16px;
+    max-width: 600px; 
+    width: 100%; 
+    padding: 12px 16px;
+    font-size: 18px; 
+    border-radius: 8px; 
+    border: none;
+    box-shadow: #0000001a 0px 1px 3px 0px, #0000001a 0px 1px 2px 0px; /* Sombra suave*/  
+}
+
+.fat-footer button {
+    margin-top: 10px;
+    padding: 12px 24px; 
+    font-size: 18px; 
+    font-weight: 500; 
+    color: white; 
+    background-color: #9700CC; 
+    border: none; 
+    border-radius: 8px; 
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.fat-footer button:hover {
+    background-color: #f0f;
+    transform: scale(1.05); 
+}
+
+.fat-footer button:active {
+    transform: scale(0.95); 
+}
+
+.navLogo img {
+    margin-top: 20px;
+    width: 259px; 
+    height: 46px; 
+    max-width: 100%; 
+    object-fit: contain; 
+}
+
 .thin-footer{
     background-color: #484648; 
     display:flex;
