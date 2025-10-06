@@ -14,6 +14,7 @@ a, a:hover, a:active, a:visited, li{
 }
 
 .game-body{ 
+    max-width: 1920px;
     font-family: 'Roboto', sans-serif;
     color: white;
     position: relative;
@@ -43,24 +44,24 @@ a, a:hover, a:active, a:visited, li{
     gap: 8px;
     font-size: 24px;
     font-weight: 400;
-    padding: 32px 190px 32px 110px;
+    padding: 32px 190px 32px 80px;
 }   
 
 .container-breadcrumbs{
-    margin-top: 80px;
+    margin-top: 40px;
 }
 
 .game-title{
     font-family: 'Raleway', sans-serif;
     font-size: 64px;
     font-weight: 700;
-    margin: 20px 230px 10px 230px;
+    margin: 20px 0 0 200px;
 }
 
 .game-subtitle{
     font-size: 24px;
     font-weight: 300;
-    margin: 0 230px 10px 230px;
+    margin: 0 0 10px 200px;
 }
 
 .game-container{
@@ -69,11 +70,13 @@ a, a:hover, a:active, a:visited, li{
 
 .game-preview{
   position: inherit;
-  margin: 20px 230px 20px 230px;
+  margin: 20px 0 0 200px;
   width: 1430px;
   height: 682px;
+  max-width: 100%;
   object-fit: cover;
   border-radius: 20px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
 }
 
 .game-btnPlay {
@@ -82,8 +85,8 @@ a, a:hover, a:active, a:visited, li{
     font-size: 24px;
     font-weight: 600;
     position: absolute; 
-    bottom: 56px;         
-    right: 305px;
+    bottom: 40px;         
+    right: 240px;
     background-color: #9700CC;
     color: white;
     border: none;
@@ -100,7 +103,7 @@ a, a:hover, a:active, a:visited, li{
     background-color: transparent;
     position: absolute;
     top: 56px;
-    right: 305px; 
+    right: 240px; 
     z-index: 2; 
     display: flex; 
     gap: 24px; 
@@ -126,12 +129,11 @@ a, a:hover, a:active, a:visited, li{
 }
 
 .game-btn-secondary{
-    position: absolute;
-    bottom:-32px;
-    right: 305px;
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    padding-right: 220px;
+    margin-top: 16px;
     gap: 32px;
 }
 
@@ -146,11 +148,11 @@ a, a:hover, a:active, a:visited, li{
 .howToPlay-section {
     width: 1476px;
     height: 425px;
-    margin: 64px 230px 64px 230px;
+    margin: 20px 10px 20px 200px;
     display: flex; 
     flex-direction: row;
     align-items: flex-start;
-    gap: 180px;    
+    gap: 160px;    
 }
 
 .controls-aside {
@@ -218,29 +220,31 @@ a, a:hover, a:active, a:visited, li{
 }
 
 .demo-title{
-    margin-left: 335px;
+    margin-top: 20px;
+    margin-left: 300px;
 }
 
 .demo-container {
     width: 1210px;
     height: 682px;
-    margin-left: 335px;
-    margin-bottom: 64px;
+    margin-left: 300px;
+    margin-bottom: 40px;
     border-radius: 20px; 
 }
 
 .community-section {
-    margin-left: 227px;
-    margin-right: 267px;
-    border-radius: 12px;
+    margin-left: 200px;
+    margin-right: 200px;
+    border-radius:20px;
     padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.community-section h2 {
-    font-size: 24px;
-    font-weight: 600;
-    margin-bottom: 20px;
+.community-title{
+    font-size: 32px;
+    font-family: Raleway, sans-serif;
+    font-weight: 500;
+    margin-bottom: 26px;
 }
 
 /* Contenedor del formulario de comentarios */
@@ -255,6 +259,7 @@ a, a:hover, a:active, a:visited, li{
     display: flex;
     gap: 15px;
     align-items: flex-start;
+    
 }
 
 .form-comentario img {
@@ -273,7 +278,7 @@ a, a:hover, a:active, a:visited, li{
     width:1354px;
     height: 64px;;
     flex-grow: 1;
-    border-radius: 8px;
+    border-radius: 20px;
     padding: 10px;
     font-size: 14px;
     color: rgb(34, 33, 33);
@@ -389,7 +394,7 @@ a, a:hover, a:active, a:visited, li{
 .lista-comentarios article {
     display: flex;
     gap: 16px;
-    padding: 15px 0;
+    padding: 20px 0;
     
 }
 
@@ -414,18 +419,18 @@ a, a:hover, a:active, a:visited, li{
 }
 
 .lista-comentarios span {
-    font-weight: bold;
-    font-size: 14px;
+    font-weight: 500;
+    font-size: 21px;
 }
 
 .lista-comentarios time {
-    font-size: 12px;
+    font-size: 19px;
     color: #888;
 }
 
 .lista-comentarios p {
-    font-size: 14px;
-    line-height: 1.5;
+    font-size: 22px;
+   font-weight: 300;
     margin: 0;
 }
 
@@ -444,7 +449,7 @@ a, a:hover, a:active, a:visited, li{
     align-items: center;
     gap: 5px;
     color: #666;
-    font-size: 12px;
+    font-size: 19px;
 }
 
 .lista-comentarios article button img {

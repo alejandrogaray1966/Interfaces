@@ -145,4 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 2. Inicializa la lógica del Hero Carousel
     // Es seguro llamarla aquí porque el HTML del carrusel ya está presente en index.html
     heroCarousel();
+
+    //3. Carga el footer
+    cargarComponente('footer.html', '.ContFooter');
 });
