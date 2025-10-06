@@ -1,6 +1,6 @@
 /* --- Estilos para la Pantalla de Carga --- */
 
-body {
+body.body-carga {
     background-color: black; /* Un color de respaldo por si la imagen no carga */
     background-image: url('../img/fondo/fondoL.jpg'); /* Ruta a tu imagen */
     background-size: cover; /* Para que la imagen cubra todo el fondo */
