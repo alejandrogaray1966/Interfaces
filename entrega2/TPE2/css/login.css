@@ -3,7 +3,7 @@
 | ESTILOS GENERALES
 |--------------------------------------------------------------------------
 */
-body {
+body.login-body {
     background-color: black; /* Un color de respaldo por si la imagen no carga */
     background-image: url('../img/fondo/fondoL.jpg'); /* Ruta a tu imagen */
     background-size: cover; /* Para que la imagen cubra todo el fondo */
@@ -21,7 +21,7 @@ body {
     transition: opacity 0.9s ease-in-out, transform 0.9s ease-in-out; /* Transiciones suaves */
 }
 
-body.fade-out {
+body.login-body.fade-out {
     opacity: 0;
     transform: translateX(-100px); /* Se mueve ligeramente a la izquierda mientras se desvanece */
 }
@@ -64,7 +64,7 @@ body.fade-out {
     z-index: 10; /* La capa deseada */
 }
 
-h2 {
+h2.login-title {
     color: white;
     font-size: 32px;
     font-weight: bold;
@@ -72,7 +72,7 @@ h2 {
     text-align: left;
 }
 
-form {
+form.login-form {
     width: 353px;
 }
 
@@ -81,7 +81,7 @@ form {
 | ETIQUETAS Y CAMPOS DE FORMULARIO
 |--------------------------------------------------------------------------
 */
-label {
+label.login-label {
     color: white;
     display: block;
     margin-bottom: 1%;
@@ -90,7 +90,7 @@ label {
 }
 
 /* --------------------------- Input del EMAIL y la PASSWORD ------------------------*/
-input[type="email"] , .password-container input {
+input.login-input[type="email"] , .password-container input.login-input {
     width: 352px;
     height: 54px;
     padding: 3%;
@@ -104,24 +104,24 @@ input[type="email"] , .password-container input {
     box-sizing: border-box;
 }
 
-.password-container input {
+.password-container input.login-input {
     padding-right: 40px; /* Deja espacio para el ícono */
 }
 
 /* 1. Elimina el 'outline' por defecto del navegador en el foco */
-input[type="email"]:focus , .password-container input:focus {
+input.login-input[type="email"]:focus , .password-container input.login-input:focus {
     outline: none;
 }
 
 /* --------------------------- Estado de VALIDO (Verde) ------------------------*/
 /* 🟢 Cuando el campo requerido está en foco Y su contenido es válido */
-input[type="email"][required]:focus:valid , .password-container input[required]:focus:valid {
+input.login-input[type="email"][required]:focus:valid , .password-container input.login-input[required]:focus:valid {
     border: 2px solid green; 
 }
 
 /* --------------------------- Estado de ERROR (Rojo) ------------------------*/
 /* 🔴 Cuando el campo requerido está en foco Y su contenido es inválido */
-input[type="email"][required]:focus:invalid , .password-container input[required]:focus:invalid {
+input.login-input[type="email"][required]:focus:invalid , .password-container input.login-input[required]:focus:invalid {
     border: 2px solid red; 
 }
 
@@ -130,7 +130,7 @@ input[type="email"][required]:focus:invalid , .password-container input[required
 | BOTÓN PRINCIPAL
 |--------------------------------------------------------------------------
 */
-button[type="submit"] {
+button.login-button[type="submit"] {
     width: 352px;
     height: 54px;
     padding: 3%;
@@ -146,17 +146,8 @@ button[type="submit"] {
     transition: background-color 0.5s ease;
 }
 
-button[type="submit"]:hover {
+button.login-button[type="submit"]:hover {
     background-color: #ff00d6;
-}
-
-a {
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 16px;
-    margin-top: 3%;
-    text-align: center;
 }
 
 /* Estilo para el nuevo contenedor del mensaje */
@@ -181,11 +172,11 @@ a {
     font-weight: normal;
 }
 
-.remember-me input {
+.remember-me input.remember-me-checkbox[type="checkbox"] {
     margin-right: 2%;
 }
 
-.remember-me input[type="checkbox"]:hover {
+.remember-me input.remember-me-checkbox[type="checkbox"]:hover {
     transform: scale(1.28); /* Aumenta el tamaño un 28% */
     cursor: pointer;
 }
@@ -201,7 +192,7 @@ a {
     align-items: center; /* Center items horizontally */
 }
 
-.social-login span {
+.social-login span.social-login-text {
     font-size: 16px;
     font-weight: normal;
     color: white;
@@ -214,7 +205,7 @@ a {
 }
 
 /* Create the lines using pseudoelements */
-.social-login span::before, .social-login span::after {
+.social-login span.social-login-text::before, .social-login span.social-login-text::after {
     content: '';
     flex-grow: 1; /* Makes the lines fill the available space */
     height: 1px;
@@ -222,11 +213,11 @@ a {
 }
 
 /* Add spacing between the text and the lines */
-.social-login span::before {
+.social-login span.social-login-text::before {
     margin-right: 15px;
 }
 
-.social-login span::after {
+.social-login span.social-login-text::after {
     margin-left: 15px;
 }
 
@@ -235,13 +226,23 @@ a {
     flex-direction: row;
 }
 
-.social-login a img {
+.social-login a.facebook-login img {
     width: 35px; /* Add 'px' unit */
     height: 35px;
     margin: 0px 23px;
 }
 
-.social-login a img:hover {
+.social-login a.google-login img {
+    width: 35px; /* Add 'px' unit */
+    height: 35px;
+    margin: 0px 23px;
+}
+
+.social-login a.facebook-login img:hover {
+    transform: scale(1.28); /* Aumenta el tamaño un 28% (35px * 1.28 ≈ 45px) */
+}
+
+.social-login a.google-login img:hover {
     transform: scale(1.28); /* Aumenta el tamaño un 28% (35px * 1.28 ≈ 45px) */
 }
 
@@ -250,7 +251,7 @@ a {
 | ENLACE FINAL
 |--------------------------------------------------------------------------
 */
-p {
+p.register-prompt , p.forgot-password {
     color: white;
     text-align: center;
     font-size: 16px;
@@ -258,19 +259,19 @@ p {
     margin-top: 5%;
 }
 
-p a {
+p.register-prompt a.register-link {
     color: #00eba4;
     text-decoration: none;
     font-weight: bold;
     transition: color 0.5s ease;
 }
 
-p a:hover , p u:hover {
+p.register-prompt a.register-link:hover , p.forgot-password u.forgot-password-link:hover {
     color: #ff00d6;
 }
 
 /* Estilo para hacer que el texto subrayado parezca clickeable */
-p u {
+p.forgot-password u.forgot-password-link {
     /* Cambia el cursor predeterminado a la mano o puntero */
     cursor: pointer; 
     /* Opcional: Podrías añadir un pequeño cambio de color para mayor feedback visual */
@@ -284,7 +285,7 @@ p u {
 }
 
 /* El input dentro del contenedor */
-.password-container input {
+.password-container input.login-input {
     box-sizing: border-box; /* Para que el padding no afecte el ancho total */
     padding-right: 40px; /* Deja espacio para el ícono */
 }
