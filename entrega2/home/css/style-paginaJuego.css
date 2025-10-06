@@ -212,7 +212,7 @@ a, a:hover, a:active, a:visited, li{
     object-fit: contain;
 }
 
-.demo-title, .controls-title, .how-to-play-title, .community-title {
+.demo-title, .controls-title, .how-to-play-title .cards-title{
     font-size: 32px;
     font-family: Raleway, sans-serif;
     font-weight: 500;
@@ -478,4 +478,13 @@ a, a:hover, a:active, a:visited, li{
   .lista-comentarios article.new-comment {
     animation: slideIn 0.3s ease-out;
   }
+
+  .cards-section {
+    margin:40px 300px 40px 210px;
+  }
+
+  .cards-title{
+    margin-bottom: 26px;
+  }
+
   

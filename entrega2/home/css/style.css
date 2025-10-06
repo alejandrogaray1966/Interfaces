@@ -810,3 +810,62 @@ ul {
     }
 
 }
+
+/* FOOTER */
+.fat-footer{
+    background-color: #484648; 
+    display:flex;
+    max-width: 1920px;
+    width: 100%;
+    font-family: 'Roboto', 'sans-serif';
+}
+
+.fat-footer>ul{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+    margin: 40px 80px;
+}
+
+.fat-footer .footer-title{
+    color:  #00FFB2;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.fat-footer>ul>li{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    font-size: 24px;
+}
+
+.footer-lista-navegacion, .footer-lista-legal, .footer-lista-sobreNosotros{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    font-weight: 300;
+}
+.footer-lista-redes{
+    display: flex;
+    flex-direction: row;
+    gap: 36px;
+}
+
+.footer>ul :last-child>div{
+    height: 70px;
+    object-fit: cover;
+}
+.thin-footer{
+    background-color: #484648; 
+    display:flex;
+    max-width: 1920px;
+    width: 100%;
+    height: 70px;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: 400;
+}
