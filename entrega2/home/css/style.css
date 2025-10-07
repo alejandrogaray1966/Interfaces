@@ -28,11 +28,17 @@ h2{
 
 p, a, span{
     color: white;
-    font-size: 1.5rem;
     font-family:'Roboto','sans-serif';
+}
+p,a{
+    font-size: 1.5rem;
 }
 a {
     text-decoration: none;
+
+}
+span{
+    font-size: 1.2rem;
 }
 ul {
     list-style: none;
@@ -397,12 +403,10 @@ ul {
 /*CARDS Horizontales*/
 
 .contenedor.cards-horizontales{
-    height: auto;
+    height: 710px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-top: 64px;
-    margin-bottom: 64px;
     align-items: center;
     
 
@@ -468,18 +472,16 @@ ul {
 }
 
 /*CARDS Verticales*/
-/* --- Estilos para 1920px o más (Base) --- */
-/* Dimensiones de la tarjeta: 338px x 499px */
 /* Cantidad: 9 */
 
 .contenedor.cards-verticales {
     width: 1426px;
     height: 622px;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden; /* CLAVE: Oculta las tarjetas que se están moviendo fuera del área */
-  /* Opcional: Máscara de desvanecimiento para entrada/salida */
-  mask-image: linear-gradient(to right, transparent, #00eba4 4% 90%, transparent);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* CLAVE: Oculta las tarjetas que se están moviendo fuera del área */
+    /* Opcional: Máscara de desvanecimiento para entrada/salida */
+    mask-image: linear-gradient(to right, transparent, #00eba4 4% 90%, transparent);
 }
 
 
@@ -499,6 +501,7 @@ ul {
   padding: 0;
   margin: 0;
   width: 100%;
+  height: 569px;
 }
 
 .card-vertical {
@@ -509,7 +512,7 @@ ul {
   height: 499px; 
   border-radius: 20px;
   position: absolute;
-  animation: autoRun-base 10s linear infinite;
+  animation: autoRun-base 20s linear infinite;
   transition: filter 1s;
 
 }
@@ -531,39 +534,39 @@ ul {
 }
 
 .cards-lista-verticales .card-vertical:nth-child(1) {
-  animation-delay: -10s;
+  animation-delay: -20s;
 }
 
 .cards-lista-verticales .card-vertical:nth-child(2) {
-  animation-delay: -8.8889s;
+  animation-delay: -17.7778s;
 }
 
 .cards-lista-verticales .card-vertical:nth-child(3) {
-  animation-delay: -7.7778s;
+  animation-delay: -15.5556s;
 }
 
 .cards-lista-verticales .card-vertical:nth-child(4) {
-  animation-delay: -6.6667s;
+  animation-delay: -13.3333s;
 }
 
 .cards-lista-verticales .card-vertical:nth-child(5) {
-  animation-delay: -5.5556s;
+  animation-delay: -11.1111s;
 }
 
 .cards-lista-verticales .card-vertical:nth-child(6) {
-  animation-delay: -4.4445s;
+  animation-delay: -8.8889s;
 }
 
 .cards-lista-verticales .card-vertical:nth-child(7) {
-  animation-delay: -3.3334s;
+  animation-delay: -6.6667s;
 }
 
 .cards-lista-verticales .card-vertical:nth-child(8) {
-  animation-delay: -2.2223s;
+  animation-delay: -4.4444s;
 }
 
 .cards-lista-verticales .card-vertical:nth-child(9) {
-  animation-delay: -1.1112s;
+  animation-delay:-2.2222s;
 }
 /* --- Estilos de Hover (Se mantienen) --- */
 .contenedor.cards-verticales:hover .card-vertical {
@@ -599,11 +602,11 @@ ul {
     display: grid;
     justify-content: center;
     width: 1448px;
-    height: fit-content;
+    height: 944px;
 }
 
 .cards-lista-grande{
-    height: inherit;
+    height: 944px;
 }
 
 .contenedor.cards-grande .nombre-categoria{
@@ -636,11 +639,10 @@ ul {
     border-radius: 20px;
     background: #ffffff80;
     color: #000;
-    box-shadow: inset 0 0 80px whitesmoke, inset 20px 0 80px rgba(255, 0, 255, 0.747),
+    box-shadow:  0 0 80px whitesmoke, inset 20px 0 80px rgba(255, 0, 255, 0.747),
         inset -20px 0 80px #0ff, inset 20px 0 300px #f0f, inset -20px 0 300px #0ff,
         0 0 50px #fff, -10px 0 80px #f0f, 10px 0 80px #0ff;
     transition: all ease-in-out 0.3s;
-    height: fit-content;
 }
 .iconos-juego{
     display: flex;
@@ -768,7 +770,7 @@ ul {
     h1{
       font-size: 3.5rem;
     }
-    p, a, span{
+    p, a{
     font-size: 1.25rem;
     }
     .card-horizontal{
@@ -778,7 +780,9 @@ ul {
     .hero-contenido{
         width: 54vw;
     }
-
+    .contenedor.cards-horizontales{
+        height: 650px;
+    }  
     .card-img-horizontal img{
         width: 400px;
     }
@@ -816,6 +820,10 @@ ul {
     }
     .card-grande{
         width: 1150px;
+        height: 750px;
+    }
+    .cards-lista-grande {
+    height: 750px;
     }
 
     .card-img-grande img{
@@ -834,8 +842,7 @@ ul {
     .hero-contenido h1{
         font-size: 2rem;
     }
-     .hero-contenido p,
-     .hero-contenido span{
+     .hero-contenido p{
         font-size: 1rem;
     }
     .btn-primario{
@@ -843,7 +850,7 @@ ul {
     }
 
     .contenedor.cards-horizontales {
-      margin-top: 30px;
+    height: 850px;
     }
     
     .contenedor .cards-lista{
@@ -866,16 +873,21 @@ ul {
     .card-vertical {
     animation-name: autoRun-1275;
     }
-     @keyframes autoRun-1275 {
+    
+    @keyframes autoRun-1275 {
         from {
            left: 100%;
         }
         to {
             left: -237px;
-         }
-  }
+        }
+    }
     .card-grande{
         width: 750px;
+        height: 470px;
+    }
+    .cards-lista-grande {
+    height: 526px;
     }
     .card-img-grande img{
         width: 750px;
@@ -892,9 +904,9 @@ ul {
     .fat-footer>ul{
         gap: 46px;
     }
+}
 
 
-}    
 @media (max-width: 850px){
     .nav-Busqueda{
         display: none;
@@ -909,6 +921,9 @@ ul {
     }
     .btn-primario{
         width: 175px;
+    }
+    .contenedor.cards-horizontales {
+        height: 594px;
     }
     .contenedor .cards-lista {
         grid-template-columns: 1fr;
@@ -929,20 +944,25 @@ ul {
     
     .contenedor.cards-verticales {
         width: 500px;
+        height: 5472x;
     }
-  .card-vertical {
-    animation-name: autoRun-850;
-  }
-  @keyframes autoRun-850 {
-    from {
-      left: 100%;
+    .card-vertical {
+        animation-name: autoRun-850;
     }
-    to {
-      left: -169px; 
+    @keyframes autoRun-850 {
+        from {
+            left: 100%;
+        }
+        to {
+            left: -169px; 
+        }
     }
-  }
     .card-grande{
         width: 446px;
+        height: 285px;
+    }
+    .cards-lista-grande {
+    height: 315px;
     }
     .card-img-grande img{
         width: 446px;
@@ -954,19 +974,20 @@ ul {
     .card-contenido-grande h1{
         font-size: 2.5rem;
     }
+
     .iconos-juego{
         bottom: 108px;
         height: 26px;
-
     }
 
     .fat-footer>ul {
-    display: grid;
-    justify-content: space-around;
-    width: 100%;
-    margin: 30px 50px 30px 50px;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    gap: 16px;
-}}
+        display: grid;
+        justify-content: space-around;
+        width: 100%;
+        margin: 30px 50px 30px 50px;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        gap: 16px;  
+    }
+}
 
