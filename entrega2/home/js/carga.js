@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (percentage >= 100) {
             loadingScreen.classList.add('loaded');
             setTimeout(() => {
-                window.location.href = 'home.html'; // Aquí podrías redirigir o mostrar el Home
+                window.location.href = './index.html'; // Aquí podrías redirigir o mostrar el Home
             }, 900); // Espera 0.9 segundos con el 100%
             return; // Detener el intervalo
         }
