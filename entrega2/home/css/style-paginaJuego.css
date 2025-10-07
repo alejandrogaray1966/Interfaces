@@ -58,6 +58,7 @@ a, a:hover, a:active, a:visited, li{
 }   
 
 .container-breadcrumbs{
+    margin-left: -10%;
     margin-top: 40px;
 }
 
@@ -160,14 +161,14 @@ a, a:hover, a:active, a:visited, li{
     display: flex; 
     flex-direction: row;
     align-items: flex-start;
-    gap: 160px;    
+    gap: 10%;    
 }
 
 .controls-aside {
     display: flex; 
     align-items: flex-start; 
-    width: 650px; 
-    height: 263px;
+    width: 45%; 
+    
 }
 
 .controls-container {
