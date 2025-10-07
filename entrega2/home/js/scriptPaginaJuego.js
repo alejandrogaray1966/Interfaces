@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const loadingSpinner = document.getElementById("loading-spinner")
     const listaComentarios = document.getElementById("lista-comentarios")
   
-    // Manejar el envío del formulario
+    // detengo el submit
     form.addEventListener("submit", (e) => {
       e.preventDefault()
   
@@ -18,23 +18,23 @@ document.addEventListener("DOMContentLoaded", () => {
         return
       }
   
-      // Activar estado de carga
+      // Activo estado de carga
       textarea.classList.add("loading")
       loadingSpinner.classList.add("active")
       btnComentar.disabled = true
       btnCancelar.disabled = true
   
-      // Simular envío durante 3 segundos
+      
       setTimeout(() => {
-        // Crear el nuevo comentario
+        // Creo el nuevo comentario
         agregarComentario(textoComentario)
   
-        // Reiniciar el formulario
+        // Reseteo el mensaje en el textarea
         resetearFormulario()
       }, 3000)
     })
   
-    // Manejar el botón cancelar
+    // botón cancelar
     btnCancelar.addEventListener("click", () => {
       resetearFormulario()
     })
@@ -62,25 +62,38 @@ function agregarComentario(texto) {
             </div>
         `
 
-    // Insertar el comentario al inicio de la lista
+    // Inserto el comentario nuevo primero en la lista
     listaComentarios.insertBefore(nuevoComentario, listaComentarios.firstChild)
 
-    // Hacer scroll al nuevo comentario
+    // scroll al nuevo comentario
     listaComentarios.scrollTop = 0
   }
 
   function resetearFormulario() {
-    // Remover estado de carga
+    // Remuevo estado de carga
     textarea.classList.remove("loading")
     loadingSpinner.classList.remove("active")
     btnComentar.disabled = false
     btnCancelar.disabled = false
 
-    // Limpiar el textarea
+    // textarea vacío
     textarea.value = ""
-
-    // Quitar el foco del textarea para ocultar los botones
     textarea.blur()
   }
 })
+
+//SECCION DEMO
+document.addEventListener('DOMContentLoaded', () => {
+    const video = document.querySelector('.demo-container');
+
+    // muestro los controles agregando el atributo con hover
+    video.addEventListener('mouseenter', () => {
+        video.setAttribute('controls', 'controls');
+    });
+
+    // Oculto los controles sin hover
+    video.addEventListener('mouseleave', () => {
+        video.removeAttribute('controls');
+    });
+});
 
