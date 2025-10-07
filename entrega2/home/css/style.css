@@ -453,13 +453,12 @@ ul {
 }
 .nombre-categoria{
     position: relative;
-    right: 510px;
-    width: 200px;
+    right: 561px;
 }
 
 .span-verMas{
     position: relative;
-    left: 607px;
+    left: 579px;
     width: 90px;
 }
 
@@ -594,9 +593,14 @@ ul {
 .card-grande{
     display: grid;
     justify-content: center;
-    width: 1510px;
+    width: 1448px;
     height: 950px;
 }
+
+.cards-lista-grande{
+    height: inherit;
+}
+
 .contenedor.cards-grande .nombre-categoria{
     left: 24px;
 }
@@ -609,6 +613,7 @@ ul {
     position: relative;
     bottom: 211px;
     padding-right: 32px;
+    height: fit-content;
 }
 
 
@@ -620,25 +625,137 @@ ul {
 .card-grande:hover {
   transform: scale(1.02);
     transition: ease-in-out 0.3s;
+    height: fit-content;
 
 }
-.card-img-grande:hover{
+.card-grande .card-img-grande:hover{
     border-radius: 20px;
-  background: #ffffff80;
-  color: #000;
-  outline: 1px solid rgb(255, 255, 255);
-  box-shadow: inset 0 0 80px whitesmoke, inset 20px 0 80px rgba(255, 0, 255, 0.747),
-    inset -20px 0 80px #0ff, inset 20px 0 300px #f0f, inset -20px 0 300px #0ff,
-    0 0 50px #fff, -10px 0 80px #f0f, 10px 0 80px #0ff;
-  transition: all ease-in-out 0.3s;
+    background: #ffffff80;
+    color: #000;
+    box-shadow: inset 0 0 80px whitesmoke, inset 20px 0 80px rgba(255, 0, 255, 0.747),
+        inset -20px 0 80px #0ff, inset 20px 0 300px #f0f, inset -20px 0 300px #0ff,
+        0 0 50px #fff, -10px 0 80px #f0f, 10px 0 80px #0ff;
+    transition: all ease-in-out 0.3s;
+    height: fit-content;
 }
 .iconos-juego{
     display: flex;
     justify-content: flex-end;
     position: relative;
     bottom: 142px;
-    padding-right: 21px;
+    height: 64px;
+    padding: 4px;
 }
+
+
+
+/* FOOTER */
+.fat-footer{
+    background-color: #484648; 
+    display:flex;
+    width: 100%;
+    font-family: 'Roboto', 'sans-serif';
+}
+
+.fat-footer>ul{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+    margin: 70px 100px 60px 100px;
+    gap: 14px;
+}
+
+.fat-footer .footer-title{
+    color:  #00FFB2;
+    font-weight: 600;
+    margin-bottom: 10px;
+    font-size: 24px;
+
+}
+
+.fat-footer>ul>li{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.footer-lista-navegacion, .footer-lista-legal, .footer-lista-sobreNosotros{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    font-weight: 300;
+}
+.footer-lista-redes{
+    margin-top: 16px;
+    display: flex;
+    flex-direction: row;
+    gap: 36px;
+    
+}
+
+.footer-lista-redes img{
+    width: 24px;
+    height: 24px;
+    object-fit: cover;
+    box-shadow:#0000001a 0px 1px 3px 0px, #0000001a 0px 1px 2px 0px;
+}
+
+
+.footer>ul :last-child>div{
+    height: 70px;
+    object-fit: cover;
+}
+
+.inputSuscripcion {
+    margin-top: 16px;
+    width: 92%; 
+    padding: 12px 16px;
+    font-size: 18px; 
+    border-radius: 8px; 
+    border: none;
+    box-shadow: #0000001a 0px 1px 3px 0px, #0000001a 0px 1px 2px 0px; /* Sombra suave*/  
+}
+
+.fat-footer button {
+    margin-top: 10px;
+    padding: 12px 24px; 
+    font-size: 18px; 
+    font-weight: 500; 
+    color: white; 
+    background-color: #9700CC; 
+    border: none; 
+    border-radius: 8px; 
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.fat-footer button:hover {
+    background-color: #f0f;
+    transform: scale(1.05); 
+}
+
+.fat-footer button:active {
+    transform: scale(0.95); 
+}
+
+.navLogo img {
+    margin-top: 20px;
+    height: 34px; 
+    object-fit: contain; 
+}
+
+.thin-footer{
+    background-color: #484648; 
+    display:flex;
+    width: 100%;
+    height: 70px;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: 400;
+}
+
 
 
 
@@ -661,7 +778,7 @@ ul {
         width: 401px;
     }
     .nombre-categoria{
-        right: 410px;
+        right: 457px;
     }
     .span-verMas{
         left: 537px;
@@ -697,7 +814,8 @@ ul {
     }
 
     .iconos-juego{
-        bottom: 115px;
+        bottom: 168px;
+        height: 48px;
     }
 }
 @media (max-width: 1275px){
@@ -725,7 +843,7 @@ ul {
     gap: 14px;
     }
     .nombre-categoria {
-        right: 204px;
+        right: 284px;
         font-size: 1.5rem;
 
     }
@@ -747,16 +865,22 @@ ul {
             left: -237px;
          }
   }
-      .card-grande{
+    .card-grande{
         width: 800px;
     }
     .card-img-grande img{
         width: 800px;
     }
+    .card-contenido-grande{
+        bottom: 274px;
+    }
 
     .iconos-juego{
-        bottom: 115px;
+        bottom: 343px;
+        height: 35px;
     }
+
+
 }    
 @media (max-width: 850px){
 
@@ -776,7 +900,7 @@ ul {
         grid-template-rows: 1fr 1fr;
     }
     .nombre-categoria {
-        right: 0px;
+        right: 93px;
     }
     .span-verMas {
         left: 120px;
@@ -809,115 +933,19 @@ ul {
         width: 480px;
     }
 
-}
+    .iconos-juego{
+        bottom: 496px;
+        height: 26px;
 
-/* FOOTER */
-.fat-footer{
-    background-color: #484648; 
-    display:flex;
-    max-width: 1920px;
-    width: 100%;
-    font-family: 'Roboto', 'sans-serif';
-}
+    }
 
-.fat-footer>ul{
-    display: flex;
-    flex-direction: row;
+    .fat-footer>ul {
+    display: grid;
     justify-content: space-around;
     width: 100%;
-    margin: 70px 100px 60px 100px
-}
+    margin: 30px 50px 30px 50px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 16px;
+}}
 
-.fat-footer .footer-title{
-    color:  #00FFB2;
-    font-weight: 600;
-    margin-bottom: 10px;
-}
-
-.fat-footer>ul>li{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 20px;
-    font-size: 24px;
-}
-
-.footer-lista-navegacion, .footer-lista-legal, .footer-lista-sobreNosotros{
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    font-weight: 300;
-}
-.footer-lista-redes{
-    margin-top: 16px;
-    display: flex;
-    flex-direction: row;
-    gap: 36px;
-    
-}
-
-.footer-lista-redes img{
-    width: 24px;
-    height: 24px;
-    object-fit: cover;
-    box-shadow:#0000001a 0px 1px 3px 0px, #0000001a 0px 1px 2px 0px;
-}
-
-
-.footer>ul :last-child>div{
-    height: 70px;
-    object-fit: cover;
-}
-
-.inputSuscripcion {
-    margin-top: 16px;
-    max-width: 600px; 
-    width: 100%; 
-    padding: 12px 16px;
-    font-size: 18px; 
-    border-radius: 8px; 
-    border: none;
-    box-shadow: #0000001a 0px 1px 3px 0px, #0000001a 0px 1px 2px 0px; /* Sombra suave*/  
-}
-
-.fat-footer button {
-    margin-top: 10px;
-    padding: 12px 24px; 
-    font-size: 18px; 
-    font-weight: 500; 
-    color: white; 
-    background-color: #9700CC; 
-    border: none; 
-    border-radius: 8px; 
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.fat-footer button:hover {
-    background-color: #f0f;
-    transform: scale(1.05); 
-}
-
-.fat-footer button:active {
-    transform: scale(0.95); 
-}
-
-.navLogo img {
-    margin-top: 20px;
-    width: 259px; 
-    height: 46px; 
-    max-width: 100%; 
-    object-fit: contain; 
-}
-
-.thin-footer{
-    background-color: #484648; 
-    display:flex;
-    max-width: 1920px;
-    width: 100%;
-    height: 70px;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-    font-weight: 400;
-}
