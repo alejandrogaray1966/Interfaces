@@ -1012,5 +1012,549 @@ ul {
         grid-template-rows: 1fr 1fr;
         gap: 16px;  
     }
+}/*----------------------------------
+    COMIENZA ESTILOS PAGINA JUEGO
+    ---------------------------------*/
+
+.contenedor-principal{
+    max-width: 1430px; 
+    margin: 0 auto;   
+    width: 100%;      
+    padding: 0 20px;   
+    box-sizing: border-box; 
 }
+
+.game-section{
+    display: flex;
+    flex-direction: column;  
+    
+    
+}
+
+a, a:hover, a:active, a:visited, li{
+    text-decoration: none;
+}
+
+.game-body{ 
+    max-width: 100%;
+    font-family: 'Roboto', sans-serif;
+    color: white;
+    position: relative;
+    width: 100%;
+    height: 100;
+    background-image: url(../assets/backgroundJuego.png);
+    background-size:cover;
+    background-position: center;
+    overflow-x:hidden;  
+    background-attachment: scroll;
+    background-repeat: no-repeat;
+}
+
+.game-body::before{
+    content:"";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: -1;
+}
+
+.breadcrumbs{
+    display: flex;
+    align-items: first baseline;
+    justify-content:flex-start;
+    gap: 8px;
+    font-size: 24px;
+    font-weight: 400;
+    padding: 32px 0 32px 0
+}   
+
+.container-breadcrumbs{
+    margin-left: -10%;
+    margin-top: 40px;
+}
+
+.game-title{
+    font-family: 'Raleway', sans-serif;
+    font-size: 64px;
+    font-weight: 700;
+    margin-top: 20px;
+}
+
+.game-subtitle{
+    font-size: 24px;
+    font-weight: 300;
+    margin-bottom:  10px;
+}
+
+.game-container{
+    position: relative;
+    clip-path: circle(150% at 50% 50%);
+}
+
+
+.game-preview{
+  position: inherit;
+  margin-top: 20px;
+  width: 100%;
+  height: 682px;
+  object-fit: cover;
+  border-radius: 20px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+  transition: all ease-in-out 0.3s;
+}
+
+.game-btnPlay {
+    width: 222px;
+    height: 69px;
+    font-size: 24px;
+    font-weight: 600;
+    position: absolute; 
+    bottom: 40px;         
+    right: 40px;
+    background-color: #9700CC;
+    color: white;
+    border: none;
+    border-radius: 8px;
+}
+
+.game-btnPlay:hover {
+    background-color: #FF00D6;
+    transform: scale(1.1);
+    transition: ease-in-out 0.3s;
+    cursor: pointer;
+}
+
+.game-btn-settings {
+    background-color: transparent;
+    position: absolute;
+    top: 56px;
+    right: 40px; 
+    z-index: 2; 
+    display: flex; 
+    gap: 24px; 
+    align-items: center;
+}
+
+.game-btn-settings button  {
+    background-color: transparent;
+    color: #fff;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    border:none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.game-btn-settings button img {
+    color: #fff;
+    width: 40px;
+    height: 40px;
+}
+
+.game-btn-secondary{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 20px;
+    margin-top: 16px;
+    gap: 32px;
+    right: 40px;
+}
+
+.game-btn-secondary button  {
+    background-color: transparent;
+     cursor: pointer;
+     width: 32px;
+     height: 32px;
+     border:none;
+ }
+
+ .game-btn-secondary img:hover{
+    transform: scale(1.2);
+    transition: ease-in-out 0.3s;
+ }
+ 
+.howToPlay-section {
+
+    margin-top: 30px;
+    display: flex; 
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 10%;    
+}
+
+.controls-aside {
+    display: flex; 
+    align-items: flex-start; 
+    width: 45%; 
+    
+}
+
+.controls-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.controls-text{
+    width: 21vw
+}
+
+.mouse-img img {
+    margin-top: 26px;
+    width: 231px;
+    height: 80px; 
+    object-fit: contain; 
+}
+
+.diagrama-img {
+    width: 270px; 
+    height: 263px; 
+    object-fit: contain; 
+}
+
+.howToPlay-section aside p {
+    font-size: 24px; 
+    font-weight: 300; 
+    margin-top: 26px; 
+}
+
+.howToPlay-section aside:last-child ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    margin-top: 44px;
+}
+
+.howToPlay-section aside:last-child ul li {
+    display: flex; 
+    align-items:center; 
+    gap: 28px; 
+    margin-top: 44px;
+    font-size: 20px;
+    font-weight: 200;
+}
+
+.howToPlay-section aside:last-child ul li span {
+    width: 32px; 
+    height: 32px;
+    object-fit: contain;
+}
+
+.demo-title, .controls-title, .how-to-play-title .cards-title{
+    font-size: 32px;
+    font-family: Raleway, sans-serif;
+    font-weight: 500;
+    margin-bottom: 26px;
+}
+
+.demo-title{
+    max-width: 1130px;
+    margin-top: 40px;
+}
+
+.demo-container {
+   
+    width: 100%; 
+    max-width: 1230px; 
+    margin-left: 5%; 
+    aspect-ratio: 16/9; 
+    margin-bottom: 20px;
+}
+
+.community-section {
+    width: 100%;
+    margin-top: 20px;
+    border-radius:20px;
+    
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.community-title{
+    font-size: 32px;
+    font-family: Raleway, sans-serif;
+    font-weight: 500;
+    margin-bottom: 26px;
+}
+
+/* Contenedor del formulario de comentarios */
+.form-comentario {
+    position: relative;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+/*formulario de entrada de comentarios */
+.form-comentario form {
+    display: flex;
+    gap: 15px;
+    align-items: flex-start;
+    
+}
+
+.form-comentario img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.imput-comentario {
+    width: 1354px;
+    height: 64px;
+}
+
+.form-comentario textarea {
+    width:100%;
+    height: 64px;;
+    flex-grow: 1;
+    border-radius: 20px;
+    padding: 10px;
+    font-size: 14px;
+    color: rgb(34, 33, 33);
+    resize: vertical;
+    min-height: 40px;
+    box-sizing: border-box;
+    transition: opacity 0.3s ease;
+}
+
+.form-comentario textarea.loading{
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.form-comentario textarea:focus {
+    outline: none;
+    border-color: #00FFB2; /* Color al enfocar */
+}
+
+.loading-spinner-container {/*estilo del spinner de carga*/
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;/* Oculto por defecto */
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.loading-spinner-container.active{
+    display: flex; /* Muestra el spinner cuando está activo */
+}
+
+.spinner{
+    width:40px;
+    height:40px;
+    border: 3px solid rgba(255, 0, 221, 0.2);
+    border-top-color: #00FFB2;
+    border-radius: 50%;
+    animation: spin 0.5s linear infinite;
+}
+
+@keyframes spin {
+    from{
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Contenedor de los botones del formulario */
+.form-comentario > form > div:last-of-type {
+  display: none;
+}
+
+.form-comentario:focus-within > form > div:last-of-type {
+    display: flex; 
+    position: absolute; 
+    right: 0; 
+    margin-top: 70px; 
+    gap: 10px;
+}
+
+.form-comentario button {
+    font-size: 14px;
+    font-weight: bold;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Estilo del botón Cancelar */
+.form-comentario button:first-of-type {
+    background-color: transparent;
+    color: #666;
+}
+
+.form-comentario button:first-of-type:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+  color:#fff;
+}
+
+/* Estilo del botón Comentar */
+.form-comentario button:last-of-type {
+    background-color: #ff00dd;
+    color: #fff;
+}
+
+.form-comentario button:hover {
+    opacity: 0.8;
+}
+
+/*Deshabilita botones durante la carga*/
+.form-comentario button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+
+/* Contenedor para la lista de comentarios que permite el scroll */
+.lista-comentarios {
+    max-height: 800px; /* Altura máxima antes de que aparezca el scroll */
+    overflow-y: auto; /* Permite el scroll vertical */
+    padding-right: 10px; /* Espacio para que la barra de scroll no se pegue al contenido */
+    margin-top: 10px;
+}
+
+/* Estilo de cada comentario */
+.lista-comentarios article {
+    display: flex;
+    gap: 16px;
+    padding: 20px 0;
+    
+}
+
+.lista-comentarios article > img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Contenido del comentario (usuario, texto, botones) */
+.lista-comentarios article > div:first-of-type {
+    flex-grow: 1;
+}
+
+/* Fila del nombre de usuario y tiempo */
+.lista-comentarios article > div > div:first-of-type {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 5px;
+}
+
+.lista-comentarios span {
+    font-weight: 500;
+    font-size: 21px;
+}
+
+.lista-comentarios time {
+    font-size: 19px;
+    color: #888;
+}
+
+.lista-comentarios p {
+    font-size: 22px;
+   font-weight: 300;
+    margin: 0;
+}
+
+/* botones de interacción (likes, responder) */
+.lista-comentarios article > div > div:last-of-type {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.lista-comentarios article button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #666;
+    font-size: 19px;
+}
+
+.lista-comentarios article button img {
+    width: 16px;
+    height: 16px;
+}
+
+/* Botón de opciones (los tres puntos) */
+.lista-comentarios article > div:last-of-type {
+    align-self: flex-start;
+    margin-left: auto; /* Empuja el botón a la derecha */
+}
+
+/* Animación de entrada para nuevos comentarios */
+@keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .lista-comentarios article.new-comment {
+    animation: slideIn 0.3s ease-out;
+  }
+
+  .cards-section {
+    margin-top: 40px;
+  }
+
+  .cards-title{
+    margin-bottom: 26px;
+    font-family: 'Raleway', sans-serif;
+    font-size: 32px;
+    font-weight: 500;
+  }
+
+  .game-preview:hover {
+    border-radius: 20px;
+    background: #ffffff80;
+    color: #000;
+    box-shadow:  0 0 80px whitesmoke, 
+                inset 20px 0 80px rgba(255, 0, 255, 0.2),
+                inset -20px 0 80px #0ff, 
+                inset 20px 0 300px #f0f, 
+                inset -20px 0 300px #0ff,
+                0 0 50px #fff, 
+                -10px 0 80px #f0f, 
+                10px 0 80px #0ff;
+    transition: all ease-in-out 0.3s;
+  }
+
+  /* Escala el botón "Jugar" cuando el contenedor game-preview está en hover */
+.game-preview:hover ~ .game-btnPlay {
+    transform: scale(1.1); 
+    transition: transform 0.3s ease-in-out;
+}
+
+
+/*----------------------------------
+    FIN ESTILOS PAGINA JUEGO
+    ---------------------------------*/
+
+
+
+
+
+
+
+
 
