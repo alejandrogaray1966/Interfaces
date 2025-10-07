@@ -19,7 +19,7 @@ h1, h2{
     font-family: 'raleway', 'sans-serif';
 }
 h1{
-    font-size: 5rem;
+    font-size: 4rem;
     font-weight: 700;
 }
 h2{
@@ -282,7 +282,7 @@ ul {
     z-index: 4;
 }
 
-.hero-contenido .calificacion,
+
 .hero-contenido h1,
 .hero-contenido span,
 .hero-contenido p,
@@ -290,6 +290,11 @@ ul {
     margin-bottom: 14px;
     opacity: 0;
     transition: opacity 1s;
+}
+.hero-contenido .calificacion{
+    opacity: 0;
+    transition: opacity 1s;
+
 }
 
 .carousel-slide.active .hero-contenido .circulo img,
@@ -312,11 +317,11 @@ ul {
     flex-direction: column;
     align-items: flex-start;
     position: absolute;
-    bottom: 14%; 
+    bottom: 10%; 
     left: 4%;
     text-align: left;
     z-index: 11;
-    width: 55vw;
+    width: 54vw;
 
 }
 .hero-contenido p{
@@ -379,7 +384,7 @@ ul {
 
 .hero-contenido .hero-span{
     background-color: #484648;
-    padding: 12px;
+    padding: 8px;
 }
     
 /*HOME seccion CARDS*/  
@@ -594,7 +599,7 @@ ul {
     display: grid;
     justify-content: center;
     width: 1448px;
-    height: 950px;
+    height: fit-content;
 }
 
 .cards-lista-grande{
@@ -618,7 +623,6 @@ ul {
 
 
 .card-grande .card-img-grande img{
-    width: 100%;
     border-radius: 20px;
     filter: brightness(0.5) saturate(1); 
 }
@@ -642,7 +646,7 @@ ul {
     display: flex;
     justify-content: flex-end;
     position: relative;
-    bottom: 142px;
+    bottom: 135px;
     height: 64px;
     padding: 4px;
 }
@@ -663,7 +667,6 @@ ul {
     justify-content: space-around;
     width: 100%;
     margin: 70px 100px 60px 100px;
-    gap: 14px;
 }
 
 .fat-footer .footer-title{
@@ -708,7 +711,6 @@ ul {
 }
 
 .inputSuscripcion {
-    margin-top: 16px;
     width: 92%; 
     padding: 12px 16px;
     font-size: 18px; 
@@ -738,8 +740,11 @@ ul {
 .fat-footer button:active {
     transform: scale(0.95); 
 }
+.footer-suscripcion div:nth-child(2){
+    margin-top: 22px;
+}
 
-.navLogo img {
+.footerLogo img {
     margin-top: 20px;
     height: 34px; 
     object-fit: contain; 
@@ -770,6 +775,10 @@ ul {
         width: 400px;
         height: 231px;
     }
+    .hero-contenido{
+        width: 54vw;
+    }
+
     .card-img-horizontal img{
         width: 400px;
     }
@@ -806,21 +815,21 @@ ul {
           }
     }
     .card-grande{
-        width: 1250px;
+        width: 1150px;
     }
 
     .card-img-grande img{
-    width: 1250px;
+    width: 1150px;
     }
 
     .iconos-juego{
-        bottom: 168px;
+        bottom: 120px;
         height: 48px;
     }
 }
 @media (max-width: 1275px){
     .hero-contenido{
-        width: 37vw; 
+        width: 40vw;
     }
     .hero-contenido h1{
         font-size: 2rem;
@@ -866,26 +875,32 @@ ul {
          }
   }
     .card-grande{
-        width: 800px;
+        width: 750px;
     }
     .card-img-grande img{
-        width: 800px;
+        width: 750px;
     }
     .card-contenido-grande{
-        bottom: 274px;
+        bottom: 180px;
     }
 
     .iconos-juego{
-        bottom: 343px;
+        bottom: 118px;
         height: 35px;
+    }
+
+    .fat-footer>ul{
+        gap: 46px;
     }
 
 
 }    
 @media (max-width: 850px){
-
+    .nav-Busqueda{
+        display: none;
+    }
     .hero-contenido{
-        width: 70vw; 
+        width: 55vw; 
     }
 
     .hero-contenido p{
@@ -893,7 +908,7 @@ ul {
         width: 50vw;
     }
     .btn-primario{
-        width: 160px;
+        width: 175px;
     }
     .contenedor .cards-lista {
         grid-template-columns: 1fr;
@@ -926,15 +941,21 @@ ul {
       left: -169px; 
     }
   }
-        .card-grande{
-        width: 480px;
+    .card-grande{
+        width: 446px;
     }
     .card-img-grande img{
-        width: 480px;
+        width: 446px;
+    }
+    .card-contenido-grande {
+        bottom: 133px;
     }
 
+    .card-contenido-grande h1{
+        font-size: 2.5rem;
+    }
     .iconos-juego{
-        bottom: 496px;
+        bottom: 108px;
         height: 26px;
 
     }
