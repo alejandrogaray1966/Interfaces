@@ -779,240 +779,7 @@ ul {
 
 
 
-
-@media (max-width: 1510px){
-    .body-home::before{
-        height: 7200px;
-    }
-    h1{
-      font-size: 3.5rem;
-    }
-    p, a{
-    font-size: 1.25rem;
-    }
-    .card-horizontal{
-        width: 400px;
-        height: 231px;
-    }
-    .hero-contenido{
-        width: 54vw;
-    }
-    .contenedor.cards-horizontales{
-        height: 650px;
-    }  
-    .card-img-horizontal img{
-        width: 400px;
-    }
-
-    .card-contenido-horizontal {
-        width: 401px;
-    }
-    .nombre-categoria{
-        right: 457px;
-    }
-    .span-verMas{
-        left: 537px;
-    }
-
-    .contenedor.cards-verticales {
-         width: 1250px;
-    }
-
-
-    .card-vertical {
-        animation-name: autoRun-1510;
-    }
-
-    .card-contenido-vertical{
-        bottom: 113px;
-     }
-    
-    @keyframes autoRun-1510 {
-       from {
-          left: 100%;
-        }
-       to {
-            left: -287px; 
-          }
-    }
-    .card-grande{
-        width: 1150px;
-        height: 750px;
-    }
-    .cards-lista-grande {
-    height: 750px;
-    }
-
-    .card-img-grande img{
-    width: 1150px;
-    }
-
-    .iconos-juego{
-        bottom: 120px;
-        height: 48px;
-    }
-}
-@media (max-width: 1275px){
-    .body-home::before{
-        height: 7100px;
-    }
-    .hero-contenido{
-        width: 40vw;
-    }
-    .hero-contenido h1{
-        font-size: 2rem;
-    }
-     .hero-contenido p{
-        font-size: 1rem;
-    }
-    .btn-primario{
-        width: 200px;
-    }
-
-    .contenedor.cards-horizontales {
-    height: 850px;
-    }
-    
-    .contenedor .cards-lista{
-    grid-template-rows: 1fr 1fr 1fr;
-    grid-template-columns: 1fr 1fr;
-    gap: 14px;
-    }
-    .nombre-categoria {
-        right: 284px;
-        font-size: 1.5rem;
-
-    }
-    .span-verMas {
-      left: 330px;
-      font-size: 1rem;
-    }
-    .contenedor.cards-verticales {
-        width: 850px;
-    }
-    .card-vertical {
-    animation-name: autoRun-1275;
-    }
-    
-    @keyframes autoRun-1275 {
-        from {
-           left: 100%;
-        }
-        to {
-            left: -237px;
-        }
-    }
-    .card-grande{
-        width: 750px;
-        height: 470px;
-    }
-    .cards-lista-grande {
-    height: 526px;
-    }
-    .card-img-grande img{
-        width: 750px;
-    }
-    .card-contenido-grande{
-        bottom: 180px;
-    }
-
-    .iconos-juego{
-        bottom: 118px;
-        height: 35px;
-    }
-
-    .fat-footer>ul{
-        gap: 46px;
-    }
-}
-
-
-@media (max-width: 850px){
-    .body-home::before{
-        height: 5672px;
-    }
-    .nav-Busqueda{
-        display: none;
-    }
-    .hero-contenido{
-        width: 55vw; 
-    }
-
-    .hero-contenido p{
-        display: none;
-        width: 50vw;
-    }
-    .btn-primario{
-        width: 175px;
-    }
-    .contenedor.cards-horizontales {
-        height: 594px;
-    }
-    .contenedor .cards-lista {
-        grid-template-columns: 1fr;
-        grid-template-rows: 1fr 1fr;
-    }
-    .nombre-categoria {
-        right: 93px;
-    }
-    .span-verMas {
-        left: 120px;
-    }
-    .card-horizontal.card-3,
-    .card-horizontal.card-4,
-    .card-horizontal.card-5,
-    .card-horizontal.card-6{
-        display: none;
-    }
-    
-    .contenedor.cards-verticales {
-        width: 500px;
-        height: 5472x;
-    }
-    .card-vertical {
-        animation-name: autoRun-850;
-    }
-    @keyframes autoRun-850 {
-        from {
-            left: 100%;
-        }
-        to {
-            left: -169px; 
-        }
-    }
-    .card-grande{
-        width: 446px;
-        height: 285px;
-    }
-    .cards-lista-grande {
-    height: 315px;
-    }
-    .card-img-grande img{
-        width: 446px;
-    }
-    .card-contenido-grande {
-        bottom: 133px;
-    }
-
-    .card-contenido-grande h1{
-        font-size: 2.5rem;
-    }
-
-    .iconos-juego{
-        bottom: 108px;
-        height: 26px;
-    }
-
-    .fat-footer>ul {
-        display: grid;
-        justify-content: space-around;
-        width: 100%;
-        margin: 30px 50px 30px 50px;
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: 1fr 1fr;
-        gap: 16px;  
-    }
-}/*----------------------------------
+/*----------------------------------
     COMIENZA ESTILOS PAGINA JUEGO
     ---------------------------------*/
 
@@ -1550,6 +1317,241 @@ a, a:hover, a:active, a:visited, li{
     FIN ESTILOS PAGINA JUEGO
     ---------------------------------*/
 
+
+
+    @media (max-width: 1510px){
+        .body-home::before{
+            height: 7200px;
+        }
+        h1{
+          font-size: 3.5rem;
+        }
+        p, a{
+        font-size: 1.25rem;
+        }
+        .card-horizontal{
+            width: 400px;
+            height: 231px;
+        }
+        .hero-contenido{
+            width: 54vw;
+        }
+        .contenedor.cards-horizontales{
+            height: 650px;
+        }  
+        .card-img-horizontal img{
+            width: 400px;
+        }
+    
+        .card-contenido-horizontal {
+            width: 401px;
+        }
+        .nombre-categoria{
+            right: 457px;
+        }
+        .span-verMas{
+            left: 537px;
+        }
+    
+        .contenedor.cards-verticales {
+             width: 1250px;
+        }
+    
+    
+        .card-vertical {
+            animation-name: autoRun-1510;
+        }
+    
+        .card-contenido-vertical{
+            bottom: 113px;
+         }
+        
+        @keyframes autoRun-1510 {
+           from {
+              left: 100%;
+            }
+           to {
+                left: -287px; 
+              }
+        }
+        .card-grande{
+            width: 1150px;
+            height: 750px;
+        }
+        .cards-lista-grande {
+        height: 750px;
+        }
+    
+        .card-img-grande img{
+        width: 1150px;
+        }
+    
+        .iconos-juego{
+            bottom: 120px;
+            height: 48px;
+        }
+    }
+    @media (max-width: 1275px){
+        .body-home::before{
+            height: 7100px;
+        }
+        .hero-contenido{
+            width: 40vw;
+        }
+        .hero-contenido h1{
+            font-size: 2rem;
+        }
+         .hero-contenido p{
+            font-size: 1rem;
+        }
+        .btn-primario{
+            width: 200px;
+        }
+    
+        .contenedor.cards-horizontales {
+        height: 850px;
+        }
+        
+        .contenedor .cards-lista{
+        grid-template-rows: 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+        }
+        .nombre-categoria {
+            right: 284px;
+            font-size: 1.5rem;
+    
+        }
+        .span-verMas {
+          left: 330px;
+          font-size: 1rem;
+        }
+        .contenedor.cards-verticales {
+            width: 850px;
+        }
+        .card-vertical {
+        animation-name: autoRun-1275;
+        }
+        
+        @keyframes autoRun-1275 {
+            from {
+               left: 100%;
+            }
+            to {
+                left: -237px;
+            }
+        }
+        .card-grande{
+            width: 750px;
+            height: 470px;
+        }
+        .cards-lista-grande {
+        height: 526px;
+        }
+        .card-img-grande img{
+            width: 750px;
+        }
+        .card-contenido-grande{
+            bottom: 180px;
+        }
+    
+        .iconos-juego{
+            bottom: 118px;
+            height: 35px;
+        }
+    
+        .fat-footer>ul{
+            gap: 46px;
+        }
+    }
+    
+    
+    @media (max-width: 850px){
+        .body-home::before{
+            height: 5672px;
+        }
+        .nav-Busqueda{
+            display: none;
+        }
+        .hero-contenido{
+            width: 55vw; 
+        }
+    
+        .hero-contenido p{
+            display: none;
+            width: 50vw;
+        }
+        .btn-primario{
+            width: 175px;
+        }
+        .contenedor.cards-horizontales {
+            height: 594px;
+        }
+        .contenedor .cards-lista {
+            grid-template-columns: 1fr;
+            grid-template-rows: 1fr 1fr;
+        }
+        .nombre-categoria {
+            right: 93px;
+        }
+        .span-verMas {
+            left: 120px;
+        }
+        .card-horizontal.card-3,
+        .card-horizontal.card-4,
+        .card-horizontal.card-5,
+        .card-horizontal.card-6{
+            display: none;
+        }
+        
+        .contenedor.cards-verticales {
+            width: 500px;
+            height: 5472x;
+        }
+        .card-vertical {
+            animation-name: autoRun-850;
+        }
+        @keyframes autoRun-850 {
+            from {
+                left: 100%;
+            }
+            to {
+                left: -169px; 
+            }
+        }
+        .card-grande{
+            width: 446px;
+            height: 285px;
+        }
+        .cards-lista-grande {
+        height: 315px;
+        }
+        .card-img-grande img{
+            width: 446px;
+        }
+        .card-contenido-grande {
+            bottom: 133px;
+        }
+    
+        .card-contenido-grande h1{
+            font-size: 2.5rem;
+        }
+    
+        .iconos-juego{
+            bottom: 108px;
+            height: 26px;
+        }
+    
+        .fat-footer>ul {
+            display: grid;
+            justify-content: space-around;
+            width: 100%;
+            margin: 30px 50px 30px 50px;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 16px;  
+        }
+    }
 
 
 
