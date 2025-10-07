@@ -17,7 +17,9 @@ async function cargarComponente(url, contenedorSelector) {
             console.log(`Componente ${url} cargado exitosamente en ${contenedorSelector}`);
             
             // AHORA LLAMAMOS A LA FUNCIÓN DE INICIALIZACIÓN DE MENÚ
-            abrirMenuDesplegable(); 
+            if (contenedorSelector === '.ContNavBar') {
+                abrirMenuDesplegable(); 
+            }
             
         } else {
             console.error(`Error: No se encontró el elemento con el selector ${contenedorSelector} en index.html`);
