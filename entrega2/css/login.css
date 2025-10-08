@@ -26,6 +26,11 @@ body.login-body.fade-out {
     transform: translateX(-100px); /* Se mueve ligeramente a la izquierda mientras se desvanece */
 }
 
+a {
+    text-decoration: none;
+    color: white;
+}
+
 /*
 |--------------------------------------------------------------------------
 | CONTENEDOR PRINCIPAL (ADAPTADO PARA LOGIN)
@@ -259,7 +264,8 @@ p.register-prompt , p.forgot-password {
     margin-top: 5%;
 }
 
-p.register-prompt a.register-link {
+p.register-prompt a.register-link
+{
     color: #00eba4;
     text-decoration: none;
     font-weight: bold;
