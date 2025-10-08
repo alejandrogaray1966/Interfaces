@@ -1,5 +1,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
 
 
 /*ESTILOS GENERALES*/
@@ -29,7 +31,7 @@
 
 h1, h2{
     color: white;
-    font-family: 'raleway', 'sans-serif';
+    font-family: 'Raleway', 'sans-serif';
 }
 h1{
     font-size: 4rem;
@@ -887,7 +889,7 @@ a, a:hover, a:active, a:visited, li{
     border-radius: 8px;
 }
 
-.game-btnPlay:hover {
+.game-btnPlay:hover , .btn-primario:hover {
     background-color: #FF00D6;
     transform: scale(1.1);
     transition: ease-in-out 0.3s;
@@ -1071,8 +1073,10 @@ a, a:hover, a:active, a:visited, li{
 }
 
 .imput-comentario {
-    width: 1354px;
+    color: rgb(34, 33, 33);
+    width: 100%;
     height: 64px;
+    flex-grow: 1;
 }
 
 .form-comentario textarea {
@@ -1097,11 +1101,12 @@ a, a:hover, a:active, a:visited, li{
 .form-comentario textarea:focus {
     outline: none;
     border-color: #00FFB2; /* Color al enfocar */
+    color: rgb(34, 33, 33);;
 }
 
 .loading-spinner-container {/*estilo del spinner de carga*/
     position: absolute;
-    top: 50%;
+    top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
     display: none;/* Oculto por defecto */
