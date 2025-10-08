@@ -55,10 +55,10 @@ togglePasswordIcon.addEventListener('click', function () {
     // Alterna la imagen del ícono
     if (type === 'password') {
         // La contraseña está oculta, muestra el ojo cerrado
-        togglePasswordIcon.src = '../img/icono/cerradoL.png';
+        togglePasswordIcon.src = './img/icono/cerradoL.png';
     } else {
         // La contraseña está visible, muestra el ojo abierto
-        togglePasswordIcon.src = '../img/icono/abiertoL.png';
+        togglePasswordIcon.src = './img/icono/abiertoL.png';
     }
 });
 
