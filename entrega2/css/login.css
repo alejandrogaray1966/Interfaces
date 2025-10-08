@@ -1,0 +1,306 @@
+/*
+|--------------------------------------------------------------------------
+| ESTILOS GENERALES
+|--------------------------------------------------------------------------
+*/
+body.login-body {
+    background-color: black; /* Un color de respaldo por si la imagen no carga */
+    background-image: url('../img/fondo/fondoL.jpg'); /* Ruta a tu imagen */
+    background-size: cover; /* Para que la imagen cubra todo el fondo */
+    backdrop-filter: blur(6px); /* Aplica el desenfoque */
+    font-family: "Roboto", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Altura máxima del 100% de la ventana */
+    margin: 0;
+    transition: opacity 0.9s ease-in-out, transform 0.9s ease-in-out; /* Transiciones suaves */
+}
+
+body.login-body.fade-out {
+    opacity: 0;
+    transform: translateX(-100px); /* Se mueve ligeramente a la izquierda mientras se desvanece */
+}
+
+/*
+|--------------------------------------------------------------------------
+| CONTENEDOR PRINCIPAL (ADAPTADO PARA LOGIN)
+|--------------------------------------------------------------------------
+*/
+.login-container {
+    position: relative; 
+    background-color: rgba(30, 7, 58, 0.75);
+    padding: 1% 3%;
+    border-radius: 20px;
+    box-shadow: 0px 4px 30px rgba(255, 255, 255, 0.25);
+    width: 480px; /* 25% Ancho fijo para desktop */
+    height: 603px; /* 70% Altura fija para desktop */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/*
+|--------------------------------------------------------------------------
+| ENCABEZADO Y LOGO
+|--------------------------------------------------------------------------
+*/
+.header-logo img {
+    width: 290px; 
+    height: 59px; 
+}
+
+.header-logo {
+    position: absolute; /* Posicionamos el contenedor del logo */
+    top: -30px; /* Ajusta este valor según la posición deseada */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10; /* La capa deseada */
+}
+
+h2.login-title {
+    color: white;
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 3%;
+    text-align: left;
+}
+
+form.login-form {
+    width: 353px;
+}
+
+/*
+|--------------------------------------------------------------------------
+| ETIQUETAS Y CAMPOS DE FORMULARIO
+|--------------------------------------------------------------------------
+*/
+label.login-label {
+    color: white;
+    display: block;
+    margin-bottom: 1%;
+    font-size: 16px;
+    font-weight: normal;
+}
+
+/* --------------------------- Input del EMAIL y la PASSWORD ------------------------*/
+input.login-input[type="email"] , .password-container input.login-input {
+    width: 352px;
+    height: 54px;
+    padding: 3%;
+    margin-bottom: 3%;
+    background-color: white;
+    border: none;
+    border-radius: 4px;
+    color: black;
+    font-size: 20px;
+    font-weight: normal;
+    box-sizing: border-box;
+}
+
+.password-container input.login-input {
+    padding-right: 40px; /* Deja espacio para el ícono */
+}
+
+/* 1. Elimina el 'outline' por defecto del navegador en el foco */
+input.login-input[type="email"]:focus , .password-container input.login-input:focus {
+    outline: none;
+}
+
+/* --------------------------- Estado de VALIDO (Verde) ------------------------*/
+/* 🟢 Cuando el campo requerido está en foco Y su contenido es válido */
+input.login-input[type="email"][required]:focus:valid , .password-container input.login-input[required]:focus:valid {
+    border: 2px solid green; 
+}
+
+/* --------------------------- Estado de ERROR (Rojo) ------------------------*/
+/* 🔴 Cuando el campo requerido está en foco Y su contenido es inválido */
+input.login-input[type="email"][required]:focus:invalid , .password-container input.login-input[required]:focus:invalid {
+    border: 2px solid red; 
+}
+
+/*
+|--------------------------------------------------------------------------
+| BOTÓN PRINCIPAL
+|--------------------------------------------------------------------------
+*/
+button.login-button[type="submit"] {
+    width: 352px;
+    height: 54px;
+    padding: 3%;
+    background-color: #00eba4;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 2%;
+    margin-bottom: 3%;
+    transition: background-color 0.5s ease;
+}
+
+button.login-button[type="submit"]:hover {
+    background-color: #ff00d6;
+}
+
+/* Estilo para el nuevo contenedor del mensaje */
+.message-container {
+    text-align: center;     /* Esto centra el texto dentro del div */
+    font-size: 14px;       /* Para que no sea tan grande como un encabezado */
+    color: lightgreen;    /* O el color que desees para un mensaje de éxito */
+    font-weight: normal;      /* Opcional: para que resalte más */
+}
+
+/*
+|--------------------------------------------------------------------------
+| Recordarme (Checkbox)
+|--------------------------------------------------------------------------
+*/
+.remember-me {
+    display: flex;
+    align-items: center;
+    margin-top: 3%;
+    color: #aaa;
+    font-size: 16px;
+    font-weight: normal;
+}
+
+.remember-me input.remember-me-checkbox[type="checkbox"] {
+    margin-right: 2%;
+}
+
+.remember-me input.remember-me-checkbox[type="checkbox"]:hover {
+    transform: scale(1.28); /* Aumenta el tamaño un 28% */
+    cursor: pointer;
+}
+
+/*
+|--------------------------------------------------------------------------
+| REGISTRO CON (SOCIAL ICONS)
+|--------------------------------------------------------------------------
+*/
+.social-login {
+    display: flex;
+    flex-direction: column; /* Change to column */
+    align-items: center; /* Center items horizontally */
+}
+
+.social-login span.social-login-text {
+    font-size: 16px;
+    font-weight: normal;
+    color: white;
+    text-align: center;
+    display: flex; /* Add Flexbox properties to the span itself */
+    align-items: center; /* Vertically center the text and lines */
+    justify-content: center;
+    width: 100%;
+    margin: 20px 0px 10px; /* Adds spacing above and below */
+}
+
+/* Create the lines using pseudoelements */
+.social-login span.social-login-text::before, .social-login span.social-login-text::after {
+    content: '';
+    flex-grow: 1; /* Makes the lines fill the available space */
+    height: 1px;
+    background-color: white; /* You can change this color */
+}
+
+/* Add spacing between the text and the lines */
+.social-login span.social-login-text::before {
+    margin-right: 15px;
+}
+
+.social-login span.social-login-text::after {
+    margin-left: 15px;
+}
+
+.social-login .social-icons {
+    display: flex;
+    flex-direction: row;
+}
+
+.social-login a.facebook-login img {
+    width: 35px; /* Add 'px' unit */
+    height: 35px;
+    margin: 0px 23px;
+}
+
+.social-login a.google-login img {
+    width: 35px; /* Add 'px' unit */
+    height: 35px;
+    margin: 0px 23px;
+}
+
+.social-login a.facebook-login img:hover {
+    transform: scale(1.28); /* Aumenta el tamaño un 28% (35px * 1.28 ≈ 45px) */
+}
+
+.social-login a.google-login img:hover {
+    transform: scale(1.28); /* Aumenta el tamaño un 28% (35px * 1.28 ≈ 45px) */
+}
+
+/*
+|--------------------------------------------------------------------------
+| ENLACE FINAL
+|--------------------------------------------------------------------------
+*/
+p.register-prompt , p.forgot-password {
+    color: white;
+    text-align: center;
+    font-size: 16px;
+    font-weight: normal;
+    margin-top: 5%;
+}
+
+p.register-prompt a.register-link {
+    color: #00eba4;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.5s ease;
+}
+
+p.register-prompt a.register-link:hover , p.forgot-password u.forgot-password-link:hover {
+    color: #ff00d6;
+}
+
+/* Estilo para hacer que el texto subrayado parezca clickeable */
+p.forgot-password u.forgot-password-link {
+    /* Cambia el cursor predeterminado a la mano o puntero */
+    cursor: pointer; 
+    /* Opcional: Podrías añadir un pequeño cambio de color para mayor feedback visual */
+    transition: color 0.5s ease;
+}
+
+/* Contenedor del campo de contraseña y el ícono */
+.password-container {
+    position: relative; /* Hace que el ícono se posicione en relación a este div */
+    width: 100%; /* Para que ocupe el mismo ancho que el input */
+}
+
+/* El input dentro del contenedor */
+.password-container input.login-input {
+    box-sizing: border-box; /* Para que el padding no afecte el ancho total */
+    padding-right: 40px; /* Deja espacio para el ícono */
+}
+
+/* El ícono del ojo */
+.password-container .toggle-password {
+    position: absolute;
+    right: 10px; /* Distancia desde el borde derecho */
+    top: 50%; /* Centra verticalmente */
+    transform: translateY(-50%); /* Ajuste fino para el centrado vertical */
+    cursor: pointer;
+    width: 20px; /* Ajusta el tamaño del ícono según sea necesario */
+    height: auto;
+}
+
+.password-container .toggle-password:hover {
+    transform: translateY(-50%) scale(1.28); /* Aumenta el tamaño al pasar el cursor */
+}
