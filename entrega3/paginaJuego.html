@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Ultimo Caballero</title>
+    <!--roboto-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <!--Raleway-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/style.css">
+    
+</head>
+
+<body class="game-body">
+    <!-- seccion Barra de navegación-->
+    <section class="ContNavBar"          
+        role="region" 
+        aria-roledescription="Contenedor de navegador" 
+        aria-label="Menu de navegación">
+    </section>
+    <div class="contenedor-principal">
+
+        <section class="game-section">  <!--seccion Juego -->
+        
+        <div class="container-breadcrumbs">
+            <ul class="breadcrumbs">
+              <li class="breadcrumbs-li"><a href="#">Categorias</a></li>
+              <li class="breadcrumbs-li"><a href="#">> Estrategia</a></li>
+              <li class="breadcrumbs-li">> ElUltimoCaballero</li>
+            </ul>
+        </div>
+
+        <H1 class="game-title">EL ULTIMO CABALLERO</H1>
+        
+        <p class="game-subtitle">El Rey ha convocado a sus caballeros a un duelo de ingenio y estrategia; 
+            <br>sólo el vencedor será honrado como su Guardia Real.
+            <br>¿Estás listo para esta batalla?</p>
+        
+        <div><!--contenedor del juego/previsualizacion-->
+            <figure class="game-container">
+                <img class="game-preview" src="assets/juego gemini.jpg" alt="vista previa del Juego El Ultimo Caballero">
+                <div class="game-btn-settings"><!--controles-->
+                    <button><img src="assets/sett.png" alt="icono de ajustes"></button>
+                    <button><img src="assets/maxbco.png" alt="icono de maximizar"></button>
+                </div>
+                <!--boton Jugar-->
+                    <button  class="game-btnPlay">Jugar</button>
+            </figure>
+            
+            <div class="game-btn-secondary"><!--botones de icono-->
+                <button><img src="./assets/Thumbs up.png" alt="icono de una mano con el pulgar hacia arriba"></button>
+                <button><img src="./assets/Thumbs down.png" alt="icono de una mano con el pulgar hacia abajo"></button>
+                <button><img src="./assets/Heart.png" alt="icono de un corazón"></button>
+                <button><img src="./assets/Share 2.png" alt="icono de compartir"></button>
+            </div>
+        </div>
+        </section>
+
+        <section class="game-section"><!--seccion Como Jugar-->
+        <div class="howToPlay-section">
+            <aside class="controls-aside">
+                <div class="controls-container">
+                    <div class="controls-text">
+                        <h2 class="controls-title">Controles</h2>
+                        <p>Click o Toque: Selecciona un <br>caballero, luego haz click o toca un <br>espacio vacío para moverlo.</p>
+                        <div class="mouse-img">
+                        <img src="./assets/Group 10.png" alt="imagen del mouse y botón izquierdo con dots donde se debe hacer el click">
+                        </div>
+                    </div>
+                    <img class="diagrama-img" src="./assets/diagramaJuego.png" alt="imagen del tablero de juego con la posición inicial">
+                </div>
+            </aside>
+            
+            <aside>
+                <h2 class="how-to-play-title">¿Cómo Jugar?</h2>
+                <p>El objetivo es sencillo, pero el desafío es colosal: debes <br>ser el único caballero que quede en el centro del tablero.</p>
+                <ul>
+                    <li><span><img src="./assets/armadura1.png" alt="viñeta con la parte superior de una armadura"></span>Movimiento: Los caballeros solo pueden moverse saltando <br>sobre otro caballero (horizontal o verticalmente) hacia un <br>espacio vacío.</li>
+                    <li><span><img src="./assets/armadura2.png" alt="viñeta con la parte media de una armadura"></span>Captura: El caballero sobre el que saltas es "derrotado" y se retira del tablero.</li>
+                    <li><span><img src="./assets/armadura3.png" alt="viñeta con la parte inferior de una armadura"></span>Victoria: La victoria perfecta se logra cuando solo <br>queda un caballero en el centro del tablero.</li>     
+                </ul>
+            </aside>
+        </div>
+        </section>
+
+        <section  class= "game-section demo-section"><!--seccion Demo-->
+        <h2 class="demo-title">Demo</h2>
+        <div>
+            <figure><!--<figcaption>Video de jugabilidad o Demo del juego.</figcaption>-->
+                <video
+                    class="demo-container" 
+                    poster="" 
+                    title="Demo del juego."
+                  > 
+                <source src="assets/demoJuego.webm" type="video/webm"> 
+                <source src="assets/demoJuego.mp4" type="video/mp4"> 
+                
+                ¡Ups! Parece que tu dispositivo no puede reproducir este video. 
+    No te preocupes, puedes descargar el <a href="./assets/demoJuego.mp4">trailer aquí</a> para verlo.
+
+                </video>
+            </figure>
+        </section>
+
+        <section class="game-section community-section"><!--seccion Comentarios-->
+        <h2 class="community-title">Comunidad</h2>
+            
+            <div class="form-comentario">
+                <form id="form-comentario"><!--input comentar-->
+                    <div>
+                        <img src="./assets/3d_avatar_28.png" alt="avatar del usuario logueado.">
+                    </div>
+                    
+                    <textarea class="input-comentario"
+                        id="texto-comentario" 
+                        placeholder="Añade un comentario..." required>
+                    </textarea>
+                    <!-- Agrego animación spinner de carga -->
+                    <div class="loading-spinner-container" id="loading-spinner">
+                        <span class="spinner"></span>
+                    </div>
+                    <div>
+                        <button type="button" id="btn-cancelar">Cancelar</button>
+                        <button type="submit" id="btn-comentar">Comentar</button>
+                    </div>
+                </form>
+            </div>
+        
+            <div class="lista-comentarios" id="lista-comentarios"><!--lista comentarios-->
+                
+                <!--Comentario oculto-->
+                
+                <article>
+                <img src="./assets/16.png" alt="avatar del usuario que comentó"> 
+                <div>    
+                    <div>
+                        <span>medieval19</span>
+                        <time>hace 2 semanas</time> 
+                    </div>
+                    <p>IMPOSIBLE!</p>
+                    <div>
+                        <button><img src="./assets/Thumbs up.png"></button>
+                        <button><img src="assets/Thumbs down.png"></button>
+                        <button>Responder</button>
+                    </div>
+                </div>
+                <div>
+                    <button><img src="./assets/More horizontal.png"></button>
+                </div>
+                </article>
+
+                <article>
+                    <img src="./assets/19.png" alt="avatar del usuario que comentó"> 
+                    <div>    
+                        <div>
+                            <span>juanBT05</span>
+                            <time>hace 3 días</time> 
+                        </div>
+                        <p>nunca pude ganar.</p>
+                        <div>
+                            <button><img src="./assets/Thumbs up.png"></button>
+                            <button><img src="assets/Thumbs down.png"></button>
+                            <button>Responder</button>
+                        </div>
+                    </div>
+                    <div>
+                        <button><img src="./assets/More horizontal.png"></button>
+                    </div>
+                    </article>
+                       <article>
+                <img src="./assets/12.png" alt="avatar del usuario que comentó"> 
+                <div>    
+                    <div>
+                        <span>lucasaran26</span>
+                        <time>hace 1 día</time> 
+                    </div>
+                    <p>Una vez que encontrás la estrategia para ganar, ganás siempre...</p>
+                    <div>
+                        <button><img src="./assets/Thumbs up.png"></button>
+                        <button><img src="assets/Thumbs down.png"></button>
+                        <button>Responder</button>
+                    </div>
+                </div>
+                <div>
+                    <button><img src="./assets/More horizontal.png"></button>
+                </div>
+                </article>
+
+                <article>
+                    <img src="./assets/26.png" alt="avatar del usuario que comentó"> 
+                    <div>    
+                        <div>
+                            <span>sofihache</span>
+                            <time>hace 2 semanas</time> 
+                        </div>
+                        <p>entretenido</p>
+                        <div>
+                            <button><img src="./assets/Thumbs up.png"></button>
+                            <button><img src="assets/Thumbs down.png"></button>
+                            <button>Responder</button>
+                        </div>
+                    </div>
+                    <div>
+                        <button><img src="./assets/More horizontal.png"></button>
+                    </div>
+                </article>
+
+                <article>
+                    <img src="./assets/16.png" alt="avatar del usuario que comentó"> 
+                    <div>    
+                        <div>
+                            <span>medieval19</span>
+                            <time>hace 2 semanas</time> 
+                        </div>
+                        <p>IMPOSIBLE!</p>
+                        <div>
+                            <button><img src="./assets/Thumbs up.png"></button>
+                            <button><img src="assets/Thumbs down.png"></button>
+                            <button>Responder</button>
+                        </div>
+                    </div>
+                    <div>
+                        <button><img src="./assets/More horizontal.png"></button>
+                    </div>
+                    </article>
+    
+                    <article>
+                        <img src="./assets/19.png" alt="avatar del usuario que comentó"> 
+                        <div>    
+                            <div>
+                                <span>juanBT05</span>
+                                <time>hace 3 días</time> 
+                            </div>
+                            <p>nunca pude ganar.</p>
+                            <div>
+                                <button><img src="./assets/Thumbs up.png"></button>
+                                <button><img src="assets/Thumbs down.png"></button>
+                                <button>Responder</button>
+                            </div>
+                        </div>
+                        <div>
+                            <button><img src="./assets/More horizontal.png"></button>
+                        </div>
+                        </article>
+                           <article>
+                    <img src="./assets/12.png" alt="avatar del usuario que comentó"> 
+                    <div>    
+                        <div>
+                            <span>lucasaran26</span>
+                            <time>hace 1 día</time> 
+                        </div>
+                        <p>Una vez que encontrás la estrategia para ganar, ganás siempre...</p>
+                        <div>
+                            <button><img src="./assets/Thumbs up.png"></button>
+                            <button><img src="assets/Thumbs down.png"></button>
+                            <button>Responder</button>
+                        </div>
+                    </div>
+                    <div>
+                        <button><img src="./assets/More horizontal.png"></button>
+                    </div>
+                    </article>
+    
+                    <article>
+                        <img src="./assets/26.png" alt="avatar del usuario que comentó"> 
+                        <div>    
+                            <div>
+                                <span>sofihache</span>
+                                <time>hace 2 semanas</time> 
+                            </div>
+                            <p>entretenido</p>
+                            <div>
+                                <button><img src="./assets/Thumbs up.png"></button>
+                                <button><img src="assets/Thumbs down.png"></button>
+                                <button>Responder</button>
+                            </div>
+                        </div>
+                        <div>
+                            <button><img src="./assets/More horizontal.png"></button>
+                        </div>
+                    </article>
+
+                    <article>
+                        <img src="./assets/16.png" alt="avatar del usuario que comentó"> 
+                        <div>    
+                            <div>
+                                <span>medieval19</span>
+                                <time>hace 2 semanas</time> 
+                            </div>
+                            <p>IMPOSIBLE!</p>
+                            <div>
+                                <button><img src="./assets/Thumbs up.png"></button>
+                                <button><img src="assets/Thumbs down.png"></button>
+                                <button>Responder</button>
+                            </div>
+                        </div>
+                        <div>
+                            <button><img src="./assets/More horizontal.png"></button>
+                        </div>
+                        </article>
+        
+                        <article>
+                            <img src="./assets/19.png" alt="avatar del usuario que comentó"> 
+                            <div>    
+                                <div>
+                                    <span>juanBT05</span>
+                                    <time>hace 3 días</time> 
+                                </div>
+                                <p>nunca pude ganar.</p>
+                                <div>
+                                    <button><img src="./assets/Thumbs up.png"></button>
+                                    <button><img src="assets/Thumbs down.png"></button>
+                                    <button>Responder</button>
+                                </div>
+                            </div>
+                            <div>
+                                <button><img src="./assets/More horizontal.png"></button>
+                            </div>
+                            </article>
+                               <article>
+                        <img src="./assets/12.png" alt="avatar del usuario que comentó"> 
+                        <div>    
+                            <div>
+                                <span>lucasaran26</span>
+                                <time>hace 1 día</time> 
+                            </div>
+                            <p>Una vez que encontrás la estrategia para ganar, ganás siempre...</p>
+                            <div>
+                                <button><img src="./assets/Thumbs up.png"></button>
+                                <button><img src="assets/Thumbs down.png"></button>
+                                <button>Responder</button>
+                            </div>
+                        </div>
+                        <div>
+                            <button><img src="./assets/More horizontal.png"></button>
+                        </div>
+                        </article>
+        
+                        <article>
+                            <img src="./assets/26.png" alt="avatar del usuario que comentó"> 
+                            <div>    
+                                <div>
+                                    <span>sofihache</span>
+                                    <time>hace 2 semanas</time> 
+                                </div>
+                                <p>entretenido</p>
+                                <div>
+                                    <button><img src="./assets/Thumbs up.png"></button>
+                                    <button><img src="assets/Thumbs down.png"></button>
+                                    <button>Responder</button>
+                                </div>
+                            </div>
+                            <div>
+                                <button><img src="./assets/More horizontal.png"></button>
+                            </div>
+                        </article>
+
+                        <article>
+                            <img src="./assets/16.png" alt="avatar del usuario que comentó"> 
+                            <div>    
+                                <div>
+                                    <span>medieval19</span>
+                                    <time>hace 2 semanas</time> 
+                                </div>
+                                <p>IMPOSIBLE!</p>
+                                <div>
+                                    <button><img src="./assets/Thumbs up.png"></button>
+                                    <button><img src="assets/Thumbs down.png"></button>
+                                    <button>Responder</button>
+                                </div>
+                            </div>
+                            <div>
+                                <button><img src="./assets/More horizontal.png"></button>
+                            </div>
+                            </article>
+            
+                            <article>
+                                <img src="./assets/19.png" alt="avatar del usuario que comentó"> 
+                                <div>    
+                                    <div>
+                                        <span>juanBT05</span>
+                                        <time>hace 3 días</time> 
+                                    </div>
+                                    <p>nunca pude ganar.</p>
+                                    <div>
+                                        <button><img src="./assets/Thumbs up.png"></button>
+                                        <button><img src="assets/Thumbs down.png"></button>
+                                        <button>Responder</button>
+                                    </div>
+                                </div>
+                                <div>
+                                    <button><img src="./assets/More horizontal.png"></button>
+                                </div>
+                                </article>
+                                   <article>
+                            <img src="./assets/12.png" alt="avatar del usuario que comentó"> 
+                            <div>    
+                                <div>
+                                    <span>lucasaran26</span>
+                                    <time>hace 1 día</time> 
+                                </div>
+                                <p>Una vez que encontrás la estrategia para ganar, ganás siempre...</p>
+                                <div>
+                                    <button><img src="./assets/Thumbs up.png"></button>
+                                    <button><img src="assets/Thumbs down.png"></button>
+                                    <button>Responder</button>
+                                </div>
+                            </div>
+                            <div>
+                                <button><img src="./assets/More horizontal.png"></button>
+                            </div>
+                            </article>
+            
+                            <article>
+                                <img src="./assets/26.png" alt="avatar del usuario que comentó"> 
+                                <div>    
+                                    <div>
+                                        <span>sofihache</span>
+                                        <time>hace 2 semanas</time> 
+                                    </div>
+                                    <p>entretenido</p>
+                                    <div>
+                                        <button><img src="./assets/Thumbs up.png"></button>
+                                        <button><img src="assets/Thumbs down.png"></button>
+                                        <button>Responder</button>
+                                    </div>
+                                </div>
+                                <div>
+                                    <button><img src="./assets/More horizontal.png"></button>
+                                </div>
+                            </article>
+
+                            <article>
+                                <img src="./assets/16.png" alt="avatar del usuario que comentó"> 
+                                <div>    
+                                    <div>
+                                        <span>medieval19</span>
+                                        <time>hace 2 semanas</time> 
+                                    </div>
+                                    <p>IMPOSIBLE!</p>
+                                    <div>
+                                        <button><img src="./assets/Thumbs up.png"></button>
+                                        <button><img src="assets/Thumbs down.png"></button>
+                                        <button>Responder</button>
+                                    </div>
+                                </div>
+                                <div>
+                                    <button><img src="./assets/More horizontal.png"></button>
+                                </div>
+                                </article>
+                
+                                <article>
+                                    <img src="./assets/19.png" alt="avatar del usuario que comentó"> 
+                                    <div>    
+                                        <div>
+                                            <span>juanBT05</span>
+                                            <time>hace 3 días</time> 
+                                        </div>
+                                        <p>nunca pude ganar.</p>
+                                        <div>
+                                            <button><img src="./assets/Thumbs up.png"></button>
+                                            <button><img src="assets/Thumbs down.png"></button>
+                                            <button>Responder</button>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <button><img src="./assets/More horizontal.png"></button>
+                                    </div>
+                                    </article>
+                                       <article>
+                                <img src="./assets/12.png" alt="avatar del usuario que comentó"> 
+                                <div>    
+                                    <div>
+                                        <span>lucasaran26</span>
+                                        <time>hace 1 día</time> 
+                                    </div>
+                                    <p>Una vez que encontrás la estrategia para ganar, ganás siempre...</p>
+                                    <div>
+                                        <button><img src="./assets/Thumbs up.png"></button>
+                                        <button><img src="assets/Thumbs down.png"></button>
+                                        <button>Responder</button>
+                                    </div>
+                                </div>
+                                <div>
+                                    <button><img src="./assets/More horizontal.png"></button>
+                                </div>
+                                </article>
+                
+                                <article>
+                                    <img src="./assets/26.png" alt="avatar del usuario que comentó"> 
+                                    <div>    
+                                        <div>
+                                            <span>sofihache</span>
+                                            <time>hace 2 semanas</time> 
+                                        </div>
+                                        <p>entretenido</p>
+                                        <div>
+                                            <button><img src="./assets/Thumbs up.png"></button>
+                                            <button><img src="assets/Thumbs down.png"></button>
+                                            <button>Responder</button>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <button><img src="./assets/More horizontal.png"></button>
+                                    </div>
+                                </article>
+
+                                <article>
+                                    <img src="./assets/16.png" alt="avatar del usuario que comentó"> 
+                                    <div>    
+                                        <div>
+                                            <span>medieval19</span>
+                                            <time>hace 2 semanas</time> 
+                                        </div>
+                                        <p>IMPOSIBLE!</p>
+                                        <div>
+                                            <button><img src="./assets/Thumbs up.png"></button>
+                                            <button><img src="assets/Thumbs down.png"></button>
+                                            <button>Responder</button>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <button><img src="./assets/More horizontal.png"></button>
+                                    </div>
+                                    </article>
+                    
+                                    <article>
+                                        <img src="./assets/19.png" alt="avatar del usuario que comentó"> 
+                                        <div>    
+                                            <div>
+                                                <span>juanBT05</span>
+                                                <time>hace 3 días</time> 
+                                            </div>
+                                            <p>nunca pude ganar.</p>
+                                            <div>
+                                                <button><img src="./assets/Thumbs up.png"></button>
+                                                <button><img src="assets/Thumbs down.png"></button>
+                                                <button>Responder</button>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <button><img src="./assets/More horizontal.png"></button>
+                                        </div>
+                                        </article>
+                                           <article>
+                                    <img src="./assets/12.png" alt="avatar del usuario que comentó"> 
+                                    <div>    
+                                        <div>
+                                            <span>lucasaran26</span>
+                                            <time>hace 1 día</time> 
+                                        </div>
+                                        <p>Una vez que encontrás la estrategia para ganar, ganás siempre...</p>
+                                        <div>
+                                            <button><img src="./assets/Thumbs up.png"></button>
+                                            <button><img src="assets/Thumbs down.png"></button>
+                                            <button>Responder</button>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <button><img src="./assets/More horizontal.png"></button>
+                                    </div>
+                                    </article>
+                    
+                                    <article>
+                                        <img src="./assets/26.png" alt="avatar del usuario que comentó"> 
+                                        <div>    
+                                            <div>
+                                                <span>sofihache</span>
+                                                <time>hace 2 semanas</time> 
+                                            </div>
+                                            <p>entretenido</p>
+                                            <div>
+                                                <button><img src="./assets/Thumbs up.png"></button>
+                                                <button><img src="assets/Thumbs down.png"></button>
+                                                <button>Responder</button>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <button><img src="./assets/More horizontal.png"></button>
+                                        </div>
+                                    </article>   
+            </div>
+        </section>
+
+        <section class="game-section cards-section"><!--seccion cards Carrusel o grilla-->
+        <h2 class="cards-title">Tambien te puede interesar</h2>
+        <div class="contenedor cards-verticales">
+            <ul class="cards-lista-verticales">
+                <li class="card-vertical cardVert-1" style="--position: 1" role="group" aria-label="Card 1 de 9">
+                    <div class="card-img-vetical">
+                        <img src="./image/card-vertical-1.jpg" alt="Imagen del videojuego">
+                    </div>
+                    <div class="card-contenido-vertical">
+                        <h2 class="card-titulo">El último rey...</h2>
+                        <p class="categoria">accion</p>
+                        <p class="precio">$11.000</p>
+                    </div>
+                </li>
+                <li class="card-vertical cardVert-2" style="--position: 2" role="group" aria-label="Card 2 de 9">
+                    <div class="card-img-vetical">
+                        <img src="./image/image 22.png" alt="Imagen del videojuego">
+                    </div>
+                    <div class="card-contenido-vertical">
+                        <h2 class="card-titulo">Batalla</h2>
+                        <p class="categoria">accion</p>
+                        <p class="precio">$15.000</p>
+                    </div>
+                </li>
+                <li class="card-vertical cardVert-3" style="--position: 3"  role="group" aria-label="Card 3 de 9">
+                    <div class="card-img-vetical">
+                        <img src="./image/image 24.png" alt="Imagen del videojuego">
+                    </div>
+                    <div class="card-contenido-vertical">
+                        <h2 class="card-titulo">Dragon Ball</h2>
+                        <p class="categoria">accion</p>
+                        <p class="precio">$18.000</p>
+                    </div>
+                </li>
+                <li class="card-vertical cardVert-4" style="--position: 4">
+                    <div class="card-img-vetical">
+                        <img src="./image/image 25.png" alt="Imagen del videojuego">
+                    </div>
+                    <div class="card-contenido-vertical">
+                        <h2 class="card-titulo">Spider Man</h2>
+                        <p class="categoria">accion</p>
+                        <p class="precio">$18.000</p>
+                    </div>
+                </li>
+                <li class="card-vertical cardVert-5" style="--position: 5">
+                    <div class="card-img-vetical">
+                        <img src="./image/image 24.png" alt="Imagen del videojuego">
+                    </div>
+                    <div class="card-contenido-vertical">
+                        <h2 class="card-titulo">Dragon Ball</h2>
+                        <p class="categoria">accion</p>
+                        <p class="precio">$18.000</p>
+                    </div>
+                </li>
+                <li class="card-vertical cardVert-6" style="--position: 6">
+                    <div class="card-img-vetical">
+                        <img src="./image/image 22.png" alt="Imagen del videojuego">
+                    </div>
+                    <div class="card-contenido-vertical">
+                        <h2 class="card-titulo">Batalla...</h2>
+                        <p class="categoria">accion</p>
+                        <p class="precio">$18.000</p>
+                    </div>
+                </li>
+                <li class="card-vertical cardVert-7" style="--position: 7">
+                    <div class="card-img-vetical">
+                        <img src="./image/card-vertical-1.jpg" alt="Imagen del videojuego">
+                    </div>
+                    <div class="card-contenido-vertical">
+                        <h2 class="card-titulo">El último Rey...</h2>
+                        <p class="categoria">accion</p>
+                        <p class="precio">$18.000</p>
+                    </div>
+                </li>
+                <li class="card-vertical cardVert-8" style="--position: 8">
+                    <div class="card-img-vetical">
+                        <img src="./image/image 25.png" alt="Imagen del videojuego">
+                    </div>
+                    <div class="card-contenido-vertical">
+                        <h2 class="card-titulo">Spider Man</h2>
+                        <p class="categoria">accion</p>
+                        <p class="precio">$18.000</p>
+                    </div>
+                </li>
+                <li class="card-vertical cardVert-9" style="--position: 9">
+                    <div class="card-img-vetical">
+                        <img src="./image/card-vertical-1.jpg" alt="Imagen del videojuego">
+                    </div>
+                    <div class="card-contenido-vertical">
+                        <h2 class="card-titulo">El último Rey...</h2>
+                        <p class="categoria">accion</p>
+                        <p class="precio">$18.000</p>
+                    </div>
+                </li>
+            </ul>
+    
+        </div>
+        </section>
+
+     </div>
+     <!--fatFooter-->
+    <section class="ContFooter" 
+        role="region" 
+        aria-roledescription="Contenedor de footer" 
+        aria-label="Pie de pagina">
+    </section>
+    
+</body>
+<script src="js/index.js"></script>
+
+
+
+
+</html>
