@@ -14,6 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <!--CSS-->
     <link rel="stylesheet" href="../entrega2/css/style.css">
+     <link rel="stylesheet" href="css/blocka.css">
     
 </head>
 
@@ -43,16 +44,44 @@
         <p class="game-subtitle">Es un juego de rompecabezas basado en imagenes; 
             <br>debes rotar las piezas hasta formar la imagen.
             <br>¿Estás listo para este desafío?</p>
-        
-        <div><!--contenedor del juego/previsualizacion-->
+
+        <!--contenedor del juego/previsualizacion-->
+        <div>
             <figure class="game-container">
-                <img class="game-preview" src="../entrega2/assets/juego gemini.jpg" alt="vista previa del Juego El Ultimo Caballero">
-                <div class="game-btn-settings"><!--controles-->
+                <div class="game-preview">
+
+                    <!--aca las 6 imagenes para elegir-->
+                    <div class="game-preview-blocka" id="ruleta-container">
+                        <div class="elegir-1">
+                            <img src="../entrega2/image/subwaySurfers 1.png" alt="Imagen del videojuego">
+                        </div>
+                        <div class="elegir-2">
+                            <img src="../entrega2/image/motoGp2.png" alt="Imagen del videojuego">
+                        </div>
+                        <div class="elegir-3">
+                            <img src="../entrega2/image/ajedrez3.png" alt="Imagen del videojuego">
+                        </div>
+                        <div class="elegir-4">
+                            <img src="../entrega2/image/formula1_4.png" alt="Imagen del videojuego">
+                        </div>
+                        <div class="elegir-5">
+                            <img src="../entrega2/image/marioBros5.png" alt="Imagen del videojuego">
+                        </div>
+                        <div class="elegir-6">
+                            <img src="../entrega2/image/ContenedorCImgJuego.png" alt="Imagen del videojuego">
+                        </div>
+                    </div>
+                    <!--aca la imagen ganadora-->
+                    <div id="winner-display">
+                    </div>
+
+                </div>
+                <!--controles-->
+                <div class="game-btn-settings">
                     <button><img src="../entrega2/assets/sett.png" alt="icono de ajustes"></button>
-                    <button><img src="../entrega2/assets/maxbco.png" alt="icono de maximizar"></button>
                 </div>
                 <!--boton Jugar-->
-                    <button  class="game-btnPlay">Jugar</button>
+                <button  class="game-btnPlay">Jugar</button>
             </figure>
             
             <div class="game-btn-secondary"><!--botones de icono-->
@@ -64,7 +93,8 @@
         </div>
         </section>
 
-        <section class="game-section"><!--seccion Como Jugar-->
+        <!--seccion Como Jugar-->
+        <section class="game-section">
         <div class="howToPlay-section">
             <aside class="controls-aside">
                 <div class="controls-container">
@@ -700,6 +730,7 @@
 
     <!-- JavaScript file -->
     <script src="../entrega2/js/index.js" defer></script>
+    <script src="js/blocka.js" defer></script>
 
 </body>
 

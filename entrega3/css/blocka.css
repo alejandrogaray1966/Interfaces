@@ -1,0 +1,136 @@
+/* ------------------------------------------------------------------- */
+/* 1. Estilos para el contenedor principal de las imágenes para elegir */
+/* ------------------------------------------------------------------- */
+.game-preview-blocka {
+    display: grid; 
+    grid-template-columns: repeat(3, 1fr); 
+    grid-template-rows: repeat(2, 1fr); 
+    gap: 25px; 
+    width: 70%; 
+    margin: 0 auto;
+    padding: 30px;
+    box-sizing: border-box; /* Incluye padding y borde en el ancho/alto */ 
+    position: relative;
+}
+/* --------------------------------------------------- */
+/* 2. Estilos para las imágenes y sus contenedores div */
+/* --------------------------------------------------- */
+.game-preview-blocka > div {
+    width: 100%;
+    padding-bottom: 100%; 
+    position: relative;
+    /* Centrar la imagen dentro de su celda (opcional, si el grid no lo hace) */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Oculta cualquier parte de la imagen que se salga */
+}
+/* ------------------------------------------ */
+/* Estilos para la imagen real dentro del div */
+/* ------------------------------------------ */
+.game-preview-blocka img {
+    /* Estas propiedades aseguran que la imagen se ajuste y cubra el área cuadrada de su div */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Asegura que la imagen no se distorsione, cubriendo el área */
+    object-fit: cover; 
+    border-radius: 10px;
+    border: 3px solid #ccc; 
+}
+
+/* ------------------------------------------------------------------- */
+/*            Clase CSS para resaltar la imagen elegida                */
+/* ------------------------------------------------------------------- */
+.selected-random {
+    transition: all 0.3s ease-in-out; 
+    transform: scale(1.30); 
+}
+
+/* Clase CSS para resaltar la imagen elegida (¡ahora es el ganador a lo grande!) */
+/* Clase CSS para la GANADORA - Ajustada para el centro */
+.selected-winner {
+    border: 5px solid #00a8e8; 
+    box-shadow: 0 0 25px rgba(0, 168, 232, 1); 
+    
+    /* 1. SACAR DEL FLUJO (position: absolute ya estaba en el IMG) */
+    
+    /* 2. Posicionarla en el centro del padre (.game-preview-blocka) */
+    top: 50%;     
+    left: 50%;    
+    
+    /* 3. CENTRAR el elemento en sí mismo y AUMENTAR el tamaño */
+    transform: translate(-50%, -50%) scale(2.5); 
+    
+    /* 4. Asegurar que esté por encima de todo */
+    z-index: 9000; 
+    
+    transition: all 0.7s ease-in-out; 
+}
+
+/* ---------------------------------------------------- */
+/* OCULTAR IMÁGENES ORIGINALES AL FINAL DEL SORTEO */
+/* ---------------------------------------------------- */
+#ruleta-container.hidden {
+    opacity: 0;
+    /* Ajusta la visibilidad al finalizar la transición */
+    visibility: hidden; 
+    transition: opacity 0.5s ease-out, visibility 0.5s;
+}
+
+/* ---------------------------------------------------- */
+/* ESTILO PARA EL CONTENEDOR DE LA IMAGEN GANADORA */
+/* ---------------------------------------------------- */
+#winner-display {
+    /* Posicionamiento para centrarse sobre el área de juego */
+    position: absolute; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* Flexbox para centrar contenido */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    /* Oculto al inicio */
+    opacity: 0; 
+    transition: opacity 1s ease-in;
+    pointer-events: none; /* No interactuable hasta que aparezca */
+}
+#winner-display.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Estilo para la imagen dentro del contenedor de ganador */
+/* Estilo para la imagen dentro del contenedor de ganador */
+#winner-display img {
+    /* ------------------------------------------------ */
+    /* ¡CAMBIO CLAVE: DEFINIR UN TAMAÑO MÁXIMO CUADRADO! */
+    /* ------------------------------------------------ */
+    width: 60vh;    /* Tomar 60% del alto de la ventana */
+    height: 60vh;   /* Igualar el alto al ancho (cuadrado) */
+    
+    max-width: 90%;
+    max-height: 90%;
+    
+    /* Asegura que la imagen, aunque esté en un contenedor cuadrado,
+       cubra ese cuadrado. Si la imagen original no es cuadrada,
+       se cortará (cropping) para llenar el espacio. */
+    object-fit: cover; 
+    
+
+    box-shadow: 0 0 40px #00FFB2;
+    
+    /* Empieza pequeña y se agranda */
+    transform: scale(0.1); 
+    transition: transform 0.7s ease-out;
+}
+
+#winner-display.visible img {
+    transform: scale(1); /* Tamaño final grande */
+}
