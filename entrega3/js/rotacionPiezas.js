@@ -1,4 +1,4 @@
-console.log("🔄 rotacionPiezas.js cargado");
+console.log("✅ rotacionPiezas.js cargado");
 
 let piezasEstado = [];
 let imagen = null;
@@ -20,7 +20,7 @@ export const inicializarRotacion = (canvas, imagenSrc, nivel) => {
     imagen.onload = () => {
         for (let fila = 0; fila < lado; fila++) {
             for (let col = 0; col < lado; col++) {
-                const angulos = [0, 90, 180, 270];
+                const angulos = [90, 180, 270];
                 const rotacion = angulos[Math.floor(Math.random() * angulos.length)];
 
                 piezasEstado.push({ fila, col, rotacion });

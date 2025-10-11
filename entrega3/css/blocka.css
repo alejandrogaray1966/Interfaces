@@ -181,13 +181,51 @@
     justify-content: center;
     align-items: center;
     z-index: 100;
-    pointer-events: none; /* si no querés que interfiera antes de iniciar */
+    pointer-events: auto; /* ← permitir interacción */
 }
 
 #puzzleCanvas {
     width: 600px;
     height: 600px;
     border-radius: 0 !important;
+}
+
+/* ------------------------------------------------------ */
+/* Estilo para el botón de verificar las imagenes         */
+/* ------------------------------------------------------ */
+.verificarBtn {
+    width: 222px;
+    height: 69px;
+    font-size: 24px;
+    font-weight: 600;
+    position: absolute; 
+    bottom: 40px;         
+    right: 40px;
+    background-color: #9700CC;
+    color: white;
+    border: none;
+    border-radius: 8px;
+}
+
+.verificarBtn:hover {
+    background-color: #FF00D6;
+    transform: scale(1.1);
+    transition: ease-in-out 0.3s;
+    cursor: pointer;
+}
+
+/* ------------------------------------------------------ */
+/* Estilo para el cronometro                              */
+/* ------------------------------------------------------ */
+.cronometro {
+    font-size: 36px;
+    font-weight: bold;
+    color: #333;
+    background-color: transparent;
+    position: absolute;
+    top: 56px;
+    right: 40px; 
+    z-index: 2; 
 }
 
 
