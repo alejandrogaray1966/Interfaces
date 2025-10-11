@@ -51,6 +51,11 @@
             <figure class="game-container">
                 <div class="game-preview">
 
+                    <!--aca el canvas para mostrar el puzzle oculto hasta que comienze el juego -->
+                    <div class="canvas-wrapper hidden">
+                        <canvas id="puzzleCanvas" width="600" height="600" class="canvas-hidden"></canvas>
+                    </div>
+
                     <!--aca las 6 imagenes para elegir-->
                     <div class="game-preview-blocka" id="ruleta-container">
                         <div class="elegir-1">
@@ -82,18 +87,18 @@
                     <button><img src="../entrega2/assets/sett.png" alt="icono de ajustes"></button>
                 </div>
                 <div class="game-settings-menu hidden">
-                    <h3>Configuración del juego</h3>
+                    <h3>Configuración</h3>
                     <!--aca elijo NIVEL-->
                     <label for="nivel">Nivel:</label>
                     <select id="nivel">
-                        <option value="4">4 piezas</option>
+                        <option value="4" selected>4 piezas</option>
                         <option value="9">9 piezas</option>
                         <option value="16">16 piezas</option>
                     </select>
                     <!--aca elijo DIFICULTAD-->
                     <label for="dificultad">Dificultad:</label>
                     <select id="dificultad">
-                        <option value="principiante">Principiante</option>
+                        <option value="principiante" selected>Principiante</option>
                         <option value="normal">Normal</option>
                         <option value="intermedio">Intermedio</option>
                         <option value="experto">Experto</option>
@@ -101,7 +106,7 @@
                     <!--aca elijo TIEMPO-->
                     <label for="tiempo">Tiempo:</label>
                     <select id="tiempo">
-                        <option value="120">120 seg.</option>
+                        <option value="120" selected>120 seg.</option>
                         <option value="60">60 seg.</option>
                         <option value="30">30 seg.</option>
                     </select>
@@ -637,7 +642,7 @@
                                             <p>entretenido</p>
                                             <div>
                                                 <button><img src="../entrega2/assets/Thumbs up.png"></button>
-                                                <button><img src="assets/Thumbs down.png"></button>
+                                                <button><img src="../entrega2/assets/Thumbs down.png"></button>
                                                 <button>Responder</button>
                                             </div>
                                         </div>
@@ -758,7 +763,8 @@
 
     <!-- JavaScript file -->
     <script src="../entrega2/js/index.js" defer></script>
-    <script src="js/blocka.js" defer></script>
+    <script type="module" src="js/blocka.js" defer></script>
+    
 
 </body>
 

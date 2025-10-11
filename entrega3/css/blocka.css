@@ -123,16 +123,15 @@
     transform: scale(1); /* Tamaño final grande */
 }
 
-
-
-
-
+/* ------------------------------------------------------ */
+/* Estilo para el menú de configuración del juego BLOCKA  */
+/* ------------------------------------------------------ */
 .game-settings-menu {
     position: absolute;
     top: 100px;
     right: 30px;
-    background-color: #fff;
-    border: 2px solid #ccc;
+    background-color: grey;
+    border: 2px solid black;
     border-radius: 10px;
     padding: 20px;
     z-index: 10;
@@ -156,3 +155,39 @@
     padding: 5px;
     margin-top: 5px;
 }
+
+/* ------------------------------------------------------ */
+/* Estilo para el CANVA                                   */
+/* ------------------------------------------------------ */
+.hidden {
+    display: none !important;
+}
+
+.canvas-visible {
+    display: block;
+}
+
+.canvas-hidden {
+    display: none;
+}
+
+.canvas-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    pointer-events: none; /* si no querés que interfiera antes de iniciar */
+}
+
+#puzzleCanvas {
+    width: 600px;
+    height: 600px;
+    border-radius: 0 !important;
+}
+
+

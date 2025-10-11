@@ -1,5 +1,12 @@
+console.log("✅ blocka.js cargado");
+
+// se importa el método iniciarJuego de la clase jugarBlocka.js
+import { iniciarJuego } from './jugarBlocka.js';
+
+
 // Espera a que el DOM esté completamente cargado
 document.addEventListener('DOMContentLoaded', () => {
+
     // constantes para la elección de la imagen
     const playButton = document.querySelector('.game-btnPlay');
     const ruletaContainer = document.getElementById('ruleta-container');
@@ -19,14 +26,20 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // ------------------------------------------------------------------------------------------------
-    // método que bloquea el botón jugar 
+    // método que bloquea el botón jugar y el de configuración
     // ------------------------------------------------------------------------------------------------
     const bloquearBoton = () => {
+        // Bloquear botón de jugar
         playButton.style.pointerEvents = 'none';
-        playButton.style.opacity = '0.6'; // opcional: leve transparencia
+        playButton.style.opacity = '0.6';
+        // Bloquear botón de configuración
+        settingsButton.style.pointerEvents = 'none';
+        settingsButton.style.opacity = '0.6';
         setTimeout(() => {
             playButton.style.pointerEvents = 'auto';
             playButton.style.opacity = '1';
+            settingsButton.style.pointerEvents = 'auto';
+            settingsButton.style.opacity = '1';
         }, 5000);
     };
 
@@ -43,7 +56,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // da comienzo a la selección de la imagen con la cual se jugará
     // ------------------------------------------------------------------------------------------------
     const startRandomSelection = () => {
+        
         bloquearBoton();
+        settingsMenu.classList.add('hidden');
         // Limpiar estados previos
         if (intervalId) clearInterval(intervalId);
         removeSelection();
@@ -82,8 +97,18 @@ document.addEventListener('DOMContentLoaded', () => {
             // 3. Revelar el contenedor de ganador con efecto de ampliación
             // Pequeño retraso para que la ruleta se oculte primero
             setTimeout(() => {
-                winnerDisplay.classList.add('visible'); 
-            }, 100); // 600ms para permitir la transición de ocultar (0.5s)
+                winnerDisplay.classList.add('visible');
+                // Esperamos 2 segundo más para que se vea la imagen ganadora
+                setTimeout(() => {
+                    const imagenSrc = selectedImageElement.src;
+                    const nivel = document.getElementById('nivel').value;
+                    const dificultad = document.getElementById('dificultad').value;
+                    const tiempo = document.getElementById('tiempo').value;
+                    // lanzamos el juego
+                    iniciarJuego(imagenSrc, nivel, dificultad, tiempo);
+                }, 2000); // ⏳ Espera de 2 segundo para mostrar la imagen ganadora
+
+            }, 100); // ⏱️ Espera breve para aplicar la clase visible
             
         }, 4000); // Duración total de la ruleta: 4 segundos
     };
