@@ -45,8 +45,9 @@
             <br>debes rotar las piezas hasta formar la imagen.
             <br>¿Estás listo para este desafío?</p>
 
-        <!--contenedor del juego/previsualizacion-->
+        
         <div>
+            <!----------------------------------------------------------contenedor del juego/previsualizacion-->
             <figure class="game-container">
                 <div class="game-preview">
 
@@ -76,13 +77,40 @@
                     </div>
 
                 </div>
-                <!--controles-->
+                <!--aca la configuración del juego-->
                 <div class="game-btn-settings">
                     <button><img src="../entrega2/assets/sett.png" alt="icono de ajustes"></button>
                 </div>
-                <!--boton Jugar-->
+                <div class="game-settings-menu hidden">
+                    <h3>Configuración del juego</h3>
+                    <!--aca elijo NIVEL-->
+                    <label for="nivel">Nivel:</label>
+                    <select id="nivel">
+                        <option value="4">4 piezas</option>
+                        <option value="9">9 piezas</option>
+                        <option value="16">16 piezas</option>
+                    </select>
+                    <!--aca elijo DIFICULTAD-->
+                    <label for="dificultad">Dificultad:</label>
+                    <select id="dificultad">
+                        <option value="principiante">Principiante</option>
+                        <option value="normal">Normal</option>
+                        <option value="intermedio">Intermedio</option>
+                        <option value="experto">Experto</option>
+                    </select>
+                    <!--aca elijo TIEMPO-->
+                    <label for="tiempo">Tiempo:</label>
+                    <select id="tiempo">
+                        <option value="120">120 seg.</option>
+                        <option value="60">60 seg.</option>
+                        <option value="30">30 seg.</option>
+                    </select>
+                </div>
+
+                <!--aca el boton para Jugar-->
                 <button  class="game-btnPlay">Jugar</button>
             </figure>
+            <!----------------------------------------------------fin del contenedor del juego/previsualizacion-->
             
             <div class="game-btn-secondary"><!--botones de icono-->
                 <button><img src="../entrega2/assets/Thumbs up.png" alt="icono de una mano con el pulgar hacia arriba"></button>

@@ -1,46 +1,77 @@
+// Espera a que el DOM esté completamente cargado
 document.addEventListener('DOMContentLoaded', () => {
+    // constantes para la elección de la imagen
     const playButton = document.querySelector('.game-btnPlay');
     const ruletaContainer = document.getElementById('ruleta-container');
     const winnerDisplay = document.getElementById('winner-display');
     const gameImages = document.querySelectorAll('#ruleta-container img');
     const totalImages = gameImages.length; 
     let intervalId = null;
+    // constantes para la configuración del juego
+    const settingsButton = document.querySelector('.game-btn-settings button');
+    const settingsMenu = document.querySelector('.game-settings-menu');
 
+    // ------------------------------------------------------------------------------------------------
+    // método que abre y cierra el menú de configuración
+    // ------------------------------------------------------------------------------------------------
+    const toggleSettingsMenu = () => {
+        settingsMenu.classList.toggle('hidden');
+    };
+
+    // ------------------------------------------------------------------------------------------------
+    // método que bloquea el botón jugar 
+    // ------------------------------------------------------------------------------------------------
+    const bloquearBoton = () => {
+        playButton.style.pointerEvents = 'none';
+        playButton.style.opacity = '0.6'; // opcional: leve transparencia
+        setTimeout(() => {
+            playButton.style.pointerEvents = 'auto';
+            playButton.style.opacity = '1';
+        }, 5000);
+    };
+
+    // ------------------------------------------------------------------------------------------------
+    // método que borra de todas las imágenes los estilos si fue seleccionada
+    // ------------------------------------------------------------------------------------------------
     const removeSelection = () => {
         gameImages.forEach(img => {
             img.classList.remove('selected-random');
         });
     };
 
+    // ------------------------------------------------------------------------------------------------
+    // da comienzo a la selección de la imagen con la cual se jugará
+    // ------------------------------------------------------------------------------------------------
     const startRandomSelection = () => {
+        bloquearBoton();
         // Limpiar estados previos
         if (intervalId) clearInterval(intervalId);
         removeSelection();
         ruletaContainer.classList.remove('hidden'); // Aseguramos que la ruleta esté visible al inicio
-        winnerDisplay.classList.remove('visible');
+        winnerDisplay.classList.remove('visible'); // Aseguremos que no se vea el ganador anterior
         winnerDisplay.innerHTML = ''; // Limpiamos el contenido anterior
 
         const finalRandomIndex = Math.floor(Math.random() * totalImages);
         const selectedImageElement = gameImages[finalRandomIndex]; 
 
         // -----------------------------------------------------
-        // C. INICIO DEL EFECTO DE SORTEO
+        // A. INICIO DEL EFECTO DE SORTEO
         // -----------------------------------------------------
         let currentIndex = 0;
         intervalId = setInterval(() => {
             gameImages[currentIndex].classList.remove('selected-random');
             currentIndex = (currentIndex + 1) % totalImages;
             gameImages[currentIndex].classList.add('selected-random');
-        }, 200); // Ajusté a 150ms para una ruleta más pausada
+        }, 200); // Ajusté a 300 para una ruleta más pausada
 
         // -----------------------------------------------------
-        // D. DETENER EL SORTEO Y REVELAR EL GANADOR
+        // B. DETENER EL SORTEO Y REVELAR EL GANADOR
         // -----------------------------------------------------
         setTimeout(() => {
             clearInterval(intervalId); 
             intervalId = null; 
             removeSelection(); 
-            
+
             // 1. Ocultar el contenedor de la ruleta
             //ruletaContainer.classList.add('hidden');
             
@@ -52,13 +83,13 @@ document.addEventListener('DOMContentLoaded', () => {
             // Pequeño retraso para que la ruleta se oculte primero
             setTimeout(() => {
                 winnerDisplay.classList.add('visible'); 
-                
-                // Mostrar el resultado en consola
-                console.log(`🎉 ¡El juego elegido al azar es!: ${winnerImageClone.alt}`);
             }, 100); // 600ms para permitir la transición de ocultar (0.5s)
             
         }, 4000); // Duración total de la ruleta: 4 segundos
     };
 
+    // Añade el escuchador de eventos
+    settingsButton.addEventListener('click', toggleSettingsMenu);
     playButton.addEventListener('click', startRandomSelection);
+
 });
