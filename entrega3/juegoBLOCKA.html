@@ -53,8 +53,19 @@
 
                     <!--aca el canvas para mostrar el puzzle oculto hasta que comienze el juego -->
                     <div class="canvas-wrapper hidden">
+                        <!--aca datos del juego iniciado-->
+                        <div id="ranking" class="ranking">
+                            <h3>Juego</h3>
+                            <ul id="gameInfo"></ul>
+                            <br><br>
+                            <h3>Ranking</h3>
+                            <ul id="rankingList"></ul>
+                        </div>
+                        <!--aca canvas del juego iniciado-->
                         <canvas id="puzzleCanvas" width="600" height="600" class="canvas-hidden"></canvas>
+                        <!--aca cronometro del juego iniciado-->
                         <div id="cronometro" class="cronometro">Tiempo: 00:00</div>
+                        <!--aca botón verificar-->
                         <button id="verificarBtn" class="verificarBtn">Verificar</button>
                     </div>
 
@@ -108,7 +119,7 @@
                     <!--aca elijo TIEMPO-->
                     <label for="tiempo">Tiempo:</label>
                     <select id="tiempo">
-                        <option value="120" selected>120 seg.</option>
+                        <option value="90" selected>90 seg.</option>
                         <option value="60">60 seg.</option>
                         <option value="30">30 seg.</option>
                     </select>

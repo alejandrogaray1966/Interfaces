@@ -12,6 +12,7 @@
     box-sizing: border-box; /* Incluye padding y borde en el ancho/alto */ 
     position: relative;
 }
+
 /* --------------------------------------------------- */
 /* 2. Estilos para las imágenes y sus contenedores div */
 /* --------------------------------------------------- */
@@ -25,6 +26,7 @@
     align-items: center;
     overflow: hidden; /* Oculta cualquier parte de la imagen que se salga */
 }
+
 /* --------------------------------------------- */
 /* 3. Estilos para la imagen real dentro del div */
 /* --------------------------------------------- */
@@ -93,6 +95,7 @@
     transition: opacity 1s ease-in;
     pointer-events: none; /* No interactuable hasta que aparezca */
 }
+
 #winner-display.visible {
     opacity: 1;
     pointer-events: auto;
@@ -226,6 +229,48 @@
     top: 56px;
     right: 40px; 
     z-index: 2; 
+}
+
+/* ------------------------------------------------------ */
+/* Estilo para los datos del juego iniciado y el ranking  */
+/* ------------------------------------------------------ */
+.ranking {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    background-color: transparent;
+    position: absolute;
+    top: 56px;
+    left: 40px; 
+    z-index: 2; 
+}
+
+.ranking ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.ranking li {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 1rem;
+}
+
+/* ------------------------------------------------------ */
+/* Efecto de entrada brillante al Ranking para Matías     */
+/* ------------------------------------------------------ */
+.destacado {
+    animation: brillar 1.5s ease-out;
+    background: linear-gradient(90deg, #ffe680, #fff8cc);
+    border-radius: 4px;
+    padding: 2px 6px;
+}
+
+@keyframes brillar {
+    0% { background-color: transparent; }
+    50% { background-color: #fff8cc; }
+    100% { background-color: transparent; }
 }
 
 

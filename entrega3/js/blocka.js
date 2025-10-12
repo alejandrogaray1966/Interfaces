@@ -2,6 +2,9 @@ console.log("✅ blocka.js cargado");
 
 // se importa el método iniciarJuego de la clase jugarBlocka.js
 import { iniciarJuego } from './jugarBlocka.js';
+import { reiniciarJuegoCompleto } from './jugarBlocka.js';
+
+
 
 
 // Espera a que el DOM esté completamente cargado
@@ -65,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ruletaContainer.classList.remove('hidden'); // Aseguramos que la ruleta esté visible al inicio
         winnerDisplay.classList.remove('visible'); // Aseguremos que no se vea el ganador anterior
         winnerDisplay.innerHTML = ''; // Limpiamos el contenido anterior
-
+        // acá elegimos la imagen ganadora
         const finalRandomIndex = Math.floor(Math.random() * totalImages);
         const selectedImageElement = gameImages[finalRandomIndex]; 
 
