@@ -151,19 +151,18 @@ function aplicarFiltroPrincipiante(imagen) {
     const data = imageData.data;
     // Aplica un filtro personalizado (aquí podés definir lo que quieras)
     for (let i = 0; i < data.length; i += 4) {
-        // R = data[i]
-        // G = data[i + 1]
-        // B = data[i + 2]
-        // A = data[i + 3]
-
-        // Ejemplo: aumentar rojo un poco (descomentar si querés probar)
-        // data[i] = Math.min(255, data[i] + 20);
-
-        // Ejemplo: reducir verde (descomentar si querés probar)
-        // data[i + 1] = Math.max(0, data[i + 1] - 30);
-
-        // Ejemplo: invertir azul (descomentar si querés probar)
-        // data[i + 2] = 255 - data[i + 2];
+        // constantes R G B Alpha
+        // const r = data[i];
+        // const g = data[i + 1];
+        // const b = data[i + 2];
+        // Filtro sepia simple
+        // const sepiaR = 0.393 * r + 0.769 * g + 0.189 * b;
+        // const sepiaG = 0.349 * r + 0.686 * g + 0.168 * b;
+        // const sepiaB = 0.272 * r + 0.534 * g + 0.131 * b;
+        // modifica los valores de los píxeles
+        // data[i]     = Math.min(255, sepiaR);
+        // data[i + 1] = Math.min(255, sepiaG);
+        // data[i + 2] = Math.min(255, sepiaB);
     }
     // Actualiza el canvas auxiliar con los datos modificados
     auxCtx.putImageData(imageData, 0, 0);
@@ -241,7 +240,4 @@ function aplicarFiltroNegativo(imagen) {
     return auxCanvas.toDataURL();
 }
 
-
-
-
-// ------------------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------------- FIN -----

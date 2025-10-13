@@ -54,12 +54,14 @@ export const iniciarJuego = (imagenSrc, nivel, dificultad, tiempo) => {
 
     // ⏱️ ¡Arranca el tiempo!
     iniciarCronometro(tiempo, () => {
-        alert("⏱️ ¡Tiempo agotado! Matías... has perdido el juego.");
-        location.reload();
+        mostrarDerrotaConManitos();
         // Podés ocultar el canvas, mostrar un mensaje, reiniciar, etc.
         //reiniciarJuegoCompleto(); // no funciona se rompe revisar !!!!!!!!!
-    }); 
-
+        setTimeout(() => {
+            alert("⏱️ ¡Tiempo agotado! Matías... has perdido el juego.");
+            location.reload();
+        }, 4000); // Espera 4 segundos antes de alert + reload
+    });
     const canvas = document.getElementById('puzzleCanvas');
 
     // Inicializa el puzzle con rotaciones aleatorias
@@ -120,7 +122,11 @@ if (verificarBtn) {
         if (verificarPuzzleResuelto()) {
             detenerCronometro((tiempoFinal) => {
                 actualizarRanking('Matías', tiempoFinal);
-                alert("🎉 Matías... ¡Puzzle resuelto correctamente!");
+                mostrarVictoriaConManitos();
+                setTimeout(() => {
+                    alert("🎉 Matías... ¡Puzzle resuelto correctamente!");
+                    location.reload();
+                }, 4000);
             });
         } else {
             alert("❌ Matías... Algunas piezas están mal orientadas.");
@@ -155,3 +161,46 @@ export const reiniciarJuegoCompleto = () => {
     playButton.disabled = false;
 };
 
+// ------------------------------------------------------------------------------------------------
+//                método que muestra efecto de derrota con manitos
+// ------------------------------------------------------------------------------------------------
+function mostrarDerrotaConManitos() {
+    const contenedor = document.createElement('div');
+    contenedor.id = "derrotaEffect";
+    document.body.appendChild(contenedor);
+    // Crear múltiples imágenes de manitos cayendo
+    for (let i = 0; i < 30; i++) {
+        const mano = document.createElement('img');
+        mano.src = "../entrega2/assets/Thumbs down.png";
+        mano.className = "manoDerrota";
+        mano.style.left = `${Math.random() * 90}%`;
+        mano.style.top = `-60px`;
+        contenedor.appendChild(mano);
+        // Animación caída
+        setTimeout(() => {
+            mano.style.top = "100vh";
+        }, i * 200);
+    }
+}
+
+// ------------------------------------------------------------------------------------------------
+//                método que muestra efecto de victoria con manitos
+// ------------------------------------------------------------------------------------------------
+function mostrarVictoriaConManitos() {
+    const contenedor = document.createElement('div');
+    contenedor.id = "victoriaEffect";
+    document.body.appendChild(contenedor);
+    // crear múltiples imágenes de manitos subiendo
+    for (let i = 0; i < 30; i++) {
+        const mano = document.createElement('img');
+        mano.src = "../entrega2/assets/Thumbs up.png";
+        mano.className = "manoVictoria";
+        mano.style.left = `${Math.random() * 90}%`;
+        mano.style.bottom = `-60px`;
+        contenedor.appendChild(mano);
+        // Animación subida
+        setTimeout(() => {
+            mano.style.bottom = "100vh";
+        }, i * 200);
+    }
+}
