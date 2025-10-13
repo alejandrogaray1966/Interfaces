@@ -18,6 +18,7 @@ let rankingJugadores = [
 //                método que oculta la selección de imágenes y muestra el CANVAS 
 // ------------------------------------------------------------------------------------------------
 export const mostrarCanvas = () => {
+
     // Ocultar elementos de la interfaz
     document.querySelector('.game-preview-blocka').classList.add('hidden');
     document.getElementById('winner-display').classList.add('hidden');
@@ -50,9 +51,11 @@ export const iniciarJuego = (imagenSrc, nivel, dificultad, tiempo) => {
     mostrarCanvas(); 
     mostrarDatosDelJuego(gameSettings);
     mostrarRanking(rankingJugadores);
+
     // ⏱️ ¡Arranca el tiempo!
     iniciarCronometro(tiempo, () => {
         alert("⏱️ ¡Tiempo agotado! Matías... has perdido el juego.");
+        location.reload();
         // Podés ocultar el canvas, mostrar un mensaje, reiniciar, etc.
         //reiniciarJuegoCompleto(); // no funciona se rompe revisar !!!!!!!!!
     }); 
@@ -60,7 +63,7 @@ export const iniciarJuego = (imagenSrc, nivel, dificultad, tiempo) => {
     const canvas = document.getElementById('puzzleCanvas');
 
     // Inicializa el puzzle con rotaciones aleatorias
-    inicializarRotacion(canvas, imagenSrc, nivel);
+    inicializarRotacion(canvas, imagenSrc, nivel, dificultad);
 
     // Activa la interacción por clic izquierdo/derecho
     activarRotacionInteractiva(canvas);
@@ -125,6 +128,7 @@ if (verificarBtn) {
     });
 }
 
+// no funciona se rompe revisar !!!!!!!!!
 // ------------------------------------------------------------------------------------------------
 //                método que oculta el CANVAS y muestra la selección de imágenes
 // ------------------------------------------------------------------------------------------------
