@@ -169,7 +169,7 @@ function mostrarDerrotaConManitos() {
     contenedor.id = "derrotaEffect";
     document.body.appendChild(contenedor);
     // Crear múltiples imágenes de manitos cayendo
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < 20; i++) {
         const mano = document.createElement('img');
         mano.src = "../entrega2/assets/Thumbs down.png";
         mano.className = "manoDerrota";
@@ -191,7 +191,7 @@ function mostrarVictoriaConManitos() {
     contenedor.id = "victoriaEffect";
     document.body.appendChild(contenedor);
     // crear múltiples imágenes de manitos subiendo
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < 20; i++) {
         const mano = document.createElement('img');
         mano.src = "../entrega2/assets/Thumbs up.png";
         mano.className = "manoVictoria";
