@@ -149,8 +149,8 @@ function aplicarFiltroPrincipiante(imagen) {
     auxCtx.drawImage(imagen, 0, 0);
     const imageData = auxCtx.getImageData(0, 0, imagen.width, imagen.height);
     const data = imageData.data;
-    // Aplica un filtro personalizado (aquí podés definir lo que quieras)
-    for (let i = 0; i < data.length; i += 4) {
+    // Aplica un filtro personalizado (aquí podés definir lo que quieras). Al ser principiante no le ponemos filtro, es solo a modo de ejemplo.
+    //for (let i = 0; i < data.length; i += 4) {
         // constantes R G B Alpha
         // const r = data[i];
         // const g = data[i + 1];
@@ -163,7 +163,7 @@ function aplicarFiltroPrincipiante(imagen) {
         // data[i]     = Math.min(255, sepiaR);
         // data[i + 1] = Math.min(255, sepiaG);
         // data[i + 2] = Math.min(255, sepiaB);
-    }
+    //}
     // Actualiza el canvas auxiliar con los datos modificados
     auxCtx.putImageData(imageData, 0, 0);
     return auxCanvas.toDataURL();
@@ -206,10 +206,11 @@ function aplicarFiltroBrillo(imagen) {
     const imageData = auxCtx.getImageData(0, 0, imagen.width, imagen.height);
     const data = imageData.data;
     // Aplica el filtro de brillo (aumenta el brillo en un 30%)
+
     for (let i = 0; i < data.length; i += 4) {
-        data[i]     = Math.min(255, data[i] * 1.3);     // R
-        data[i + 1] = Math.min(255, data[i + 1] * 1.3); // G
-        data[i + 2] = Math.min(255, data[i + 2] * 1.3); // B
+        data[i]     = Math.min(255, data[i] * 0.3);     // R
+        data[i + 1] = Math.min(255, data[i + 1] * 0.3); // G
+        data[i + 2] = Math.min(255, data[i + 2] * 0.3); // B
         // Alpha (data[i + 3]) se mantiene igual - El canal Alpha controla la transparencia.
     }
     // Actualiza el canvas auxiliar con los datos modificados

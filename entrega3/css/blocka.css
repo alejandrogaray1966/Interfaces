@@ -39,7 +39,7 @@
     height: 100%;
     /* Asegura que la imagen no se distorsione, cubriendo el área */
     object-fit: cover; 
-    border-radius: 10px;
+    border-radius: 0px;
     border: 3px solid #ccc; 
 }
 
@@ -187,10 +187,10 @@
     pointer-events: auto; /* ← permitir interacción */
 }
 
-#puzzleCanvas {
+#puzzleCanvas img{
     width: 600px;
     height: 600px;
-    border-radius: 0 !important;
+    border-radius: 0;
 }
 
 /* ------------------------------------------------------ */

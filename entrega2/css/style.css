@@ -511,7 +511,6 @@ ul {
 .cards-lista-verticales {
   display: flex;
   flex-direction: row;
-  /* min-width: 338px * 9 = 3042px */
   min-width: 3042px; 
   position: relative;
   list-style: none;
