@@ -53,7 +53,7 @@ export const inicializarRotacion = (canvas, imagenSrc, nivel, dificultad) => {
                     const angulos = [90, 180, 270];
                     const rotacion = angulos[Math.floor(Math.random() * angulos.length)];
                     // Guarda el estado de cada pieza
-                    piezasEstado.push({ fila, col, rotacion });
+                    piezasEstado.push({ fila, col, rotacion, bloqueada: false });
                     dibujarPieza(fila, col, rotacion);
                 }
             }
@@ -115,7 +115,7 @@ function obtenerPiezaClickeada(e, canvas) {
 // Actualiza la rotación de una pieza y la redibuja
 function rotarPieza(fila, col, deltaAngulo) {
     const pieza = piezasEstado.find(p => p.fila === fila && p.col === col);
-    if (!pieza) return;
+    if (!pieza || pieza.bloqueada) return;
     // Actualiza la rotación de la pieza (0, 90, 180, 270)
     pieza.rotacion = (pieza.rotacion + deltaAngulo + 360) % 360;
     dibujarPieza(fila, col, pieza.rotacion);
@@ -239,6 +239,27 @@ function aplicarFiltroNegativo(imagen) {
     // Actualiza el canvas auxiliar con los datos modificados
     auxCtx.putImageData(imageData, 0, 0);
     return auxCanvas.toDataURL();
+}
+
+// Método que corrige una pieza incorrecta (la rota a 0) y la bloquea
+export function corregirUnaPiezaIncorrecta() {
+    const pieza = piezasEstado.find(p => p.rotacion !== 0 && !p.bloqueada);
+    if (!pieza) return;
+
+    pieza.rotacion = 0;
+    pieza.bloqueada = true;
+
+    // Redibujamos la pieza corregida
+    dibujarPieza(pieza.fila, pieza.col, pieza.rotacion);
+
+    // Dibujamos el borde verde encima
+    const x = pieza.col * piezaSize;
+    const y = pieza.fila * piezaSize;
+    ctx.save();
+    ctx.strokeStyle = 'limegreen';
+    ctx.lineWidth = 4;
+    ctx.strokeRect(x + 2, y + 2, piezaSize - 4, piezaSize - 4);
+    ctx.restore();
 }
 
 // ------------------------------------------------------------------------------------------- FIN -----
