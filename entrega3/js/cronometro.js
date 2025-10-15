@@ -45,4 +45,13 @@ export const detenerCronometro = (onJuegoTerminado) => {
     }
 };
 
+// ------------------------------------------------------------------------------------------------
+//                                  método para penalizar tiempo
+// ------------------------------------------------------------------------------------------------
+export function penalizarTiempo(extraSegundos) {
+    if (tiempoInicio) {
+        tiempoInicio -= extraSegundos * 1000;
+    }
+}
 
+// --------------------------------------------------------------------------------------- FIN ----

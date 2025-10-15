@@ -1,9 +1,9 @@
 console.log("✅ jugarBlocka.js cargado");
 
 // se importan los métodos de la clase rotacionPiezas.js
-import { inicializarRotacion, activarRotacionInteractiva, verificarPuzzleResuelto } from './rotacionPiezas.js';
+import { inicializarRotacion, activarRotacionInteractiva, verificarPuzzleResuelto, corregirUnaPiezaIncorrecta } from './rotacionPiezas.js';
 // se importan los métodos de la clase cronometro.js
-import { iniciarCronometro, detenerCronometro } from './cronometro.js';
+import { iniciarCronometro, detenerCronometro, penalizarTiempo } from './cronometro.js';
 
 // 🌍 Definila fuera de iniciarJuego como variables globales
 let rankingJugadores = [
@@ -13,7 +13,8 @@ let rankingJugadores = [
     { nombre: 'Soledad', tiempo: 55 },
     { nombre: 'Alejandro', tiempo: 62 }
 ]; // Constantes del ranking del juego iniciado
-    
+let multa = 10; // segundos de penalización según tiempo 
+
 // ------------------------------------------------------------------------------------------------
 //                método que oculta la selección de imágenes y muestra el CANVAS 
 // ------------------------------------------------------------------------------------------------
@@ -53,6 +54,7 @@ export const iniciarJuego = (imagenSrc, nivel, dificultad, tiempo) => {
     mostrarRanking(rankingJugadores);
 
     // ⏱️ ¡Arranca el tiempo!
+    multa = tiempo / 3; 
     iniciarCronometro(tiempo, () => {
         mostrarDerrotaConManitos();
         // Podés ocultar el canvas, mostrar un mensaje, reiniciar, etc.
@@ -129,7 +131,12 @@ if (verificarBtn) {
                 }, 4000);
             });
         } else {
-            alert("❌ Matías... Algunas piezas están mal orientadas.");
+            // aca un método que ubique una pieza (que está mal) en su posición correcta (poniendo un recuadro verde a la pieza)
+            // y no la deje clickear ( como ya está bien ubicada que no la deje rotar)
+            corregirUnaPiezaIncorrecta();
+            penalizarTiempo(multa); // penaliza 10/20/30 segundos en el cronómetro según nivel
+            mostrarPenalizacionVisual(multa);
+            // alert("❌ Matías... Algunas piezas están mal orientadas.");
         }
     });
 }
@@ -203,4 +210,29 @@ function mostrarVictoriaConManitos() {
             mano.style.bottom = "100vh";
         }, i * 200);
     }
+}
+
+// ------------------------------------------------------------------------------------------------
+//                método que muestra visualmente la penalización de tiempo
+// ------------------------------------------------------------------------------------------------
+function mostrarPenalizacionVisual(segundos) {
+    const cronometroEl = document.getElementById('cronometro');
+    if (!cronometroEl) return;
+
+    // Efecto flotante de penalización
+    const rect = cronometroEl.getBoundingClientRect();
+    const penalizacionEl = document.createElement('div');
+    penalizacionEl.textContent = `+${segundos}s`;
+    penalizacionEl.className = 'penalizacion';
+    // Posicionamos cerca del cronómetro
+    penalizacionEl.style.position = 'fixed';
+    penalizacionEl.style.top = `${rect.top - 20}px`;// un poco arriba
+    penalizacionEl.style.left = `${rect.left + 120}px`;// ligeramente desplazado
+    penalizacionEl.style.zIndex = '199';
+    document.body.appendChild(penalizacionEl);
+    setTimeout(() => penalizacionEl.remove(), 3000);
+
+    // Efecto de sacudida en el cronómetro
+    cronometroEl.classList.add('shake');
+    setTimeout(() => cronometroEl.classList.remove('shake'), 400);
 }
