@@ -221,14 +221,16 @@
 /* Estilo para el cronometro                              */
 /* ------------------------------------------------------ */
 .cronometro {
-    font-size: 36px;
+    font-size: 32px;
     font-weight: bold;
-    color: #333;
-    background-color: transparent;
     position: absolute;
+    border-radius: 8px;
     top: 56px;
-    right: 40px; 
-    z-index: 2; 
+    right: 40px;
+    z-index: 2;
+    text-align: center;
+    height: 80px;
+    width: 200px;
 }
 
 .cronometro.shake {
@@ -249,7 +251,6 @@
 .ranking {
     font-size: 24px;
     font-weight: bold;
-    color: #333;
     background-color: transparent;
     position: absolute;
     top: 56px;
@@ -338,4 +339,176 @@
 @keyframes fadeOut {
     0% { opacity: 1; transform: translateY(0); }
     100% { opacity: 0; transform: translateY(-20px); }
+}
+
+
+
+/* RANKING PRIMER PUESTO*/
+
+/* From Uiverse.io by sohoning */ 
+.cards-ranking {
+  position: relative;
+  height: 150px;
+  transition-duration: 0.5s;
+  background: none;
+  overflow: hidden;
+}
+
+.cards-ranking:hover {
+  height: 270px;
+}
+
+.cards-ranking:hover .frente-ranking{
+  box-shadow: 0 10px 15px #b1985e;
+}
+
+.cards-ranking:hover .detalle-ranking {
+  display: flex;
+}
+
+.frente-ranking {
+  position: relative;
+  background: linear-gradient(45deg, #fffbf0, #ffdd87);
+  width: 240px;
+  height: 130px;
+  border-radius: 20px;
+  transition-duration: 0.5s;
+  z-index: 2;
+}
+
+.detalle-ranking {
+  position: relative;
+  display: none;
+  width: 240px;
+  height: 120px;
+  background: white;
+  top: -20px;
+  z-index: 1;
+  transition-duration: 1s;
+  border-radius: 0 0 25px 25px;
+  overflow: hidden;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.linea {
+  position: absolute;
+  width: 200px;
+  height: 10px;
+  top: 70px;
+  background-image: linear-gradient(
+    to right,
+    transparent 10%,
+    #ffe8a0 20%,
+    #f7b733 50%,
+    #ffe8a0 70%,
+    transparent 90%
+  );
+  z-index: 1;
+}
+
+.trofeo {
+  position: absolute;
+  right: 0px;
+  top: 4px;
+  z-index: 2;
+  width :70px;
+  height : 70px;
+}
+
+.ranking-numero{
+  position: relative;
+  color: #ffc64b;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 700;
+  font-size: 50px;
+  left: 20px;
+  padding: 0;
+  margin: 0;
+  top: -5px;
+}
+
+.ranking-primero {
+  position: relative;
+  font-size: 40px;
+  color: #0f0c1f;
+}
+
+.usuario-avatar {
+  position: absolute;
+  bottom: 17px;
+  left: 20px;
+  color: #0f0c1f;
+
+}
+
+.usuario-nombre {
+  position: relative;
+  font-weight: 600;
+  color: #0f0c1f;
+  left: 55px;
+  font-size: 18px;
+  top: 24px;
+}
+
+.medalla {
+  position: absolute;
+  top: 15px;
+  right: 5px;
+}
+
+.puntuacion {
+  position: relative;
+  height: 75px;
+  top: 10px;
+  margin-right: 10px;
+  margin-left: 15px;
+}
+
+.gradesIcon {
+  position: absolute;
+  top: 10px;
+}
+
+.puntuacion-puntos {
+  position: relative;
+  display: block;
+  margin-left: 60px;
+  color: #0f0c1f;
+  letter-spacing: 6px;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-top: 20px;
+  font-weight: 800;
+  font-size: 13px;
+}
+
+.puntuacion-numero {
+  position: relative;
+  font-family: Arial, Helvetica, sans-serif;
+  display: block;
+  font-size: 25px;
+  font-weight: 800;
+  margin-left: 60px;
+  color: #ea9518;
+  top: -5px;
+}
+
+.timeNum {
+  color: #6cabf6;
+}
+
+.slide-in-top {
+  animation: slide-in-top 1s cubic-bezier(0.65, 0.05, 0.36, 1) both;
+}
+
+@keyframes slide-in-top {
+  0% {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
