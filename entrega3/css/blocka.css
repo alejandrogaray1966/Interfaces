@@ -318,9 +318,10 @@
 }
 
 .manoVictoria {
+    
     position: absolute;
-    width: 50px;
-    transition: bottom 4s ease-out;
+    width: 32px;
+    transition: bottom 2s ease-out;
 }
 
 /* ------------------------------------------------------ */

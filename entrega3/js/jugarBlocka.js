@@ -203,11 +203,11 @@ function mostrarVictoriaConManitos() {
         mano.src = "../entrega2/assets/Thumbs up.png";
         mano.className = "manoVictoria";
         mano.style.left = `${Math.random() * 90}%`;
-        mano.style.bottom = `-60px`;
+        mano.style.bottom = '0px';
         contenedor.appendChild(mano);
         // Animación subida
         setTimeout(() => {
-            mano.style.bottom = "100vh";
+            mano.style.bottom = "80vh";
         }, i * 200);
     }
 }

@@ -279,7 +279,7 @@ ul {
     transition: transform 0s, opacity 2s;
 }
 .carousel-slide.active .circulo img{
-    transition: transform 1s cubic-bezier(0.645, 0.045, 0.355, 1), opacity 1s cubic-bezier(0.645, 0.045, 0.355, 1);
+    transition: transform 0.4s cubic-bezier(0.645, 0.045, 0.355, 1), opacity 1s cubic-bezier(0.645, 0.045, 0.355, 1);
     transform: rotate(360deg);
     opacity: 1;
 }
@@ -618,7 +618,7 @@ ul {
     display: grid;
     justify-content: center;
     width: 1448px;
-    height: 944px;
+    height: 814px;
 }
 
 .cards-lista-grande{
@@ -637,7 +637,6 @@ ul {
     position: relative;
     bottom: 211px;
     padding-right: 32px;
-    height: fit-content;
 }
 
 
@@ -646,20 +645,27 @@ ul {
     filter: brightness(0.5) saturate(1); 
 }
 .card-grande:hover {
-  transform: scale(1.02);
-    transition: ease-in-out 0.3s;
-    height: fit-content;
-
-}
-.card-grande .card-img-grande:hover{
     border-radius: 20px;
+    transform: scale(1.02);
     background: #ffffff80;
     color: #000;
     box-shadow:  0 0 80px whitesmoke, inset 20px 0 80px rgba(255, 0, 255, 0.747),
         inset -20px 0 80px #0ff, inset 20px 0 300px #f0f, inset -20px 0 300px #0ff,
         0 0 50px #fff, -10px 0 80px #f0f, 10px 0 80px #0ff;
     transition: all ease-in-out 0.3s;
+
+
 }
+ /*.card-grande .card-img-grande:hover{
+    border-radius: 20px;
+    transform: scale(1.02);
+    background: #ffffff80;
+    color: #000;
+    box-shadow:  0 0 80px whitesmoke, inset 20px 0 80px rgba(255, 0, 255, 0.747),
+        inset -20px 0 80px #0ff, inset 20px 0 300px #f0f, inset -20px 0 300px #0ff,
+        0 0 50px #fff, -10px 0 80px #f0f, 10px 0 80px #0ff;
+    transition: all ease-in-out 0.3s;
+}*/
 .iconos-juego{
     display: flex;
     justify-content: flex-end;
@@ -1381,7 +1387,7 @@ a, a:hover, a:active, a:visited, li{
         }
         .card-grande{
             width: 1150px;
-            height: 750px;
+            height: 650px;
         }
         .cards-lista-grande {
         height: 750px;
