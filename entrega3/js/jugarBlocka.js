@@ -133,7 +133,7 @@ if (verificarBtn) {
                 setTimeout(() => {
                     alert("🎉 Matías... ¡Puzzle resuelto correctamente!");
                     location.reload();
-                }, 4000);
+                }, 1000);
             });
         } else {
             // aca un método que ubique una pieza (que está mal) en su posición correcta (poniendo un recuadro verde a la pieza)
