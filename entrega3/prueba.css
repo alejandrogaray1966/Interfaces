@@ -1,0 +1,282 @@
+/*
+ * --------------------------------
+ * Estilos para el contenedor principal
+ * --------------------------------
+ */
+.leaderboard {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  /* Mueve el elemento hacia la izquierda y arriba por la mitad de su tamaño */
+  transform: translate(-50%, -50%);
+  width: 285px;
+  height: 334px;
+  /* Degradado de fondo */
+  background: linear-gradient(to bottom, #47065fed, #0a0d20d1);
+  border-radius: 10px;
+  /* Sombra de caja para el efecto 3D */
+  box-shadow: 0 7px 30px rgba(62, 9, 11, 0.3);
+}
+
+/*
+ * --------------------------------
+ * Estilos para el título (h1)
+ * --------------------------------
+ */
+.leaderboard h1 {
+  font-size: 18px;
+  color: #e1e1e1;
+  padding: 12px 13px 18px;
+}
+
+/* Estilos para el icono SVG dentro del título */
+.leaderboard h1 svg {
+  width: 25px;
+  height: 26px;
+  position: relative;
+  top: 3px;
+  margin-right: 6px;
+  vertical-align: baseline;
+}
+
+/*
+ * --------------------------------
+ * Estilos para la lista de ranking (ol)
+ * --------------------------------
+ */
+.leaderboard ol {
+  /* Inicializa el contador para la numeración de la lista */
+    counter-reset: leaderboard;
+    list-style: none;
+    padding: 0;
+}
+
+/*
+ * --------------------------------
+ * Estilos para cada elemento de la lista (li)
+ * --------------------------------
+ */
+.leaderboard ol li {
+  position: relative;
+  z-index: 1;
+  font-size: 14px;
+  /* Incrementa el contador para el pseudo-elemento ::before */
+  counter-increment: leaderboard;
+  padding: 18px 10px 18px 50px;
+  cursor: pointer;
+  backface-visibility: hidden;
+  transform: translateZ(0) scale(1, 1);
+}
+
+/* Pseudo-elemento ::before para mostrar el número de posición (1, 2, 3...) */
+.leaderboard ol li::before {
+  content: counter(leaderboard);
+  position: absolute;
+  z-index: 2;
+  top: 15px;
+  left: 15px;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  color: #9700CC;
+  background: #fff;
+  border-radius: 20px;
+  text-align: center;
+}
+
+/*
+ * --------------------------------
+ * Estilos para el nombre del jugador (mark)
+ * --------------------------------
+ */
+.leaderboard ol li mark {
+  position: absolute;
+  z-index: 2;
+  top: 16px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding-left: 43px;
+  margin: 0;
+  background: none;
+  color: #fff;
+}
+mark p{
+    position: relative;
+    top: 4px;
+
+}
+
+/* Pseudo-elemento ::before en 'mark' */
+.leaderboard ol li mark::before,
+.leaderboard ol li mark::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  bottom: 5px;
+  left: -9px;
+  border-top: 10px solid #4f1c65;
+  border-left: 10px solid transparent;
+  transition: all 0.1s ease-in-out;
+  opacity: 0;
+}
+
+/* Pseudo-elemento ::after en 'mark' */
+.leaderboard ol li mark::after {
+  left: auto;
+  right: 34px;
+  border-left: none;
+  border-right: 10px solid transparent;
+}
+
+/*
+ * --------------------------------
+ * Estilos para la puntuación (small)
+ * --------------------------------
+ */
+.leaderboard ol li small {
+  position: relative;
+  z-index: 2;
+  display: block;
+  text-align: right;
+  color:#e1e1e1;
+}
+
+/* Pseudo-elemento ::after en 'li' (para el efecto de hover/fondo) */
+.leaderboard ol li::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #4f1c65;
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.08);
+  /* transform: scaleX(1.06) scaleY(1.03); */
+  transition: all 0.3s ease-in-out;
+  opacity: 0;
+}
+
+/*
+ * --------------------------------
+ * Estilos específicos por posición (colores)
+ * --------------------------------
+ */
+
+/* Estilos para el 1er lugar */
+.leaderboard ol li:nth-child(1) {
+  background: #0a0d201a;
+}
+
+.leaderboard ol li:nth-child(1)::after {
+  background: #4f1c65;
+}
+.leaderboard ol li:nth-child(1) mark::after {
+    top: 34px;
+    right: 34px;
+}
+
+/* Estilos para el 2do lugar */
+.leaderboard ol li:nth-child(2) {
+  background: #0a0d204f;
+}
+
+.leaderboard ol li:nth-child(2)::after {
+  background: #4f1c65;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.08);
+}
+
+
+
+.leaderboard ol li:nth-child(2) mark::before,
+.leaderboard ol li:nth-child(2) mark::after {
+  border-top: 6px solid #4f1c65;
+  bottom: 9px;
+}
+
+/* Estilos para el 3er lugar */
+.leaderboard ol li:nth-child(3) {
+  background: #0a0d2094;
+}
+
+.leaderboard ol li:nth-child(3)::after {
+  background: #4f1c65;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.11);
+}
+
+.leaderboard ol li:nth-child(3) mark::before,
+.leaderboard ol li:nth-child(3) mark::after {
+  border-top: 2px solid #4f1c65;
+  bottom: 13px;
+}
+
+/* Estilos para el 4to lugar */
+.leaderboard ol li:nth-child(4) {
+  background: #0a0d20b4;
+}
+
+.leaderboard ol li:nth-child(4)::after {
+  background: #4f1c65;
+  box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.15);
+}
+
+.leaderboard ol li:nth-child(4) mark::before,
+.leaderboard ol li:nth-child(4) mark::after {
+  top: -23px;
+  bottom: auto;
+  border-top: none;
+  border-bottom: 6px solid #4f1c65;
+}
+
+/* Estilos para el 5to lugar */
+.leaderboard ol li:nth-child(5) {
+  background: #0a0d20;
+  border-radius: 0 0 10px 10px;
+}
+
+.leaderboard ol li:nth-child(5)::after {
+  background: #4f1c65;
+  box-shadow: 0 -2.5px 0 rgba(0, 0, 0, 0.12);
+  border-radius: 0 0 10px 10px;
+}
+
+.leaderboard ol li:nth-child(5) mark::before,
+.leaderboard ol li:nth-child(5) mark::after {
+  top: -25px;
+  bottom: auto;
+  border-top: none;
+  border-bottom: 8px solid #4f1c65;
+}
+
+/*
+ * --------------------------------
+ * Estilos de HOVER (al pasar el ratón)
+ * --------------------------------
+ */
+.leaderboard ol li:hover {
+  z-index: 2;
+  overflow: visible;
+}
+
+.leaderboard ol li:hover::after {
+  opacity: 1;
+  transform: scaleX(1.06) scaleY(1.03);
+}
+
+.leaderboard ol li:hover mark::before,
+.leaderboard ol li:hover mark::after {
+  opacity: 1;
+  transition: all 0.35s ease-in-out;
+}
+
+/*
+ * --------------------------------
+ * Estilos globales (Generales)
+ * --------------------------------
+ */
+/* Esto estaba comentado o mal aplicado en el original, se deja limpio:
+* {
+  //display: none;
+}*/
+

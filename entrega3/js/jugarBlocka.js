@@ -55,6 +55,11 @@ export const iniciarJuego = (imagenSrc, nivel, dificultad, tiempo) => {
 
     // ⏱️ ¡Arranca el tiempo!
     multa = tiempo / 3; 
+
+
+ 
+
+
     iniciarCronometro(tiempo, () => {
         mostrarDerrotaConManitos();
         // Podés ocultar el canvas, mostrar un mensaje, reiniciar, etc.
@@ -92,7 +97,7 @@ function mostrarRanking(ranking) {
     const rankingContainer = document.getElementById('rankingList');
     rankingContainer.innerHTML = ranking.map((jugador, index) => {
         const clase = jugador.nombre === 'Matías' ? 'destacado' : '';
-        return `<li class="${clase}">${index + 1}. ${jugador.nombre} - ${jugador.tiempo} Seg.</li>`;
+        return `<li><mark>${jugador.nombre}</mark><small>${jugador.tiempo}</small></li>`;
     }).join('');
 }
 
@@ -107,8 +112,8 @@ function actualizarRanking(nombre, tiempoFinal) {
     rankingJugadores.sort((a, b) => a.tiempo - b.tiempo);
 
     // Limitar a 9 jugadores
-    if (rankingJugadores.length > 9) {
-        rankingJugadores = rankingJugadores.slice(0, 9);
+    if (rankingJugadores.length > 6) {
+        rankingJugadores = rankingJugadores.slice(0, 6);
     }
 
     // Mostrar ranking actualizado
@@ -122,9 +127,9 @@ const verificarBtn = document.getElementById('verificarBtn');
 if (verificarBtn) {
     verificarBtn.addEventListener('click', () => {
         if (verificarPuzzleResuelto()) {
-            detenerCronometro((tiempoFinal) => {
+           detenerCronometro((tiempoFinal) => {
                 actualizarRanking('Matías', tiempoFinal);
-                mostrarVictoriaConManitos();
+                /*mostrarVictoriaConManitos();*/
                 setTimeout(() => {
                     alert("🎉 Matías... ¡Puzzle resuelto correctamente!");
                     location.reload();
@@ -171,14 +176,14 @@ export const reiniciarJuegoCompleto = () => {
 // ------------------------------------------------------------------------------------------------
 //                método que muestra efecto de derrota con manitos
 // ------------------------------------------------------------------------------------------------
-function mostrarDerrotaConManitos() {
+/*function mostrarDerrotaConManitos() {
     const contenedor = document.createElement('div');
     contenedor.id = "derrotaEffect";
     document.body.appendChild(contenedor);
     // Crear múltiples imágenes de manitos cayendo
     for (let i = 0; i < 20; i++) {
         const mano = document.createElement('img');
-        mano.src = "../entrega2/assets/Thumbs down.png";
+        mano.src = "./assets/Thumbs down.png";
         mano.className = "manoDerrota";
         mano.style.left = `${Math.random() * 90}%`;
         mano.style.top = `-60px`;
@@ -188,29 +193,32 @@ function mostrarDerrotaConManitos() {
             mano.style.top = "100vh";
         }, i * 200);
     }
-}
+}*/
 
 // ------------------------------------------------------------------------------------------------
 //                método que muestra efecto de victoria con manitos
 // ------------------------------------------------------------------------------------------------
-function mostrarVictoriaConManitos() {
+/*function mostrarVictoriaConManitos() {
     const contenedor = document.createElement('div');
     contenedor.id = "victoriaEffect";
+    contenedor.style.display = 'flex';
+    contenedor.style.justifyContent = 'center';
+
     document.body.appendChild(contenedor);
     // crear múltiples imágenes de manitos subiendo
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < 1210; i++) {
         const mano = document.createElement('img');
-        mano.src = "../entrega2/assets/Thumbs up.png";
+        mano.src = "./assets/Thumbs up.png";
         mano.className = "manoVictoria";
-        mano.style.left = `${Math.random() * 90}%`;
-        mano.style.bottom = '0px';
+        mano.style.left = `${Math.random() * 60}%`;
+        mano.style.bottom = '-60px';
         contenedor.appendChild(mano);
         // Animación subida
         setTimeout(() => {
-            mano.style.bottom = "80vh";
+            mano.style.bottom = "100vh";
         }, i * 200);
     }
-}
+}*/
 
 // ------------------------------------------------------------------------------------------------
 //                método que muestra visualmente la penalización de tiempo
