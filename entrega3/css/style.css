@@ -877,8 +877,8 @@ a, a:hover, a:active, a:visited, li{
   height: 682px;
   object-fit: cover;
   border-radius: 20px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-  transition: all ease-in-out 0.3s;
+  /*box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5); comento para el blocka*/
+  transition: ease-in-out 0.3s;
 }
 
 .game-btnPlay {
@@ -1304,16 +1304,26 @@ a, a:hover, a:active, a:visited, li{
 
   .game-preview:hover {
     border-radius: 20px;
-    background: #0a0d20;
-    box-shadow: 0 0 80px #11112996, inset 20px 0 80px rgba(255, 0, 255, 0.2), inset -20px 0 80px #08102c85, inset 20px 0 300px #7d4086, inset -20px 0 300px #1a122b75, 0 0 50px #fff, -10px 0 80px #4914567a, 10px 0 80px #27154666;
-    transition: all ease-in-out 0.3s;
+    /*background: #ffffff80; comento esto para el blocka
+    color: #000;
+    /*box-shadow:  0 0 80px whitesmoke, 
+>>>>>>> 727dd62 (cambio estilo hover del canvas)
+                inset 20px 0 80px rgba(255, 0, 255, 0.2),
+                inset -20px 0 80px #0ff, 
+                inset 20px 0 300px #f0f, 
+                inset -20px 0 300px #0ff,
+                0 0 50px #fff, 
+                -10px 0 80px #f0f, 
+                10px 0 80px #0ff;*/
+    transition: ease-in-out 0.3s;
+    transform: scale(1.1);
   }
 
-  /* Escala el botón "Jugar" cuando el contenedor game-preview está en hover */
+  /* Escala el botón "Jugar" cuando el contenedor game-preview está en hover 
 .game-preview:hover ~ .game-btnPlay {
     transform: scale(1.1); 
     transition: transform 0.3s ease-in-out;
-}
+}no para blocka*/
 
 
 /*----------------------------------
