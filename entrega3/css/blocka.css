@@ -137,9 +137,9 @@
 /* ------------------------------------------------------ */
 .game-settings-menu {
     position: absolute;
-    top: 70px;
+    top: 75px;
     right: -33px;
-    background-color:  #9700CC;
+    border:1px solid rgba(255, 255, 255, 0.489);
     border-radius: 10px;
     padding: 14px;
     z-index: 10;
@@ -202,7 +202,7 @@
 
 /* Efecto blur para destacar boton play */
 .blur {
-  filter: blur(3px);
+  filter: blur(4px);
   pointer-events: none;
   transition: filter 0.8s ease;
 }
@@ -210,7 +210,7 @@
 /* Cuando comienza el juego, saco el blur */
 .clearBlur{
   filter: blur(0);
-  transition: filter 0.8s ease;
+  transition: filter 0.8s ease-in;
 }
 
 
@@ -223,8 +223,8 @@
     font-size: 24px;
     font-weight: 600;
     position: absolute; 
-    bottom: 40px;         
-    right: 10px;
+    bottom: 45px;         
+    right: 81px;
     background-color: #9700CC;
     color: white;
     border: none;
@@ -242,17 +242,20 @@
 /* Estilo para el cronometro                              */
 /* ------------------------------------------------------ */
 .cronometro {
+    
+    border-radius: 20px;
+    font-family: 'Roboto' sans-serif;
     font-size: 32px;
     font-weight: bold;
     position: absolute;
-    border-radius: 8px;
-    top: 56px;
-    right: 40px;
+    top: 55px;
+    right: 100px;
     z-index: 2;
     text-align: center;
-    height: 80px;
+    height: 100px;
     width: 200px;
 }
+
 
 .cronometro.shake {
     animation: shake 0.4s;
@@ -288,17 +291,24 @@
 .ranking li {
     margin-top: 5px;
     margin-bottom: 5px;
-    font-size: 1rem;
+    font-size: 16px;
 }
 
 .info-juego{
     position: absolute;
-    right: 32px;
-    top: 250px;
+    right: 140px;
+    top: 220px;
 }
 
-.info-juego h3{
-  font-size: 24px;
+.info-juego h1{
+  font-family: 'Raleway'sans-serif;
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.info-juego ul li{
+  margin-top: 10px;
+  font-size: 16px;
 }
 /* ------------------------------------------------------ */
 /* Efecto de entrada brillante al Ranking para Matías     */
