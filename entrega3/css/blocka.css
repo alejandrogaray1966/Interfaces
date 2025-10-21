@@ -1,3 +1,9 @@
+/*Estilos particulares diferentes a la paginaJuego*/
+.controls-textBlocka{
+  width:30vw;
+}
+
+
 /* ------------------------------------------------------------------- */
 /* 1. Estilos para el contenedor principal de las imágenes para elegir */
 /* ------------------------------------------------------------------- */
@@ -40,7 +46,6 @@
     /* Asegura que la imagen no se distorsione, cubriendo el área */
     object-fit: cover; 
     border-radius: 0px;
-    border: 3px solid #ccc; 
 }
 
 /* ------------------------------------------------------------------- */
@@ -48,7 +53,8 @@
 /* ------------------------------------------------------------------- */
 .selected-random {
     transition: all 0.3s ease-in-out; 
-    transform: scale(1.30); 
+    transform: scale(1.30);
+
 }
 
 /* ------------------------------------------------------------------- */
@@ -130,36 +136,39 @@
 /* Estilo para el menú de configuración del juego BLOCKA  */
 /* ------------------------------------------------------ */
 .game-settings-menu {
-  position: absolute;
-    top: 104px;
-    right: 5px;
-    border: 2px solid;
+    position: absolute;
+    top: 70px;
+    right: -33px;
+    background-color:  #9700CC;
     border-radius: 10px;
     padding: 14px;
     z-index: 10;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    width: 218px;
+    box-shadow: 8px rgb(0 0 0 / 48%);
+    width: 250px;
+    font-family: 'Roboto'sans-serif;
 }
 .game-settings-menu.hidden {
     display: none;
 }
 
 .game-settings-menu label {
+    font-family: 'Roboto' sans-serif;
     display: block;
-    margin-top: 14px;
+    margin-top: 20px;
     font-weight: bold;
 }
 
 .game-settings-menu select {
     width: 100%;
-    padding: 5px;
-    margin-top: 5px;
-    border-radius: 4px;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 8px;
 }
 
 /* ------------------------------------------------------ */
 /* Estilo para el CANVA                                   */
 /* ------------------------------------------------------ */
+
 .hidden {
     display: none !important;
 }
@@ -191,6 +200,20 @@
     border-radius: 0;
 }
 
+/* Efecto blur para destacar boton play */
+.blur {
+  filter: blur(3px);
+  pointer-events: none;
+  transition: filter 0.8s ease;
+}
+
+/* Cuando comienza el juego, saco el blur */
+.clearBlur{
+  filter: blur(0);
+  transition: filter 0.8s ease;
+}
+
+
 /* ------------------------------------------------------ */
 /* Estilo para el botón de verificar las imagenes         */
 /* ------------------------------------------------------ */
@@ -201,7 +224,7 @@
     font-weight: 600;
     position: absolute; 
     bottom: 40px;         
-    right: 40px;
+    right: 10px;
     background-color: #9700CC;
     color: white;
     border: none;
