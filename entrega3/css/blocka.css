@@ -324,23 +324,31 @@
 .ayudita-btn, .ayudaPiezaFija, .ayudaTiempoAdicional {
   background: transparent;
   border: none;
-  width: 75px;
-  height: auto;
+  width: 70px;
+  height: 70px;
   position: absolute;
   transition: all 0.5s ease-in-out;
   cursor: pointer;
+  border-radius: 50%;
 }
 
 .ayudita-btn {
   z-index: 10;
 }
 
+.ayudita-btn:hover, .ayudaPiezaFija:hover, .ayudaTiempoAdicional:hover{
+  box-shadow:  0 0 80px whitesmoke, inset 20px 0 80px rgba(255, 0, 255, 0.747),
+  inset -20px 0 80px #0ff, inset 20px 0 300px #f0f, inset -20px 0 300px #0ff,
+  0 0 50px #fff, -10px 0 80px #f0f, 10px 0 80px #0ff;
+}
+
+
 .ayudaPiezaFija, .ayudaTiempoAdicional {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
   z-index: 5;
-  transform: scale(0.5); 
+  transform: scale(0.3); 
 }
 
 
@@ -350,21 +358,22 @@
   pointer-events: auto;
 }
 
+
 .contenedor-ayudita:hover .ayudaPiezaFija {
-  transform: translate(-70%, -70%);
+  transform: translate(-80%, -80%);
 }
 
 .contenedor-ayudita:hover .ayudaTiempoAdicional {
-  transform: translate(70%, -70%);
+  transform: translate(80%, -80%);
 }
 
 .contenedor-ayudita:hover .ayudaPiezaFija:hover {
   /*para que no vuelva al centro*/
-  transform: translate(-70%, -70%) scale(1.3);
+  transform: translate(-80%, -80%) scale(1.3);
 }
 
 .contenedor-ayudita:hover .ayudaTiempoAdicional:hover {
-  transform: translate(70%, -70%) scale(1.3);
+  transform: translate(80%, -80%) scale(1.3);
 }
 
 

@@ -145,15 +145,28 @@ if (verificarBtn) {
         }else {
             // aca un método que ubique una pieza (que está mal) en su posición correcta (poniendo un recuadro verde a la pieza)
             // y no la deje clickear ( como ya está bien ubicada que no la deje rotar)
-            corregirUnaPiezaIncorrecta();
-            penalizarTiempo(multa); // penaliza 10/20/30 segundos en el cronómetro según nivel
-            mostrarPenalizacionVisual(multa);
+            //corregirUnaPiezaIncorrecta();
+           // penalizarTiempo(multa); // penaliza 10/20/30 segundos en el cronómetro según nivel
+           // mostrarPenalizacionVisual(multa);
             alert("❌ Matías... Algunas piezas están mal orientadas.");
         }
     });
 }
-
 // no funciona se rompe revisar !!!!!!!!!
+//agrego funcionalidad ayuditas fijar pieza
+const ayudaPiezaFija= document.getElementById('ayudaPiezaFija');
+
+if(ayudaPiezaFija){
+    ayudaPiezaFija.addEventListener('click',()=>{
+        corregirUnaPiezaIncorrecta();
+        penalizarTiempo(multa);
+        mostrarPenalizacionVisual(multa);
+    })
+}
+
+
+
+
 // ------------------------------------------------------------------------------------------------
 //                método que oculta el CANVAS y muestra la selección de imágenes
 // ------------------------------------------------------------------------------------------------
