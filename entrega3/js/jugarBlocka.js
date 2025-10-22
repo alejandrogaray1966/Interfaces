@@ -56,6 +56,8 @@ export const iniciarJuego = (imagenSrc, nivel, dificultad, tiempo) => {
     // ⏱️ ¡Arranca el tiempo!
     multa = tiempo / 3; 
 
+    popover.style.display='none';
+
 
  
 
@@ -131,7 +133,6 @@ if (verificarBtn) {
         if (verificarPuzzleResuelto()) {
            detenerCronometro((tiempoFinal) => {
                 actualizarRanking('Matías', tiempoFinal);
-                /*mostrarVictoriaConManitos();*/
                 exito();//aca pongo la funcion de exito
 
                 setTimeout(() => {
@@ -141,7 +142,8 @@ if (verificarBtn) {
                     //location.reload();
                }, 1000);
                reinicioBlocka.addEventListener('click', iniciarJuego);
-               popover.style.display='none';
+               //popover.style.backgroundColor="red";
+               //popover.style.display='none';
             });
         }else {
             // aca un método que ubique una pieza (que está mal) en su posición correcta (poniendo un recuadro verde a la pieza)
@@ -193,54 +195,6 @@ export const reiniciarJuegoCompleto = () => {
     const playButton = document.querySelector('.game-btnPlay');
     playButton.disabled = false;
 };
-
-// ------------------------------------------------------------------------------------------------
-//                método que muestra efecto de derrota con manitos
-// ------------------------------------------------------------------------------------------------
-/*function mostrarDerrotaConManitos() {
-    const contenedor = document.createElement('div');
-    contenedor.id = "derrotaEffect";
-    document.body.appendChild(contenedor);
-    // Crear múltiples imágenes de manitos cayendo
-    for (let i = 0; i < 20; i++) {
-        const mano = document.createElement('img');
-        mano.src = "./assets/Thumbs down.png";
-        mano.className = "manoDerrota";
-        mano.style.left = `${Math.random() * 90}%`;
-        mano.style.top = `-60px`;
-        contenedor.appendChild(mano);
-        // Animación caída
-        setTimeout(() => {
-            mano.style.top = "100vh";
-        }, i * 200);
-    }
-}*/
-
-// ------------------------------------------------------------------------------------------------
-//                método que muestra efecto de victoria con manitos
-// ------------------------------------------------------------------------------------------------
-/*function mostrarVictoriaConManitos() {
-    const contenedor = document.createElement('div');
-    contenedor.id = "victoriaEffect";
-    contenedor.style.display = 'flex';
-    contenedor.style.justifyContent = 'center';
-
-    document.body.appendChild(contenedor);
-    // crear múltiples imágenes de manitos subiendo
-    for (let i = 0; i < 1210; i++) {
-        const mano = document.createElement('img');
-        mano.src = "./assets/Thumbs up.png";
-        mano.className = "manoVictoria";
-        mano.style.left = `${Math.random() * 60}%`;
-        mano.style.bottom = '-60px';
-        contenedor.appendChild(mano);
-        // Animación subida
-        setTimeout(() => {
-            mano.style.bottom = "100vh";
-        }, i * 200);
-    }
-}*/
-
 
 //empieza confeti
 // --- Tu Función de Éxito (Disparador) --- linea 135
