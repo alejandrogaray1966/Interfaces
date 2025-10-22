@@ -17,6 +17,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // constantes para la configuración del juego
     const settingsButton = document.querySelector('.game-btn-settings button');
     const settingsMenu = document.querySelector('.game-settings-menu');
+    // las 6 imágenes comienzan blureadas para que destaque el boton Play
+    ruletaContainer.classList.add('blur');
 
     // ------------------------------------------------------------------------------------------------
     // método que abre y cierra el menú de configuración
@@ -30,14 +32,16 @@ document.addEventListener('DOMContentLoaded', () => {
     // ------------------------------------------------------------------------------------------------
     const bloquearBoton = () => {
         // Bloquear botón de jugar
-        playButton.style.pointerEvents = 'none';
-        playButton.style.opacity = '0.6';
+        playButton.classList.remove('btn-play');//agrego una clase para ocultar el boton Jugar durante el juego.
+        playButton.classList.add('playing');
+        //playButton.style.pointerEvents = 'none';
+        //playButton.style.opacity = '0.6';
         // Bloquear botón de configuración
         settingsButton.style.pointerEvents = 'none';
         settingsButton.style.opacity = '0.6';
         setTimeout(() => {
-            playButton.style.pointerEvents = 'auto';
-            playButton.style.opacity = '1';
+            //playButton.style.pointerEvents = 'auto';
+            //playButton.style.opacity = '1';
             settingsButton.style.pointerEvents = 'auto';
             settingsButton.style.opacity = '1';
         }, 5000);
@@ -63,6 +67,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (intervalId) clearInterval(intervalId);
         removeSelection();
         ruletaContainer.classList.remove('hidden'); // Aseguramos que la ruleta esté visible al inicio
+        ruletaContainer.classList.remove('blur');
+        ruletaContainer.classList.add('clearBlur');
         winnerDisplay.classList.remove('visible'); // Aseguremos que no se vea el ganador anterior
         winnerDisplay.innerHTML = ''; // Limpiamos el contenido anterior
         // acá elegimos la imagen ganadora

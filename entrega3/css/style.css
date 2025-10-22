@@ -646,7 +646,7 @@ ul {
 }
 .card-grande:hover {
     border-radius: 20px;
-    transform: scale(1.02);
+    /*transform: scale(1.02); lo quito para blocka*/
     background: #ffffff80;
     color: #000;
     box-shadow:  0 0 80px whitesmoke, inset 20px 0 80px rgba(255, 0, 255, 0.747),
@@ -877,22 +877,29 @@ a, a:hover, a:active, a:visited, li{
   height: 682px;
   object-fit: cover;
   border-radius: 20px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-  transition: all ease-in-out 0.3s;
+  /*box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5); comento para el blocka*/
+  transition: ease-in-out 0.3s;
 }
 
-.game-btnPlay {
-    width: 194px;
+.game-btnPlay {/*estilos para blocka*/
+    width: 222px;
     height: 69px;
     font-size: 24px;
     font-weight: 600;
     position: absolute; 
-    bottom: 40px;         
-    right: 20px;
+    bottom: 319px;         
+    right: 583px;
     background-color: #9700CC;
     color: white;
     border: none;
     border-radius: 8px;
+}
+.playing{
+    opacity: 0;
+    transform: scale(0.95);
+    transition: ease-out;
+    pointer-events: none;
+
 }
 
 .game-btnPlay:hover , .btn-primario:hover {
@@ -929,16 +936,16 @@ a, a:hover, a:active, a:visited, li{
     color: #fff;
     width: 40px;
     height: 40px;
+    position: relative;
+    top:-30px;
+    right: 145px;
 }
 
 .game-btn-secondary{
     display: flex;
-    align-items: center;
     justify-content: flex-end;
-    padding-right: 20px;
-    margin-top: 16px;
     gap: 32px;
-    right: 40px;
+   
 }
 
 .game-btn-secondary button  {
@@ -1304,16 +1311,26 @@ a, a:hover, a:active, a:visited, li{
 
   .game-preview:hover {
     border-radius: 20px;
-    background: #0a0d20;
-    box-shadow: 0 0 80px #11112996, inset 20px 0 80px rgba(255, 0, 255, 0.2), inset -20px 0 80px #08102c85, inset 20px 0 300px #7d4086, inset -20px 0 300px #1a122b75, 0 0 50px #fff, -10px 0 80px #4914567a, 10px 0 80px #27154666;
-    transition: all ease-in-out 0.3s;
+    /*background: #ffffff80; comento esto para el blocka
+    color: #000;
+    /*box-shadow:  0 0 80px whitesmoke, 
+>>>>>>> 727dd62 (cambio estilo hover del canvas)
+                inset 20px 0 80px rgba(255, 0, 255, 0.2),
+                inset -20px 0 80px #0ff, 
+                inset 20px 0 300px #f0f, 
+                inset -20px 0 300px #0ff,
+                0 0 50px #fff, 
+                -10px 0 80px #f0f, 
+                10px 0 80px #0ff;*/
+    transition: ease-in-out 0.3s;
+    /*transform: scale(1.1);*/
   }
 
-  /* Escala el botón "Jugar" cuando el contenedor game-preview está en hover */
+  /* Escala el botón "Jugar" cuando el contenedor game-preview está en hover 
 .game-preview:hover ~ .game-btnPlay {
     transform: scale(1.1); 
     transition: transform 0.3s ease-in-out;
-}
+}no para blocka*/
 
 
 /*----------------------------------
