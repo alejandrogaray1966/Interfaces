@@ -450,6 +450,53 @@
     100% { opacity: 0; transform: translateY(-20px); }
 }
 
+/*ANIMACION EXITO
+
+/* --- Contenedor --- */
+.confeti-container {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 25vw;
+  height: 10px;
+  overflow: visible;
+  z-index: 9999;
+}
+
+/* --- Pieza de Confeti Base --- */
+.confeti-pieza {
+  position: absolute;
+  width: 8px;
+  height: 12px;
+  opacity: 1;
+  pointer-events: none;
+  transition: opacity 0.5s; /* Transición para desvanecer al final */
+}
+
+/* --- Colores --- */
+.c1 { background-color:#0ff; }
+.c2 { background-color: #f0f; }
+.c3 { background-color:  #9700CC;; }
+
+/* --- Keyframe Único de Caída Acelerada por GPU --- */
+/* Este keyframe utiliza variables CSS (como --end-x) que JS inyecta. */
+@keyframes caída-aleatoria {
+  0% {
+      /* Estado inicial: En el punto de origen */
+      transform: translate(0, 0) rotateZ(0deg) rotateY(0deg); 
+      opacity: 1;
+  }
+  100% {
+      /* Estado final: Usa las variables de JS para una dirección, giro y caída únicos */
+      transform: 
+          translate(var(--end-x), 150vh) /* 150vh asegura que caiga fuera de la pantalla */
+          rotateZ(var(--end-rotate-z)) 
+          rotateY(var(--end-rotate-y));
+      opacity: 0; 
+  }
+}
+
 
 
 /* RANKING PRIMER PUESTO*/
