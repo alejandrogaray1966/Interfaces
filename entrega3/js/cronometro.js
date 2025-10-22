@@ -18,7 +18,7 @@ export const iniciarCronometro = (tiempoLimite, onTiempoAgotado) => {
         const tiempoTranscurrido = Math.floor((ahora - tiempoInicio) / 1000);
         const minutos = String(Math.floor(tiempoTranscurrido / 60)).padStart(2, '0');
         const segundos = String(tiempoTranscurrido % 60).padStart(2, '0');
-        cronometroEl.textContent = `Tiempo: ${minutos}:${segundos}`;
+        cronometroEl.textContent = `Tiempo ${minutos}:${segundos}`;
 
         // ⛔ Verificamos si se agotó el tiempo
         if (tiempoTranscurrido >= tiempoLimite) {
