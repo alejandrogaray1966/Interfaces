@@ -124,24 +124,31 @@ function actualizarRanking(nombre, tiempoFinal) {
 //                      método que verifica si están las piezas correctas
 // ------------------------------------------------------------------------------------------------
 const verificarBtn = document.getElementById('verificarBtn');
+const popover = document.getElementById('id-popover');
+const reinicioBlocka = document.getElementById('reintentar-blocka');
 if (verificarBtn) {
     verificarBtn.addEventListener('click', () => {
         if (verificarPuzzleResuelto()) {
            detenerCronometro((tiempoFinal) => {
                 actualizarRanking('Matías', tiempoFinal);
                 /*mostrarVictoriaConManitos();*/
+
                 setTimeout(() => {
-                    alert("🎉 Matías... ¡Puzzle resuelto correctamente!");
-                    location.reload();
-                }, 1000);
+                    popover.style.display = 'flex';
+
+                   // alert("🎉 Matías... ¡Puzzle resuelto correctamente!");
+                    //location.reload();
+               }, 1000);
+               reinicioBlocka.addEventListener('click', iniciarJuego);
+               popover.style.display='none';
             });
-        } else {
+        }else {
             // aca un método que ubique una pieza (que está mal) en su posición correcta (poniendo un recuadro verde a la pieza)
             // y no la deje clickear ( como ya está bien ubicada que no la deje rotar)
             corregirUnaPiezaIncorrecta();
             penalizarTiempo(multa); // penaliza 10/20/30 segundos en el cronómetro según nivel
             mostrarPenalizacionVisual(multa);
-            // alert("❌ Matías... Algunas piezas están mal orientadas.");
+            alert("❌ Matías... Algunas piezas están mal orientadas.");
         }
     });
 }

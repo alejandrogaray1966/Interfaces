@@ -938,7 +938,7 @@ a, a:hover, a:active, a:visited, li{
     height: 40px;
     position: relative;
     top:-30px;
-    right: 145px;
+    right: 138px;
 }
 
 .game-btn-secondary{
@@ -1409,6 +1409,11 @@ a, a:hover, a:active, a:visited, li{
         .iconos-juego{
             bottom: 120px;
             height: 48px;
+        }
+
+        .game-btnPlay{
+            bottom: 336px;
+            right: 543px;        
         }
     }
     @media (max-width: 1275px){

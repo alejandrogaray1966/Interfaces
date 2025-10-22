@@ -834,3 +834,38 @@ mark p{
   opacity: 1;
   transition: all 0.35s ease-in-out;
 }
+
+
+.container-popover{
+  display: none;
+  background-color: #090b1b;
+  position: absolute;
+  top: 634px;
+  left: 750px;
+  width: 420px;
+  flex-direction: column;
+  border-radius: 8px;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+  gap: 22px;
+}
+
+.container-popover p{
+  font-size: 16px;
+}
+.btn-popover{
+  display: flex;
+  gap: 24px;
+} 
+
+.btn-popover button{
+  width: 100px;
+  height: 24px;
+}
+
+ @media (max-width: 1510px){
+    .container-popover{
+      left: 466px;
+    }
+ }
