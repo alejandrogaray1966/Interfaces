@@ -39,6 +39,12 @@ export const mostrarCanvas = () => {
 // ------------------------------------------------------------------------------------------------
 //                                  método que lanza el juego 
 // ------------------------------------------------------------------------------------------------
+    const popover = document.getElementById('id-popover');
+    const reintentarBlocka = document.getElementById('reintentar-blocka');
+    const inicioBlocka = document.getElementById('inicio-blocka');
+
+
+
 export const iniciarJuego = (imagenSrc, nivel, dificultad, tiempo) => {
 
     // Constantes del juego iniciado
@@ -55,7 +61,6 @@ export const iniciarJuego = (imagenSrc, nivel, dificultad, tiempo) => {
 
     // ⏱️ ¡Arranca el tiempo!
     multa = tiempo / 3; 
-
     popover.style.display='none';
 
 
@@ -63,14 +68,21 @@ export const iniciarJuego = (imagenSrc, nivel, dificultad, tiempo) => {
 
 
     iniciarCronometro(tiempo, () => {
-        mostrarDerrotaConManitos();
+
+        popover.style.display = 'flex';
+
         // Podés ocultar el canvas, mostrar un mensaje, reiniciar, etc.
         //reiniciarJuegoCompleto(); // no funciona se rompe revisar !!!!!!!!!
         setTimeout(() => {
-            alert("⏱️ ¡Tiempo agotado! Matías... has perdido el juego.");
-            location.reload();
-        }, 4000); // Espera 4 segundos antes de alert + reload
+
+        reintentarBlocka.addEventListener('click', iniciarJuego(imagenSrc, nivel, dificultad, tiempo));
+        //inicioBlocka.addEventListener('click', location.reload());
+
+        }, 4000); 
+
     });
+
+
     const canvas = document.getElementById('puzzleCanvas');
 
     // Inicializa el puzzle con rotaciones aleatorias
@@ -78,7 +90,9 @@ export const iniciarJuego = (imagenSrc, nivel, dificultad, tiempo) => {
 
     // Activa la interacción por clic izquierdo/derecho
     activarRotacionInteractiva(canvas);
+
 };
+
 
 // ------------------------------------------------------------------------------------------------
 //            método que muestra los datos del juego iniciado
@@ -126,8 +140,6 @@ function actualizarRanking(nombre, tiempoFinal) {
 //                      método que verifica si están las piezas correctas
 // ------------------------------------------------------------------------------------------------
 const verificarBtn = document.getElementById('verificarBtn');
-const popover = document.getElementById('id-popover');
-const reinicioBlocka = document.getElementById('reintentar-blocka');
 if (verificarBtn) {
     verificarBtn.addEventListener('click', () => {
         if (verificarPuzzleResuelto()) {
@@ -136,14 +148,11 @@ if (verificarBtn) {
                 exito();//aca pongo la funcion de exito
 
                 setTimeout(() => {
-                    popover.style.display = 'flex';
-
+                    location.reload();
                    // alert("🎉 Matías... ¡Puzzle resuelto correctamente!");
                     //location.reload();
-               }, 1000);
-               reinicioBlocka.addEventListener('click', iniciarJuego);
-               //popover.style.backgroundColor="red";
-               //popover.style.display='none';
+               }, 3000);
+             
             });
         }else {
             // aca un método que ubique una pieza (que está mal) en su posición correcta (poniendo un recuadro verde a la pieza)
