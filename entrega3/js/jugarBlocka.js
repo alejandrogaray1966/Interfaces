@@ -41,7 +41,7 @@ export const mostrarCanvas = () => {
 // ------------------------------------------------------------------------------------------------
     const popover = document.getElementById('id-popover');
     const reintentarBlocka = document.getElementById('reintentar-blocka');
-    const inicioBlocka = document.getElementById('inicio-blocka');
+    //const inicioBlocka = document.getElementById('inicio-blocka');
 
 
 
