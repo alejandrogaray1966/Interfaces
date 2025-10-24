@@ -213,7 +213,7 @@ if (verificarBtn) {
             // penalizarTiempo(multa); // penaliza 10/20/30 segundos en el cronómetro según nivel
             // mostrarPenalizacionVisual(multa);
             //alert("❌ Matías... Algunas piezas están mal orientadas.");
-             // Efecto de sacudida en el cronómetro
+             // Efecto de shake
             verificarBtn.classList.add('shake');
             setTimeout(() => verificarBtn.classList.remove('shake'), 400);
 
