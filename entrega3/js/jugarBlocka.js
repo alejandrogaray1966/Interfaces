@@ -4,6 +4,7 @@ console.log("✅ jugarBlocka.js cargado");
 import { inicializarRotacion, activarRotacionInteractiva, verificarPuzzleResuelto, corregirUnaPiezaIncorrecta } from './rotacionPiezas.js';
 // se importan los métodos de la clase cronometro.js
 import { iniciarCronometro, detenerCronometro, penalizarTiempo } from './cronometro.js';
+//import{ startRandomSelection} from './blocka.js'
 
 // 🌍 Definila fuera de iniciarJuego como variables globales
 let rankingJugadores = [
@@ -41,7 +42,7 @@ export const mostrarCanvas = () => {
 // ------------------------------------------------------------------------------------------------
     const popover = document.getElementById('id-popover');
     const reintentarBlocka = document.getElementById('reintentar-blocka');
-    //const inicioBlocka = document.getElementById('inicio-blocka');
+    const inicioBlocka = document.getElementById('inicio-blocka');
 
 
 
@@ -65,6 +66,7 @@ export const iniciarJuego = (imagenSrc, nivel, dificultad, tiempo) => {
 
 
  
+    iniciarCronometro(tiempo, comprobandotiempo() )
 
 
     iniciarCronometro(tiempo, () => {
@@ -72,13 +74,9 @@ export const iniciarJuego = (imagenSrc, nivel, dificultad, tiempo) => {
         popover.style.display = 'flex';
 
         // Podés ocultar el canvas, mostrar un mensaje, reiniciar, etc.
-        //reiniciarJuegoCompleto(); // no funciona se rompe revisar !!!!!!!!!
-        setTimeout(() => {
-
         reintentarBlocka.addEventListener('click', iniciarJuego(imagenSrc, nivel, dificultad, tiempo));
-        //inicioBlocka.addEventListener('click', location.reload());
 
-        }, 4000); 
+        inicioBlocka.addEventListener('click', location.reload());
 
     });
 
@@ -183,7 +181,7 @@ if(ayudaPiezaFija){
 //                método que oculta el CANVAS y muestra la selección de imágenes
 // ------------------------------------------------------------------------------------------------
 export const reiniciarJuegoCompleto = () => {
-    const canvasWrapper = document.querySelector('.canvas-wrapper');
+    /*const canvasWrapper = document.querySelector('.canvas-wrapper');
     const canvas = document.getElementById('puzzleCanvas');
     canvasWrapper.classList.add('hidden');
     canvas.classList.remove('canvas-visible');
@@ -195,7 +193,7 @@ export const reiniciarJuegoCompleto = () => {
     const winnerDisplay = document.getElementById('winner-display');
     winnerDisplay.classList.remove('visible');
     winnerDisplay.innerHTML = '';
-
+*/
     document.querySelector('.game-preview-blocka').classList.remove('hidden');
     document.querySelector('.game-btn-settings').classList.remove('hidden');
     document.querySelector('.game-settings-menu').classList.remove('hidden');

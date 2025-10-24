@@ -23,11 +23,13 @@ export const iniciarCronometro = (tiempoLimite, onTiempoAgotado) => {
         // ⛔ Verificamos si se agotó el tiempo
         if (tiempoTranscurrido >= tiempoLimite) {
             clearInterval(intervaloCronometro);
-            if (typeof onTiempoAgotado === 'function') {
+
+           /* if (typeof onTiempoAgotado === 'function') {
+                
                 onTiempoAgotado(); // Llamamos a la función que maneja la derrota
-            }
+*/
         }
-    }, 1000);
+    }, 500);
 };
 
 // ------------------------------------------------------------------------------------------------
