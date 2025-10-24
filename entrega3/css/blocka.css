@@ -955,8 +955,8 @@ mark p{
 .container-popover{
   background-color: #090b1b;
   position: absolute;
-  top: 350px;
-  left: 504px;
+  top: 293px;
+  left: 485px;
   width: 420px;
   flex-direction: column;
   border-radius: 8px;
