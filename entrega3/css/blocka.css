@@ -3,6 +3,37 @@
   width:30vw;
 }
 
+.lista-ayuditas{
+  display: flex;
+  width: 100%;
+  margin-top: 50px;
+  
+
+  
+}
+
+.img-lista-ayuditas{
+  width: 40px;
+  height: 40px;
+}
+
+.lista-ayuditas ul{
+display: flex;
+flex-direction: column;
+gap: 28px;
+
+
+}
+
+
+.lista-ayuditas li{
+  display: flex;
+  gap: 28px;
+  align-items: center;
+  font-size: 20px;
+  font-weight: 200;
+}
+
 
 /* ------------------------------------------------------------------- */
 /* 1. Estilos para el contenedor principal de las imágenes para elegir */
@@ -238,6 +269,19 @@
     cursor: pointer;
 }
 
+
+.verificarBtn.shake {
+  animation: shake 0.4s;
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+  100% { transform: translateX(0); }
+}
+
 /* ------------------------------------------------------ */
 /* Estilo para el cronometro                              */
 /* ------------------------------------------------------ */
@@ -255,6 +299,7 @@
     height: 100px;
     width: 200px;
 }
+
 
 
 .cronometro.shake {
