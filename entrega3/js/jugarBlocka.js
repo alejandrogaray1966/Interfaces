@@ -41,9 +41,7 @@ export const mostrarCanvas = () => {
 // ------------------------------------------------------------------------------------------------
     const popover = document.getElementById('id-popover');
     const reintentarBlocka = document.getElementById('reintentar-blocka');
-    //const inicioBlocka = document.getElementById('inicio-blocka');
-
-
+    const inicioBlocka = document.getElementById('inicio-blocka'); // Se mantiene comentado o se usa si es necesario
 
 export const iniciarJuego = (imagenSrc, nivel, dificultad, tiempo) => {
 
@@ -64,23 +62,52 @@ export const iniciarJuego = (imagenSrc, nivel, dificultad, tiempo) => {
     popover.style.display='none';
 
 
- 
+    // **CORRECCIÓN CLAVE 1: Limpiar Listener anterior y usar una función anónima**
+    // Si ya existe un listener del popover, lo quitamos para evitar múltiples llamadas
+    const oldListener = reintentarBlocka.onclick;
+    if (oldListener) {
+        reintentarBlocka.removeEventListener('click', oldListener);
+    }
+    
+    // Función que se llamará al agotar el tiempo
+    const onTiempoAgotado = () => {
+        // Detiene el cronómetro (aunque ya debería estar detenido por el if interno de cronometro.js)
+        // clearInterval(intervaloCronometro) se llama dentro de iniciarCronometro.
+
+        popover.style.display = 'flex'; // Muestra el popover de "Tiempo Agotado"
+        verificarBtn.disabled=true;
+        ayudaPiezaFija.disabled=true;
+        canvas.style.pointerEvents='none';
+        canvas.style.opacity="0.3";
+        
+
+        // **CORRECCIÓN CLAVE 2: Pasar una función que LLAMA a iniciarJuego (Closure)**
+        // Esto asegura que se inicie un nuevo juego al hacer clic
+        const nuevoJuegoListener = () => {
+            reiniciarJuegoCompleto();
+            iniciarJuego(imagenSrc, nivel, dificultad, tiempo);
+            verificarBtn.disabled= false;
+            ayudaPiezaFija.disabled=false;
+            canvas.style.pointerEvents='auto';
+            canvas.style.opacity="1";
+            // Es buena práctica reiniciar la vista antes de iniciar un nuevo juego
+            
+            
+        };
+
+        // Asigna la función (el listener)
+        reintentarBlocka.addEventListener('click', nuevoJuegoListener, { once: true });
+        
+        // Si tienes el botón 'inicioBlocka' también, lo puedes manejar aquí:
+        if (inicioBlocka) {
+             inicioBlocka.addEventListener('click', () => {
+                 location.reload();
+             }, { once: true });
+        }
+    };
 
 
-    iniciarCronometro(tiempo, () => {
-
-        popover.style.display = 'flex';
-
-        // Podés ocultar el canvas, mostrar un mensaje, reiniciar, etc.
-        //reiniciarJuegoCompleto(); // no funciona se rompe revisar !!!!!!!!!
-        setTimeout(() => {
-
-        reintentarBlocka.addEventListener('click', iniciarJuego(imagenSrc, nivel, dificultad, tiempo));
-        //inicioBlocka.addEventListener('click', location.reload());
-
-        }, 4000); 
-
-    });
+    iniciarCronometro(tiempo, onTiempoAgotado);
 
 
     const canvas = document.getElementById('puzzleCanvas');
