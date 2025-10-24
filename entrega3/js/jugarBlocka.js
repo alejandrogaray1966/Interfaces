@@ -4,7 +4,6 @@ console.log("✅ jugarBlocka.js cargado");
 import { inicializarRotacion, activarRotacionInteractiva, verificarPuzzleResuelto, corregirUnaPiezaIncorrecta } from './rotacionPiezas.js';
 // se importan los métodos de la clase cronometro.js
 import { iniciarCronometro, detenerCronometro, penalizarTiempo } from './cronometro.js';
-//import{ startRandomSelection} from './blocka.js'
 
 // 🌍 Definila fuera de iniciarJuego como variables globales
 let rankingJugadores = [
@@ -173,13 +172,14 @@ function mostrarRanking(ranking) {
 //                     método para insertar a Matías en la lista del Ranking
 // ------------------------------------------------------------------------------------------------
 function actualizarRanking(nombre, tiempoFinal) {
+
     // Agregar a Matías
     rankingJugadores.push({ nombre, tiempo: tiempoFinal });
 
     // Ordenar de menor a mayor tiempo
     rankingJugadores.sort((a, b) => a.tiempo - b.tiempo);
 
-    // Limitar a 9 jugadores
+    // Limitar a 6 jugadores
     if (rankingJugadores.length > 6) {
         rankingJugadores = rankingJugadores.slice(0, 6);
     }
@@ -201,7 +201,7 @@ if (verificarBtn) {
                 // espera 3 segundos y recarga la página
                 setTimeout(() => {
                     location.reload();
-                   // alert("🎉 Matías... ¡Puzzle resuelto correctamente!");
+                    // alert("🎉 Matías... ¡Puzzle resuelto correctamente!");
                     //location.reload();
                }, 3000);
              
@@ -209,7 +209,7 @@ if (verificarBtn) {
         }else {
             // aca un método que ubique una pieza (que está mal) en su posición correcta (poniendo un recuadro verde a la pieza)
             // y no la deje clickear ( como ya está bien ubicada que no la deje rotar)
-            //corregirUnaPiezaIncorrecta();
+            // corregirUnaPiezaIncorrecta();
             // penalizarTiempo(multa); // penaliza 10/20/30 segundos en el cronómetro según nivel
             // mostrarPenalizacionVisual(multa);
             alert("❌ Matías... Algunas piezas están mal orientadas.");
@@ -234,6 +234,7 @@ if(ayudaPiezaFija){
 //                método que borra el CANVAS para poder reiniciar nuevamente
 // ------------------------------------------------------------------------------------------------
 export const borrarCanvasCompleto = () => {
+
     // se borra el canvas para reiniciar el juego
     const canvas = document.getElementById('puzzleCanvas');
     const ctx = canvas.getContext('2d');
@@ -242,15 +243,6 @@ export const borrarCanvasCompleto = () => {
     // Removemos todos los event listeners clonando el canvas
     const nuevoCanvas = canvas.cloneNode(true);
     canvas.parentNode.replaceChild(nuevoCanvas, canvas);
-    /*
-    document.querySelector('.game-preview-blocka').classList.remove('hidden');
-    document.querySelector('.game-btn-settings').classList.remove('hidden');
-    document.querySelector('.game-settings-menu').classList.remove('hidden');
-    document.querySelector('.game-btnPlay').classList.remove('hidden');
-    
-    const playButton = document.querySelector('.game-btnPlay');
-    playButton.disabled = false;
-    */
 };
 
 // ------------------------------------------------------------------------------------------------
