@@ -1,0 +1,987 @@
+/*Estilos particulares diferentes a la paginaJuego*/
+.controls-textBlocka{
+  width:30vw;
+}
+
+
+/* ------------------------------------------------------------------- */
+/* 1. Estilos para el contenedor principal de las imágenes para elegir */
+/* ------------------------------------------------------------------- */
+.game-preview-blocka {
+    display: grid; 
+    grid-template-columns: repeat(3, 1fr); 
+    grid-template-rows: repeat(2, 1fr); 
+    gap: 25px; 
+    width: 70%; 
+    margin: 0 auto;
+    padding: 30px;
+    box-sizing: border-box; /* Incluye padding y borde en el ancho/alto */ 
+    position: relative;
+}
+
+/* --------------------------------------------------- */
+/* 2. Estilos para las imágenes y sus contenedores div */
+/* --------------------------------------------------- */
+.game-preview-blocka > div {
+    width: 100%;
+    padding-bottom: 100%; 
+    position: relative;
+    /* Centrar la imagen dentro de su celda (opcional, si el grid no lo hace) */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Oculta cualquier parte de la imagen que se salga */
+}
+
+/* --------------------------------------------- */
+/* 3. Estilos para la imagen real dentro del div */
+/* --------------------------------------------- */
+.game-preview-blocka img {
+    /* Estas propiedades aseguran que la imagen se ajuste y cubra el área cuadrada de su div */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Asegura que la imagen no se distorsione, cubriendo el área */
+    object-fit: cover; 
+    border-radius: 0px;
+}
+
+/* ------------------------------------------------------------------- */
+/*            Clase CSS para resaltar la imagen elegida                */
+/* ------------------------------------------------------------------- */
+.selected-random {
+    transition: all 0.3s ease-in-out; 
+    transform: scale(1.30);
+
+}
+
+/* ------------------------------------------------------------------- */
+/* Clase CSS para la GANADORA - Ajustada para el centro                */
+/* ------------------------------------------------------------------- */
+.selected-winner {
+    border: 5px solid #00FFB2; 
+    box-shadow: 0 0 25px #00FFB2; 
+    /* 2. Posicionarla en el centro del padre (.game-preview-blocka) */
+    top: 50%;     
+    left: 50%;    
+    /* 3. CENTRAR el elemento en sí mismo y AUMENTAR el tamaño */
+    transform: translate(-50%, -50%) scale(2.5); 
+    z-index: 9; 
+    transition: all 0.7s ease-in-out; 
+}
+
+/* ---------------------------------------------------- */
+/* OCULTAR IMÁGENES ORIGINALES AL FINAL DEL SORTEO */
+/* ---------------------------------------------------- */
+#ruleta-container.hidden {
+    opacity: 0;
+    /* Ajusta la visibilidad al finalizar la transición */
+    visibility: hidden; 
+    transition: opacity 0.5s ease-out, visibility 0.5s;
+}
+
+/* ---------------------------------------------------- */
+/* ESTILO PARA EL CONTENEDOR DE LA IMAGEN GANADORA */
+/* ---------------------------------------------------- */
+#winner-display {
+    /* Posicionamiento para centrarse sobre el área de juego */
+    position: absolute; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Flexbox para centrar contenido */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Oculto al inicio */
+    opacity: 0; 
+    transition: opacity 1s ease-in;
+    pointer-events: none; /* No interactuable hasta que aparezca */
+}
+
+#winner-display.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* ------------------------------------------------------ */
+/* Estilo para la imagen dentro del contenedor de ganador */
+/* ------------------------------------------------------ */
+#winner-display img {
+    /* ------------------------------------------------ */
+    /* ¡CAMBIO CLAVE: DEFINIR UN TAMAÑO MÁXIMO CUADRADO! */
+    /* ------------------------------------------------ */
+    width: 60vh;    /* Tomar 60% del alto de la ventana */
+    height: 60vh;   /* Igualar el alto al ancho (cuadrado) */
+    max-width: 90%;
+    max-height: 90%;
+    /* Asegura que la imagen, aunque esté en un contenedor cuadrado,
+       cubra ese cuadrado. Si la imagen original no es cuadrada,
+       se cortará (cropping) para llenar el espacio. */
+    object-fit: cover; 
+    box-shadow: 0 0 40px #00FFB2;
+    /* Empieza pequeña y se agranda */
+    transform: scale(0.1); 
+    transition: transform 0.7s ease-out;
+}
+
+#winner-display.visible img {
+    transform: scale(1); /* Tamaño final grande */
+}
+
+/* ------------------------------------------------------ */
+/* Estilo para el menú de configuración del juego BLOCKA  */
+/* ------------------------------------------------------ */
+.game-settings-menu {
+    position: absolute;
+    top: 75px;
+    right: -33px;
+    border:1px solid rgba(255, 255, 255, 0.489);
+    border-radius: 10px;
+    padding: 14px;
+    z-index: 10;
+    box-shadow: 8px rgb(0 0 0 / 48%);
+    width: 250px;
+    font-family: 'Roboto'sans-serif;
+}
+.game-settings-menu.hidden {
+    display: none;
+}
+
+.game-settings-menu label {
+    font-family: 'Roboto' sans-serif;
+    display: block;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+.game-settings-menu select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 8px;
+}
+
+/* ------------------------------------------------------ */
+/* Estilo para el CANVA                                   */
+/* ------------------------------------------------------ */
+
+.hidden {
+    display: none !important;
+}
+
+.canvas-visible {
+    display: block;
+}
+
+.canvas-hidden {
+    display: none;
+}
+
+.canvas-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    pointer-events: auto; /* ← permitir interacción */
+}
+
+#puzzleCanvas img{
+    width: 600px;
+    height: 600px;
+    border-radius: 0;
+}
+
+/* Efecto blur para destacar boton play */
+.blur {
+  filter: blur(4px);
+  pointer-events: none;
+  transition: filter 0.8s ease;
+}
+
+/* Cuando comienza el juego, saco el blur */
+.clearBlur{
+  filter: blur(0);
+  transition: filter 0.8s ease-in;
+}
+
+
+/* ------------------------------------------------------ */
+/* Estilo para el botón de verificar las imagenes         */
+/* ------------------------------------------------------ */
+.verificarBtn {
+    width: 222px;
+    height: 69px;
+    font-size: 24px;
+    font-weight: 600;
+    position: absolute; 
+    bottom: 45px;         
+    right: 81px;
+    background-color: #9700CC;
+    color: white;
+    border: none;
+    border-radius: 8px;
+}
+
+.verificarBtn:hover {
+    background-color: #FF00D6;
+    transform: scale(1.1);
+    transition: ease-in-out 0.3s;
+    cursor: pointer;
+}
+
+/* ------------------------------------------------------ */
+/* Estilo para el cronometro                              */
+/* ------------------------------------------------------ */
+.cronometro {
+    
+    border-radius: 20px;
+    font-family: 'Roboto' sans-serif;
+    font-size: 32px;
+    font-weight: bold;
+    position: absolute;
+    top: 55px;
+    right: 100px;
+    z-index: 2;
+    text-align: center;
+    height: 100px;
+    width: 200px;
+}
+
+
+.cronometro.shake {
+    animation: shake 0.4s;
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+}
+
+/* ------------------------------------------------------ */
+/* Estilo para los datos del juego iniciado y el ranking  */
+/* ------------------------------------------------------ */
+.ranking {
+    font-size: 24px;
+    font-weight: bold;
+    background-color: transparent;
+    position: absolute;
+    top: 56px;
+    left: 40px; 
+    z-index: 2; 
+}
+
+.ranking ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.ranking li {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 16px;
+}
+
+.info-juego{
+    position: absolute;
+    right: 140px;
+    top: 220px;
+}
+
+.info-juego h1{
+  font-family: 'Raleway'sans-serif;
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.info-juego ul li{
+  margin-top: 10px;
+  font-size: 16px;
+}
+
+/*AYUDITAS*/
+
+.contenedor-ayudita {
+  position: absolute;
+  right: 158px;
+  bottom: 156px;
+  width: 75px;
+  height: 75px;
+}
+
+.ayudita-btn, .ayudaPiezaFija, .ayudaTiempoAdicional {
+  background: transparent;
+  border: none;
+  width: 70px;
+  height: 70px;
+  position: absolute;
+  transition: all 0.5s ease-in-out;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.ayudita-btn {
+  z-index: 10;
+}
+
+.ayudita-btn:hover, .ayudaPiezaFija:hover, .ayudaTiempoAdicional:hover{
+  box-shadow:  0 0 80px whitesmoke, inset 20px 0 80px rgba(255, 0, 255, 0.747),
+  inset -20px 0 80px #0ff, inset 20px 0 300px #f0f, inset -20px 0 300px #0ff,
+  0 0 50px #fff, -10px 0 80px #f0f, 10px 0 80px #0ff;
+}
+
+
+.ayudaPiezaFija, .ayudaTiempoAdicional {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  z-index: 5;
+  transform: scale(0.3); 
+}
+
+
+.contenedor-ayudita:hover .ayudaPiezaFija,.contenedor-ayudita:hover .ayudaTiempoAdicional {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+
+.contenedor-ayudita:hover .ayudaPiezaFija {
+  transform: translate(-80%, -80%);
+}
+
+.contenedor-ayudita:hover .ayudaTiempoAdicional {
+  transform: translate(80%, -80%);
+}
+
+.contenedor-ayudita:hover .ayudaPiezaFija:hover {
+  /*para que no vuelva al centro*/
+  transform: translate(-80%, -80%) scale(1.3);
+}
+
+.contenedor-ayudita:hover .ayudaTiempoAdicional:hover {
+  transform: translate(80%, -80%) scale(1.3);
+}
+
+
+
+
+/* ------------------------------------------------------ */
+/* Efecto de entrada brillante al Ranking para Matías     */
+/* ------------------------------------------------------ */
+.destacado {
+    animation: brillar 1.5s ease-out;
+    background: linear-gradient(90deg, #ffe680, #fff8cc);
+    border-radius: 4px;
+    padding: 2px 6px;
+}
+
+@keyframes brillar {
+    0% { background-color: transparent; }
+    50% { background-color: #fff8cc; }
+    100% { background-color: transparent; }
+}
+
+/* ------------------------------------------------------ */
+/* Efecto de las manitos para la derrota                  */
+/* ------------------------------------------------------ */
+#derrotaEffect {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 111;
+}
+
+.manoDerrota {
+    position: absolute;
+    width: 50px;
+    transition: top 4s ease-in;
+}
+
+/* ------------------------------------------------------ */
+/* Efecto de las manitos para la victoria                 */
+/* ------------------------------------------------------ */
+#victoriaEffect {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 111;
+}
+
+.manoVictoria {
+    
+    position: absolute;
+    width: 32px;
+    transition: bottom 2s ease-out;
+}
+
+/* ------------------------------------------------------ */
+/* Efecto mostra segundos de penalización                 */
+/* ------------------------------------------------------ */
+.penalizacion {
+    font-size: 48px;
+    font-weight: bold;
+    color: red;
+    animation: fadeOut 3s ease-out;
+    pointer-events: none;
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-20px); }
+}
+
+/*ANIMACION EXITO
+
+/* --- Contenedor --- */
+.confeti-container {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 25vw;
+  height: 10px;
+  overflow: visible;
+  z-index: 9999;
+}
+
+/* --- Pieza de Confeti Base --- */
+.confeti-pieza {
+  position: absolute;
+  width: 8px;
+  height: 12px;
+  opacity: 1;
+  pointer-events: none;
+  transition: opacity 0.5s; /* Transición para desvanecer al final */
+}
+
+/* --- Colores --- */
+.c1 { background-color:#0ff; }
+.c2 { background-color: #f0f; }
+.c3 { background-color:  #9700CC;; }
+
+/* --- Keyframe Único de Caída Acelerada por GPU --- */
+/* Este keyframe utiliza variables CSS (como --end-x) que JS inyecta. */
+@keyframes caída-aleatoria {
+  0% {
+      /* Estado inicial: En el punto de origen */
+      transform: translate(0, 0) rotateZ(0deg) rotateY(0deg); 
+      opacity: 1;
+  }
+  100% {
+      /* Estado final: Usa las variables de JS para una dirección, giro y caída únicos */
+      transform: 
+          translate(var(--end-x), 150vh) /* 150vh asegura que caiga fuera de la pantalla */
+          rotateZ(var(--end-rotate-z)) 
+          rotateY(var(--end-rotate-y));
+      opacity: 0; 
+  }
+}
+
+
+
+/* RANKING PRIMER PUESTO*/
+
+/* From Uiverse.io by sohoning */ 
+.cards-ranking {
+  position: relative;
+  height: 150px;
+  transition-duration: 0.5s;
+  background: none;
+  overflow: hidden;
+}
+
+.cards-ranking:hover {
+  height: 270px;
+}
+
+.cards-ranking:hover .frente-ranking{
+  box-shadow: 0 10px 15px #b1985e;
+}
+
+.cards-ranking:hover .detalle-ranking {
+  display: flex;
+}
+
+.frente-ranking {
+  position: relative;
+  background: linear-gradient(45deg, #fffbf0, #ffdd87);
+  width: 240px;
+  height: 130px;
+  border-radius: 20px;
+  transition-duration: 0.5s;
+  z-index: 2;
+}
+
+.detalle-ranking {
+  position: relative;
+  display: none;
+  width: 240px;
+  height: 120px;
+  background: white;
+  top: -20px;
+  z-index: 1;
+  transition-duration: 1s;
+  border-radius: 0 0 25px 25px;
+  overflow: hidden;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.linea {
+  position: absolute;
+  width: 200px;
+  height: 10px;
+  top: 70px;
+  background-image: linear-gradient(
+    to right,
+    transparent 10%,
+    #ffe8a0 20%,
+    #f7b733 50%,
+    #ffe8a0 70%,
+    transparent 90%
+  );
+  z-index: 1;
+}
+
+.trofeo {
+  position: absolute;
+  right: 0px;
+  top: 4px;
+  z-index: 2;
+  width :70px;
+  height : 70px;
+}
+
+.ranking-numero{
+  position: relative;
+  color: #ffc64b;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 700;
+  font-size: 50px;
+  left: 20px;
+  padding: 0;
+  margin: 0;
+  top: -5px;
+}
+
+.ranking-primero {
+  position: relative;
+  font-size: 40px;
+  color: #0f0c1f;
+}
+
+.usuario-avatar {
+  position: absolute;
+  bottom: 17px;
+  left: 20px;
+  color: #0f0c1f;
+
+}
+
+.usuario-nombre {
+  position: relative;
+  font-weight: 600;
+  color: #0f0c1f;
+  left: 55px;
+  font-size: 18px;
+  top: 24px;
+}
+
+.medalla {
+  position: absolute;
+  top: 15px;
+  right: 5px;
+}
+
+.puntuacion {
+  position: relative;
+  height: 75px;
+  top: 10px;
+  margin-right: 10px;
+  margin-left: 15px;
+}
+
+.gradesIcon {
+  position: absolute;
+  top: 16px;
+}
+
+.puntuacion-puntos {
+  position: relative;
+  display: block;
+  margin-left: 60px;
+  color: #0f0c1f;
+  letter-spacing: 6px;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-top: 20px;
+  font-weight: 800;
+  font-size: 13px;
+}
+
+.puntuacion-numero {
+  position: relative;
+  font-family: Arial, Helvetica, sans-serif;
+  display: block;
+  font-size: 25px;
+  font-weight: 800;
+  margin-left: 60px;
+  color: #ea9518;
+  top: -5px;
+}
+
+.timeNum {
+  color: #6cabf6;
+}
+
+.slide-in-top {
+  animation: slide-in-top 1s cubic-bezier(0.65, 0.05, 0.36, 1) both;
+}
+
+@keyframes slide-in-top {
+  0% {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/*ranking todos los jugadores*/
+.leaderboard {
+  position: absolute;
+  top: 390px;
+  left: 50%;
+  /* Mueve el elemento hacia la izquierda y arriba por la mitad de su tamaño */
+  transform: translate(-50%, -50%);
+  width: 285px;
+  height: auto;
+  /* Degradado de fondo */
+  background: linear-gradient(to bottom, #47065fed, #0a0d20d1);
+  border-radius: 10px;
+  /* Sombra de caja para el efecto 3D */
+  box-shadow: 0 7px 30px rgba(62, 9, 11, 0.3);
+}
+
+/*
+ * --------------------------------
+ * Estilos para el título (h1)
+ * --------------------------------
+ */
+.leaderboard h1 {
+  font-size: 18px;
+  color: #e1e1e1;
+  padding: 12px 13px 18px;
+}
+
+/* Estilos para el icono SVG dentro del título */
+.leaderboard h1 svg {
+  width: 25px;
+  height: 26px;
+  position: relative;
+  top: 3px;
+  margin-right: 6px;
+  vertical-align: baseline;
+}
+
+/*
+ * --------------------------------
+ * Estilos para la lista de ranking (ol)
+ * --------------------------------
+ */
+.leaderboard ol {
+  /* Inicializa el contador para la numeración de la lista */
+    counter-reset: leaderboard;
+    list-style: none;
+    padding: 0;
+}
+
+/*
+ * --------------------------------
+ * Estilos para cada elemento de la lista (li)
+ * --------------------------------
+ */
+.leaderboard ol li {
+  position: relative;
+  z-index: 1;
+  font-size: 14px;
+  /* Incrementa el contador para el pseudo-elemento ::before */
+  counter-increment: leaderboard;
+  padding: 18px 10px 18px 50px;
+  margin: 0;
+  cursor: pointer;
+  backface-visibility: hidden;
+  transform: translateZ(0) scale(1, 1);
+}
+
+/* Pseudo-elemento ::before para mostrar el número de posición (1, 2, 3...) */
+.leaderboard ol li::before {
+  content: counter(leaderboard);
+  position: absolute;
+  z-index: 2;
+  top: 15px;
+  left: 15px;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  color: #9700CC;
+  background: #fff;
+  border-radius: 20px;
+  text-align: center;
+}
+
+/*
+ * --------------------------------
+ * Estilos para el nombre del jugador (mark)
+ * --------------------------------
+ */
+.leaderboard ol li mark {
+  position: absolute;
+  z-index: 2;
+  top: 16px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding-left: 43px;
+  margin: 0;
+  background: none;
+  color: #fff;
+}
+mark p{
+    position: relative;
+    top: 4px;
+
+}
+
+/* Pseudo-elemento ::before en 'mark' */
+.leaderboard ol li mark::before,
+.leaderboard ol li mark::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  bottom: 5px;
+  left: -9px;
+  border-top: 10px solid #4f1c65;
+  border-left: 10px solid transparent;
+  transition: all 0.1s ease-in-out;
+  opacity: 0;
+}
+
+/* Pseudo-elemento ::after en 'mark' */
+.leaderboard ol li mark::after {
+  left: auto;
+  right: -9px;
+  border-left: none;
+  border-right: 10px solid transparent;
+}
+
+/*
+ * --------------------------------
+ * Estilos para la puntuación (small)
+ * --------------------------------
+ */
+.leaderboard ol li small {
+  position: relative;
+  z-index: 2;
+  display: block;
+  text-align: right;
+  color:#e1e1e1;
+}
+
+/* Pseudo-elemento ::after en 'li' (para el efecto de hover/fondo) */
+.leaderboard ol li::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #4f1c65;
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.08);
+  /* transform: scaleX(1.06) scaleY(1.03); */
+  transition: all 0.3s ease-in-out;
+  opacity: 0;
+
+}
+
+/*
+ * --------------------------------
+ * Estilos específicos por posición (colores)
+ * --------------------------------
+ */
+
+/* Estilos para el 1er lugar */
+.leaderboard ol li:nth-child(1) {
+  background: #0a0d201a;
+}
+
+.leaderboard ol li:nth-child(1)::after {
+  background: #4f1c65;
+}
+
+
+/* Estilos para el 2do lugar */
+.leaderboard ol li:nth-child(2) {
+  background: #0a0d204f;
+}
+
+.leaderboard ol li:nth-child(2)::after {
+  background: #4f1c65;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.08);
+
+}
+
+
+
+.leaderboard ol li:nth-child(2) mark::before,
+.leaderboard ol li:nth-child(2) mark::after {
+  border-top: 6px solid #4f1c65;
+  bottom: 9px;
+
+}
+
+/* Estilos para el 3er lugar */
+.leaderboard ol li:nth-child(3) {
+  background: #0a0d2094;
+}
+
+.leaderboard ol li:nth-child(3)::after {
+  background: #4f1c65;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.11);
+}
+
+.leaderboard ol li:nth-child(3) mark::before,
+.leaderboard ol li:nth-child(3) mark::after {
+  border-top: 2px solid #4f1c65;
+  bottom: 13px;
+}
+
+/* Estilos para el 4to lugar */
+.leaderboard ol li:nth-child(4) {
+  background: #0a0d20b4;
+}
+
+.leaderboard ol li:nth-child(4)::after {
+  background: #4f1c65;
+  box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.15);
+}
+
+.leaderboard ol li:nth-child(4) mark::before,
+.leaderboard ol li:nth-child(4) mark::after {
+  top: -23px;
+  bottom: auto;
+  border-top: none;
+  border-bottom: 6px solid #4f1c65;
+}
+
+/* Estilos para el 5to lugar */
+.leaderboard ol li:nth-child(5) {
+  background: #0a0d20;
+}
+
+.leaderboard ol li:nth-child(5)::after{
+  background: #4f1c65;
+  box-shadow: 0 -2.5px 0 rgba(0, 0, 0, 0.12);
+}
+
+.leaderboard ol li:nth-child(5) mark::before,
+.leaderboard ol li:nth-child(5) mark::after{
+  top: -25px;
+  bottom: auto;
+  border-top: none;
+  border-bottom: 8px solid #4f1c65;
+}
+
+
+.leaderboard ol li:last-child{
+  background: #090b1b;
+  border-radius: 0 0 10px 10px;
+
+}
+.leaderboard ol li:last-child mark::before,
+.leaderboard ol li:last-child mark::after{
+  top: -25px;
+  bottom: auto;
+  border-top: none;
+  border-bottom: 8px solid #4f1c65;
+
+}
+
+/*
+ * --------------------------------
+ * Estilos de HOVER (al pasar el ratón)
+ * --------------------------------
+ */
+.leaderboard ol li:hover {
+  z-index: 2;
+  overflow: visible;
+}
+
+.leaderboard ol li:hover::after {
+  opacity: 1;
+  transform: scaleX(1.06) scaleY(1.03);
+}
+
+.leaderboard ol li:hover mark::before,
+.leaderboard ol li:hover mark::after {
+  opacity: 1;
+  transition: all 0.35s ease-in-out;
+}
+
+
+.container-popover{
+  display: none;
+  background-color: #090b1b;
+  position: absolute;
+  top: 293px;
+  left: 485px;
+  width: 420px;
+  flex-direction: column;
+  border-radius: 8px;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+  gap: 22px;
+}
+
+.container-popover p{
+  font-size: 16px;
+}
+.btn-popover{
+  display: flex;
+  gap: 24px;
+} 
+
+.btn-popover button{
+  width: 100px;
+  height: 24px;
+}
+
+ @media (max-width: 1510px){
+    .container-popover{
+      left: 466px;
+    }
+ }
