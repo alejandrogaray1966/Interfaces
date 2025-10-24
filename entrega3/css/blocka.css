@@ -884,6 +884,7 @@ mark p{
   background: #0a0d20b4;
 }
 
+
 .leaderboard ol li:nth-child(4)::after {
   background: #4f1c65;
   box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.15);
@@ -977,6 +978,15 @@ mark p{
 .btn-popover button{
   width: 100px;
   height: 24px;
+}
+
+/* ------------------------------------------------------ */
+/* Popover: mostrar la mano (cursor pointer) sobre botones */
+/* ------------------------------------------------------ */
+#id-popover button,
+.container-popover button,
+#id-popover .btn-popover button {
+  cursor: pointer;
 }
 
  @media (max-width: 1510px){

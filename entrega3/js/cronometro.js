@@ -22,12 +22,11 @@ export const iniciarCronometro = (tiempoLimite, onTiempoAgotado) => {
 
         // ⛔ Verificamos si se agotó el tiempo
         if (tiempoTranscurrido >= tiempoLimite) {
+            // Detenemos el cronómetro
             clearInterval(intervaloCronometro);
-
-            if (typeof onTiempoAgotado === 'function') {
-                
-                onTiempoAgotado(); // Llamamos a la función que maneja la derrota
-
+            if (typeof onTiempoAgotado === 'function') {  
+                // Llamamos a la función que maneja la derrota por tiempo agotado
+                onTiempoAgotado(); 
         }
     }
     }, 500);

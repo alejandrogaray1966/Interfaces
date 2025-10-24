@@ -4,7 +4,6 @@ console.log("✅ jugarBlocka.js cargado");
 import { inicializarRotacion, activarRotacionInteractiva, verificarPuzzleResuelto, corregirUnaPiezaIncorrecta } from './rotacionPiezas.js';
 // se importan los métodos de la clase cronometro.js
 import { iniciarCronometro, detenerCronometro, penalizarTiempo } from './cronometro.js';
-//import{ startRandomSelection} from './blocka.js'
 
 // 🌍 Definila fuera de iniciarJuego como variables globales
 let rankingJugadores = [
@@ -40,85 +39,109 @@ export const mostrarCanvas = () => {
 // ------------------------------------------------------------------------------------------------
 //                                  método que lanza el juego 
 // ------------------------------------------------------------------------------------------------
-    const popover = document.getElementById('id-popover');
-    const reintentarBlocka = document.getElementById('reintentar-blocka');
-    const inicioBlocka = document.getElementById('inicio-blocka'); // Se mantiene comentado o se usa si es necesario
-
 export const iniciarJuego = (imagenSrc, nivel, dificultad, tiempo) => {
 
+    // Obtener todas las referencias DOM al inicio
+    const popover = document.getElementById('id-popover');
+    const reintentarBlocka = document.getElementById('reintentar-blocka');
+    const inicioBlocka = document.getElementById('inicio-blocka');
+    const verificarBtn = document.getElementById('verificarBtn');
+    const ayudaPiezaFija = document.getElementById('ayudaPiezaFija');
+    const canvas = document.getElementById('puzzleCanvas');
+
     // Constantes del juego iniciado
-        const gameSettings = {
-                                    nivel: nivel,
-                                    dificultad: dificultad,
-                                    tiempo: tiempo
-                            };
+    const gameSettings = {
+        nivel: nivel,
+        dificultad: dificultad,
+        tiempo: tiempo
+    };
 
-    // 👈 Prepara la vista
-    mostrarCanvas(); 
-    mostrarDatosDelJuego(gameSettings);
-    mostrarRanking(rankingJugadores);
-
-    // ⏱️ ¡Arranca el tiempo!
-    multa = tiempo / 3; 
-    popover.style.display='none';
-
-
-    // **CORRECCIÓN CLAVE 1: Limpiar Listener anterior y usar una función anónima**
-    // Si ya existe un listener del popover, lo quitamos para evitar múltiples llamadas
-    const oldListener = reintentarBlocka.onclick;
-    if (oldListener) {
-        reintentarBlocka.removeEventListener('click', oldListener);
-    }
-    
-    // Función que se llamará al agotar el tiempo
-    const onTiempoAgotado = () => {
-        // Detiene el cronómetro (aunque ya debería estar detenido por el if interno de cronometro.js)
-        // clearInterval(intervaloCronometro) se llama dentro de iniciarCronometro.
-
-        popover.style.display = 'flex'; // Muestra el popover de "Tiempo Agotado"
-        verificarBtn.disabled=true;
-        ayudaPiezaFija.disabled=true;
-        canvas.style.pointerEvents='none';
-        canvas.style.opacity="0.3";
+    // Función para reiniciar el estado visual del juego
+    const reiniciarEstadoVisual = () => {
+        // Ocultamos el popover y reseteamos sus estilos
+        popover.style.display = 'none';
+        popover.style.pointerEvents = '';
+        popover.style.zIndex = '';
         
-
-        // **CORRECCIÓN CLAVE 2: Pasar una función que LLAMA a iniciarJuego (Closure)**
-        // Esto asegura que se inicie un nuevo juego al hacer clic
-        const nuevoJuegoListener = () => {
-            reiniciarJuegoCompleto();
-            iniciarJuego(imagenSrc, nivel, dificultad, tiempo);
-            verificarBtn.disabled= false;
-            ayudaPiezaFija.disabled=false;
-            canvas.style.pointerEvents='auto';
-            canvas.style.opacity="1";
-            // Es buena práctica reiniciar la vista antes de iniciar un nuevo juego
-            
-            
-        };
-
-        // Asigna la función (el listener)
-        reintentarBlocka.addEventListener('click', nuevoJuegoListener, { once: true });
+        // Habilitamos los botones del juego
+        verificarBtn.disabled = false;
+        ayudaPiezaFija.disabled = false;
         
-        // Si tienes el botón 'inicioBlocka' también, lo puedes manejar aquí:
-        if (inicioBlocka) {
-             inicioBlocka.addEventListener('click', () => {
-                 location.reload();
-             }, { once: true });
+        // Habilitamos el canvas (obteniendo la referencia actual del DOM)
+        const currentCanvas = document.getElementById('puzzleCanvas');
+        if (currentCanvas) {
+            currentCanvas.style.pointerEvents = 'auto';
+            currentCanvas.style.opacity = '1';
         }
     };
 
+    // 👈 Prepara la vista inicial
+    mostrarCanvas(); 
+    mostrarDatosDelJuego(gameSettings);
+    mostrarRanking(rankingJugadores);
+    reiniciarEstadoVisual();
 
+    // ⏱️ ¡Define el tiempo que se empleará de multa al pedir ayuda!
+    multa = tiempo / 3;
+
+    // Limpiamos listeners previos
+    reintentarBlocka.replaceWith(reintentarBlocka.cloneNode(true));
+    const newReintentarBlocka = document.getElementById('reintentar-blocka');
+    
+    // Función que se llamará al agotar el tiempo
+    const onTiempoAgotado = () => {
+
+        // Obtenemos el canvas actual (por si fue clonado/reemplazado)
+        const currentCanvas = document.getElementById('puzzleCanvas');
+        if (currentCanvas) {
+            currentCanvas.style.pointerEvents = 'none';
+            currentCanvas.style.opacity = '0.3';
+        }
+
+        // Deshabilitamos los botones del juego
+        verificarBtn.disabled = true;
+        ayudaPiezaFija.disabled = true;
+
+        // Mostramos el popover y lo aseguramos interactivo
+        popover.style.display = 'flex';
+        popover.style.pointerEvents = 'auto';
+        popover.style.zIndex = '1000'; // Aseguramos que esté por encima
+        
+        // Manejador para reintentar
+        newReintentarBlocka.addEventListener('click', () => {
+            borrarCanvasCompleto();
+            // Guardamos los valores originales antes de reiniciar
+            const currentSettings = {
+                imagenSrc: imagenSrc,
+                nivel: nivel,
+                dificultad: dificultad,
+                tiempo: tiempo
+            };
+            // Iniciamos un nuevo juego con los mismos parámetros
+            iniciarJuego(
+                currentSettings.imagenSrc,
+                currentSettings.nivel,
+                currentSettings.dificultad,
+                currentSettings.tiempo
+            );
+        }, { once: true });
+        
+        // Manejador para volver al inicio
+        if (inicioBlocka) {
+            inicioBlocka.addEventListener('click', () => {
+                location.reload();
+            }, { once: true });
+        }
+    };
+
+    // Limpiamos los event listeners anteriores del canvas
+    const nuevoCanvas = canvas.cloneNode(true);
+    canvas.parentNode.replaceChild(nuevoCanvas, canvas);
+    
+    // Reinicializamos el juego con el canvas limpio
     iniciarCronometro(tiempo, onTiempoAgotado);
-
-
-    const canvas = document.getElementById('puzzleCanvas');
-
-    // Inicializa el puzzle con rotaciones aleatorias
-    inicializarRotacion(canvas, imagenSrc, nivel, dificultad);
-
-    // Activa la interacción por clic izquierdo/derecho
-    activarRotacionInteractiva(canvas);
-
+    inicializarRotacion(nuevoCanvas, imagenSrc, nivel, dificultad);
+    activarRotacionInteractiva(nuevoCanvas);
 };
 
 
@@ -149,13 +172,14 @@ function mostrarRanking(ranking) {
 //                     método para insertar a Matías en la lista del Ranking
 // ------------------------------------------------------------------------------------------------
 function actualizarRanking(nombre, tiempoFinal) {
+
     // Agregar a Matías
     rankingJugadores.push({ nombre, tiempo: tiempoFinal });
 
     // Ordenar de menor a mayor tiempo
     rankingJugadores.sort((a, b) => a.tiempo - b.tiempo);
 
-    // Limitar a 9 jugadores
+    // Limitar a 6 jugadores
     if (rankingJugadores.length > 6) {
         rankingJugadores = rankingJugadores.slice(0, 6);
     }
@@ -174,10 +198,10 @@ if (verificarBtn) {
            detenerCronometro((tiempoFinal) => {
                 actualizarRanking('Matías', tiempoFinal);
                 exito();//aca pongo la funcion de exito
-
+                // espera 3 segundos y recarga la página
                 setTimeout(() => {
                     location.reload();
-                   // alert("🎉 Matías... ¡Puzzle resuelto correctamente!");
+                    // alert("🎉 Matías... ¡Puzzle resuelto correctamente!");
                     //location.reload();
                }, 3000);
              
@@ -185,15 +209,17 @@ if (verificarBtn) {
         }else {
             // aca un método que ubique una pieza (que está mal) en su posición correcta (poniendo un recuadro verde a la pieza)
             // y no la deje clickear ( como ya está bien ubicada que no la deje rotar)
-            //corregirUnaPiezaIncorrecta();
-           // penalizarTiempo(multa); // penaliza 10/20/30 segundos en el cronómetro según nivel
-           // mostrarPenalizacionVisual(multa);
+            // corregirUnaPiezaIncorrecta();
+            // penalizarTiempo(multa); // penaliza 10/20/30 segundos en el cronómetro según nivel
+            // mostrarPenalizacionVisual(multa);
             alert("❌ Matías... Algunas piezas están mal orientadas.");
         }
     });
 }
-// no funciona se rompe revisar !!!!!!!!!
+
+// ------------------------------------------------------------------------------------------------
 //agrego funcionalidad ayuditas fijar pieza
+// ------------------------------------------------------------------------------------------------
 const ayudaPiezaFija= document.getElementById('ayudaPiezaFija');
 
 if(ayudaPiezaFija){
@@ -204,36 +230,24 @@ if(ayudaPiezaFija){
     })
 }
 
-
-
-
 // ------------------------------------------------------------------------------------------------
-//                método que oculta el CANVAS y muestra la selección de imágenes
+//                método que borra el CANVAS para poder reiniciar nuevamente
 // ------------------------------------------------------------------------------------------------
-export const reiniciarJuegoCompleto = () => {
-    /*const canvasWrapper = document.querySelector('.canvas-wrapper');
+export const borrarCanvasCompleto = () => {
+
+    // se borra el canvas para reiniciar el juego
     const canvas = document.getElementById('puzzleCanvas');
-    canvasWrapper.classList.add('hidden');
-    canvas.classList.remove('canvas-visible');
-    canvas.classList.add('canvas-hidden');
-
     const ctx = canvas.getContext('2d');
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    const winnerDisplay = document.getElementById('winner-display');
-    winnerDisplay.classList.remove('visible');
-    winnerDisplay.innerHTML = '';
-*/
-    document.querySelector('.game-preview-blocka').classList.remove('hidden');
-    document.querySelector('.game-btn-settings').classList.remove('hidden');
-    document.querySelector('.game-settings-menu').classList.remove('hidden');
-    document.querySelector('.game-btnPlay').classList.remove('hidden');
-
-    const playButton = document.querySelector('.game-btnPlay');
-    playButton.disabled = false;
+    
+    // Removemos todos los event listeners clonando el canvas
+    const nuevoCanvas = canvas.cloneNode(true);
+    canvas.parentNode.replaceChild(nuevoCanvas, canvas);
 };
 
+// ------------------------------------------------------------------------------------------------
 //empieza confeti
+// ------------------------------------------------------------------------------------------------
 // --- Tu Función de Éxito (Disparador) --- linea 135
 function exito() {
     const cantidadConfeti = 80; // Número óptimo para un buen efecto sin sobrecargar

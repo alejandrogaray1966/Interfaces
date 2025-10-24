@@ -2,7 +2,6 @@ console.log("✅ blocka.js cargado");
 
 // se importa el método iniciarJuego de la clase jugarBlocka.js
 import { iniciarJuego } from './jugarBlocka.js';
-import { reiniciarJuegoCompleto } from './jugarBlocka.js'; // no funciona se rompe revisar !!!!!!!!!
 
 // Espera a que el DOM esté completamente cargado
 document.addEventListener('DOMContentLoaded', () => {
