@@ -68,9 +68,12 @@ export const iniciarJuego = (imagenSrc, nivel, dificultad, tiempo) => {
         verificarBtn.disabled = false;
         ayudaPiezaFija.disabled = false;
         
-        // Habilitamos el canvas y restauramos su opacidad
-        canvas.style.pointerEvents = 'auto';
-        canvas.style.opacity = "1";
+        // Habilitamos el canvas (obteniendo la referencia actual del DOM)
+        const currentCanvas = document.getElementById('puzzleCanvas');
+        if (currentCanvas) {
+            currentCanvas.style.pointerEvents = 'auto';
+            currentCanvas.style.opacity = '1';
+        }
     };
 
     // 👈 Prepara la vista inicial
@@ -88,18 +91,22 @@ export const iniciarJuego = (imagenSrc, nivel, dificultad, tiempo) => {
     
     // Función que se llamará al agotar el tiempo
     const onTiempoAgotado = () => {
+
+        // Obtenemos el canvas actual (por si fue clonado/reemplazado)
+        const currentCanvas = document.getElementById('puzzleCanvas');
+        if (currentCanvas) {
+            currentCanvas.style.pointerEvents = 'none';
+            currentCanvas.style.opacity = '0.3';
+        }
+
+        // Deshabilitamos los botones del juego
+        verificarBtn.disabled = true;
+        ayudaPiezaFija.disabled = true;
+
         // Mostramos el popover y lo aseguramos interactivo
         popover.style.display = 'flex';
         popover.style.pointerEvents = 'auto';
         popover.style.zIndex = '1000'; // Aseguramos que esté por encima
-        
-        // Deshabilitamos los botones del juego
-        verificarBtn.disabled = true;
-        ayudaPiezaFija.disabled = true;
-        
-        // Solo deshabilitamos el canvas y lo hacemos semi-transparente
-        canvas.style.pointerEvents = 'none';
-        canvas.style.opacity = "0.3";
         
         // Manejador para reintentar
         newReintentarBlocka.addEventListener('click', () => {
