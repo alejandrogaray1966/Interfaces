@@ -76,6 +76,14 @@
                                 <button  id="inicio-blocka"> Inicio</button>
                             </div>
                         </div>
+                        <!-- Mensaje de estado del juego -->
+                        <div id="status-message" class="status-message">
+                            Selecciona una ficha para empezar.
+                        </div>
+                        <!-- Contador de fichas restantes -->
+                        <div class="peg-counter">
+                            Fichas restantes: <span id="peg-count">32</span>
+                        </div>
                         <!--aca botón de reiniciar el juego en cualquier momento-->
                         <button id="verificarBtn" class="verificarBtn">Reiniciar</button>
                     </div>
@@ -758,6 +766,6 @@
     
 </body>
 <script src="js/index.js"></script>
-<script src="./Senku/js/senku.js" defer></script>
+<script type="module" src="./Senku/js/senku.js" defer></script>
 
 </html>

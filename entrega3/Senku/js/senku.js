@@ -1,7 +1,7 @@
 console.log("✅ Senku.js cargado");
 
 // se importa el método iniciarJuego de la clase jugarSenku.js
-// import { iniciarJuego } from './jugarSenku.js';
+import { iniciarJuego } from './jugarSenku.js';
 
 // Espera a que el DOM esté completamente cargado
 document.addEventListener('DOMContentLoaded', () => {
