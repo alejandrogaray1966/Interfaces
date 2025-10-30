@@ -1,18 +1,13 @@
 console.log("✅ jugarSenku.js cargado");
 
+// se importan los métodos de la clase relojSenku.js
+import { iniciarCronometro, detenerCronometro } from './relojSenku.js';
+
         // --- Variables Globales del Juego ---
-        
+        let tiempoLimite = 0;
         // Estado inicial del tablero
-        const INITIAL_BOARD = [
-            [9, 9, 1, 1, 1, 9, 9], 
-            [9, 9, 1, 1, 1, 9, 9], 
-            [1, 1, 1, 1, 1, 1, 1], 
-            [1, 1, 1, 0, 1, 1, 1], 
-            [1, 1, 1, 1, 1, 1, 1], 
-            [9, 9, 1, 1, 1, 9, 9], 
-            [9, 9, 1, 1, 1, 9, 9] 
-        ];
-        
+        let INITIAL_BOARD = [];
+
         let tablero = JSON.parse(JSON.stringify(INITIAL_BOARD)); // Clonar el tablero inicial
         let fichaArrastrandose = null; // { row, col } de la ficha seleccionada
         let isDragging = false;
@@ -446,6 +441,8 @@ console.log("✅ jugarSenku.js cargado");
 
             // Lógica de fin de juego
             if (possibleMoves === 0) {
+                // Detener el cronómetro
+                detenerCronometro();
                 // Desactivar interacción
                 canvas.removeEventListener('pointerdown', handleStart);
                 canvas.removeEventListener('pointerup', handleEnd);
@@ -460,13 +457,23 @@ console.log("✅ jugarSenku.js cargado");
             }
         }
 
+        // ---------------------------------  Función que se comienza nuevamente el juego con los mismos parámetros -----------------------
         function resetGame() {
-            tablero = JSON.parse(JSON.stringify(INITIAL_BOARD)); // Clonar el estado inicial
+            // Clonar el estado inicial
+            tablero = JSON.parse(JSON.stringify(INITIAL_BOARD)); 
             fichaArrastrandose = null;
             isDragging = false;
             validTargets = [];
             hoverTarget = null;
-            
+            // Ocultamos el popover y lo aseguramos interactivo
+            const popover = document.getElementById('id-popover');
+            popover.style.display = 'none';
+            // Obtenemos el canvas actual (por si fue clonado/reemplazado)
+            const currentCanvas = document.getElementById('senkuCanvas');
+            if (currentCanvas) {
+                currentCanvas.style.pointerEvents = 'auto';
+                currentCanvas.style.opacity = '1';
+            }
             dibujarTablero();
             statusMessage.textContent = "Tablero reiniciado. Selecciona una ficha.";
             
@@ -484,12 +491,51 @@ console.log("✅ jugarSenku.js cargado");
             document.documentElement.scrollLeft = 0;
             document.body.scrollLeft = 0;
 
+            iniciarCronometro(tiempoLimite, onTiempoAgotado);
             checkGameStatus();
         }
 
-        // ----------------------------- Inicialización --------------------------------------
+        // ---------------------------------  Función que se llamará al agotar el tiempo ----------------------------------------------------
+        const onTiempoAgotado = () => {
+            // Obtenemos el canvas actual (por si fue clonado/reemplazado)
+            const currentCanvas = document.getElementById('senkuCanvas');
+            if (currentCanvas) {
+                currentCanvas.style.pointerEvents = 'none';
+                currentCanvas.style.opacity = '0.3';
+            }
+            // Deshabilitamos los botones del juego
+            const verificarBtn = document.getElementById('verificarBtn');
+            verificarBtn.disabled = true;
+            // Mostramos el popover y lo aseguramos interactivo
+            const popover = document.getElementById('id-popover');
+            popover.style.display = 'flex';
+            popover.style.pointerEvents = 'auto';
+            popover.style.zIndex = '1000'; // Aseguramos que esté por encima
+            // Limpiamos listeners previos
+            const reintentarSenku = document.getElementById('reintentar-Senku');
+            reintentarSenku.replaceWith(reintentarSenku.cloneNode(true));
+            const newReintentarSenku = document.getElementById('reintentar-Senku');
+            // Manejador para reintentar
+            newReintentarSenku.addEventListener('click', () => {
+                resetGame()
+            }, { once: true });
+            // Manejador para volver al inicio
+            const inicioSenku = document.getElementById('inicio-Senku');
+            if (inicioSenku) {
+                inicioSenku.addEventListener('click', () => {
+                    location.reload();
+                }, { once: true });
+            }
+        };
 
-        export function iniciarJuego(tablero, ficha, tiempo) {
+        // ------------------------------------- Inicialización -----------------------------------------------------------------------------
+
+        export function iniciarJuego(MATRIZ, ficha, tiempo) {
+
+            INITIAL_BOARD = JSON.parse(JSON.stringify(MATRIZ));
+            tablero = JSON.parse(JSON.stringify(INITIAL_BOARD));
+
+            tiempoLimite = tiempo;
 
             canvas = document.getElementById('senkuCanvas');
             ctx = canvas.getContext('2d');
@@ -501,8 +547,11 @@ console.log("✅ jugarSenku.js cargado");
             
             canvas.addEventListener('dragstart', (e) => e.preventDefault());
 
-            document.getElementById('verificarBtn').addEventListener('click', resetGame);
+            const verificarBtn = document.getElementById('verificarBtn');
+            verificarBtn.disabled = false;
+            verificarBtn.addEventListener('click', resetGame);
 
             dibujarTablero();
+            iniciarCronometro(tiempoLimite, onTiempoAgotado);
             checkGameStatus();
         };

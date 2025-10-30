@@ -3,6 +3,28 @@ console.log("✅ Senku.js cargado");
 // se importa el método iniciarJuego de la clase jugarSenku.js
 import { iniciarJuego } from './jugarSenku.js';
 
+// Estado inicial del tablero MODERNO
+const INITIAL_BOARD_MODERNO = [
+            [9, 9, 1, 1, 1, 9, 9], 
+            [9, 9, 1, 1, 1, 9, 9], 
+            [1, 1, 1, 1, 1, 1, 1], 
+            [1, 1, 1, 0, 1, 1, 1], 
+            [1, 1, 1, 1, 1, 1, 1], 
+            [9, 9, 1, 1, 1, 9, 9], 
+            [9, 9, 1, 1, 1, 9, 9] 
+        ];
+
+// Estado inicial del tablero MEDIEVAL
+const INITIAL_BOARD_MEDIEVAL = [
+            [9, 9, 1, 1, 1, 9, 9], 
+            [9, 1, 1, 1, 1, 1, 9], 
+            [1, 1, 1, 1, 1, 1, 1], 
+            [1, 1, 1, 0, 1, 1, 1], 
+            [1, 1, 1, 1, 1, 1, 1], 
+            [9, 1, 1, 1, 1, 1, 9], 
+            [9, 9, 1, 1, 1, 9, 9] 
+        ];
+
 // Espera a que el DOM esté completamente cargado
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -33,6 +55,18 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // ------------------------------------------------------------------------------------------------
+    //            método que muestra los datos del juego iniciado
+    // ------------------------------------------------------------------------------------------------
+    function mostrarDatosDelJuego(settings) {
+        const infoContainer = document.getElementById('gameInfo');
+        infoContainer.innerHTML = `
+            <li><strong>Tablero:</strong> ${settings.tablero}</li>
+            <li><strong>Fichas:</strong> ${settings.ficha}</li>
+            <li><strong>Límite:</strong> ${settings.tiempo} Seg.</li>
+        `;
+    }
+
+    // ------------------------------------------------------------------------------------------------
     // se muestra el canvas con la imagen de fondo y se llama a iniciarJuego con sus parámetros
     // ------------------------------------------------------------------------------------------------
     const startGame = () => {
@@ -44,6 +78,21 @@ document.addEventListener('DOMContentLoaded', () => {
         const ficha = document.getElementById('fichas').value;
         const tiempo = document.getElementById('tiempos').value;
         
+        // Constantes del juego iniciado
+        const gameSettings = {
+            tablero: tablero,
+            ficha: ficha,
+            tiempo: tiempo
+        };
+
+        // Cambiar LA MATRIZ DEL JUEGO  según el tablero escogido
+        let MATRIZ;
+        if (tablero === 'moderno') {
+            MATRIZ = INITIAL_BOARD_MODERNO;
+        } else if (tablero === 'medieval') {
+            MATRIZ = INITIAL_BOARD_MEDIEVAL;
+        }
+
         // Cambiar el fondo del canvas según el tablero escogido
         const canvas = document.getElementById('senkuCanvas');
         if (tablero === 'moderno') {
@@ -56,8 +105,11 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('.canvas-wrapper').classList.remove('hidden');
         document.querySelector('.game-preview').classList.add('faded-blur');
 
+        // Mostrar los datos del juego iniciado
+        mostrarDatosDelJuego(gameSettings);
+
         // lanzamos el juego
-        iniciarJuego( tablero, ficha, tiempo);
+        iniciarJuego( MATRIZ, ficha, tiempo);
 
     }
 
