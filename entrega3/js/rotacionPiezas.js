@@ -150,23 +150,61 @@ function aplicarFiltroPrincipiante(imagen) {
     const imageData = auxCtx.getImageData(0, 0, imagen.width, imagen.height);
     const data = imageData.data;
     // Aplica un filtro personalizado (aquí podés definir lo que quieras). Al ser principiante no le ponemos filtro, es solo a modo de ejemplo.
-    //for (let i = 0; i < data.length; i += 4) {
-        // constantes R G B Alpha
-        // const r = data[i];
-        // const g = data[i + 1];
-        // const b = data[i + 2];
-        // Filtro sepia simple
-        // const sepiaR = 0.393 * r + 0.769 * g + 0.189 * b;
-        // const sepiaG = 0.349 * r + 0.686 * g + 0.168 * b;
-        // const sepiaB = 0.272 * r + 0.534 * g + 0.131 * b;
+    for (let i = 0; i < data.length; i += 4) {
+        // Filtro Blureado con vecindario
+        const [compR, compG, compB, compA] = obtenerPromedioVecindario(data, i, imagen.width);
+        const blurR = compR;
+        const blurG = compG;
+        const blurB = compB;
+        const blurA = compA;
         // modifica los valores de los píxeles
-        // data[i]     = Math.min(255, sepiaR);
-        // data[i + 1] = Math.min(255, sepiaG);
-        // data[i + 2] = Math.min(255, sepiaB);
-    //}
+        data[i]     = Math.min(255, blurR);
+        data[i + 1] = Math.min(255, blurG);
+        data[i + 2] = Math.min(255, blurB);
+        data[i + 3] = Math.min(255, blurA);
+    }
     // Actualiza el canvas auxiliar con los datos modificados
     auxCtx.putImageData(imageData, 0, 0);
     return auxCanvas.toDataURL();
+}
+
+// Función de Blureado con vecindario = 15
+function obtenerPromedioVecindario(data, x, ancho) {
+    // Constante que define el ancho y alto del vecindario
+    const vecindario = 15;
+    const medioVecindario = Math.floor(vecindario / 15);
+    // Indice que indica donde comienza el vecindario
+    const inicio = x - (ancho * medioVecindario * 4) - (medioVecindario * 4); 
+    // Variables para llevar la suma de cada vecino
+    let totalR = 0;
+    let totalG = 0;
+    let totalB = 0;
+    let totalA = 0;
+    // Variable para llevar la cantidad de vecinos
+    let cantidad = 0;
+    let index = 0;
+    // Recorremos un vecindario de 15 x 15
+    for (let i = 0 ; i <= vecindario ; i++) {
+        index = inicio + (i * ancho * 4);
+        for (let j = 0 ; j <= vecindario ; j++) {
+            // Verificamos que esté dentro de los límites
+            if ((index > 0) && ((index+3) < data.length)) {
+                totalR += data[index];
+                totalG += data[index + 1];
+                totalB += data[index + 2];
+                totalA += data[index + 3];
+                cantidad++;
+            }
+            index += 4;
+        }
+    }
+    // Devolvemos el promedio RGBA
+    return [
+        Math.round(totalR / cantidad),
+        Math.round(totalG / cantidad),
+        Math.round(totalB / cantidad),
+        Math.round(totalA / cantidad)
+    ];
 }
 
 // Aplica un filtro de gris a la imagen dada y devuelve una nueva imagen en base64
