@@ -2,9 +2,12 @@ console.log("✅ jugarSenku.js cargado");
 
 // se importan los métodos de la clase relojSenku.js
 import { iniciarCronometro, detenerCronometro } from './relojSenku.js';
+// se importan los métodos de la clase vistaSenku.js
+import { exito } from './vistaSenku.js';
 
         // --- Variables Globales del Juego ---
         let tiempoLimite = 0;
+
         // Estado inicial del tablero
         let INITIAL_BOARD = [];
 
@@ -421,13 +424,14 @@ import { iniciarCronometro, detenerCronometro } from './relojSenku.js';
             }
         }
 
-
-        // --- Lógica del Juego y Control de Flujo ---
-
+        // ----------------------------------------------------------------------------------------------------------
+        // ------------------------------------ Lógica del Juego y Control de Flujo ---------------------------------
+        // ----------------------------------------------------------------------------------------------------------
         function checkGameStatus() {
+            // Inicializar contadores
             let pegCount = 0;
             let possibleMoves = 0;
-
+            // Contar fichas y posibles movimientos
             for (let r = 0; r < GRID_SIZE; r++) {
                 for (let c = 0; c < GRID_SIZE; c++) {
                     if (tablero[r][c] === 1) {
@@ -436,28 +440,41 @@ import { iniciarCronometro, detenerCronometro } from './relojSenku.js';
                     }
                 }
             }
-            
-            pegCountDisplay.textContent = pegCount; // Actualizar el contador visible
-
+            // Actualizar el contador visible
+            pegCountDisplay.textContent = pegCount; 
             // Lógica de fin de juego
             if (possibleMoves === 0) {
-                // Detener el cronómetro
-                detenerCronometro();
                 // Desactivar interacción
                 canvas.removeEventListener('pointerdown', handleStart);
                 canvas.removeEventListener('pointerup', handleEnd);
                 canvas.removeEventListener('pointermove', handleMove); 
                 canvas.removeEventListener('pointercancel', handleCancel); 
-
+                // Verificar el estado del juego y mostrar mensaje adecuado
                 if (pegCount === 1) {
-                    statusMessage.textContent = `🎉 ¡Ganaste! ¡Solo queda 1 ficha!`;
+                    // Detener el cronómetro y obtener el tiempo final
+                    detenerCronometro((tiempoFinal) => {
+                                        statusMessage.textContent = `🎉 ¡Ganaste! ¡Solo queda 1 ficha!`;
+                                        //actualizarRanking('Matías', tiempoFinal); --------------------------------> actualizar ranking aca !!!!!!!!!
+                                        // Festejo con papelitos
+                                        exito();
+                                        // espera 3 segundos y recarga la página
+                                        setTimeout(() => {
+                                            location.reload();
+                                    }, 3000);
+                    }); 
                 } else {
+                    // Detener el cronómetro
+                    detenerCronometro();
                     statusMessage.textContent = `🛑 ¡Juego terminado! Quedaron ${pegCount} fichas.`;
+                    // Mostrar opciones de reinicio o inicio
+                    onTiempoAgotado(); 
                 }
             }
         }
 
-        // ---------------------------------  Función que se comienza nuevamente el juego con los mismos parámetros -----------------------
+        // ----------------------------------------------------------------------------------------------------------
+        // -------------------- Función que se comienza nuevamente el juego con los mismos parámetros ---------------
+        // ----------------------------------------------------------------------------------------------------------
         function resetGame() {
             // Clonar el estado inicial
             tablero = JSON.parse(JSON.stringify(INITIAL_BOARD)); 
@@ -474,28 +491,30 @@ import { iniciarCronometro, detenerCronometro } from './relojSenku.js';
                 currentCanvas.style.pointerEvents = 'auto';
                 currentCanvas.style.opacity = '1';
             }
+            // dibujamos el tablero reiniciado
             dibujarTablero();
             statusMessage.textContent = "Tablero reiniciado. Selecciona una ficha.";
-            
             // Re-añadir listeners (eliminar primero en caso de que el juego estuviera terminado)
             canvas.removeEventListener('pointerdown', handleStart);
             canvas.removeEventListener('pointerup', handleEnd);
             canvas.removeEventListener('pointermove', handleMove);
             canvas.removeEventListener('pointercancel', handleCancel);
-
+            // Re-añadir los listeners
             canvas.addEventListener('pointerdown', handleStart);
             canvas.addEventListener('pointerup', handleEnd);
             canvas.addEventListener('pointermove', handleMove);
             canvas.addEventListener('pointercancel', handleCancel);
-
+            // Ubicar el scroll al inicio
             document.documentElement.scrollLeft = 0;
             document.body.scrollLeft = 0;
-
+            // Reiniciar el cronómetro y el estado del juego
             iniciarCronometro(tiempoLimite, onTiempoAgotado);
             checkGameStatus();
         }
 
-        // ---------------------------------  Función que se llamará al agotar el tiempo ----------------------------------------------------
+        // ----------------------------------------------------------------------------------------------------------
+        // ---------------------------------  Función que se llamará al agotar el tiempo ----------------------------
+        // ----------------------------------------------------------------------------------------------------------
         const onTiempoAgotado = () => {
             // Obtenemos el canvas actual (por si fue clonado/reemplazado)
             const currentCanvas = document.getElementById('senkuCanvas');
@@ -528,29 +547,30 @@ import { iniciarCronometro, detenerCronometro } from './relojSenku.js';
             }
         };
 
-        // ------------------------------------- Inicialización -----------------------------------------------------------------------------
-
+        // ----------------------------------------------------------------------------------------------------------
+        // ------------------------------------- Inicialización -----------------------------------------------------
+        // ----------------------------------------------------------------------------------------------------------
         export function iniciarJuego(MATRIZ, ficha, tiempo) {
-
+            // Guardamos el estado inicial para reinicios
             INITIAL_BOARD = JSON.parse(JSON.stringify(MATRIZ));
             tablero = JSON.parse(JSON.stringify(INITIAL_BOARD));
-
+            // Configuramos el límite de tiempo
             tiempoLimite = tiempo;
-
+            // Configuramos el canvas y contexto
             canvas = document.getElementById('senkuCanvas');
             ctx = canvas.getContext('2d');
-            
+            // agregamos los escuchadores de eventos para la interacción
             canvas.addEventListener('pointerdown', handleStart);
             canvas.addEventListener('pointerup', handleEnd);
             canvas.addEventListener('pointermove', handleMove);
             canvas.addEventListener('pointercancel', handleCancel); 
-            
+            // Prevenir comportamiento por defecto de arrastrar imágenes
             canvas.addEventListener('dragstart', (e) => e.preventDefault());
-
+            // Inicializar estado del juego
             const verificarBtn = document.getElementById('verificarBtn');
             verificarBtn.disabled = false;
             verificarBtn.addEventListener('click', resetGame);
-
+            // Dibujar el tablero inicial , iniciar cronómetro y comenzar chequeo de estado
             dibujarTablero();
             iniciarCronometro(tiempoLimite, onTiempoAgotado);
             checkGameStatus();
