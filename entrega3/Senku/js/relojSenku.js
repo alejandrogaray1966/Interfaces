@@ -1,5 +1,8 @@
 console.log("✅ relojSenku.js cargado");
 
+// se importan los métodos de la clase vistaSenku.js
+import { mostrarPenalizacionVisual } from './vistaSenku.js';
+
 // ------------------------------------------------------------------------------------------------
 //                                  variables del método para tomar el tiempo
 // ------------------------------------------------------------------------------------------------
@@ -25,6 +28,7 @@ export const iniciarCronometro = (tiempoLimite, onTiempoAgotado) => {
             // Detenemos el cronómetro
             clearInterval(intervaloCronometro);
             if (typeof onTiempoAgotado === 'function') {  
+                mostrarPenalizacionVisual();
                 // Llamamos a la función que maneja la derrota por tiempo agotado
                 onTiempoAgotado(); 
         }

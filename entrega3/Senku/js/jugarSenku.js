@@ -457,9 +457,9 @@ import { exito, mostrarDerrotaConManitos, mostrarVictoriaConManitos } from './vi
                                         //actualizarRanking('Matías', tiempoFinal); --------------------------------> actualizar ranking aca !!!!!!!!!
                                         // Festejo con papelitos
                                         exito();
-                                        // espera 3 segundos y recarga la página
+                                        // Espera 3 segundos y Mostrar opciones de reinicio o inicio
                                         setTimeout(() => {
-                                            location.reload();
+                                            onTiempoAgotado();
                                         }, 3000);
                     }); 
                 } else {
