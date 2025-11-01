@@ -25,6 +25,17 @@ const INITIAL_BOARD_MEDIEVAL = [
             [9, 9, 1, 1, 1, 9, 9] 
         ];
 
+// Estado inicial del tablero ANTIGUO
+const INITIAL_BOARD_ANTIGUO = [
+            [9, 9, 9, 1, 1, 1, 1], 
+            [9, 9, 9, 1, 1, 1, 1], 
+            [9, 9, 9, 1, 1, 1, 1], 
+            [1, 1, 1, 0, 1, 1, 1], 
+            [1, 1, 1, 1, 9, 9, 9], 
+            [1, 1, 1, 1, 9, 9, 9], 
+            [1, 1, 1, 1, 9, 9, 9] 
+        ];
+
 // Espera a que el DOM esté completamente cargado
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -91,6 +102,8 @@ document.addEventListener('DOMContentLoaded', () => {
             MATRIZ = INITIAL_BOARD_MODERNO;
         } else if (tablero === 'medieval') {
             MATRIZ = INITIAL_BOARD_MEDIEVAL;
+        } else if (tablero === 'antiguo') {
+            MATRIZ = INITIAL_BOARD_ANTIGUO;
         }
 
         // Cambiar el fondo del canvas según el tablero escogido
@@ -99,6 +112,8 @@ document.addEventListener('DOMContentLoaded', () => {
             canvas.style.backgroundImage = "url('./Senku/img/tablero_moderno.svg')";
         } else if (tablero === 'medieval') {
             canvas.style.backgroundImage = "url('./Senku/img/tablero_medieval.png')";
+        } else if (tablero === 'antiguo') {
+            canvas.style.backgroundImage = "url('./Senku/img/tablero_antiguo.png')";
         }
 
         // Mostrar el canvas y ocultar la imagen de previsualización
