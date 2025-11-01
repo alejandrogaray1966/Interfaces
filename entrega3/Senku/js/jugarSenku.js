@@ -3,7 +3,7 @@ console.log("✅ jugarSenku.js cargado");
 // se importan los métodos de la clase relojSenku.js
 import { iniciarCronometro, detenerCronometro } from './relojSenku.js';
 // se importan los métodos de la clase vistaSenku.js
-import { exito } from './vistaSenku.js';
+import { exito, mostrarDerrotaConManitos, mostrarVictoriaConManitos } from './vistaSenku.js';
 
         // --- Variables Globales del Juego ---
         let tiempoLimite = 0;
@@ -460,14 +460,17 @@ import { exito } from './vistaSenku.js';
                                         // espera 3 segundos y recarga la página
                                         setTimeout(() => {
                                             location.reload();
-                                    }, 3000);
+                                        }, 3000);
                     }); 
                 } else {
                     // Detener el cronómetro
                     detenerCronometro();
                     statusMessage.textContent = `🛑 ¡Juego terminado! Quedaron ${pegCount} fichas.`;
-                    // Mostrar opciones de reinicio o inicio
-                    onTiempoAgotado(); 
+                    mostrarDerrotaConManitos();
+                    // Espera 3 segundos y Mostrar opciones de reinicio o inicio
+                    setTimeout(() => {
+                        onTiempoAgotado();
+                    }, 3000);
                 }
             }
         }

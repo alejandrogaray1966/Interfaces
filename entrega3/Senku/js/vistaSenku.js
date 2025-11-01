@@ -7,6 +7,59 @@ console.log("✅ vistaSenku.js cargado");
 
 
 
+
+
+
+
+
+
+
+
+
+// ------------------------------------------------------------------------------------------------
+//                método que muestra efecto de victoria con manitos
+// ------------------------------------------------------------------------------------------------
+export function mostrarVictoriaConManitos() {
+    const contenedor = document.createElement('div');
+    contenedor.id = "victoriaEffect";
+    document.body.appendChild(contenedor);
+    // crear múltiples imágenes de manitos subiendo
+    for (let i = 0; i < 20; i++) {
+        const mano = document.createElement('img');
+        mano.src = "./Senku/img/pulgar_arriba.png";
+        mano.className = "manoVictoria";
+        mano.style.left = `${Math.random() * 90}%`;
+        mano.style.bottom = `-60px`;
+        contenedor.appendChild(mano);
+        // Animación subida
+        setTimeout(() => {
+            mano.style.bottom = "100vh";
+        }, i * 200);
+    }
+}
+
+// ------------------------------------------------------------------------------------------------
+//                método que muestra efecto de derrota con manitos
+// ------------------------------------------------------------------------------------------------
+export function mostrarDerrotaConManitos() {
+    const contenedor = document.createElement('div');
+    contenedor.id = "derrotaEffect";
+    document.body.appendChild(contenedor);
+    // Crear múltiples imágenes de manitos cayendo
+    for (let i = 0; i < 20; i++) {
+        const mano = document.createElement('img');
+        mano.src = "./Senku/img/pulgar_abajo.png";
+        mano.className = "manoDerrota";
+        mano.style.left = `${Math.random() * 90}%`;
+        mano.style.top = `-60px`;
+        contenedor.appendChild(mano);
+        // Animación caída
+        setTimeout(() => {
+            mano.style.top = "100vh";
+        }, i * 200);
+    }
+}
+
 // ------------------------------------------------------------------------------------------------
 //                                                                                  empieza confeti
 // ------------------------------------------------------------------------------------------------
