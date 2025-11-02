@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SENKU - Implementación con Canvas</title>
+    <!-- Carga de Tailwind CSS para estilos de interfaz -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f0f4f8; /* Fondo de la página */
+            font-family: 'Inter', sans-serif;
+            /* Evita la selección de texto en todo el cuerpo, eliminando el desplazamiento en drag */
+            user-select: none; 
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            /* FIX CRÍTICO: Evita que el scroll "salga" del contenido, deteniendo el desplazamiento fantasma */
+            overscroll-behavior: none;
+            /* Asegura que no haya scroll horizontal en el cuerpo */
+            overflow-x: hidden;
+        }
+
+        #game-container {
+            position: relative; 
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            overflow: hidden; 
+            max-width: fit-content;
+            background-color: #ffffff; /* Contenedor blanco para el tablero */
+            padding: 1rem; /* p-4 */
+        }
+        
+        /* Contenedor que mantiene el espacio del canvas (630px) + sus dimensiones de estabilidad (4px) = 634px para evitar CLS */
+        #canvas-wrapper {
+            position: relative;
+            width: 634px; 
+            height: 634px; 
+        }
+
+        #solitaire-canvas {
+            /* Posición normal (dentro del flujo) para evitar el desplazamiento no deseado */
+            display: block;
+            margin: 0; /* Asegura que no haya margen extra */
+            
+            border-radius: 10px;
+            cursor: pointer;
+            
+            /* Fondo SVG COMPLETAMENTE CODIFICADO */
+            background-image: url('data:image/svg+xml,<svg%20width="630"%20height="630"%20viewBox="0%200%20630%20630"%20xmlns="http://www.w3.org/2000/svg"><path%20d="M%20200%202%20L%20430%202%20A%2020%2020%200%200%201%20450%2020%20L%20450%20180%20L%20610%20180%20A%2020%2020%200%200%201%20628%20200%20L%20628%20430%20A%2020%2020%200%200%201%20610%20450%20L%20450%20450%20L%20450%20610%20A%2020%2020%200%200%201%20430%20628%20L%20200%20628%20A%2020%2020%200%200%201%20180%20610%20L%20180%20450%20L%2020%20450%20A%2020%2020%200%200%201%202%20430%20L%202%20200%20A%2020%2020%200%200%201%2020%20180%20L%20180%20180%20L%20180%2020%20A%2020%2020%200%200%201%20200%202%20Z"%20fill="%238f6fdb"%20stroke="%23000000"%20stroke-width="5"/><defs><circle%20id="hole"%20r="25"%20fill="%23333333"/></defs><use%20href="%23hole"%20x="225"%20y="45"/>%20<use%20href="%23hole"%20x="315"%20y="45"/>%20<use%20href="%23hole"%20x="405"%20y="45"/>%20<use%20href="%23hole"%20x="225"%20y="135"/>%20<use%20href="%23hole"%20x="315"%20y="135"/>%20<use%20href="%23hole"%20x="405"%20y="135"/>%20<use%20href="%23hole"%20x="45"%20y="225"/>%20<use%20href="%23hole"%20x="135"%20y="225"/>%20<use%20href="%23hole"%20x="225"%20y="225"/>%20<use%20href="%23hole"%20x="315"%20y="225"/>%20<use%20href="%23hole"%20x="405"%20y="225"/>%20<use%20href="%23hole"%20x="495"%20y="225"/>%20<use%20href="%23hole"%20x="585"%20y="225"/>%20<use%20href="%23hole"%20x="45"%20y="315"/>%20<use%20href="%23hole"%20x="135"%20y="315"/>%20<use%20href="%23hole"%20x="225"%20y="315"/>%20<use%20href="%23hole"%20x="315"%20y="315"/>%20<use%20href="%23hole"%20x="405"%20y="315"/>%20<use%20href="%23hole"%20x="495"%20y="315"/>%20<use%20href="%23hole"%20x="585"%20y="315"/>%20<use%20href="%23hole"%20x="45"%20y="405"/>%20<use%20href="%23hole"%20x="135"%20y="405"/>%20<use%20href="%23hole"%20x="225"%20y="405"/>%20<use%20href="%23hole"%20x="315"%20y="405"/>%20<use%20href="%23hole"%20x="405"%20y="405"/>%20<use%20href="%23hole"%20x="495"%20y="405"/>%20<use%20href="%23hole"%20x="585"%20y="405"/>%20<use%20href="%23hole"%20x="225"%20y="495"/>%20<use%20href="%23hole"%20x="315"%20y="495"/>%20<use%20href="%23hole"%20x="405"%20y="495"/>%20<use%20href="%23hole"%20x="225"%20y="585"/>%20<use%20href="%23hole"%20x="315"%20y="585"/>%20<use%20href="%23hole"%20x="405"%20y="585"/></svg>');
+            background-color: transparent; /* Permite que el SVG se vea */
+            background-repeat: no-repeat;
+            background-position: center;
+            
+            user-select: none; 
+            outline: none; 
+            /* Desactiva la manipulación táctil predeterminada */
+            touch-action: none; 
+        }
+
+        /* FIX CRÍTICO: Estabilidad total para evitar cambios de layout al actualizar el mensaje */
+        #status-message {
+            height: 24px; /* h-6 en Tailwind */
+            line-height: 24px;
+            /* Fija el ancho máximo y corta el texto para evitar la expansión del contenedor padre */
+            max-width: 100%; 
+            white-space: nowrap; 
+            overflow: hidden; 
+            text-overflow: ellipsis; 
+        }
+    </style>
+</head>
+<body>
+
+    <div id="game-container" class="p-4 bg-white">
+        <h1 class="text-3xl font-bold text-center text-gray-800 mb-4">Solitario de Fichas (SENKU)</h1>
+        
+        <!-- Contenedor para fijar el espacio del Canvas -->
+        <div id="canvas-wrapper" class="mb-4">
+            <canvas id="solitaire-canvas" width="630" height="630" draggable="false"></canvas>
+        </div>
+
+        <div id="status-message" class="text-center text-lg font-semibold text-blue-600">
+            Selecciona una ficha para empezar.
+        </div>
+
+        <button id="reset-button" class="mt-6 w-full py-2 bg-indigo-600 text-white font-bold rounded-lg shadow-md hover:bg-indigo-700 transition duration-150">
+            Reiniciar Juego
+        </button>
+    </div>
+
+    <script>
+        // --- Variables Globales del Juego ---
+        
+        /**
+         * Representación del tablero:
+         * 1: Ficha (Peg)
+         * 0: Agujero vacío (Hole)
+         * 9: Área no jugable
+         */
+        let tablero = [
+            // Col: 0  1  2  3  4  5  6
+            [9, 9, 1, 1, 1, 9, 9],  // Fila 0
+            [9, 9, 1, 1, 1, 9, 9],  // Fila 1
+            [1, 1, 1, 1, 1, 1, 1],  // Fila 2
+            [1, 1, 1, 0, 1, 1, 1],  // Fila 3 <-- El CERO (0) está en el centro: [3][3]
+            [1, 1, 1, 1, 1, 1, 1],  // Fila 4
+            [9, 9, 1, 1, 1, 9, 9],  // Fila 5
+            [9, 9, 1, 1, 1, 9, 9]   // Fila 6
+        ];
+
+        /**
+         * Almacena las coordenadas de la ficha seleccionada para un posible movimiento.
+         * Formato: { row: number, col: number } | null
+         */
+        let fichaArrastrandose = null;
+        
+        /** Flag que indica si el usuario está activamente arrastrando una ficha. */
+        let isDragging = false;
+        
+        /** Posición actual del ratón en píxeles. */
+        let mouseX = 0;
+        let mouseY = 0;
+
+
+        // --- Configuración y Contexto del Canvas ---
+        // TAMAÑO DEL CANVAS: 630x630px
+        const CANVAS_SIZE = 630; // Tamaño de Canvas (7x90px)
+        const GRID_SIZE = 7;
+        // TAMAÑO DE CELDA: 90px
+        const CELL_SIZE = CANVAS_SIZE / GRID_SIZE; // 90px por celda
+        
+        // --- Parámetros de Ficha ---
+        // RADIO DE FICHA: 25px
+        const PEG_RADIUS = 25; // Radio de la ficha (25px)
+        const PEG_COLOR = '#a7f3d0'; // Verde Claro
+        const PEG_STROKE_COLOR = '#065f46'; // Verde Oscuro 
+        const PEG_STROKE_WIDTH = 3; // Ancho del borde en píxeles (3px)
+        // Ficha seleccionada ahora es verde oscuro sólido
+        const SELECTED_PEG_COLOR = PEG_STROKE_COLOR; 
+
+        let canvas;
+        let ctx;
+        
+        const statusMessage = document.getElementById('status-message');
+
+        // --- Funciones de Ayuda para Dibujar en Canvas ---
+        
+        /**
+         * Dibuja una ficha (círculo) en coordenadas de PIXEL.
+         * @param {number} x - Coordenada X (pixel).
+         * @param {number} y - Coordenada Y (pixel).
+         * @param {string} color - El color de relleno de la ficha.
+         * @param {boolean} hasBorder - Indica si debe dibujarse el borde verde oscuro.
+         */
+        function dibujarPegAtCoords(x, y, color, hasBorder = true) {
+            ctx.beginPath();
+            ctx.arc(x, y, PEG_RADIUS, 0, Math.PI * 2);
+            
+            // 1. Aplicar sombra (para dar relieve)
+            ctx.shadowColor = 'rgba(0, 0, 0, 0.6)';
+            ctx.shadowBlur = 10;
+            ctx.shadowOffsetY = 5;
+            
+            // 2. Dibujar el borde
+            if (hasBorder && color !== PEG_STROKE_COLOR) {
+                ctx.strokeStyle = PEG_STROKE_COLOR;
+                ctx.lineWidth = PEG_STROKE_WIDTH;
+                ctx.stroke();
+            }
+            
+            // 3. Rellenar la ficha
+            ctx.fillStyle = color;
+            ctx.fill();
+            
+            // 4. Resetear la sombra
+            ctx.shadowColor = 'transparent'; 
+        }
+
+
+        /**
+         * Dibuja una ficha (círculo) en las coordenadas de la cuadrícula dadas.
+         * @param {number} row - La fila de la celda.
+         * @param {number} col - La columna de la celda.
+         * @param {string} color - El color de la ficha.
+         */
+        function dibujarPeg(row, col, color = PEG_COLOR) {
+            const centerX = col * CELL_SIZE + CELL_SIZE / 2;
+            const centerY = row * CELL_SIZE + CELL_SIZE / 2;
+            
+            // Si el color es el color normal de la ficha, le ponemos borde.
+            const hasBorder = color === PEG_COLOR; 
+            
+            dibujarPegAtCoords(centerX, centerY, color, hasBorder);
+        }
+
+        /**
+         * Dibuja todo el tablero basándose en el estado de la matriz 'tablero'.
+         */
+        function dibujarTablero() {
+            // 1. Limpiar Canvas COMPLETAMENTE. Esto limpia las fichas dibujadas previamente 
+            // (incluyendo la ficha flotante), pero el fondo SVG permanece.
+            ctx.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
+
+            // 2. Dibujar las Fichas (estado '1' en la matriz)
+            for (let r = 0; r < GRID_SIZE; r++) {
+                for (let c = 0; c < GRID_SIZE; c++) {
+                    if (tablero[r][c] === 1) {
+                        
+                        // Determinar si es la ficha seleccionada/arrastrándose
+                        const isSelected = fichaArrastrandose && fichaArrastrandose.row === r && fichaArrastrandose.col === c;
+
+                        // Si estamos arrastrando, NO dibujamos el peg en la posición original.
+                        if (isDragging && isSelected) {
+                            continue; 
+                        }
+
+                        let color = PEG_COLOR;
+                        
+                        // Si está seleccionado, usamos el color verde oscuro
+                        if (isSelected) {
+                            color = SELECTED_PEG_COLOR;
+                        }
+                        
+                        dibujarPeg(r, c, color);
+                    } 
+                }
+            }
+            
+            // 3. Si estamos arrastrando, dibujamos el peg flotante ÚLTIMO (sin borde)
+            if (isDragging) {
+                // Usamos SELECTED_PEG_COLOR (verde oscuro) y el borde es 'false'
+                dibujarPegAtCoords(mouseX, mouseY, SELECTED_PEG_COLOR, false); 
+            }
+        }
+
+
+        /**
+         * @function moverFicha
+         * @description Intenta mover la ficha desde la posición de origen a la posición de destino.
+         * @returns {boolean} True si el movimiento fue exitoso, false si fue inválido.
+         */
+        function moverFicha(fromRow, fromCol, toRow, toCol) {
+            const dRow = toRow - fromRow;
+            const dCol = toCol - fromCol;
+            
+            const rowDistance = Math.abs(dRow);
+            const colDistance = Math.abs(dCol);
+            
+            // Check 1: Debe ser exactamente un salto horizontal O vertical de 2 casillas.
+            const isHorizontalJump = rowDistance === 0 && colDistance === 2;
+            const isVerticalJump = rowDistance === 2 && colDistance === 0;
+
+            if (!isHorizontalJump && !isVerticalJump) {
+                statusMessage.textContent = "Mov. inválido: solo saltos horiz/vert de 2.";
+                return false;
+            }
+
+            // Calculamos las coordenadas de la ficha intermedia (el punto medio)
+            const jumpedRow = fromRow + dRow / 2;
+            const jumpedCol = fromCol + dCol / 2;
+
+            // Check 2: Verificar límites y zonas no jugables para el destino.
+            if (toRow < 0 || toRow >= GRID_SIZE || toCol < 0 || toCol >= GRID_SIZE || tablero[toRow][toCol] === 9) {
+                statusMessage.textContent = "Mov. inválido: destino fuera de límites o zona no jugable.";
+                return false;
+            }
+
+            // Check 3: Condiciones del tablero (origen, destino, intermedia)
+            if (tablero[fromRow][fromCol] !== 1) { 
+                statusMessage.textContent = "Error: origen no es ficha.";
+                return false;
+            } else if (tablero[toRow][toCol] !== 0) { 
+                statusMessage.textContent = "Mov. inválido: destino ocupado.";
+                return false;
+            } else if (tablero[jumpedRow][jumpedCol] !== 1) { 
+                statusMessage.textContent = "Mov. inválido: casilla intermedia vacía.";
+                return false;
+            }
+            
+            // Si todas las condiciones pasan, el movimiento es válido.
+
+            // Realizar el movimiento (Actualizar el estado LÓGICO del tablero)
+            tablero[toRow][toCol] = 1;      
+            tablero[fromRow][fromCol] = 0;  
+            tablero[jumpedRow][jumpedCol] = 0; 
+
+            statusMessage.textContent = `¡Movimiento exitoso!`;
+            
+            checkGameStatus();
+            return true;
+        }
+
+        // --- Lógica de Interacción (Eventos del Puntero) ---
+
+        /**
+         * Obtiene la fila y columna del tablero a partir de las coordenadas del evento (x, y).
+         */
+        function getGridCoordinates(clientX, clientY) {
+            const rect = canvas.getBoundingClientRect();
+            // Calcula las coordenadas relativas al canvas
+            const canvasX = clientX - rect.left;
+            const canvasY = clientY - rect.top;
+
+            const col = Math.floor(canvasX / CELL_SIZE);
+            const row = Math.floor(canvasY / CELL_SIZE);
+
+            return { row, col, canvasX, canvasY };
+        }
+
+        /**
+         * Inicia el arrastre (pointerdown handler).
+         */
+        function handleStart(e) {
+            e.preventDefault(); 
+            e.stopPropagation(); // Detener la propagación desde el inicio.
+            
+            // Captura el puntero
+            if (e.pointerId !== undefined) {
+                canvas.setPointerCapture(e.pointerId);
+            }
+
+            const { row, col, canvasX, canvasY } = getGridCoordinates(e.clientX, e.clientY);
+
+            if (isDragging) return;
+
+            // Asegurar que las coordenadas estén dentro de los límites del tablero (0-6)
+            if (row >= 0 && row < GRID_SIZE && col >= 0 && col < GRID_SIZE && tablero[row][col] === 1) {
+                fichaArrastrandose = { row, col };
+                statusMessage.textContent = `Ficha seleccionada. Arrastra y suelta para mover.`;
+                
+                mouseX = canvasX;
+                mouseY = canvasY;
+                
+                // Redibujar para mostrar la ficha seleccionada (verde oscuro)
+                dibujarTablero(); 
+            } else if (row >= 0 && row < GRID_SIZE && col >= 0 && col < GRID_SIZE && tablero[row][col] === 9) {
+                statusMessage.textContent = "Zona no jugable.";
+            } else {
+                statusMessage.textContent = "Selecciona una ficha para empezar.";
+            }
+            
+            // FIX CRÍTICO: Forzar el restablecimiento del desplazamiento horizontal a cero ANTES de empezar el drag.
+            document.documentElement.scrollLeft = 0;
+            document.body.scrollLeft = 0;
+        }
+        
+        /**
+         * Maneja el arrastre visual (pointermove handler).
+         */
+        function handleMove(e) {
+            e.stopPropagation(); // Detener la propagación para evitar scroll del contenedor.
+            
+            if (!fichaArrastrandose) return;
+
+            // FIX CRÍTICO: Prevenir el comportamiento por defecto (scroll/pan) DE FORMA CONDICIONAL
+            // Esto es crucial para bloquear el scroll una vez que se confirma que estamos arrastrando.
+            if (isDragging) {
+                 e.preventDefault();
+            }
+
+            // Detección de arrastre: solo se considera drag si se ha movido una distancia mínima.
+            if (!isDragging) {
+                const { row: startRow, col: startCol } = fichaArrastrandose;
+                // Coordenadas del centro de la ficha seleccionada en PIXELES
+                const startX = startCol * CELL_SIZE + CELL_SIZE / 2;
+                const startY = startRow * CELL_SIZE + CELL_SIZE / 2;
+                
+                // Usamos la posición del evento (clientX, clientY) para la distancia
+                const distanceSq = (e.clientX - startX)**2 + (e.clientY - startY)**2;
+                const MIN_DRAG_DISTANCE_SQ = 100; // 10px al cuadrado
+                
+                if (distanceSq > MIN_DRAG_DISTANCE_SQ) {
+                    isDragging = true;
+                } else {
+                    return; // No es un drag real (solo un click), no hagas nada.
+                }
+            }
+
+
+            const { canvasX, canvasY } = getGridCoordinates(e.clientX, e.clientY);
+
+            mouseX = canvasX;
+            mouseY = canvasY;
+
+            dibujarTablero();
+
+            canvas.style.cursor = 'grabbing';
+        }
+
+
+        /**
+         * Finaliza el arrastre e intenta el movimiento (pointerup handler).
+         */
+        function handleEnd(e) {
+            if (!fichaArrastrandose) return;
+            
+            e.preventDefault(); 
+            e.stopPropagation(); // Detener la propagación para evitar scroll del contenedor.
+            
+            const pointerId = e.pointerId;
+
+            const { row: fromRow, col: fromCol } = fichaArrastrandose;
+            
+            // Usamos clientX/Y del evento pointerup
+            const { row: toRow, col: toCol } = getGridCoordinates(e.clientX, e.clientY);
+            
+            const wasDragging = isDragging;
+            isDragging = false; // Resetear el estado de arrastre inmediatamente
+
+            canvas.style.cursor = 'pointer';
+
+            // 1. Procesar la acción
+            // CASO A: Se soltó en la misma casilla (cancelación/deselección)
+            if (fromRow === toRow && fromCol === toCol) {
+                // Si fue un drag fallido (wasDragging=true) pero en el mismo lugar, es una cancelación.
+                statusMessage.textContent = wasDragging ? "Arrastre cancelado." : "Ficha deseleccionada.";
+            } else {
+                // CASO B: Intento de movimiento a una casilla diferente (válido o inválido)
+                moverFicha(fromRow, fromCol, toRow, toCol);
+            }
+            
+            // 2. Resetear el estado de selección LÓGICO y forzar el redibujo.
+            fichaArrastrandose = null;
+            dibujarTablero(); 
+
+            // 3. FIX CRÍTICO: Forzar el restablecimiento del desplazamiento horizontal a cero. - ESENCIAL
+            document.documentElement.scrollLeft = 0;
+            document.body.scrollLeft = 0;
+
+            // 4. Liberar la captura del puntero como PASO FINAL.
+            if (pointerId !== undefined) {
+                canvas.releasePointerCapture(pointerId);
+            }
+        }
+        
+        /**
+         * Maneja cuando el navegador interrumpe la interacción (por ejemplo, para iniciar el scroll).
+         */
+        function handleCancel(e) {
+            // Asegurarse de que cualquier comportamiento predeterminado sea ignorado
+            e.preventDefault();
+            e.stopPropagation();
+            
+            // Limpiar estado inmediatamente
+            isDragging = false;
+            fichaArrastrandose = null;
+            canvas.style.cursor = 'pointer';
+            statusMessage.textContent = "Acción cancelada. Selecciona una ficha.";
+            dibujarTablero();
+            
+            // FIX ADICIONAL: Resetear scroll en caso de cancelación del sistema - ESENCIAL
+            document.documentElement.scrollLeft = 0;
+            document.body.scrollLeft = 0;
+
+            // Liberar explícitamente la captura si el navegador está cancelando la operación
+            if (e.pointerId !== undefined) {
+                canvas.releasePointerCapture(e.pointerId);
+            }
+        }
+
+
+        // --- Lógica del Juego y Control de Flujo ---
+
+        function checkGameStatus() {
+            let pegCount = 0;
+            let possibleMoves = 0;
+
+            for (let r = 0; r < GRID_SIZE; r++) {
+                for (let c = 0; c < GRID_SIZE; c++) {
+                    if (tablero[r][c] === 1) {
+                        pegCount++;
+                        // Verificar movimientos posibles
+                        const moves = [
+                            { dr: 0, dc: 2 }, { dr: 0, dc: -2 }, 
+                            { dr: 2, dc: 0 }, { dr: -2, dc: 0 }  
+                        ];
+
+                        for (const move of moves) {
+                            const tr = r + move.dr;
+                            const tc = c + move.dc;
+                            const jr = r + move.dr / 2;
+                            const jc = c + move.dc / 2;
+
+                            if (tr >= 0 && tr < GRID_SIZE && tc >= 0 && tc < GRID_SIZE) {
+                                // Asegúrate de que el índice es válido antes de acceder a la matriz
+                                if (tablero[tr] && tablero[tr][tc] === 0) {
+                                    if (tablero[jr] && tablero[jr][jc] === 1) {
+                                        possibleMoves++;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
+            // Lógica de fin de juego
+            if (possibleMoves === 0) {
+                // Desactivar interacción
+                canvas.removeEventListener('pointerdown', handleStart);
+                canvas.removeEventListener('pointerup', handleEnd);
+                canvas.removeEventListener('pointermove', handleMove); 
+                canvas.removeEventListener('pointercancel', handleCancel); 
+
+                if (pegCount === 1) {
+                    statusMessage.textContent = `🎉 ¡Ganaste! ¡Solo queda 1 ficha!`;
+                } else {
+                    statusMessage.textContent = `🛑 ¡Juego terminado! Quedaron ${pegCount} fichas.`;
+                }
+            }
+        }
+
+        function resetGame() {
+            tablero = [
+                [9, 9, 1, 1, 1, 9, 9],
+                [9, 9, 1, 1, 1, 9, 9],
+                [1, 1, 1, 1, 1, 1, 1],
+                [1, 1, 1, 0, 1, 1, 1],
+                [1, 1, 1, 1, 1, 1, 1],
+                [9, 9, 1, 1, 1, 9, 9],
+                [9, 9, 1, 1, 1, 9, 9]
+            ];
+            fichaArrastrandose = null;
+            isDragging = false;
+            dibujarTablero();
+            statusMessage.textContent = "Tablero reiniciado. Selecciona una ficha.";
+            
+            // Re-añadir listeners después de un reset para reanudar el juego
+            canvas.removeEventListener('pointerdown', handleStart);
+            canvas.removeEventListener('pointerup', handleEnd);
+            canvas.removeEventListener('pointermove', handleMove);
+            canvas.removeEventListener('pointercancel', handleCancel);
+
+            canvas.addEventListener('pointerdown', handleStart);
+            canvas.addEventListener('pointerup', handleEnd);
+            canvas.addEventListener('pointermove', handleMove);
+            canvas.addEventListener('pointercancel', handleCancel);
+
+            // Resetear el scroll como medida de seguridad - ESENCIAL
+            document.documentElement.scrollLeft = 0;
+            document.body.scrollLeft = 0;
+
+            checkGameStatus();
+        }
+
+        // --- Inicialización ---
+
+        window.onload = function() {
+            canvas = document.getElementById('solitaire-canvas');
+            ctx = canvas.getContext('2d');
+            
+            // Se usan Pointer Events para mejor manejo de mouse y touch
+            canvas.addEventListener('pointerdown', handleStart);
+            canvas.addEventListener('pointerup', handleEnd);
+            canvas.addEventListener('pointermove', handleMove);
+            canvas.addEventListener('pointercancel', handleCancel); 
+            
+            // Prevenir el comportamiento de arrastre de imágenes HTML5
+            canvas.addEventListener('dragstart', (e) => e.preventDefault());
+
+            document.getElementById('reset-button').addEventListener('click', resetGame);
+
+            // Dibujar el estado inicial
+            dibujarTablero();
+            
+            checkGameStatus();
+        };
+
+    </script>
+</body>
+</html>
