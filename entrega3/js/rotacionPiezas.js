@@ -150,24 +150,57 @@ function aplicarFiltroPrincipiante(imagen) {
     const imageData = auxCtx.getImageData(0, 0, imagen.width, imagen.height);
     const data = imageData.data;
     // Aplica un filtro personalizado (aquí podés definir lo que quieras). Al ser principiante no le ponemos filtro, es solo a modo de ejemplo.
-    //for (let i = 0; i < data.length; i += 4) {
+    for (let i = 0; i < data.length; i += 4) {
         // constantes R G B Alpha
-        // const r = data[i];
-        // const g = data[i + 1];
-        // const b = data[i + 2];
-        // Filtro sepia simple
-        // const sepiaR = 0.393 * r + 0.769 * g + 0.189 * b;
-        // const sepiaG = 0.349 * r + 0.686 * g + 0.168 * b;
-        // const sepiaB = 0.272 * r + 0.534 * g + 0.131 * b;
+        const r = data[i];
+        const g = data[i + 1];
+        const b = data[i + 2];
+        // Filtro blur
+         const blurR = blurear(i);
+         const blurG = blurear(i + 1);
+         const blurB = blurear(i + 2);
+
+         r = blurR;
+         g = blurG;
+         b = blurB;
         // modifica los valores de los píxeles
         // data[i]     = Math.min(255, sepiaR);
         // data[i + 1] = Math.min(255, sepiaG);
         // data[i + 2] = Math.min(255, sepiaB);
-    //}
+    }
     // Actualiza el canvas auxiliar con los datos modificados
     auxCtx.putImageData(imageData, 0, 0);
     return auxCanvas.toDataURL();
 }
+
+    function blurear(x,y){
+        //x es la posicion
+        const vecindario=3; //lo que expande hacia los costados
+        const inicioRecorrido= x-vecindario*4;
+        const finRecorrido= x+vecindario*4;
+        let total = 0;
+        let cantidad = 0;
+      
+        for (let i = 0; i < array.length; i+=4) {
+            
+        for (let j = 0; j < array.length; j+=4) {
+        }
+
+           let nuevoInicio= inicioRecorrido - vecindario * 600;
+            let nuevoFin = inicioRecorrido + vecindario * 600;
+
+            for (nuevoInicio; nuevoInicio<nuevoFin; nuevoInicio++){
+                if(nuevoInicio > 0 && nuevoInicio <  data.length){
+                    total += data[nuevoInicio];
+                    cantidad++;
+                }  
+            }
+        }
+        return  total / cantidad;
+
+
+
+    }
 
 // Aplica un filtro de gris a la imagen dada y devuelve una nueva imagen en base64
 function aplicarFiltroGris(imagen) {

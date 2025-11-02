@@ -48,6 +48,10 @@ export const iniciarJuego = (imagenSrc, nivel, dificultad, tiempo) => {
     const verificarBtn = document.getElementById('verificarBtn');
     const ayudaPiezaFija = document.getElementById('ayudaPiezaFija');
     const canvas = document.getElementById('puzzleCanvas');
+    const ayuditaBtn= document.getElementById('ayuditaBtn');
+    const ayudas= document.getElementById('ayudas');
+
+
 
     // Constantes del juego iniciado
     const gameSettings = {
@@ -66,6 +70,9 @@ export const iniciarJuego = (imagenSrc, nivel, dificultad, tiempo) => {
         // Habilitamos los botones del juego
         verificarBtn.disabled = false;
         ayudaPiezaFija.disabled = false;
+   
+        ayuditaBtn.style.opacity = "1"; 
+        ayudas.style.display = "flex";
         
         // Habilitamos el canvas (obteniendo la referencia actual del DOM)
         const currentCanvas = document.getElementById('puzzleCanvas');
@@ -228,9 +235,12 @@ const ayudaPiezaFija= document.getElementById('ayudaPiezaFija');
 
 if(ayudaPiezaFija){
     ayudaPiezaFija.addEventListener('click',()=>{
+       
         corregirUnaPiezaIncorrecta();
         penalizarTiempo(multa);
         mostrarPenalizacionVisual(multa);
+
+        
     })
 }
 
@@ -252,7 +262,7 @@ export const borrarCanvasCompleto = () => {
 // ------------------------------------------------------------------------------------------------
 //empieza confeti
 // ------------------------------------------------------------------------------------------------
-// --- Tu Función de Éxito (Disparador) --- linea 135
+// --- linea 200
 function exito() {
     const cantidadConfeti = 80; // Número óptimo para un buen efecto sin sobrecargar
     for (let i = 0; i < cantidadConfeti; i++) {

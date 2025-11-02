@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 200); // Ajusté a 300 para una ruleta más pausada
 
         // -----------------------------------------------------
-        // B. DETENER EL SORTEO Y REVELAR EL GANADOR
+        // B. DETENER EL SORTEO Y REVELAR LA IMAGEN GANADORA
         // -----------------------------------------------------
         setTimeout(() => {
             clearInterval(intervalId); 
@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const winnerImageClone = selectedImageElement.cloneNode(true);
             winnerDisplay.appendChild(winnerImageClone);
             
-            // 3. Revelar el contenedor de ganador con efecto de ampliación
+            // 3. Revelar el contenedor de la imagen ganadora con efecto de ampliación
             // Pequeño retraso para que la ruleta se oculte primero
             setTimeout(() => {
                 winnerDisplay.classList.add('visible');
