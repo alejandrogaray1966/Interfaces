@@ -5,10 +5,10 @@ import { iniciarCronometro, detenerCronometro } from './relojSenku.js';
 // se importan los métodos de la clase vistaSenku.js
 import { exito, mostrarDerrotaConManitos, mostrarVictoriaConManitos } from './vistaSenku.js';
 
-        // --- Variables Globales del Juego ---
+        // ----------------------- Variables Globales del Juego ---
         let tiempoLimite = 0;
 
-        // Estado inicial del tablero
+        // ----------------------- Estado inicial del tablero
         let INITIAL_BOARD = [];
 
         let tablero = JSON.parse(JSON.stringify(INITIAL_BOARD)); // Clonar el tablero inicial
@@ -19,21 +19,42 @@ import { exito, mostrarDerrotaConManitos, mostrarVictoriaConManitos } from './vi
         let validTargets = []; // Almacena { row, col } de los destinos válidos
         let hoverTarget = null; // Almacena { row, col } del destino sobre el que se está
 
-        // --- Configuración y Contexto del Canvas ---
+        // ----------------------- Configuración y Contexto del Canvas ---
         const CANVAS_SIZE = 630; 
         const GRID_SIZE = 7;
         const CELL_SIZE = CANVAS_SIZE / GRID_SIZE; // 90px
         
-        // --- Parámetros de Ficha y Estilos ---
+        // ----------------------- Configuraciones de Color por tipo de ficha ---
+        const COLOR_CONFIGS = {
+            verde: {
+                pegColor: '#a7f3d0',
+                pegStrokeColor: '#065f46',
+                targetRingColor: '#d1e7dd',
+                hoverRingColor: '#409c69'
+            },
+            azul: {
+                pegColor: '#60a5fa',
+                pegStrokeColor: '#1e3a8a',
+                targetRingColor: '#dbeafe',
+                hoverRingColor: '#3b82f6'
+            },
+            amarilla: {
+                pegColor: '#fef08a',
+                pegStrokeColor: '#92400e',
+                targetRingColor: '#fef9c3',
+                hoverRingColor: '#facc15'
+            }
+        };
+
+        // ----------------------- Parámetros de Ficha y Estilos por defecto ---
         const PEG_RADIUS = 25; 
-        const PEG_COLOR = '#a7f3d0'; 
-        const PEG_STROKE_COLOR = '#065f46'; 
+        let PEG_COLOR = '#a7f3d0'; 
+        let PEG_STROKE_COLOR = '#065f46'; 
         const PEG_STROKE_WIDTH = 3; 
-        const SELECTED_PEG_COLOR = PEG_STROKE_COLOR; 
         
-        // --- Nuevos Estilos de Feedback ---
-        const TARGET_RING_COLOR = '#d1e7dd'; // Verde claro para el destino posible
-        const HOVER_RING_COLOR = '#409c69'; // Verde más oscuro para el destino "hovered"
+        // ----------------------- Nuevos Estilos de Feedback por defecto ---
+        let TARGET_RING_COLOR = '#d1e7dd'; // Verde claro para el destino posible
+        let HOVER_RING_COLOR = '#409c69'; // Verde más oscuro para el destino "hovered"
 
         let canvas;
         let ctx;
@@ -149,16 +170,6 @@ import { exito, mostrarDerrotaConManitos, mostrarVictoriaConManitos } from './vi
                             dibujarPeg(r, c, PEG_COLOR, true);
                         }
                         
-
-//                         const color = isSelected ? SELECTED_PEG_COLOR : PEG_COLOR;
-//                         // Una ficha seleccionada (sin arrastrar) se dibuja en el color sólido, sin sombra y sin borde para un efecto "pulsado".
-//                         if (isSelected) {
-//                             const { centerX, centerY } = getCellCenter(r, c);
-//                             // Dibujar el peg seleccionado sin borde ni sombra
-//                             dibujarCircleAtCoords(centerX, centerY, PEG_RADIUS, SELECTED_PEG_COLOR, 'transparent', 0, false);
-//                         } else {
-//                             dibujarPeg(r, c, color);
-//                         }
                     } 
                 }
             }
@@ -559,6 +570,13 @@ import { exito, mostrarDerrotaConManitos, mostrarVictoriaConManitos } from './vi
             tablero = JSON.parse(JSON.stringify(INITIAL_BOARD));
             // Configuramos el límite de tiempo
             tiempoLimite = tiempo;
+            // Configuramos los colores según la ficha seleccionada
+            const colores = COLOR_CONFIGS[ficha] || COLOR_CONFIGS['verde']; // fallback a verde
+            // Aplicar configuración de colores
+            PEG_COLOR = colores.pegColor;
+            PEG_STROKE_COLOR = colores.pegStrokeColor;
+            TARGET_RING_COLOR = colores.targetRingColor;
+            HOVER_RING_COLOR = colores.hoverRingColor;
             // Configuramos el canvas y contexto
             canvas = document.getElementById('senkuCanvas');
             ctx = canvas.getContext('2d');
