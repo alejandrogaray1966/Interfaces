@@ -143,11 +143,9 @@ import { exito, mostrarDerrotaConManitos, mostrarVictoriaConManitos } from './vi
         // ----------------------------------------------------------------------------------------------------------
         // -------------------------------------- Dibuja todo el tablero --------------------------------------------
         // ----------------------------------------------------------------------------------------------------------
-
         function dibujarTablero() {
             // Limpiar el canvas
             ctx.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
-
             // 1. Dibujar los Anillos de Destino Válidos (si hay una ficha seleccionada)
             if (fichaArrastrandose) {
                 for (const target of validTargets) {
@@ -158,30 +156,23 @@ import { exito, mostrarDerrotaConManitos, mostrarVictoriaConManitos } from './vi
                     dibujarTargetRing(target.row, target.col, color);
                 }
             }
-
-
             // 2. Dibujar las Fichas (estado '1' en la matriz)
             for (let r = 0; r < GRID_SIZE; r++) {
                 for (let c = 0; c < GRID_SIZE; c++) {
                     if (tablero[r][c] === 1) {
-                        
                         const isSelected = fichaArrastrandose && fichaArrastrandose.row === r && fichaArrastrandose.col === c;
-
-                        // Si estamos arrastrando (isDragging) NO dibujamos el peg en la posición original.
-                        // Si está seleccionado pero NO arrastrando, lo dibujamos en la posición original.
+                        // Si estamos arrastrando (isDragging) NO dibujamos el peg en la posición original.
                         if (isDragging && isSelected) {
                             continue; // No la dibujamos, se dibujará después como ficha flotante
                         }
-
+                        // Si está seleccionado pero NO arrastrando, lo dibujamos en la posición original.
                         if (isSelected) {
                             // Usamos dibujarPeg con hasShadow = false para un efecto de 'pulsado' o 'incrustado'
-                            // Mantiene el color PEG_COLOR y el borde PEG_STROKE_COLOR
                             dibujarPeg(r, c, PEG_COLOR, false); 
                         } else {
                             // Ficha normal
                             dibujarPeg(r, c, PEG_COLOR, true);
-                        }
-                        
+                        }   
                     } 
                 }
             }
@@ -201,24 +192,23 @@ import { exito, mostrarDerrotaConManitos, mostrarVictoriaConManitos } from './vi
             }
         }
 
-
-        /**
-         * Determina los destinos válidos para una ficha en (fromRow, fromCol).
-         */
+        // ----------------------------------------------------------------------------------------------------------
+        // ---------------- Determina los destinos válidos para una ficha en (fromRow, fromCol). --------------------
+        // ----------------------------------------------------------------------------------------------------------
         function getValidMoves(fromRow, fromCol) {
+            // Definimos los posibles movimientos (saltos) en términos de cambios de fila y columna
             const moves = [
                 { dr: 0, dc: 2 }, { dr: 0, dc: -2 }, 
                 { dr: 2, dc: 0 }, { dr: -2, dc: 0 }  
             ];
-            
+            // Array para almacenar los destinos válidos
             const valid = [];
-
+            // Evaluamos cada posible movimiento
             for (const move of moves) {
                 const tr = fromRow + move.dr;
                 const tc = fromCol + move.dc;
                 const jr = fromRow + move.dr / 2;
                 const jc = fromCol + move.dc / 2;
-
                 // 1. Check de límites para destino
                 if (tr >= 0 && tr < GRID_SIZE && tc >= 0 && tc < GRID_SIZE) {
                     // 2. Check: Destino está vacío y es una celda jugable (no '9')
@@ -230,49 +220,53 @@ import { exito, mostrarDerrotaConManitos, mostrarVictoriaConManitos } from './vi
                     }
                 }
             }
+            // Devolvemos la lista de destinos válidos
             return valid;
         }
 
-        /**
-         * Intenta mover la ficha. (Lógica de movimiento del código original)
-         */
+        // ----------------------------------------------------------------------------------------------------------
+        // ---------------- Intenta mover la ficha. (Lógica de movimiento del código original) ----------------------
+        // ----------------------------------------------------------------------------------------------------------
         function moverFicha(fromRow, fromCol, toRow, toCol) {
             // Buscamos si el destino está en la lista precalculada de destinos válidos
             const isValidTarget = validTargets.some(target => target.row === toRow && target.col === toCol);
-
+            // Si no es un destino válido, retornamos false
             if (!isValidTarget) {
                 statusMessage.textContent = "Movimiento. inválido: destino no es un salto legal.";
                 return false;
             }
-            
             // La ficha intermedia está garantizada por getValidMoves
             const dRow = toRow - fromRow;
             const dCol = toCol - fromCol;
             const jumpedRow = fromRow + dRow / 2;
             const jumpedCol = fromCol + dCol / 2;
-
             // Realizar el movimiento (Actualizar el estado LÓGICO del tablero)
             tablero[toRow][toCol] = 1;      
             tablero[fromRow][fromCol] = 0;  
             tablero[jumpedRow][jumpedCol] = 0; 
-
+            // Actualizar el estado visual
             statusMessage.textContent = `¡Movimiento exitoso!`;
-            
+            // Chequear el estado del juego
             checkGameStatus();
             return true;
         }
 
+        // ----------------------------------------------------------------------------------------------------------
+        // --------------------------------------- Lógica de Interacción (Eventos del Puntero) ----------------------
+        // ----------------------------------------------------------------------------------------------------------
 
-        // --- Lógica de Interacción (Eventos del Puntero) ---
-
+        /**
+         * Convierte coordenadas de cliente a coordenadas de cuadrícula y canvas.
+         */
         function getGridCoordinates(clientX, clientY) {
+            // Obtener las coordenadas relativas al canvas
             const rect = canvas.getBoundingClientRect();
             const canvasX = clientX - rect.left;
             const canvasY = clientY - rect.top;
-
+            // Convertir a coordenadas de cuadrícula
             const col = Math.floor(canvasX / CELL_SIZE);
             const row = Math.floor(canvasY / CELL_SIZE);
-
+            // Devolver tanto las coordenadas de cuadrícula como las de canvas
             return { row, col, canvasX, canvasY };
         }
 
@@ -534,6 +528,10 @@ import { exito, mostrarDerrotaConManitos, mostrarVictoriaConManitos } from './vi
             // Ubicar el scroll al inicio
             document.documentElement.scrollLeft = 0;
             document.body.scrollLeft = 0;
+            // Habilitamos los botones del juego
+            const verificarBtn = document.getElementById('verificarBtn');
+            verificarBtn.disabled = false;
+            verificarBtn.classList.remove('disabled');
             // Reiniciar el cronómetro y el estado del juego
             iniciarCronometro(tiempoLimite, onTiempoAgotado);
             checkGameStatus();
@@ -552,6 +550,7 @@ import { exito, mostrarDerrotaConManitos, mostrarVictoriaConManitos } from './vi
             // Deshabilitamos los botones del juego
             const verificarBtn = document.getElementById('verificarBtn');
             verificarBtn.disabled = true;
+            verificarBtn.classList.add('disabled');
             // Mostramos el popover y lo aseguramos interactivo
             const popover = document.getElementById('id-popover');
             popover.style.display = 'flex';

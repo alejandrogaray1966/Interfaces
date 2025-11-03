@@ -103,4 +103,12 @@
     color: #2563eb;     /* azul similar a text-blue-600 */
 }
 
-
+/* ------------------------------------------------------ */
+/* Estilo para el botón de reiniciar el juego             */
+/* ------------------------------------------------------ */
+.verificarBtn.disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
