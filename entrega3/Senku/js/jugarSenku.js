@@ -2,28 +2,25 @@ console.log("✅ jugarSenku.js cargado");
 
 // se importan los métodos de la clase relojSenku.js
 import { iniciarCronometro, detenerCronometro } from './relojSenku.js';
-// se importan los métodos de la clase vistaSenku.js
+// se importan los métodos para festejar de la clase vistaSenku.js
 import { exito, mostrarDerrotaConManitos, mostrarVictoriaConManitos } from './vistaSenku.js';
 
         // ----------------------- Variables Globales del Juego ---
         let tiempoLimite = 0;
-
-        // ----------------------- Estado inicial del tablero
+        // ----------------------- Estado inicial del tablero ---
         let INITIAL_BOARD = [];
-
-        let tablero = JSON.parse(JSON.stringify(INITIAL_BOARD)); // Clonar el tablero inicial
+        // ----------------------- Clonar el tablero inicial ---
+        let tablero = JSON.parse(JSON.stringify(INITIAL_BOARD)); 
         let fichaArrastrandose = null; // { row, col } de la ficha seleccionada
         let isDragging = false;
         let mouseX = 0;
         let mouseY = 0;
         let validTargets = []; // Almacena { row, col } de los destinos válidos
         let hoverTarget = null; // Almacena { row, col } del destino sobre el que se está
-
         // ----------------------- Configuración y Contexto del Canvas ---
         const CANVAS_SIZE = 630; 
         const GRID_SIZE = 7;
         const CELL_SIZE = CANVAS_SIZE / GRID_SIZE; // 90px
-        
         // ----------------------- Configuraciones de Color por tipo de ficha ---
         const COLOR_CONFIGS = {
             verde: {
@@ -45,95 +42,92 @@ import { exito, mostrarDerrotaConManitos, mostrarVictoriaConManitos } from './vi
                 hoverRingColor: '#facc15'
             }
         };
-
         // ----------------------- Parámetros de Ficha y Estilos por defecto ---
         const PEG_RADIUS = 25; 
         let PEG_COLOR = '#a7f3d0'; 
         let PEG_STROKE_COLOR = '#065f46'; 
         const PEG_STROKE_WIDTH = 3; 
-        
         // ----------------------- Nuevos Estilos de Feedback por defecto ---
         let TARGET_RING_COLOR = '#d1e7dd'; // Verde claro para el destino posible
         let HOVER_RING_COLOR = '#409c69'; // Verde más oscuro para el destino "hovered"
-
+        // ----------------------- Variables de Contexto del Canvas ---
         let canvas;
         let ctx;
-        
+        // ----------------------- Elementos de UI ---
         const statusMessage = document.getElementById('status-message');
         const pegCountDisplay = document.getElementById('peg-count');
-        
-        // -------------------------------- Funciones de Ayuda para Dibujar en Canvas ----------------------------------
-        
-        /**
-         * Dibuja un círculo en coordenadas de PIXEL.
-         */
-        function dibujarCircleAtCoords(x, y, radius, fillColor, strokeColor, strokeWidth, shadow = true) {
-            ctx.beginPath();
-            ctx.arc(x, y, radius, 0, Math.PI * 2);
-            
-            if (shadow) {
-                ctx.shadowColor = 'rgba(0, 0, 0, 0.6)';
-                ctx.shadowBlur = 10;
-                ctx.shadowOffsetY = 5;
-            }
-            
-            if (strokeWidth > 0) {
-                ctx.strokeStyle = strokeColor;
-                ctx.lineWidth = strokeWidth;
-                ctx.stroke();
-            }
-            
-            ctx.fillStyle = fillColor;
-            ctx.fill();
-            
-            ctx.shadowColor = 'transparent'; 
-        }
 
-        /**
-         * Calcula el centro en píxeles de una celda de la cuadrícula.
-         */
-        function getCellCenter(row, col) {
-            const centerX = col * CELL_SIZE + CELL_SIZE / 2;
-            const centerY = row * CELL_SIZE + CELL_SIZE / 2;
-            return { centerX, centerY };
-        }
-        
-        /**
-         * Dibuja una ficha (peg) en la cuadrícula.
-         */
-        function dibujarPeg(row, col, color = PEG_COLOR, hasShadow = true) {
-            const { centerX, centerY } = getCellCenter(row, col);
-            dibujarCircleAtCoords(centerX, centerY, PEG_RADIUS, color, PEG_STROKE_COLOR, PEG_STROKE_WIDTH, hasShadow);
-        }
+        // ----------------------------------------------------------------------------------------------------------
+        // -----------------------------  Dibuja un círculo en coordenadas de PIXEL ---------------------------------
+        // ----------------------------------------------------------------------------------------------------------
+        export function dibujarCircleAtCoords(x, y, radius, fillColor, strokeColor, strokeWidth, shadow = true) {
+                    // Dibuja un círculo en las coordenadas (x, y) con el radio y colores especificados
+                    ctx.beginPath();
+                    ctx.arc(x, y, radius, 0, Math.PI * 2);
+                    // Aplicar sombra si es necesario
+                    if (shadow) {
+                        ctx.shadowColor = 'rgba(0, 0, 0, 0.6)';
+                        ctx.shadowBlur = 10;
+                        ctx.shadowOffsetY = 5;
+                    }
+                    // Dibujar el borde si se especifica
+                    if (strokeWidth > 0) {
+                        ctx.strokeStyle = strokeColor;
+                        ctx.lineWidth = strokeWidth;
+                        ctx.stroke();
+                    }
+                    // Rellenar el círculo
+                    ctx.fillStyle = fillColor;
+                    ctx.fill();
+                    // Resetear sombra para evitar afectar otros dibujos
+                    ctx.shadowColor = 'transparent'; 
+        }   
 
-        /**
-         * Dibuja el círculo de destino resaltado.
-         */
-        function dibujarTargetRing(row, col, color) {
-            const { centerX, centerY } = getCellCenter(row, col);
-            // Dibujamos el anillo sin relleno, solo borde.
-            ctx.beginPath();
-            ctx.arc(centerX, centerY, PEG_RADIUS * 1.2, 0, Math.PI * 2);
-            
-            // Sombra sutil para destacar
-            ctx.shadowColor = 'rgba(0, 0, 0, 0.4)';
-            ctx.shadowBlur = 8;
-            ctx.shadowOffsetY = 3;
-            
-            ctx.strokeStyle = color;
-            ctx.lineWidth = 4;
-            ctx.stroke();
-            
-            // Resetear la sombra
-            ctx.shadowColor = 'transparent'; 
-        }
+        // ----------------------------------------------------------------------------------------------------------
+        // -------------------- Calcula el centro en píxeles de una celda de la cuadrícula --------------------------
+        // ----------------------------------------------------------------------------------------------------------
+        export function getCellCenter(row, col) {
+                    const centerX = col * CELL_SIZE + CELL_SIZE / 2;
+                    const centerY = row * CELL_SIZE + CELL_SIZE / 2;
+                    return { centerX, centerY };
+        }
 
+        // ----------------------------------------------------------------------------------------------------------
+        // -------------------------------------- Dibuja una ficha (peg) en la cuadrícula. --------------------------
+        // ----------------------------------------------------------------------------------------------------------
+        export function dibujarPeg(row, col, color = PEG_COLOR, hasShadow = true) {
+                    // Obtenemos el centro de la celda
+                    const { centerX, centerY } = getCellCenter(row, col);
+                    // Dibujamos la ficha usando la función genérica
+                    dibujarCircleAtCoords(centerX, centerY, PEG_RADIUS, color, PEG_STROKE_COLOR, PEG_STROKE_WIDTH, hasShadow);
+        }
 
-        /**
-         * Dibuja todo el tablero.
-         */
+        // ----------------------------------------------------------------------------------------------------------
+        // -------------------------------------- Dibuja el círculo de destino resaltado ----------------------------
+        // ----------------------------------------------------------------------------------------------------------
+        export function dibujarTargetRing(row, col, color) {
+                    const { centerX, centerY } = getCellCenter(row, col);
+                    // Dibujamos el anillo sin relleno, solo borde.
+                    ctx.beginPath();
+                    ctx.arc(centerX, centerY, PEG_RADIUS * 1.2, 0, Math.PI * 2);
+                    // Sombra sutil para destacar
+                    ctx.shadowColor = 'rgba(0, 0, 0, 0.4)';
+                    ctx.shadowBlur = 8;
+                    ctx.shadowOffsetY = 3;
+                    // Configuramos el estilo del borde
+                    ctx.strokeStyle = color;
+                    ctx.lineWidth = 4;
+                    ctx.stroke();
+                    // Resetear la sombra
+                    ctx.shadowColor = 'transparent'; 
+        }
+
+        // ----------------------------------------------------------------------------------------------------------
+        // -------------------------------------- Dibuja todo el tablero --------------------------------------------
+        // ----------------------------------------------------------------------------------------------------------
+
         function dibujarTablero() {
-
+            // Limpiar el canvas
             ctx.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
 
             // 1. Dibujar los Anillos de Destino Válidos (si hay una ficha seleccionada)
