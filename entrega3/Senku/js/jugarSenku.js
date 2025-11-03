@@ -50,6 +50,13 @@ import { exito, mostrarDerrotaConManitos, mostrarVictoriaConManitos } from './vi
         // ----------------------- Nuevos Estilos de Feedback por defecto ---
         let TARGET_RING_COLOR = '#d1e7dd'; // Verde claro para el destino posible
         let HOVER_RING_COLOR = '#409c69'; // Verde más oscuro para el destino "hovered"
+        // ----------------------- Configuración de Stickers ---
+        let stickerImage = null;
+        const STICKER_CONFIGS = {
+            verde: './Senku/img/hoja.png',
+            azul: './Senku/img/gota.png',
+            amarilla: './Senku/img/sol.png'
+        };
         // ----------------------- Variables de Contexto del Canvas ---
         let canvas;
         let ctx;
@@ -60,7 +67,7 @@ import { exito, mostrarDerrotaConManitos, mostrarVictoriaConManitos } from './vi
         // ----------------------------------------------------------------------------------------------------------
         // -----------------------------  Dibuja un círculo en coordenadas de PIXEL ---------------------------------
         // ----------------------------------------------------------------------------------------------------------
-        export function dibujarCircleAtCoords(x, y, radius, fillColor, strokeColor, strokeWidth, shadow = true) {
+        function dibujarCircleAtCoords(x, y, radius, fillColor, strokeColor, strokeWidth, shadow = true, stickerImage = null) {
                     // Dibuja un círculo en las coordenadas (x, y) con el radio y colores especificados
                     ctx.beginPath();
                     ctx.arc(x, y, radius, 0, Math.PI * 2);
@@ -81,12 +88,23 @@ import { exito, mostrarDerrotaConManitos, mostrarVictoriaConManitos } from './vi
                     ctx.fill();
                     // Resetear sombra para evitar afectar otros dibujos
                     ctx.shadowColor = 'transparent'; 
-        }   
+                    // Dibujar el sticker si es necesario
+                    if (stickerImage && stickerImage.complete) {
+                        const stickerSize = radius * 1.2;
+                        ctx.drawImage(
+                            stickerImage,
+                            x - stickerSize / 2,
+                            y - stickerSize / 2,
+                            stickerSize,
+                            stickerSize
+                        );
+                    }
+        }
 
         // ----------------------------------------------------------------------------------------------------------
         // -------------------- Calcula el centro en píxeles de una celda de la cuadrícula --------------------------
         // ----------------------------------------------------------------------------------------------------------
-        export function getCellCenter(row, col) {
+        function getCellCenter(row, col) {
                     const centerX = col * CELL_SIZE + CELL_SIZE / 2;
                     const centerY = row * CELL_SIZE + CELL_SIZE / 2;
                     return { centerX, centerY };
@@ -95,17 +113,17 @@ import { exito, mostrarDerrotaConManitos, mostrarVictoriaConManitos } from './vi
         // ----------------------------------------------------------------------------------------------------------
         // -------------------------------------- Dibuja una ficha (peg) en la cuadrícula. --------------------------
         // ----------------------------------------------------------------------------------------------------------
-        export function dibujarPeg(row, col, color = PEG_COLOR, hasShadow = true) {
+        function dibujarPeg(row, col, color = PEG_COLOR, hasShadow = true) {
                     // Obtenemos el centro de la celda
                     const { centerX, centerY } = getCellCenter(row, col);
                     // Dibujamos la ficha usando la función genérica
-                    dibujarCircleAtCoords(centerX, centerY, PEG_RADIUS, color, PEG_STROKE_COLOR, PEG_STROKE_WIDTH, hasShadow);
+                    dibujarCircleAtCoords(centerX, centerY, PEG_RADIUS, color, PEG_STROKE_COLOR, PEG_STROKE_WIDTH, hasShadow, stickerImage);
         }
 
         // ----------------------------------------------------------------------------------------------------------
         // -------------------------------------- Dibuja el círculo de destino resaltado ----------------------------
         // ----------------------------------------------------------------------------------------------------------
-        export function dibujarTargetRing(row, col, color) {
+        function dibujarTargetRing(row, col, color) {
                     const { centerX, centerY } = getCellCenter(row, col);
                     // Dibujamos el anillo sin relleno, solo borde.
                     ctx.beginPath();
@@ -177,7 +195,8 @@ import { exito, mostrarDerrotaConManitos, mostrarVictoriaConManitos } from './vi
                     PEG_COLOR,          // <-- ¡CAMBIAR AQUÍ! Relleno verde claro original
                     PEG_STROKE_COLOR,   // <-- ¡CAMBIAR AQUÍ! Borde oscuro original
                     PEG_STROKE_WIDTH,   // <-- ¡CAMBIAR AQUÍ! Ancho del borde original
-                    true                // Mantenemos la sombra para que parezca que está flotando
+                    true,               // Mantenemos la sombra para que parezca que está flotando
+                    stickerImage        // Mantener el sticker si aplica
                 ); 
             }
         }
@@ -558,7 +577,7 @@ import { exito, mostrarDerrotaConManitos, mostrarVictoriaConManitos } from './vi
         // ----------------------------------------------------------------------------------------------------------
         // ------------------------------------- Inicialización -----------------------------------------------------
         // ----------------------------------------------------------------------------------------------------------
-        export function iniciarJuego(MATRIZ, ficha, tiempo) {
+        export function iniciarJuego(MATRIZ, cualTablero, ficha, tiempo) {
             // Guardamos el estado inicial para reinicios
             INITIAL_BOARD = JSON.parse(JSON.stringify(MATRIZ));
             tablero = JSON.parse(JSON.stringify(INITIAL_BOARD));
@@ -571,6 +590,11 @@ import { exito, mostrarDerrotaConManitos, mostrarVictoriaConManitos } from './vi
             PEG_STROKE_COLOR = colores.pegStrokeColor;
             TARGET_RING_COLOR = colores.targetRingColor;
             HOVER_RING_COLOR = colores.hoverRingColor;
+            // Configuramos la imagen del sticker si es necesario
+            if (cualTablero === 'antiguo') {
+                stickerImage = new Image();
+                stickerImage.src = STICKER_CONFIGS[ficha];
+            }
             // Configuramos el canvas y contexto
             canvas = document.getElementById('senkuCanvas');
             ctx = canvas.getContext('2d');
@@ -586,7 +610,11 @@ import { exito, mostrarDerrotaConManitos, mostrarVictoriaConManitos } from './vi
             verificarBtn.disabled = false;
             verificarBtn.addEventListener('click', resetGame);
             // Dibujar el tablero inicial , iniciar cronómetro y comenzar chequeo de estado
-            dibujarTablero();
+            if (stickerImage && !stickerImage.complete) {
+                stickerImage.onload = () => dibujarTablero();
+            } else {
+                dibujarTablero();
+            }
             iniciarCronometro(tiempoLimite, onTiempoAgotado);
             checkGameStatus();
         };

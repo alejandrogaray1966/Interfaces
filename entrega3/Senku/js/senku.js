@@ -124,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
         mostrarDatosDelJuego(gameSettings);
 
         // lanzamos el juego
-        iniciarJuego( MATRIZ, ficha, tiempo);
+        iniciarJuego( MATRIZ, tablero, ficha, tiempo);
 
     }
 
