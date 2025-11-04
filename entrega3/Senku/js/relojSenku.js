@@ -14,6 +14,11 @@ let intervaloCronometro = null;
 // ------------------------------------------------------------------------------------------------
 export const iniciarCronometro = (tiempoLimite, onTiempoAgotado) => {
 
+    // Detener cualquier cronómetro anterior antes de iniciar uno nuevo
+    if (intervaloCronometro) {
+        clearInterval(intervaloCronometro);
+    }
+
     // Inicializar el tiempo de inicio
     tiempoInicio = Date.now();
     const cronometroEl = document.getElementById('cronometro');
