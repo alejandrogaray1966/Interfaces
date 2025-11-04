@@ -120,6 +120,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Añade el escuchador de eventos
     settingsButton.addEventListener('click', toggleSettingsMenu);
-    playButton.addEventListener('click', startRandomSelection);
+    //playButton.addEventListener('click', startRandomSelection);
 
 });
