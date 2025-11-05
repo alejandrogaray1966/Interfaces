@@ -21,6 +21,18 @@ export const iniciarCronometro = (tiempoLimite, onTiempoAgotado) => {
         cronometroEl.textContent = `Tiempo ${minutos}:${segundos}`;
 
         // ⛔ Verificamos si se agotó el tiempo
+        if(tiempoTranscurrido > (tiempoLimite * 0.66)){
+            const ayudaPiezaFija= document.getElementById('ayudaPiezaFija');
+            const ayuditaBtn= document.getElementById('ayuditaBtn');
+            const ayudas= document.getElementById('ayudas');
+
+            
+            ayudaPiezaFija.disabled = true;
+            ayuditaBtn.style.opacity = "0.2"; 
+            ayudas.style.display = "none";
+
+
+        }
         if (tiempoTranscurrido >= tiempoLimite) {
             // Detenemos el cronómetro
             clearInterval(intervaloCronometro);

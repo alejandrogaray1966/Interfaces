@@ -1,0 +1,114 @@
+/* ------------------------------------------------------ */
+/* Efecto para la imagen del game-preview                 */
+/* ------------------------------------------------------ */
+
+.faded-blur {
+    opacity: 0.3;
+    filter: blur(4px);
+    transition: all 0.5s ease;
+}
+
+/* ------------------------------------------------------ */
+/* SENKU                                                  */
+/* ------------------------------------------------------ */
+
+#senku-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: auto; /* ← permitir interacción */
+}
+
+#senkuCanvas {
+    /* Posición normal (dentro del flujo) para evitar el desplazamiento no deseado */
+    display: block;
+    /* Asegura que no haya margen extra */
+    margin: 0; 
+    /* Define el tamaño exacto del canvas */
+    width: 630px;
+    height: 630px;
+    /* La clave es poner el fondo aquí */
+    background-image: url('../img/tablero_moderno.svg');
+    background-color: transparent; /* Permite que el SVG se vea */
+    background-size: cover; /* Ajusta la imagen al tamaño del canvas */
+    background-repeat: no-repeat;
+    background-position: center; 
+    /* Desactiva la manipulación táctil predeterminada */
+    touch-action: none; 
+    cursor: pointer;
+}
+
+/* ------------------------------------------------------ */
+/* Contador fichas restantes                              */
+/* ------------------------------------------------------ */
+
+.peg-counter {
+    border-radius: 20px;
+    font-family: 'Roboto' sans-serif;
+    font-size: 32px;
+    font-weight: bold;
+    position: absolute;
+    top: 100px;
+    right: 100px;
+    z-index: 3;
+    text-align: center;
+    height: 100px;
+    width: 200px;
+    margin-top: 12px;
+}
+/* Título: Contador de fichas */
+.peg-counter {
+    font-size: 0.875rem;    /* equivalente a text-sm */
+    color: #6b7280;       /* gris similar a text-gray-500 */
+}
+/* Número de fichas */
+.peg-counter span {
+    font-weight: bold;
+    color: #374151;       /* gris oscuro similar a text-gray-700 */
+}
+
+/* ------------------------------------------------------ */
+/* Mensaje para los movimientos                           */
+/* ------------------------------------------------------ */
+
+/* FIX CRÍTICO: Estabilidad total para evitar cambios de layout al actualizar el mensaje */
+#status-message {
+            font-family: 'Roboto' sans-serif;
+            font-size: 24px;
+            position: absolute;
+            bottom: 10px;
+            left: 400px;
+            z-index: 3;
+            text-align: center;
+            height: 100px;
+            width: 600px;
+            margin-top: 12px;
+            height: 24px; 
+            line-height: 24px;
+            /* Fija el ancho máximo y corta el texto para evitar la expansión del contenedor padre */
+            max-width: 100%; 
+            white-space: nowrap; 
+            overflow: hidden; 
+            text-overflow: ellipsis; 
+}
+/* Mensaje principal */
+.status-message {
+    font-size: 1.25rem; /* equivalente a text-lg */
+    font-weight: 600;   /* semibold */
+    color: #2563eb;     /* azul similar a text-blue-600 */
+}
+
+/* ------------------------------------------------------ */
+/* Estilo para el botón de reiniciar el juego             */
+/* ------------------------------------------------------ */
+.verificarBtn.disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
