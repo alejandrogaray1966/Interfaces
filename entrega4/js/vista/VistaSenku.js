@@ -6,7 +6,7 @@ export class VistaSenku {
     static CANVAS_TAMANIO = 630;
     static TAMANIO_TABLERO_LOGICO = 7; // El tablero es 7x7
 
-    constructor(canvas, imagenTableroUrl = '../Senku/img/tablero_antiguo.png') {
+    constructor(canvas, imagenTableroUrl) {
         this.canvas = canvas;
         this.ctx = canvas.getContext('2d');
         
