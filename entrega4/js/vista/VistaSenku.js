@@ -6,12 +6,11 @@ export class VistaSenku {
     static CANVAS_TAMANIO = 630;
     static TAMANIO_TABLERO_LOGICO = 7; // El tablero es 7x7
 
-    constructor(canvas, imagenTableroUrl) {
+    constructor(canvas, imagenTableroUrl = '../Senku/img/tablero_antiguo.png') {
         this.canvas = canvas;
         this.ctx = canvas.getContext('2d');
         
         // 1. Cálculos de Píxeles (Lo más importante)
-        // Tamaño de la celda: 630 píxeles / 7 celdas = 90 píxeles por celda
         this.TAMANIO_CELDA = VistaSenku.CANVAS_TAMANIO / VistaSenku.TAMANIO_TABLERO_LOGICO; // 90
         
         // 2. Elementos para el Dibujo
@@ -23,24 +22,17 @@ export class VistaSenku {
             this.onLoadCallback(); 
         };
         // Un caché para almacenar las imágenes de las fichas una vez cargadas.
-        //Si cada vez que la Vista tiene que dibujar una ficha (por ejemplo, en cada cuadro de animación de arrastre o en cada redibujado), tú crearas una imagen y le dijeras img.src = 'assets/ficha_azul.png';, el navegador tendría que recargar o al menos redecodificar esa misma imagen 32 veces, 60 veces por segundo. Esto es extremadamente ineficiente, consume recursos y puede causar parpadeo o lentitud en el juego.
         this.cacheImagenesFichas = {};
         
-        //¿Por qué una función vacía?
-        // Esto se hace por seguridad para evitar errores en tiempo de ejecución.
         // El Patrón "Callback" o Inyección.
-        // En esencia, esta línea establece un "contrato". Le dice a la clase VistaSenku:
-        // Yo tengo un espacio para guardar una función que se encargará de actualizar el cronómetro en la Interfaz de Usuario. Por defecto, no hace nada, pero la clase AppJuego me inyectará la función real usando mi método configurarActualizacionCronometro()."
         this.actualizarTiempoCronometro = () => {}; 
 
         //Estado de la Vista (para animaciones y selección)
-        this.pistasActivas = []; // Array de coordenadas {fila, columna} a resaltar
-        this.fichaArrastrada = null; // Ficha que se está arrastrando (objeto Ficha del Modelo)
-        this.xArrastre = 0; // Posición X actual de la ficha arrastrada
-        this.yArrastre = 0; // Posición Y actual de la ficha arrastrada
-        this.mensajeFinJuego = null; // Mensaje a mostrar (null si el juego está activo)
-        
-        // Espera a que la imagen de fondo cargue para asegurar que se dibuje
+        this.pistasActivas = []; 
+        this.fichaArrastrada = null; 
+        this.xArrastre = 0; 
+        this.yArrastre = 0; 
+        this.mensajeFinJuego = null; 
     }
     
     //Asigna la función (callback) de AppJuego.js que actualizará el DIV del cronómetro.
@@ -98,29 +90,138 @@ export class VistaSenku {
         this.dibujarMensajeFinJuego();
     }
 
-    //Dibuja una única ficha en su posición de matriz (NO en su posición de arrastre).
+   /**
+     * Dibuja una única ficha en su posición de matriz (NO en su posición de arrastre).
+     */
+   dibujarFicha(ficha) {
+    const x_pixel = ficha.columna * this.TAMANIO_CELDA;
+    const y_pixel = ficha.fila * this.TAMANIO_CELDA;
+    const radio = this.TAMANIO_CELDA / 2;
 
-    dibujarFicha(ficha) {
-        const x_pixel = ficha.columna * this.TAMANIO_CELDA;
-        const y_pixel = ficha.fila * this.TAMANIO_CELDA;
-        
-        this.cargarYDibujarImagen(ficha.imagenUrl, x_pixel, y_pixel);
-    }
+    // 1. DIBUJAR EL CÍRCULO CON EFECTO 3D (Siempre se dibuja)
+    const centerX = x_pixel + radio;
+    const centerY = y_pixel + radio;
+    const gradient = this.ctx.createRadialGradient(
+        centerX, 
+        centerY, 
+        radio * 0.3, // Punto focal para el brillo
+        centerX, 
+        centerY, 
+        radio
+    );
+    // Usa el color de la ficha (requiere el método aclararColor)
+    gradient.addColorStop(0, this.aclararColor(ficha.color, 0.3)); 
+    gradient.addColorStop(1, ficha.color); 
 
+    this.ctx.beginPath();
+    this.ctx.arc(centerX, centerY, radio * 0.9, 0, Math.PI * 2); // Un radio ligeramente menor para dejar un pequeño borde
+    this.ctx.fillStyle = gradient;
+    this.ctx.fill();
     
-    //Dibuja la ficha seleccionada en la posición del mouse para el efecto de Drag and Drop.
-    
-    dibujarFichaArrastrada() {
-        if (this.fichaArrastrada) {
-            // Dibuja la ficha centrada en la posición actual del mouse (xArrastre, yArrastre)
-            const mitadCelda = this.TAMANIO_CELDA / 2;
-            this.cargarYDibujarImagen(
-                this.fichaArrastrada.imagenUrl, 
-                this.xArrastre - mitadCelda, 
-                this.yArrastre - mitadCelda
+    // Dibujar un borde para el efecto de relieve
+    this.ctx.strokeStyle = this.aclararColor(ficha.color, -0.3); // Un tono más oscuro
+    this.ctx.lineWidth = 4;
+    this.ctx.stroke();
+
+    // 2. DIBUJAR EL ICONO (Si está disponible)
+    if (ficha.iconoUrl) {
+        let img = this.cacheImagenesFichas[ficha.iconoUrl];
+
+        if (!img) {
+            // Si no está en caché, la crea y la almacena
+            img = new Image();
+            img.src = ficha.iconoUrl;
+            this.cacheImagenesFichas[ficha.iconoUrl] = img;
+
+            // Si la imagen carga después, forzar un redibujado
+            // Esta es la parte crucial que faltaba: asegurar que el onload llama al redibujo
+            img.onload = () => {
+                if (this.onLoadCallback) { 
+                    this.onLoadCallback(); 
+                }
+            };
+            
+            // No dibujamos si la imagen NO está completa, esperamos el onload
+        }
+
+        if (img.complete) {
+            const iconSize = radio * 0.6; // Ajustar el tamaño del icono
+            this.ctx.drawImage(
+                img,
+                centerX - iconSize / 2,
+                centerY - iconSize / 2,
+                iconSize,
+                iconSize
             );
         }
     }
+    this.cargarYDibujarImagen(ficha.iconoUrl, x_pixel, y_pixel);
+}
+
+// Función auxiliar para aclarar un color
+aclararColor(color, porcentaje) {
+    // Esta función necesita ser definida o importada. 
+    // La incluyo aquí para que funcione, asumiendo que el Tablero.js no la tiene.
+    const num = parseInt(color.replace("#", ""), 16),
+        amt = Math.round(2.55 * porcentaje * 100),
+        R = (num >> 16) + amt,
+        G = ((num >> 8) & 0x00FF) + amt,
+        B = (num & 0x0000FF) + amt;
+    return (
+        "#" +
+        (0x1000000 + (R < 255 ? (R < 1 ? 0 : R) : 255) * 0x10000 +
+            (G < 255 ? (G < 1 ? 0 : G) : 255) * 0x100 +
+            (B < 255 ? (B < 1 ? 0 : B) : 255))
+            .toString(16)
+            .slice(1)
+    );
+}
+
+
+
+dibujarFichaArrastrada() {
+    if (this.fichaArrastrada) {
+        const radio = this.TAMANIO_CELDA / 2;
+        const centerX = this.xArrastre;
+        const centerY = this.yArrastre;
+
+        // Dibuja la ficha arrastrada con el mismo estilo que las demás
+        const gradient = this.ctx.createRadialGradient(
+            centerX,
+            centerY,
+            radio * 0.3,
+            centerX,
+            centerY,
+            radio
+        );
+        gradient.addColorStop(0, this.aclararColor(this.fichaArrastrada.color, 0.3));
+        gradient.addColorStop(1, this.fichaArrastrada.color);
+
+        this.ctx.beginPath();
+        this.ctx.arc(centerX, centerY, radio * 0.9, 0, Math.PI * 2);
+        this.ctx.fillStyle = gradient;
+        this.ctx.fill();
+
+        this.ctx.strokeStyle = this.aclararColor(this.fichaArrastrada.color, -0.3);
+        this.ctx.lineWidth = 4;
+        this.ctx.stroke();
+
+        // Dibuja el icono si está disponible
+        if (this.fichaArrastrada.iconoUrl) {
+            const img = this.cacheImagenesFichas[this.fichaArrastrada.iconoUrl];
+            if (img && img.complete) {
+                const iconSize = radio * 0.6;
+                this.ctx.drawImage(
+                    img,
+                    centerX - iconSize / 2,
+                    centerY - iconSize / 2,
+                    iconSize,
+                    iconSize
+                );
+            }
+        }
+    }
+}
 
     
     //Función auxiliar para cargar y dibujar imágenes usando un caché.

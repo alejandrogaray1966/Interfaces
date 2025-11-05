@@ -8,10 +8,11 @@ const canvas = document.getElementById('senkuCanvas');
 const selectorTiempo = document.getElementById('selectorTiempo');
 const cronometroDiv = document.getElementById('cronometro'); // El div que muestra el tiempo
 const selectorTableros = document.getElementById('tableros'); // Nuevo: Selector de tablero
+const selectorFichas = document.getElementById('selectorFichas');
 const settingsButton = document.querySelector('.game-btn-settings'); // Nuevo: Botón de ajustes (ruedita)
 const botonPlay = document.querySelector('.game-btnPlay'); // El botón para iniciar/reiniciar
 const rankingContainer = document.querySelector('.leaderboard'); 
-const botonReiniciar = document.getElementById('verificarBtn');
+
 
 // También necesitamos el contenedor del juego para mostrar/ocultar el canvas.
 const canvasWrapper = document.querySelector('.canvas-wrapper'); 
@@ -61,36 +62,11 @@ function actualizarCronometroUI(segundos) {
 }
 
 // Inicializa un nuevo juego o reinicia el existente.
-function actualizarFichasUI(fichas) {
-    // 1. Busca el SPAN que contiene solo el número.
-    // La variable 'contadorSpan' ahora es el elemento <span id="contadorFicha">32</span>
-    const contadorSpan = document.getElementById('contadorFicha'); 
 
-    if (!contadorSpan) {
-        console.error("Error: Elemento con ID 'contadorFicha' no encontrado.");
-        return;
-    }
-    
-    // 2. CORRECCIÓN: Actualiza el contenido de texto del SPAN solo con el número.
-    contadorSpan.textContent = fichas.toString().padStart(2, '0');
-    
-    
-    // --- Lógica de Estilos para el DIV contenedor ---
-    // Usamos .parentElement para obtener el DIV que tiene la clase "contadorFicha"
-    const divContenedor = contadorSpan.parentElement;
-    
-    if (divContenedor) {
-        if (fichas <= 5) {
-            divContenedor.classList.add('alerta-fichas-bajas');
-        } else {
-            divContenedor.classList.remove('alerta-fichas-bajas');
-        }
-    }
-}
 function iniciarJuego() {
 
     if (!selectorTableros || !selectorTiempo || !canvas) {
-        console.error("Error: Elementos de UI necesarios no encontrados (Tablero, Tiempo o Canvas).");
+        console.error("Error: Elementos de UI necesarios no encontrados (Tablero, Tiempo o Canvas). Verifica el DOM.");
         return;
     }
     
@@ -99,6 +75,13 @@ function iniciarJuego() {
 
     // Obtener el tiempo seleccionado por el usuario.
     const tiempoSeleccionadoSegundos = parseInt(selectorTiempo.value, 10);
+
+    if (isNaN(tiempoSeleccionadoSegundos)) {
+        console.error("Error: El tiempo seleccionado no es un número válido.");
+        return;
+    }
+
+    const tipoFichas = selectorFichas.value; 
 
     //Usamos el mapa para obtener la URL correcta
     let imagenTableroUrl = MAPA_TABLEROS[tableroSeleccionado];
@@ -117,6 +100,7 @@ function iniciarJuego() {
         // Dificultad (Tiempo): Obtenemos el texto visible de la opción seleccionada.
         dificultad: selectedOption.text,
         // Tiempo límite
+        tiempo: tiempoSeleccionadoSegundos
     };
     mostrarDatosDelJuego(settings);
 
@@ -144,13 +128,13 @@ function iniciarJuego() {
 
     if (!controlador) {
         // Primera vez que se inicia el juego
-        controlador = new ControladorSenku(canvas, imagenTableroUrl,tableroSeleccionado, tiempoSeleccionadoSegundos, actualizarCronometroUI,actualizarFichasUI);// CALLBACK QUE ACTUALIZA EL DIV!
+        controlador = new ControladorSenku(canvas, imagenTableroUrl, tipoFichas, tiempoSeleccionadoSegundos, actualizarCronometroUI);// CALLBACK QUE ACTUALIZA EL DIV!
 
         
         juegoIniciado = true;
         
     } else {
-        controlador.reiniciarJuego(imagenTableroUrl, tableroSeleccionado,  tiempoSeleccionadoSegundos, actualizarCronometroUI, actualizarFichasUI);
+        controlador.reiniciarJuego(imagenTableroUrl, tipoFichas, tiempoSeleccionadoSegundos, actualizarCronometroUI);
     }
         
     if (popoverFinJuego && popoverFinJuego.open) {
@@ -162,6 +146,8 @@ window.onload = function() {
     mostrarRanking(rankingJugadores);
     if (botonPlay) {
         botonPlay.addEventListener('click', iniciarJuego);
+    } else {
+        console.error('El botón "jugar" no se encontró en el DOM. Verifica el selector.');
     }
 
     if (settingsButton) {
@@ -171,11 +157,6 @@ window.onload = function() {
     // Si existe el botón de reintentar (por ejemplo, en un pop-up de fin de juego)
     if (reintentarSenku) {
         reintentarSenku.addEventListener('click', iniciarJuego);
-    }
-
-    if (botonReiniciar) {
-        // Llama a la misma función que ya sabe cómo reiniciar el juego.
-        botonReiniciar.addEventListener('click', iniciarJuego); 
     }
     
     // Inicializar el display de tiempo con el valor por defecto antes de que empiece el juego

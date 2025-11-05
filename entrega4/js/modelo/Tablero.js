@@ -16,15 +16,27 @@ export class Tablero {
                         [6, 2], [6, 3], [6, 4]
     ];
 
-    static MAPA_FICHA_IMAGEN = {
-        'antiguo': './img/ficha_antigua1.svg',
-        'medieval': './img/ficha_medieval1.svg',
-        'moderno': './img/ficha_moderna1.svg'
+   // Propiedades de la ficha (Color y URL del Icono SVG)
+   static MAPA_FICHA_PROPIEDADES = {
+    'antiguo': {
+        color: 'rgba(116, 81, 64, 0.67)', // Color café/tierra
+        iconoUrl:'./assets/armadura1.png' // RUTA EJEMPLO: Asegúrate de que el archivo exista
+    }, 
+    'medieval': {
+        color: 'rgba(70, 131, 180, 0.5)', // Color azul acero
+        iconoUrl: './assets/armadura2.png'
+        // RUTA EJEMPLO
+    }, 
+    'moderno': {
+        color: 'rgba(22, 62, 56, 0.5)', // Color verde medio
+        iconoUrl: './assets/armadura3.png' // RUTA EJEMPLO
+    }
     };
+
     constructor(temaTablero = 'antiguo') {
-        this.tableroMatriz = []; // La matriz 7x7
-        this.fichasRestantes = 32;
-        this.temaTablero = temaTablero; // Guardamos el tema
+        this.tableroMatriz = []; 
+        this.fichasRestantes = 0;
+        this.temaTablero = temaTablero; 
         this.inicializarTablero();
     }
 
@@ -33,11 +45,13 @@ export class Tablero {
     
     inicializarTablero() {
         this.tableroMatriz = []; 
-        this.fichasRestantes = 32;
+        this.fichasRestantes = 0;
 
-        const fichaUrl = Tablero.MAPA_FICHA_IMAGEN[this.temaTablero] || Tablero.MAPA_FICHA_IMAGEN['antiguo'];
+        const propiedadesFicha = Tablero.MAPA_FICHA_PROPIEDADES[this.temaTablero] || Tablero.MAPA_FICHA_PROPIEDADES['antiguo'];
+        const colorFicha = propiedadesFicha.color;
+        const iconoFichaUrl = propiedadesFicha.iconoUrl;
 
-        // Crear la matriz 7x7 vacía primero (con null)
+        // ... (Crear la matriz 7x7 vacía primero) ...
         for (let i = 0; i < Tablero.TAMANIO; i++) {
             this.tableroMatriz[i] = []; 
             for (let j = 0; j < Tablero.TAMANIO; j++) {
@@ -50,15 +64,14 @@ export class Tablero {
             const fila = Tablero.POSICIONES_JUEGO[i][0];
             const col = Tablero.POSICIONES_JUEGO[i][1];
 
-            // Si es la posición central (el hueco inicial)
             if (fila === 3 && col === 3) {
-                // Ya está null de la inicialización, no hacemos nada.
-                continue; //salta inmediatamente al inicio de la siguiente iteración del bucle más interno.
+                continue; 
             }
             
-            // Si es cualquier otra posición de la cruz, ponemos una ficha
-            const nuevaFicha = new Ficha(fila, col, fichaUrl);
+            // Pasamos color e iconoUrl al constructor de Ficha
+            const nuevaFicha = new Ficha(fila, col, colorFicha, iconoFichaUrl); 
             this.tableroMatriz[fila][col] = nuevaFicha;
+            this.fichasRestantes++;
         }
     }
     // Función auxiliar para verificar si una posición pertenece a la forma de cruz.
@@ -173,10 +186,6 @@ export class Tablero {
             }
         }
         return false;
-    }
-
-    contarFichas() {
-        return this.fichasRestantes;
     }
 
 
