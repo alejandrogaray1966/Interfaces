@@ -47,7 +47,10 @@
 }
 
 
-
+.info-juego h1{
+ font-size: 2rem;
+ margin-bottom: 8px;
+}
 .canvas-wrapper {
     position: relative;
     top: 0;
@@ -432,11 +435,12 @@
   background: none;
   font-size: 1.1rem;
 }
-.leaderboard ol li p.ranking-tiempo{
+.leaderboard ol li p.ranking-fichas{
     left: 230px;
   content: "";
   position: absolute;
   font-size: 1rem;
+  z-index: 2;
 }
 
 
@@ -463,7 +467,7 @@
 /* Pseudo-elemento ::after en 'span' */
 .leaderboard ol li span::after {
   left: auto;
-  right:-189px;;
+  right:-187px;;
   border-left: none;
   border-right: 10px solid transparent;
 }
@@ -533,7 +537,7 @@
 }
 
 .leaderboard ol li:nth-child(2) span::after {
-  right: -210px;
+  right: -192px;
 
 }
 
@@ -545,11 +549,16 @@
 .leaderboard ol li:nth-child(3)::after {
   background: #4f1c65;
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.11);
-}
 
+}
+.leaderboard ol li:nth-child(3) span::after {
+  right:  -177px;
+
+}
 .leaderboard ol li:nth-child(3) span::before,
 .leaderboard ol li:nth-child(3) span::after {
   border-top: 2px solid #4f1c65;
+
 }
 
 /* Estilos para el 4to lugar */
@@ -589,8 +598,7 @@
   border-bottom: 8px solid #4f1c65;
 }
 .leaderboard ol li:nth-child(5) span::after{
-    right: -175px;
-}
+right: -210px;}
 
 
 

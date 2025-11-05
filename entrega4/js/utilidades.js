@@ -62,14 +62,14 @@ export function bloquearBotones(bloquear) {
 // el estado del ranking durante la sesión. Si usas localStorage, se inicializará desde allí.
 // Aquí la inicializamos con los valores por defecto que tenías.
 export let rankingJugadores = [
-    { nombre: 'Fabricio', tiempo: 21 },
-    { nombre: 'Belén', tiempo: 34 },
-    { nombre: 'Pamela', tiempo: 40 },
-    { nombre: 'Soledad', tiempo: 55 },
-    { nombre: 'Alejandro', tiempo: 62 }
+    { nombre: 'Fabricio', fichaAcumulada: 11 },
+    { nombre: 'Belén', fichaAcumulada: 34 },
+    { nombre: 'Pamela', fichaAcumulada: 22 },
+    { nombre: 'Soledad', fichaAcumulada: 28 },
+    { nombre: 'Alejandro', fichaAcumulada: 25 }
 ]; 
 // Ordenamos el ranking una vez (por si acaso no lo está)
-rankingJugadores.sort((a, b) => a.tiempo - b.tiempo); 
+rankingJugadores.sort((a, b) => a.fichaAcumulada - b.fichaAcumulada); 
 
 //Muestra los datos del ranking del juego en el contenedor especificado.
 export function mostrarRanking(ranking) {
@@ -92,7 +92,7 @@ export function mostrarRanking(ranking) {
         htmlContent += `
             <li class="ranking-item ${nombreClase}">
                 <span class="ranking-nombre">${jugador.nombre}</span>
-                <p class="ranking-tiempo">${jugador.tiempo}s</p>
+                <p class="ranking-fichas">${jugador.fichaAcumulada}</p>
             </li>
         `;
     }
@@ -101,13 +101,13 @@ export function mostrarRanking(ranking) {
     rankingContainer.innerHTML = htmlContent;
 }
 
-export function actualizarRanking(nombre, tiempoFinal) {
+export function actualizarRanking(nombre, totalFicha) {
 
     //  Agregar el nuevo puntaje
-    rankingJugadores.push({ nombre, tiempo: tiempoFinal });
+    rankingJugadores.push({ nombre, fichaAcumulada: totalFicha });
 
     //  Ordenar de menor a mayor tiempo
-    rankingJugadores.sort((a, b) => a.tiempo - b.tiempo);
+    rankingJugadores.sort((a, b) => a.fichaAcumulada - b.fichaAcumulada);
 
     // Limitar a 6 jugadores (o el número que desees)
     if (rankingJugadores.length > 6) {
@@ -186,7 +186,6 @@ export function mostrarDatosDelJuego(settings) {
     infoContainer.innerHTML = `
         <li><strong>Nivel:</strong> ${settings.nivel}</li>
         <li><strong>Dificultad:</strong> ${settings.dificultad}</li>
-        <li><strong>Límite:</strong> ${settings.tiempo} Seg.</li>
     `;
 }
 

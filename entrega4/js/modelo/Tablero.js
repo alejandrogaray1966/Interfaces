@@ -23,7 +23,7 @@ export class Tablero {
     };
     constructor(temaTablero = 'antiguo') {
         this.tableroMatriz = []; // La matriz 7x7
-        this.fichasRestantes = 0;
+        this.fichasRestantes = 32;
         this.temaTablero = temaTablero; // Guardamos el tema
         this.inicializarTablero();
     }
@@ -33,7 +33,7 @@ export class Tablero {
     
     inicializarTablero() {
         this.tableroMatriz = []; 
-        this.fichasRestantes = 0;
+        this.fichasRestantes = 32;
 
         const fichaUrl = Tablero.MAPA_FICHA_IMAGEN[this.temaTablero] || Tablero.MAPA_FICHA_IMAGEN['antiguo'];
 
@@ -59,7 +59,6 @@ export class Tablero {
             // Si es cualquier otra posición de la cruz, ponemos una ficha
             const nuevaFicha = new Ficha(fila, col, fichaUrl);
             this.tableroMatriz[fila][col] = nuevaFicha;
-            this.fichasRestantes++;
         }
     }
     // Función auxiliar para verificar si una posición pertenece a la forma de cruz.
@@ -174,6 +173,10 @@ export class Tablero {
             }
         }
         return false;
+    }
+
+    contarFichas() {
+        return this.fichasRestantes;
     }
 
 
