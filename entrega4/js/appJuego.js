@@ -8,7 +8,7 @@ const canvas = document.getElementById('senkuCanvas');
 const selectorTiempo = document.getElementById('selectorTiempo');
 const cronometroDiv = document.getElementById('cronometro'); // El div que muestra el tiempo
 const selectorTableros = document.getElementById('tableros'); // Nuevo: Selector de tablero
-const selectorFichas = document.getElementById('selectorFichas');
+const selectorMaterial = document.getElementById('selectorMaterial');
 const settingsButton = document.querySelector('.game-btn-settings'); // Nuevo: Botón de ajustes (ruedita)
 const botonPlay = document.querySelector('.game-btnPlay'); // El botón para iniciar/reiniciar
 const rankingContainer = document.querySelector('.leaderboard'); 
@@ -92,11 +92,11 @@ function actualizarFichasUI(fichas) {
     }
 }
 
-function mostrarPopoverFinJuego(victoria, mensajePrincipal, accion = 'mostrar') {
 
 
 
     // Referencias a los elementos del popover HTML
+   function mostrarPopoverFinJuego(victoria, mensajePrincipal, accion = 'mostrar') {
     const tituloElemento = document.getElementById('mensajeFinJuegoTitulo');
     const descripcionElemento = document.getElementById('mensajeFinJuegoDescripcion'); 
         // --- 1. Definir Contenido ---
@@ -114,25 +114,24 @@ function mostrarPopoverFinJuego(victoria, mensajePrincipal, accion = 'mostrar') 
     if (popoverFinJuego.showPopover) { // Usamos la global 'popoverFinJuego'
                 popoverFinJuego.showPopover();
     }
-}// Inicializa un nuevo juego o reinicia el existente.
+}// Inicializa un nuevo juego o reinicia el existente.*/
 
 function iniciarJuego() {
+    popoverFinJuego.hidePopover();
 
-    if (!selectorTableros || !selectorTiempo || !canvas) {
-        console.error("Error: Elementos de UI necesarios no encontrados (Tablero, Tiempo o Canvas). Verifica el DOM.");
+    if (!selectorTableros || !selectorTiempo || !canvas || !selectorMaterial) {
+        console.error("Error: Elementos de UI necesarios no encontrados. Verifica el DOM.");
         return;
     }
     
     // Obtener la configuración elegida por el usuario
     const tableroSeleccionado = selectorTableros.value;
-
-    // Obtener el tiempo seleccionado por el usuario.
     const tiempoSeleccionadoSegundos = parseInt(selectorTiempo.value, 10);
+    
+    // Leer el valor del selector de material
+    const tipoFichas = selectorMaterial.value; 
 
-
-    const tipoFichas = selectorFichas.value; 
-
-    //Usamos el mapa para obtener la URL correcta
+    // Usamos el mapa para obtener la URL correcta
     let imagenTableroUrl = MAPA_TABLEROS[tableroSeleccionado];
 
     // Por si acaso, si el valor seleccionado no existe en el mapa, usamos el antiguo como fallback
@@ -141,7 +140,7 @@ function iniciarJuego() {
         imagenTableroUrl = MAPA_TABLEROS['antiguo'];
     }
 
-        // Mostrar los Datos del Juego Seleccionados
+    // Mostrar los Datos del Juego Seleccionados
     const selectedOption = selectorTiempo.options[selectorTiempo.selectedIndex];
     const settings = {
         // Nivel (Tablero): Capitalizamos la primera letra (ej: 'moderno' -> 'Moderno')
@@ -155,12 +154,10 @@ function iniciarJuego() {
     const settingsMenu = document.querySelector('.game-settings-menu');
     if ((settingsButton && !settingsButton.classList.contains('hidden'))||(settingsMenu && !settingsMenu.classList.contains('hidden'))) {
         settingsMenu.classList.add('hidden'); 
-
         settingsButton.classList.add('hidden'); 
-        
     }
     
-    //Mostrar el contenedor del Canvas (y el efecto de previsualización)
+    // Mostrar el contenedor del Canvas (y el efecto de previsualización)
     if (previewImage) {
         previewImage.classList.add('hidden');
         previewImage.classList.remove('faded-blur');    
@@ -170,17 +167,17 @@ function iniciarJuego() {
     }
     if (botonPlay) {
         botonPlay.classList.add('hidden'); 
-        // pero aquí lo ocultamos al comenzar la partida.
     }
 
     if (!controlador) {
         // Primera vez que se inicia el juego
-        controlador = new ControladorSenku(canvas, imagenTableroUrl, tipoFichas, tiempoSeleccionadoSegundos, actualizarCronometroUI, actualizarFichasUI, mostrarPopoverFinJuego);// CALLBACK QUE ACTUALIZA EL DIV!
-
         
+        controlador = new ControladorSenku(canvas, imagenTableroUrl, tipoFichas, tiempoSeleccionadoSegundos, actualizarCronometroUI, actualizarFichasUI, mostrarPopoverFinJuego);
+
         juegoIniciado = true;
         
     } else {
+    
         controlador.reiniciarJuego(imagenTableroUrl, tipoFichas, tiempoSeleccionadoSegundos, actualizarCronometroUI, actualizarFichasUI, mostrarPopoverFinJuego);
     }
         
@@ -206,6 +203,15 @@ window.onload = function() {
         // Llama a la misma función que ya sabe cómo reiniciar el juego.
         botonReiniciar.addEventListener('click', iniciarJuego); 
     }
+
+    if(selectorMaterial){
+        selectorMaterial.addEventListener('change', () => {
+            if (controlador) {
+                iniciarJuego();
+            }
+        });
+    }
+    
 
 
     // Si existe el botón de reintentar (por ejemplo, en un pop-up de fin de juego)
