@@ -90,6 +90,15 @@ function actualizarFichasUI(fichas) {
     }
 }
 
+function mostrarPopoverFinJuego(mensajeDerrota) { // Puedes recibir el mensaje si quieres mostrarlo en el popover
+    // popoverFinJuego ya está declarado al inicio del archivo
+    if (popoverFinJuego && popoverFinJuego.showPopover) {
+        popoverFinJuego.showPopover();
+    }
+    // Opcional: Detener confeti si lo usas para la victoria
+    // if (stopConfetti) stopConfetti(); 
+}
+
 // Inicializa un nuevo juego o reinicia el existente.
 
 function iniciarJuego() {
@@ -151,13 +160,13 @@ function iniciarJuego() {
 
     if (!controlador) {
         // Primera vez que se inicia el juego
-        controlador = new ControladorSenku(canvas, imagenTableroUrl, tipoFichas, tiempoSeleccionadoSegundos, actualizarCronometroUI, actualizarFichasUI);// CALLBACK QUE ACTUALIZA EL DIV!
+        controlador = new ControladorSenku(canvas, imagenTableroUrl, tipoFichas, tiempoSeleccionadoSegundos, actualizarCronometroUI, actualizarFichasUI, mostrarPopoverFinJuego);// CALLBACK QUE ACTUALIZA EL DIV!
 
         
         juegoIniciado = true;
         
     } else {
-        controlador.reiniciarJuego(imagenTableroUrl, tipoFichas, tiempoSeleccionadoSegundos, actualizarCronometroUI, actualizarFichasUI);
+        controlador.reiniciarJuego(imagenTableroUrl, tipoFichas, tiempoSeleccionadoSegundos, actualizarCronometroUI, actualizarFichasUI, mostrarPopoverFinJuego);
     }
         
     if (popoverFinJuego && popoverFinJuego.open) {
