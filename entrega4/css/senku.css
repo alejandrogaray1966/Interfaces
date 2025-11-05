@@ -37,6 +37,7 @@
 .info-juego h1{
  font-size: 2rem;
  margin-bottom: 8px;
+ text-align: center;
 }
 
 /* ------------------------------------------------------ */
@@ -647,28 +648,36 @@
 .container-popover{
   background-color: #090b1b;
   position: absolute;
-  top: 293px;
-  left: 485px;
+  top: 588px;
+  left: 696px;
   width: 420px;
-  flex-direction: column;
   border-radius: 8px;
   align-items: center;
-  justify-content: center;
-  height: 100px;
   gap: 22px;
 }
 
 .container-popover p{
   font-size: 16px;
+
 }
+
+.container-popover p,
+.container-popover h2{
+  text-align: center;
+  padding: 4px 8px 12px 8px
+}
+
 .btn-popover{
   display: flex;
-  gap: 24px;
+  flex-direction: row;
+  justify-content: space-evenly;
 } 
 
 .btn-popover button{
   width: 100px;
   height: 24px;
+  border-radius: 4px;
+  margin: 5px;
 }
 
 /* ------------------------------------------------------ */

@@ -87,7 +87,6 @@ export class VistaSenku {
         if (this.fichaArrastrada) {
             this.dibujarFichaArrastrada();
         }
-        this.dibujarMensajeFinJuego();
     }
 
    /**
@@ -159,69 +158,69 @@ export class VistaSenku {
 }
 
 // Función auxiliar para aclarar un color
-aclararColor(color, porcentaje) {
-    // Esta función necesita ser definida o importada. 
-    // La incluyo aquí para que funcione, asumiendo que el Tablero.js no la tiene.
-    const num = parseInt(color.replace("#", ""), 16),
-        amt = Math.round(2.55 * porcentaje * 100),
-        R = (num >> 16) + amt,
-        G = ((num >> 8) & 0x00FF) + amt,
-        B = (num & 0x0000FF) + amt;
-    return (
-        "#" +
-        (0x1000000 + (R < 255 ? (R < 1 ? 0 : R) : 255) * 0x10000 +
-            (G < 255 ? (G < 1 ? 0 : G) : 255) * 0x100 +
-            (B < 255 ? (B < 1 ? 0 : B) : 255))
-            .toString(16)
-            .slice(1)
-    );
-}
-
-
-
-dibujarFichaArrastrada() {
-    if (this.fichaArrastrada) {
-        const radio = this.TAMANIO_CELDA / 2;
-        const centerX = this.xArrastre;
-        const centerY = this.yArrastre;
-
-        // Dibuja la ficha arrastrada con el mismo estilo que las demás
-        const gradient = this.ctx.createRadialGradient(
-            centerX,
-            centerY,
-            radio * 0.3,
-            centerX,
-            centerY,
-            radio
+    aclararColor(color, porcentaje) {
+        // Esta función necesita ser definida o importada. 
+        // La incluyo aquí para que funcione, asumiendo que el Tablero.js no la tiene.
+        const num = parseInt(color.replace("#", ""), 16),
+            amt = Math.round(2.55 * porcentaje * 100),
+            R = (num >> 16) + amt,
+            G = ((num >> 8) & 0x00FF) + amt,
+            B = (num & 0x0000FF) + amt;
+        return (
+            "#" +
+            (0x1000000 + (R < 255 ? (R < 1 ? 0 : R) : 255) * 0x10000 +
+                (G < 255 ? (G < 1 ? 0 : G) : 255) * 0x100 +
+                (B < 255 ? (B < 1 ? 0 : B) : 255))
+                .toString(16)
+                .slice(1)
         );
-        gradient.addColorStop(0, this.aclararColor(this.fichaArrastrada.color, 0.3));
-        gradient.addColorStop(1, this.fichaArrastrada.color);
+    }
 
-        this.ctx.beginPath();
-        this.ctx.arc(centerX, centerY, radio * 0.9, 0, Math.PI * 2);
-        this.ctx.fillStyle = gradient;
-        this.ctx.fill();
 
-        this.ctx.strokeStyle = this.aclararColor(this.fichaArrastrada.color, -0.3);
-        this.ctx.lineWidth = 4;
-        this.ctx.stroke();
 
-        // Dibuja el icono si está disponible
-        if (this.fichaArrastrada.iconoUrl) {
-            const img = this.cacheImagenesFichas[this.fichaArrastrada.iconoUrl];
-            if (img && img.complete) {
-                const iconSize = radio * 0.6;
-                this.ctx.drawImage(
-                    img,
-                    centerX - iconSize / 2,
-                    centerY - iconSize / 2,
-                    iconSize,
-                    iconSize
-                );
+    dibujarFichaArrastrada() {
+        if (this.fichaArrastrada) {
+            const radio = this.TAMANIO_CELDA / 2;
+            const centerX = this.xArrastre;
+            const centerY = this.yArrastre;
+
+            // Dibuja la ficha arrastrada con el mismo estilo que las demás
+            const gradient = this.ctx.createRadialGradient(
+                centerX,
+                centerY,
+                radio * 0.3,
+                centerX,
+                centerY,
+                radio
+            );
+            gradient.addColorStop(0, this.aclararColor(this.fichaArrastrada.color, 0.3));
+            gradient.addColorStop(1, this.fichaArrastrada.color);
+
+            this.ctx.beginPath();
+            this.ctx.arc(centerX, centerY, radio * 0.9, 0, Math.PI * 2);
+            this.ctx.fillStyle = gradient;
+            this.ctx.fill();
+
+            this.ctx.strokeStyle = this.aclararColor(this.fichaArrastrada.color, -0.3);
+            this.ctx.lineWidth = 4;
+            this.ctx.stroke();
+
+            // Dibuja el icono si está disponible
+            if (this.fichaArrastrada.iconoUrl) {
+                const img = this.cacheImagenesFichas[this.fichaArrastrada.iconoUrl];
+                if (img && img.complete) {
+                    const iconSize = radio * 0.6;
+                    this.ctx.drawImage(
+                        img,
+                        centerX - iconSize / 2,
+                        centerY - iconSize / 2,
+                        iconSize,
+                        iconSize
+                    );
+                }
             }
         }
     }
-}
 
     
     //Función auxiliar para cargar y dibujar imágenes usando un caché.
@@ -314,7 +313,7 @@ dibujarFichaArrastrada() {
         return { fila, columna };
     }
 
-        // 💡 NUEVA FUNCIÓN: Determina si una coordenada lógica corresponde a una esquina no jugable.
+        //  Determina si una coordenada lógica corresponde a una esquina no jugable.
     esPosicionNoJugable(fila, columna) {
         
         // Verifica si la fila está en los extremos (0, 1, 5, 6)
@@ -365,27 +364,4 @@ dibujarFichaArrastrada() {
         this.pistasActivas = [];
     }
 
-
-    // Muestra un mensaje en el centro del Canvas (para victoria/derrota).
-
-    mostrarMensaje(mensaje) {
-        this.mensajeFinJuego = mensaje;
-    }
-
-    // Dibuja el mensaje de fin de juego si está activo.
-
-    dibujarMensajeFinJuego() {
-        if (this.mensajeFinJuego) {
-            // Fondo semi-transparente
-            this.ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
-            this.ctx.fillRect(0, VistaSenku.CANVAS_TAMANIO / 2 - 50, VistaSenku.CANVAS_TAMANIO, 100);
-
-            // El texto del mensaje
-            this.ctx.fillStyle = 'white';
-            this.ctx.font = 'bold 40px Arial';
-            this.ctx.textAlign = 'center';
-            this.ctx.textBaseline = 'middle';
-            this.ctx.fillText(this.mensajeFinJuego, VistaSenku.CANVAS_TAMANIO / 2, VistaSenku.CANVAS_TAMANIO / 2);
-        }
-    }
 }

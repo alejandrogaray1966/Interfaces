@@ -1,7 +1,7 @@
 // tomar el valor del tiempo que eligio el usuario para pasar el valor al controlador. El AppJuego.js leerá this.tiempoRestante directamente del controlador para actualizar el DIV).
 // Importamos el ControladorSenku que maneja la lógica del juego.
 import { ControladorSenku } from './controlador/ControladorSenku.js';
-import { toggleSettingsMenu, mostrarRanking,mostrarDatosDelJuego,stopConfetti,rankingJugadores} from './utilidades.js';
+import { toggleSettingsMenu, mostrarRanking,mostrarDatosDelJuego,startConfetti,stopConfetti,rankingJugadores} from './utilidades.js';
 
 // --- ELEMENTOS DE LA UI ---
 const canvas = document.getElementById('senkuCanvas');
@@ -13,15 +13,17 @@ const settingsButton = document.querySelector('.game-btn-settings'); // Nuevo: B
 const botonPlay = document.querySelector('.game-btnPlay'); // El botón para iniciar/reiniciar
 const rankingContainer = document.querySelector('.leaderboard'); 
 const botonReiniciar = document.getElementById('verificarBtn');
+let popoverFinJuego = document.getElementById('id-popover'); // Asumo que tienes un popover para el fin de juego
 
 
 
 // También necesitamos el contenedor del juego para mostrar/ocultar el canvas.
 const canvasWrapper = document.querySelector('.canvas-wrapper'); 
 const previewImage = document.querySelector('.game-preview');
-const popoverFinJuego = document.getElementById('popoverFinJuego'); // Asumo que tienes un popover para el fin de juego
 // Necesitas IDs para los popovers/botones de reintentar si los vas a usar
-const reintentarSenku = document.getElementById('reintentar-senku');
+const reintentarSenku = document.getElementById('boton-reintentar');
+const inicioSenku = document.getElementById('boton-inicio');
+
 
 // La URL de la imagen del tablero 
 const MAPA_TABLEROS = {
@@ -66,7 +68,7 @@ function actualizarCronometroUI(segundos) {
 function actualizarFichasUI(fichas) {
     // 1. Busca el SPAN que contiene solo el número.
     // La variable 'contadorSpan' ahora es el elemento <span id="contadorFicha">32</span>
-    const contadorSpan = document.getElementById('contadorFicha'); 
+    const contadorSpan = document.getElementById('contadorFichaNumero'); 
 
     if (!contadorSpan) {
         console.error("Error: Elemento con ID 'contadorFicha' no encontrado.");
@@ -90,16 +92,29 @@ function actualizarFichasUI(fichas) {
     }
 }
 
-function mostrarPopoverFinJuego(mensajeDerrota) { // Puedes recibir el mensaje si quieres mostrarlo en el popover
-    // popoverFinJuego ya está declarado al inicio del archivo
-    if (popoverFinJuego && popoverFinJuego.showPopover) {
-        popoverFinJuego.showPopover();
-    }
-    // Opcional: Detener confeti si lo usas para la victoria
-    // if (stopConfetti) stopConfetti(); 
-}
+function mostrarPopoverFinJuego(victoria, mensajePrincipal, accion = 'mostrar') {
 
-// Inicializa un nuevo juego o reinicia el existente.
+
+
+    // Referencias a los elementos del popover HTML
+    const tituloElemento = document.getElementById('mensajeFinJuegoTitulo');
+    const descripcionElemento = document.getElementById('mensajeFinJuegoDescripcion'); 
+        // --- 1. Definir Contenido ---
+    if (victoria) {
+        tituloElemento.textContent = "¡VICTORIA! 🎉";
+        descripcionElemento.textContent = "¡Felicitaciones! Has ganado el Senku. Tu Fichas seran registradas.";
+        startConfetti(); 
+    } else {
+        tituloElemento.textContent = "Juego Terminado 😞";
+        descripcionElemento.textContent = mensajePrincipal;
+        stopConfetti();
+    }
+
+        // --- 2. Mostrar el Popover ---
+    if (popoverFinJuego.showPopover) { // Usamos la global 'popoverFinJuego'
+                popoverFinJuego.showPopover();
+    }
+}// Inicializa un nuevo juego o reinicia el existente.
 
 function iniciarJuego() {
 
@@ -170,6 +185,7 @@ function iniciarJuego() {
     }
         
     if (popoverFinJuego && popoverFinJuego.open) {
+        console.log("popover de inciarjuego" + popoverFinJuego)
         popoverFinJuego.hidePopover();
     }
 }
@@ -193,15 +209,22 @@ window.onload = function() {
 
 
     // Si existe el botón de reintentar (por ejemplo, en un pop-up de fin de juego)
+    if (inicioSenku) {
+            inicioSenku.addEventListener('click', () => {
+           
+            window.location.href = 'senku.html'; // ⬅️ Cambia 'senku.html' a la ruta correcta si es diferente
+        })    }
     if (reintentarSenku) {
         reintentarSenku.addEventListener('click', iniciarJuego);
     }
+
     
     // Inicializar el display de tiempo con el valor por defecto antes de que empiece el juego
     if (selectorTiempo) {
         // Tu código usa un 'const tiempoInicial', el mío lo hace directamente. Ambos son válidos.
         actualizarCronometroUI(parseInt(selectorTiempo.value, 10));
     }
+
 };
 
 // Evita la selección de texto al arrastrar en el Canvas, lo cual puede interferir con el Drag and Drop.

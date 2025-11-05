@@ -14,7 +14,7 @@ export class Ficha {
         this.iconoUrl = iconoUrl;
         
         // Mantenemos imagenUrl por si alguna parte del código de arrastre lo sigue usando
-        this.imagenUrl = iconoUrl; 
+       // this.imagenUrl = iconoUrl; 
     }
 
     /**

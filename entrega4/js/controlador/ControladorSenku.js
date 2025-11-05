@@ -207,26 +207,23 @@ export class ControladorSenku {
         this.vista.ocultarPistas();
 
 
-        let mensaje;
+        let mensaje = "";
         if (victoria) {
             mensaje = "¡VICTORIA! 🎉 Solo te queda una ficha.";
-            if (this.mostrarPopoverFinJuego) {
-                this.mostrarPopoverFinJuego(mensaje); 
-            }
 
         } else if (this.tiempoRestante <= 0) {
-            mensaje = "Juego Terminado. 😞 El tiempo se agotó.";
-            if (this.mostrarPopoverFinJuego) {
-                this.mostrarPopoverFinJuego(mensaje); 
-            }
+            mensaje = "El tiempo se ha agotado. Intenta de nuevo con una estrategia más rápida.";
+
         } else {
-            mensaje = "Juego Terminado. 😞 No hay movimientos posibles.";
-            if (this.mostrarPopoverFinJuego) {
-                this.mostrarPopoverFinJuego(mensaje); 
-            }
+            mensaje = "Te has quedado sin movimientos posibles. ¡Mejora tu estrategia!.";
 
         }
-        this.vista.mostrarMensaje(mensaje);
+
+        if (this.mostrarPopoverFinJuego) {
+        this.mostrarPopoverFinJuego(victoria, mensaje); 
+    }
+
+        //this.vista.mostrarMensaje(mensaje);
         this.redibujarJuego();
     }
 
@@ -268,6 +265,7 @@ export class ControladorSenku {
         this.actualizarCronometroUI = nuevoUICallback; 
         this.actualizarFichasUI = nuevoUICallbackFichas;
         this.mostrarPopoverFinJuego = nuevoMostrarPopoverFinJuego;
+
 
         //Establecer el nuevo tiempo restante
         this.tiempoRestante = nuevoTiempoSegundos; 
