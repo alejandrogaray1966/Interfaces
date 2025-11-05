@@ -28,7 +28,7 @@ const inicioSenku = document.getElementById('boton-inicio');
 // La URL de la imagen del tablero 
 const MAPA_TABLEROS = {
     // IMPORTANTE: Verifica que estas rutas y extensiones sean EXACTAS a tus archivos.
-    'moderno': './img/Tableroexp.png',
+    'moderno': './img/tableroModerno.png',
     'medieval': './img/tableroMedieval.png',
     'antiguo': './img/tableroAntiguo.png' // Asumo que el antiguo es PNG
 };

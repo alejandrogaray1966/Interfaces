@@ -171,7 +171,7 @@ export class VistaSenku {
             }
 
             if (img.complete) {
-                const iconSize = radio * 0.6;
+                const iconSize = radio * 0.9;
                 //(APLICAR SOMBRA AL ICONO)
             this.ctx.save();
             this.ctx.shadowColor = 'rgba(0, 0, 0, 0.9)'; // Color oscuro y opaco
@@ -195,18 +195,29 @@ export class VistaSenku {
     obtenerColoresMaterial(tipoMaterial) {
         const materiales = {
             'antiguo': {
+                /* cambio por plateadas
                 base: '#8B4513',
                 claro: '#CD853F',
                 oscuro: '#654321',
                 brillo: '#DEB887',
-                sombra: '#3E2723'
+                sombra: '#3E2723'*/
+                base: '#C0C0C0',
+                claro: '#E8E8E8',
+                oscuro: '#A9A9A9',
+                brillo: '#F5F5F5',
+                sombra: '#696969'
             },
-            'medieval': {
+            'medieval': {/*antes doradas, cambio por plateadas
                 base: '#DAA520',
                 claro: '#FFD700',
                 oscuro: '#B8860B',
                 brillo: '#FFF8DC',
-                sombra: '#8B6914'
+                sombra: '#8B6914'*/
+                base: '#C0C0C0',
+                claro: '#E8E8E8',
+                oscuro: '#A9A9A9',
+                brillo: '#F5F5F5',
+                sombra: '#696969'
             },
             'moderno': {
                 base: '#C0C0C0',
@@ -230,7 +241,7 @@ export class VistaSenku {
 
             // 1. DIBUJAR SOMBRA (Efecto de elevación)
             this.ctx.save();
-            this.ctx.shadowColor = 'rgba(0, 0, 0, 0.7)'; // Sombra más fuerte al arrastrar
+            this.ctx.shadowColor = 'rgba(0, 0, 0, 1.5)'; // Sombra más fuerte al arrastrar
             this.ctx.shadowBlur = 20; 
             this.ctx.shadowOffsetX = 5;
             this.ctx.shadowOffsetY = 5;
@@ -291,7 +302,7 @@ export class VistaSenku {
             if (this.fichaArrastrada.iconoUrl) {
                 const img = this.cacheImagenesFichas[this.fichaArrastrada.iconoUrl];
                 if (img && img.complete) {
-                    const iconSize = radio * 0.6;
+                    const iconSize = radio * 0.9;
                     this.ctx.drawImage(
                         img,
                         centerX - iconSize / 2,
