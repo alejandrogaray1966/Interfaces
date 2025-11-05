@@ -225,7 +225,6 @@ export class Tablero {
                 this.tableroMatriz[posSaltada.fila][posSaltada.columna] = null;
                 
                 this.fichasRestantes--; 
-                
                 // Aquí se verifica el fin del juego (Requisito 5)
             if (!this.hayMovimientosDisponibles()) { 
                 console.log("¡Juego terminado! Puntuación final:", this.fichasRestantes);

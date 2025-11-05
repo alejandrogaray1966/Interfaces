@@ -28,8 +28,8 @@ entrega3/paginaSenku.html<!DOCTYPE html>
         
         <div class="container-breadcrumbs">
             <ul class="breadcrumbs">
-              <li class="breadcrumbs-li"><a href="#">Categorias</a></li>
-              <li class="breadcrumbs-li"><a href="#">> Estrategia</a></li>
+              <li class="breadcrumbs-li"><a href="senku.html">Categorias</a></li>
+              <li class="breadcrumbs-li"><a href="senku.html">> Estrategia</a></li>
               <li class="breadcrumbs-li">> ElUltimoCaballero</li>
             </ul>
         </div>
@@ -237,17 +237,17 @@ entrega3/paginaSenku.html<!DOCTYPE html>
                             </div>
 
                             <div class="container-popover" id="id-popover" popover = "manual">
-                                <h2 id="mensajeFinJuegoTitulo">Juego Finalizado</h2>
-                                <p id="mensajeFinJuegoDescripcion">El tiempo se ha agotado o no quedan movimientos posibles.</p>
+                                <button id="btn-cerrar-popover" class="btn-cerrar">X</button>                            
+                                <h2 id="mensajeFinJuegoTitulo"></h2>
+                                <p id="mensajeFinJuegoDescripcion"></p>
                                 <div class="btn-popover">
-                                    <button  id="reintentar-senku">Reintentar</button>
+                                    <button  id="boton-inicio">inicio</button>
+                                    <button  id="boton-reintentar">Reintentar</button>
                                 </div>
-                                <button onclick="popoverFinJuego.hidePopover()" class="btn-cerrar">Cerrar</button>
-
                             </div>
                             <!-- Contador de fichas restantes -->
                             <div class="contadorFicha">
-                                Fichas restantes: <span id="contadorFicha">32</span>
+                                Fichas restantes: <span id="contadorFichaNumero">32</span>
                             </div>
                             <!--aca botón de reiniciar el juego en cualquier momento-->
                             <button id="verificarBtn" class="verificarBtn">Reiniciar</button>
