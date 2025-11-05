@@ -34,7 +34,10 @@
     margin-top: 10px;
     border-radius: 8px;
 }
-
+.info-juego h1{
+ font-size: 2rem;
+ margin-bottom: 8px;
+}
 
 /* ------------------------------------------------------ */
 /* Estilo para el CANVA                                   */
@@ -342,7 +345,6 @@
   position: absolute;
   top: 80px;
    /*Mueve el elemento hacia la izquierda y arriba por la mitad de su tamaño */
-  /*transform: translate(-50%, -50%);*/
   width: 285px;
   height: auto;
   /* Degradado de fondo */
@@ -395,7 +397,7 @@
   z-index: 1;
   /* Incrementa el contador para el pseudo-elemento ::before */
   counter-increment: leaderboard;
-  padding: 18px 0px 26px 0px;
+  padding: 14px 2px 14px 2px;
   margin: 0;
   cursor: pointer;
   backface-visibility: hidden;
@@ -432,14 +434,18 @@
   background: none;
   font-size: 1.1rem;
 }
-.leaderboard ol li p.ranking-tiempo{
-    left: 230px;
-  content: "";
-  position: absolute;
-  font-size: 1rem;
+
+
+.leaderboard ol li p.ranking-ficha{
+  display: flex;
+    justify-content: flex-end;
+    font-size: 1rem;
+    padding-right: 14px;
 }
 
-
+.leaderboard ol li p::after{
+   z-index: 2;
+}
 
 /* Pseudo-elemento ::before en 'span' */
 .leaderboard ol li span::before,
@@ -451,21 +457,20 @@
   border-left: 10px solid transparent;
   transition: all 0.1s ease-in-out;
   opacity: 0;
-  top: 33px;
-
+  top: 34px;
 }
 .leaderboard ol li span::before{
-  top: 33px;
-  left: -8px;
+    left: -8px;
 
 }
 
 /* Pseudo-elemento ::after en 'span' */
 .leaderboard ol li span::after {
   left: auto;
-  right:-189px;;
+  right:-186px;
   border-left: none;
   border-right: 10px solid transparent;
+
 }
 
 /*
@@ -533,7 +538,7 @@
 }
 
 .leaderboard ol li:nth-child(2) span::after {
-  right: -210px;
+  right: -190px;
 
 }
 
@@ -545,6 +550,11 @@
 .leaderboard ol li:nth-child(3)::after {
   background: #4f1c65;
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.11);
+}
+
+.leaderboard ol li:nth-child(3) span::after {
+  right:  -177px;
+
 }
 
 .leaderboard ol li:nth-child(3) span::before,
@@ -589,7 +599,7 @@
   border-bottom: 8px solid #4f1c65;
 }
 .leaderboard ol li:nth-child(5) span::after{
-    right: -175px;
+  right: -208px;
 }
 
 

@@ -35,7 +35,7 @@ export class Tablero {
 
     constructor(temaTablero = 'antiguo') {
         this.tableroMatriz = []; 
-        this.fichasRestantes = 0;
+        this.fichasRestantes = 32;
         this.temaTablero = temaTablero; 
         this.inicializarTablero();
     }
@@ -45,7 +45,7 @@ export class Tablero {
     
     inicializarTablero() {
         this.tableroMatriz = []; 
-        this.fichasRestantes = 0;
+        this.fichasRestantes = 32;
 
         const propiedadesFicha = Tablero.MAPA_FICHA_PROPIEDADES[this.temaTablero] || Tablero.MAPA_FICHA_PROPIEDADES['antiguo'];
         const colorFicha = propiedadesFicha.color;
@@ -71,7 +71,6 @@ export class Tablero {
             // Pasamos color e iconoUrl al constructor de Ficha
             const nuevaFicha = new Ficha(fila, col, colorFicha, iconoFichaUrl); 
             this.tableroMatriz[fila][col] = nuevaFicha;
-            this.fichasRestantes++;
         }
     }
     // Función auxiliar para verificar si una posición pertenece a la forma de cruz.
@@ -187,6 +186,11 @@ export class Tablero {
         }
         return false;
     }
+
+    contarFichas() {
+        return this.fichasRestantes;
+    }
+
 
 
     moverFicha(filaOrigen, columnaOrigen, filaDestino, columnaDestino) {
