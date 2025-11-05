@@ -3,7 +3,7 @@ import { VistaSenku } from '../vista/VistaSenku.js';
 
 export class ControladorSenku {
 
-    constructor(canvas, imagenTableroUrl, temaTablero,tiempoInicialSegundos, actualizarCronometroUICallback, actualizarFichasUICallback) {
+    constructor(canvas, imagenTableroUrl, temaTablero,tiempoInicialSegundos, actualizarCronometroUICallback, actualizarFichasUICallback, mostrarPopoverFinJuegoCallback) {
         //Inicializar el Modelo y la Vista
         this.modelo = new Tablero(temaTablero);
         this.vista = new VistaSenku(canvas, imagenTableroUrl);
@@ -21,9 +21,9 @@ export class ControladorSenku {
         //Guardar el callback para la UI
         this.actualizarCronometroUI = actualizarCronometroUICallback;
         this.actualizarFichasUI = actualizarFichasUICallback;
-        //Inicializar el manejo de eventos
-        this.inicializarEventos();
+        this.mostrarPopoverFinJuego = mostrarPopoverFinJuegoCallback;
 
+        this.inicializarEventos();
          // 5. Iniciar el cronómetro (Empieza la cuenta regresiva) <--- ¡Aquí va!
         this.inicializarCronometro();
         this.actualizarCuentaFichasUI();
@@ -210,10 +210,21 @@ export class ControladorSenku {
         let mensaje;
         if (victoria) {
             mensaje = "¡VICTORIA! 🎉 Solo te queda una ficha.";
+            if (this.mostrarPopoverFinJuego) {
+                this.mostrarPopoverFinJuego(mensaje); 
+            }
+
         } else if (this.tiempoRestante <= 0) {
             mensaje = "Juego Terminado. 😞 El tiempo se agotó.";
+            if (this.mostrarPopoverFinJuego) {
+                this.mostrarPopoverFinJuego(mensaje); 
+            }
         } else {
             mensaje = "Juego Terminado. 😞 No hay movimientos posibles.";
+            if (this.mostrarPopoverFinJuego) {
+                this.mostrarPopoverFinJuego(mensaje); 
+            }
+
         }
         this.vista.mostrarMensaje(mensaje);
         this.redibujarJuego();
@@ -237,7 +248,7 @@ export class ControladorSenku {
     // Método para reiniciar el juego
     
 
-    reiniciarJuego(nuevaImagenTableroUrl, nuevoTiempoSegundos, nuevoUICallback, nuevoUICallbackFichas) {
+    reiniciarJuego(nuevaImagenTableroUrl, tipoFicha, nuevoTiempoSegundos, nuevoUICallback, nuevoUICallbackFichas, nuevoMostrarPopoverFinJuego) {
         
         // Reiniciar el Modelo y el Estado Interno
         this.modelo.inicializarTablero();
@@ -256,6 +267,7 @@ export class ControladorSenku {
         // Actualizar el callback del cronómetro
         this.actualizarCronometroUI = nuevoUICallback; 
         this.actualizarFichasUI = nuevoUICallbackFichas;
+        this.mostrarPopoverFinJuego = nuevoMostrarPopoverFinJuego;
 
         //Establecer el nuevo tiempo restante
         this.tiempoRestante = nuevoTiempoSegundos; 
@@ -269,7 +281,7 @@ export class ControladorSenku {
         // Iniciar el nuevo cronómetro (que usará el nuevo tiempo y el callback)
         this.inicializarCronometro(); 
         this.actualizarCuentaFichasUI();
-        
+
         // Finalizar y Redibujar 
         this.redibujarJuego();
         console.log("Juego Reiniciado con nueva configuración.");
