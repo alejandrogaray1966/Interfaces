@@ -35,34 +35,23 @@ export class VistaSenku {
         this.mensajeFinJuego = null; 
     }
     
-    //Asigna la función (callback) de AppJuego.js que actualizará el DIV del cronómetro.
-    // Esta función será llamada por el Controlador cada vez que el tiempo cambie.
-    // el callback es una función que acepta un solo argumento de tipo number (los segundos restantes) y no devuelve nada.
-
+    // Asigna la función (callback) de AppJuego.js que actualizará el DIV del cronómetro.
     configurarActualizacionCronometro(callback) {
-        // Renombramos la propiedad interna para usar el nuevo nombre:
         this.actualizarTiempoCronometro = callback;
     }    
 
     actualizarImagenTablero(nuevaUrl) {
         if (this.imagenFondo.src !== nuevaUrl) {
             this.imagenFondo.src = nuevaUrl;
-            // Al cambiar el src, el evento onload se disparará cuando cargue,
-            // lo que asegura el redibujado automático con el nuevo fondo.
         }
     }
     
-    //Dibuja solo el fondo del tablero (la cuadrícula de 630x630).
-    
+    // Dibuja solo el fondo del tablero (la cuadrícula de 630x630).
     dibujarTableroFondo() {
-        // 
         this.ctx.drawImage(this.imagenFondo, 0, 0, VistaSenku.CANVAS_TAMANIO, VistaSenku.CANVAS_TAMANIO);
     }
     
-    //Función principal de renderizado. Dibuja el estado actual del juego.
-    //Es llamada por el Controlador en cada actualización.
-     
-     
+    // Función principal de renderizado. Dibuja el estado actual del juego.
     redibujar(matrizFichas, juegoTerminado) {
         //Limpia y dibuja el fondo
         this.dibujarTableroFondo();
@@ -79,9 +68,9 @@ export class VistaSenku {
             }
         }
         
-        //Dibuja las pistas ANIMADOS 
+        // Dibuja las pistas ANIMADOS 
         if (!juegoTerminado) { 
-        this.dibujarPistas();
+            this.dibujarPistas();
         }        
         // Dibuja la ficha que se está arrastrando (si aplica)
         if (this.fichaArrastrada) {
@@ -89,94 +78,147 @@ export class VistaSenku {
         }
     }
 
-   /**
+    // =========================================================
+    // MÉTODOS DE DIBUJO DE FICHAS CON ESTILO MEDIEVAL (Actualizados)
+    // =========================================================
+    
+    /**
      * Dibuja una única ficha en su posición de matriz (NO en su posición de arrastre).
      */
-   dibujarFicha(ficha) {
-    const x_pixel = ficha.columna * this.TAMANIO_CELDA;
-    const y_pixel = ficha.fila * this.TAMANIO_CELDA;
-    const radio = this.TAMANIO_CELDA / 2;
+    dibujarFicha(ficha) {
+        const x_pixel = ficha.columna * this.TAMANIO_CELDA;
+        const y_pixel = ficha.fila * this.TAMANIO_CELDA;
+        const radio = this.TAMANIO_CELDA / 2;
+        const centerX = x_pixel + radio;
+        const centerY = y_pixel + radio;
 
-    // 1. DIBUJAR EL CÍRCULO CON EFECTO 3D (Siempre se dibuja)
-    const centerX = x_pixel + radio;
-    const centerY = y_pixel + radio;
-    const gradient = this.ctx.createRadialGradient(
-        centerX, 
-        centerY, 
-        radio * 0.3, // Punto focal para el brillo
-        centerX, 
-        centerY, 
-        radio
-    );
-    // Usa el color de la ficha (requiere el método aclararColor)
-    gradient.addColorStop(0, this.aclararColor(ficha.color, 0.3)); 
-    gradient.addColorStop(1, ficha.color); 
+        // Obtiene la paleta de colores según el material
+        const colores = this.obtenerColoresMaterial(ficha.tipoMaterial || 'medieval');
 
-    this.ctx.beginPath();
-    this.ctx.arc(centerX, centerY, radio * 0.9, 0, Math.PI * 2); // Un radio ligeramente menor para dejar un pequeño borde
-    this.ctx.fillStyle = gradient;
-    this.ctx.fill();
-    
-    // Dibujar un borde para el efecto de relieve
-    this.ctx.strokeStyle = this.aclararColor(ficha.color, -0.3); // Un tono más oscuro
-    this.ctx.lineWidth = 4;
-    this.ctx.stroke();
+        // 1. DIBUJAR SOMBRA (Efecto de elevación)
+        this.ctx.save();
+        this.ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
+        this.ctx.shadowBlur = 10; // Reducido ligeramente para un tablero 7x7
+        this.ctx.shadowOffsetX = 3; // Reducido ligeramente
+        this.ctx.shadowOffsetY = 3; // Reducido ligeramente
 
-    // 2. DIBUJAR EL ICONO (Si está disponible)
-    if (ficha.iconoUrl) {
-        let img = this.cacheImagenesFichas[ficha.iconoUrl];
-
-        if (!img) {
-            // Si no está en caché, la crea y la almacena
-            img = new Image();
-            img.src = ficha.iconoUrl;
-            this.cacheImagenesFichas[ficha.iconoUrl] = img;
-
-            // Si la imagen carga después, forzar un redibujado
-            // Esta es la parte crucial que faltaba: asegurar que el onload llama al redibujo
-            img.onload = () => {
-                if (this.onLoadCallback) { 
-                    this.onLoadCallback(); 
-                }
-            };
-            
-            // No dibujamos si la imagen NO está completa, esperamos el onload
-        }
-
-        if (img.complete) {
-            const iconSize = radio * 0.6; // Ajustar el tamaño del icono
-            this.ctx.drawImage(
-                img,
-                centerX - iconSize / 2,
-                centerY - iconSize / 2,
-                iconSize,
-                iconSize
-            );
-        }
-    }
-    this.cargarYDibujarImagen(ficha.iconoUrl, x_pixel, y_pixel);
-}
-
-// Función auxiliar para aclarar un color
-    aclararColor(color, porcentaje) {
-        // Esta función necesita ser definida o importada. 
-        // La incluyo aquí para que funcione, asumiendo que el Tablero.js no la tiene.
-        const num = parseInt(color.replace("#", ""), 16),
-            amt = Math.round(2.55 * porcentaje * 100),
-            R = (num >> 16) + amt,
-            G = ((num >> 8) & 0x00FF) + amt,
-            B = (num & 0x0000FF) + amt;
-        return (
-            "#" +
-            (0x1000000 + (R < 255 ? (R < 1 ? 0 : R) : 255) * 0x10000 +
-                (G < 255 ? (G < 1 ? 0 : G) : 255) * 0x100 +
-                (B < 255 ? (B < 1 ? 0 : B) : 255))
-                .toString(16)
-                .slice(1)
+        // 2. DIBUJAR BASE DE LA FICHA CON GRADIENTE 3D
+        const gradientBase = this.ctx.createRadialGradient(
+            centerX - radio * 0.3, // Fuente de luz desplazada
+            centerY - radio * 0.3, // Fuente de luz desplazada
+            radio * 0.1,
+            centerX,
+            centerY,
+            radio * 0.9
         );
+        gradientBase.addColorStop(0, colores.brillo);
+        gradientBase.addColorStop(0.3, colores.claro);
+        gradientBase.addColorStop(0.6, colores.base);
+        gradientBase.addColorStop(0.85, colores.oscuro);
+        gradientBase.addColorStop(1, colores.sombra);
+
+        this.ctx.beginPath();
+        this.ctx.arc(centerX, centerY, radio * 0.9, 0, Math.PI * 2);
+        this.ctx.fillStyle = gradientBase;
+        this.ctx.fill();
+        this.ctx.restore(); // Restaura el contexto para dejar de aplicar la sombra
+
+        // 3. DIBUJAR BORDES DE ALIVIO
+        this.ctx.beginPath();
+        this.ctx.arc(centerX, centerY, radio * 0.9, 0, Math.PI * 2);
+        this.ctx.strokeStyle = colores.oscuro;
+        this.ctx.lineWidth = 3;
+        this.ctx.stroke();
+
+        this.ctx.beginPath();
+        this.ctx.arc(centerX, centerY, radio * 0.75, 0, Math.PI * 2);
+        this.ctx.strokeStyle = colores.sombra;
+        this.ctx.lineWidth = 2;
+        this.ctx.stroke();
+
+        // 4. DIBUJAR EL BRILLO SUPERFICIAL (Efecto "mojado")
+        const gradientBrillo = this.ctx.createRadialGradient(
+            centerX - radio * 0.3,
+            centerY - radio * 0.3,
+            0,
+            centerX - radio * 0.3,
+            centerY - radio * 0.3,
+            radio * 0.5
+        );
+        gradientBrillo.addColorStop(0, 'rgba(255, 255, 255, 0.4)');
+        gradientBrillo.addColorStop(0.5, 'rgba(255, 255, 255, 0.2)');
+        gradientBrillo.addColorStop(1, 'rgba(255, 255, 255, 0)');
+
+        this.ctx.beginPath();
+        this.ctx.arc(centerX, centerY, radio * 0.9, 0, Math.PI * 2);
+        this.ctx.fillStyle = gradientBrillo;
+        this.ctx.fill();
+
+        // 5. DIBUJAR EL ICONO
+        if (ficha.iconoUrl) {
+            let img = this.cacheImagenesFichas[ficha.iconoUrl];
+
+            if (!img) {
+                img = new Image();
+                img.src = ficha.iconoUrl;
+                this.cacheImagenesFichas[ficha.iconoUrl] = img;
+
+                img.onload = () => {
+                    if (this.onLoadCallback) {
+                        this.onLoadCallback();
+                    }
+                };
+            }
+
+            if (img.complete) {
+                const iconSize = radio * 0.6;
+                //(APLICAR SOMBRA AL ICONO)
+            this.ctx.save();
+            this.ctx.shadowColor = 'rgba(0, 0, 0, 0.9)'; // Color oscuro y opaco
+            this.ctx.shadowBlur = 4; // Intensidad de la sombra
+            this.ctx.shadowOffsetX = 2; // Desplazamiento horizontal
+            this.ctx.shadowOffsetY = 2; // Desplazamiento vertical
+                this.ctx.drawImage(
+                    img,
+                    centerX - iconSize / 2,
+                    centerY - iconSize / 2,
+                    iconSize,
+                    iconSize
+                );
+            }
+        }
     }
 
-
+    /**
+     * Devuelve la paleta de colores para el material.
+     */
+    obtenerColoresMaterial(tipoMaterial) {
+        const materiales = {
+            'antiguo': {
+                base: '#8B4513',
+                claro: '#CD853F',
+                oscuro: '#654321',
+                brillo: '#DEB887',
+                sombra: '#3E2723'
+            },
+            'medieval': {
+                base: '#DAA520',
+                claro: '#FFD700',
+                oscuro: '#B8860B',
+                brillo: '#FFF8DC',
+                sombra: '#8B6914'
+            },
+            'moderno': {
+                base: '#C0C0C0',
+                claro: '#E8E8E8',
+                oscuro: '#A9A9A9',
+                brillo: '#F5F5F5',
+                sombra: '#696969'
+            }
+        };
+        
+        return materiales[tipoMaterial] || materiales['medieval'];
+    }
 
     dibujarFichaArrastrada() {
         if (this.fichaArrastrada) {
@@ -184,28 +226,68 @@ export class VistaSenku {
             const centerX = this.xArrastre;
             const centerY = this.yArrastre;
 
-            // Dibuja la ficha arrastrada con el mismo estilo que las demás
-            const gradient = this.ctx.createRadialGradient(
+            const colores = this.obtenerColoresMaterial(this.fichaArrastrada.tipoMaterial || 'medieval');
+
+            // 1. DIBUJAR SOMBRA (Efecto de elevación)
+            this.ctx.save();
+            this.ctx.shadowColor = 'rgba(0, 0, 0, 0.7)'; // Sombra más fuerte al arrastrar
+            this.ctx.shadowBlur = 20; 
+            this.ctx.shadowOffsetX = 5;
+            this.ctx.shadowOffsetY = 5;
+
+            // 2. DIBUJAR BASE DE LA FICHA CON GRADIENTE 3D
+            const gradientBase = this.ctx.createRadialGradient(
+                centerX - radio * 0.3,
+                centerY - radio * 0.3,
+                radio * 0.1,
                 centerX,
                 centerY,
-                radio * 0.3,
-                centerX,
-                centerY,
-                radio
+                radio * 0.9
             );
-            gradient.addColorStop(0, this.aclararColor(this.fichaArrastrada.color, 0.3));
-            gradient.addColorStop(1, this.fichaArrastrada.color);
+            gradientBase.addColorStop(0, colores.brillo);
+            gradientBase.addColorStop(0.3, colores.claro);
+            gradientBase.addColorStop(0.6, colores.base);
+            gradientBase.addColorStop(0.85, colores.oscuro);
+            gradientBase.addColorStop(1, colores.sombra);
 
             this.ctx.beginPath();
             this.ctx.arc(centerX, centerY, radio * 0.9, 0, Math.PI * 2);
-            this.ctx.fillStyle = gradient;
+            this.ctx.fillStyle = gradientBase;
             this.ctx.fill();
+            this.ctx.restore();
 
-            this.ctx.strokeStyle = this.aclararColor(this.fichaArrastrada.color, -0.3);
-            this.ctx.lineWidth = 4;
+            // 3. DIBUJAR BORDES DE ALIVIO
+            this.ctx.beginPath();
+            this.ctx.arc(centerX, centerY, radio * 0.9, 0, Math.PI * 2);
+            this.ctx.strokeStyle = colores.oscuro;
+            this.ctx.lineWidth = 3;
             this.ctx.stroke();
 
-            // Dibuja el icono si está disponible
+            this.ctx.beginPath();
+            this.ctx.arc(centerX, centerY, radio * 0.75, 0, Math.PI * 2);
+            this.ctx.strokeStyle = colores.sombra;
+            this.ctx.lineWidth = 2;
+            this.ctx.stroke();
+
+            // 4. DIBUJAR EL BRILLO SUPERFICIAL
+            const gradientBrillo = this.ctx.createRadialGradient(
+                centerX - radio * 0.3,
+                centerY - radio * 0.3,
+                0,
+                centerX - radio * 0.3,
+                centerY - radio * 0.3,
+                radio * 0.5
+            );
+            gradientBrillo.addColorStop(0, 'rgba(255, 255, 255, 0.6)'); // Más brillo al arrastrar
+            gradientBrillo.addColorStop(0.5, 'rgba(255, 255, 255, 0.3)');
+            gradientBrillo.addColorStop(1, 'rgba(255, 255, 255, 0)');
+
+            this.ctx.beginPath();
+            this.ctx.arc(centerX, centerY, radio * 0.9, 0, Math.PI * 2);
+            this.ctx.fillStyle = gradientBrillo;
+            this.ctx.fill();
+
+            // 5. DIBUJAR EL ICONO
             if (this.fichaArrastrada.iconoUrl) {
                 const img = this.cacheImagenesFichas[this.fichaArrastrada.iconoUrl];
                 if (img && img.complete) {
@@ -222,27 +304,42 @@ export class VistaSenku {
         }
     }
 
+    // =========================================================
+    // MÉTODOS AUXILIARES Y LÓGICA DE JUEGO (MANTENIDOS)
+    // =========================================================
+
+    // Función auxiliar para aclarar un color (ya la tenías, la mantenemos)
+    aclararColor(color, porcentaje) {
+        const num = parseInt(color.replace("#", ""), 16),
+            amt = Math.round(2.55 * porcentaje * 100),
+            R = (num >> 16) + amt,
+            G = ((num >> 8) & 0x00FF) + amt,
+            B = (num & 0x0000FF) + amt;
+        return (
+            "#" +
+            (0x1000000 + (R < 255 ? (R < 1 ? 0 : R) : 255) * 0x10000 +
+                (G < 255 ? (G < 1 ? 0 : G) : 255) * 0x100 +
+                (B < 255 ? (B < 1 ? 0 : B) : 255))
+                .toString(16)
+                .slice(1)
+        );
+    }
     
-    //Función auxiliar para cargar y dibujar imágenes usando un caché.
-     
+    // Función auxiliar para cargar y dibujar imágenes usando un caché.
     cargarYDibujarImagen(url, x, y) {
         let img = this.cacheImagenesFichas[url];
         
         if (!img) {
-            // Si no está en caché, la crea y la almacena
             img = new Image();
             img.src = url;
             this.cacheImagenesFichas[url] = img;
         }
 
-        // Dibuja solo si la imagen ya cargó
         if (img.complete) {
             this.ctx.drawImage(img, x, y, this.TAMANIO_CELDA, this.TAMANIO_CELDA);
         } else {
-            // Si no cargó, se asegura de dibujarla cuando cargue
             if (!img.onload) { 
                 img.onload = () => {
-                    // Llama al redibujo general para dibujar todas las fichas.
                     if (this.onLoadCallback) { 
                         this.onLoadCallback(); 
                     }        
@@ -254,83 +351,12 @@ export class VistaSenku {
 
     setLoadCallback(callback) {
         this.onLoadCallback = callback; 
-    
-            // Chequear si la imagen ya terminó de cargar.
-            // Esto es crucial para que el redibujo funcione si la imagen ya está en caché.
         if (this.imagenFondo.complete) { 
             this.onLoadCallback();
      }
-}
-     //Dibuja los círculos o animaciones sobre las celdas válidas.
-    
-    
-     //Inicia el proceso de arrastre, elevando la ficha.
-
-    iniciarArrastre(ficha, x, y) {
-        this.fichaArrastrada = ficha;
-        this.actualizarPosicionArrastre(x, y);
     }
-
-    // Actualiza la posición de la ficha arrastrada con el mouse.
-    actualizarPosicionArrastre(x, y) {
-        // La posición de arrastre (this.xArrastre, this.yArrastre) DEBE estar limitada 
-        // al rango completo del Canvas [0, 630].
-
-        const LIMITE_MINIMO_CANVAS = 0;
-        const LIMITE_MAXIMO_CANVAS = VistaSenku.CANVAS_TAMANIO; // 630
-
-        // Clampeamos el valor del mouse (x, y) directamente al tamaño total del Canvas
-        this.xArrastre = Math.max(LIMITE_MINIMO_CANVAS, Math.min(x, LIMITE_MAXIMO_CANVAS));
-        this.yArrastre = Math.max(LIMITE_MINIMO_CANVAS, Math.min(y, LIMITE_MAXIMO_CANVAS));
-        
-    }    
-
-    // Termina el arrastre.
-    
-    terminarArrastre() {
-        this.fichaArrastrada = null;
-    }
-
-    
-    // Convierte coordenadas de píxeles (del mouse) a coordenadas lógicas (de la matriz).
-  
-    obtenerCoordenadaLogica(xPixel, yPixel) {
-        //Si la celda mide 90 píxeles (this.TAMANIO_CELDA = 90) y Si el mouse está en xPixel = 200
-        // $200 / 90 = aprox 2.22$Math.floor(2.22) da 2. (Columna 2)
-        // Esto divide el canvas en 7 zonas, y Math.floor toma el índice de la zona donde cayó el píxel
-        let columna = Math.floor(xPixel / this.TAMANIO_CELDA);
-        let fila = Math.floor(yPixel / this.TAMANIO_CELDA);
-        
-        // Definición del límite superior
-        const limiteSuperior = VistaSenku.TAMANIO_TABLERO_LOGICO - 1; // 6
-
-        // Math.max(0, fila) asegura que no sea menor que 0.
-        // Math.min(..., limiteSuperior) asegura que no sea mayor que 6.
-        fila = Math.min(Math.max(0, fila), limiteSuperior);
-        columna = Math.min(Math.max(0, columna), limiteSuperior);
-
-        // Se asegura de que los valores estén dentro de los límites [0, 6]
-        return { fila, columna };
-    }
-
-        //  Determina si una coordenada lógica corresponde a una esquina no jugable.
-    esPosicionNoJugable(fila, columna) {
-        
-        // Verifica si la fila está en los extremos (0, 1, 5, 6)
-        const estaEnFilaExtrema = (fila <= 1 || fila >= 5);
-        
-        if (estaEnFilaExtrema) {
-            // Si está en una fila extrema, solo es jugable si la columna está en el centro (2, 3, 4).
-            // Por lo tanto, es NO JUGABLE si la columna está en los extremos (0, 1, 5, 6).
-            const estaEnColumnaExtrema = (columna <= 1 || columna >= 5);
-            
-            return estaEnColumnaExtrema;
-        }
-        
-        // Si no está en una fila extrema (es decir, está en 2, 3, 4), SIEMPRE es jugable.
-        return false;
-    }
-
+     
+    //Dibuja los círculos o animaciones sobre las celdas válidas.
     dibujarPistas() {
         this.ctx.fillStyle = 'rgba(0, 255, 0, 0.4)'; // Verde semi-transparente
         this.ctx.strokeStyle = 'green';
@@ -350,18 +376,67 @@ export class VistaSenku {
         }
     }
 
+     //Inicia el proceso de arrastre, elevando la ficha.
+    iniciarArrastre(ficha, x, y) {
+        this.fichaArrastrada = ficha;
+        this.actualizarPosicionArrastre(x, y);
+    }
 
-     // Muestra las celdas a resaltar para el usuario (lo llama el Controlador).
+    // Actualiza la posición de la ficha arrastrada con el mouse.
+    actualizarPosicionArrastre(x, y) {
+        const LIMITE_MINIMO_CANVAS = 0;
+        const LIMITE_MAXIMO_CANVAS = VistaSenku.CANVAS_TAMANIO;
 
+        this.xArrastre = Math.max(LIMITE_MINIMO_CANVAS, Math.min(x, LIMITE_MAXIMO_CANVAS));
+        this.yArrastre = Math.max(LIMITE_MINIMO_CANVAS, Math.min(y, LIMITE_MAXIMO_CANVAS));
+
+        if (this.fichaArrastrada) {
+            this.fichaArrastrada.posicionTemporal = {
+                x: this.xArrastre,
+                y: this.yArrastre
+            };
+        }
+    }    
+
+    // Termina el arrastre.
+    terminarArrastre() {
+        this.fichaArrastrada = null;
+    }
+
+    
+    // Convierte coordenadas de píxeles (del mouse) a coordenadas lógicas (de la matriz).
+    obtenerCoordenadaLogica(xPixel, yPixel) {
+        let columna = Math.floor(xPixel / this.TAMANIO_CELDA);
+        let fila = Math.floor(yPixel / this.TAMANIO_CELDA);
+        
+        const limiteSuperior = VistaSenku.TAMANIO_TABLERO_LOGICO - 1;
+
+        fila = Math.min(Math.max(0, fila), limiteSuperior);
+        columna = Math.min(Math.max(0, columna), limiteSuperior);
+
+        return { fila, columna };
+    }
+
+    // Determina si una coordenada lógica corresponde a una esquina no jugable.
+    esPosicionNoJugable(fila, columna) {
+        const estaEnFilaExtrema = (fila <= 1 || fila >= 5);
+        
+        if (estaEnFilaExtrema) {
+            const estaEnColumnaExtrema = (columna <= 1 || columna >= 5);
+            return estaEnColumnaExtrema;
+        }
+        
+        return false;
+    }
+
+    // Muestra las celdas a resaltar para el usuario (lo llama el Controlador).
     mostrarPistas(destinos) {
         this.pistasActivas = destinos;
     }
 
     
      //Oculta todos las pistas activas (lo llama el Controlador cuando el arrastre termina).
-    
     ocultarPistas() {
         this.pistasActivas = [];
     }
-
 }
