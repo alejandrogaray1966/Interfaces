@@ -144,7 +144,8 @@ export class ControladorSenku {
             this.redibujarJuego();
             
             if (movidoExitosamente) {
-                this.actualizarCuentaFichasUI(); // Llama a la nueva función
+                this.actualizarCuentaFichasUI();
+                this.verificarEstadoJuego(); // Llama a la nueva función
             } else {
                 console.log("Movimiento inválido: La ficha regresó a su posición original.");
             }       
@@ -192,6 +193,21 @@ export class ControladorSenku {
             this.actualizarFichasUI(fichasRestantes);
         }
     }
+
+// ControladorSenku.js (Nueva función)
+
+    verificarEstadoJuego() {
+
+    if (this.modelo.fichasRestantes === 1) { // Cuando quedan 1 fichas
+        this.finalizarJuego(true); // FORZAR LA VICTORIA
+        return;
+    }
+
+    if (!this.modelo.hayMovimientosDisponibles() && this.fichasRestantes > 1) {
+        this.finalizarJuego(false); // Llama a finalizarJuego() con FALSE
+    }
+    }
+
 
 
     finalizarJuego(victoria) {

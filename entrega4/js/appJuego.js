@@ -96,13 +96,13 @@ function actualizarFichasUI(fichas) {
 
 
     // Referencias a los elementos del popover HTML
-   function mostrarPopoverFinJuego(victoria, mensajePrincipal, accion = 'mostrar') {
+   function mostrarPopoverFinJuego(victoria, mensajePrincipal) {
     const tituloElemento = document.getElementById('mensajeFinJuegoTitulo');
     const descripcionElemento = document.getElementById('mensajeFinJuegoDescripcion'); 
         // --- 1. Definir Contenido ---
     if (victoria) {
         tituloElemento.textContent = "¡VICTORIA! 🎉";
-        descripcionElemento.textContent = "¡Felicitaciones! Has ganado el Senku. Tu Fichas seran registradas.";
+        descripcionElemento.textContent = "¡Felicitaciones! Has ganado el Senku. Tu Ficha sera registrada.";
         startConfetti(); 
     } else {
         tituloElemento.textContent = "Juego Terminado 😞";
