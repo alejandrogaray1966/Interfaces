@@ -92,11 +92,11 @@ function actualizarFichasUI(fichas) {
     }
 }
 
-function mostrarPopoverFinJuego(victoria, mensajePrincipal, accion = 'mostrar') {
 
 
 
     // Referencias a los elementos del popover HTML
+   function mostrarPopoverFinJuego(victoria, mensajePrincipal, accion = 'mostrar') {
     const tituloElemento = document.getElementById('mensajeFinJuegoTitulo');
     const descripcionElemento = document.getElementById('mensajeFinJuegoDescripcion'); 
         // --- 1. Definir Contenido ---
@@ -114,9 +114,10 @@ function mostrarPopoverFinJuego(victoria, mensajePrincipal, accion = 'mostrar') 
     if (popoverFinJuego.showPopover) { // Usamos la global 'popoverFinJuego'
                 popoverFinJuego.showPopover();
     }
-}// Inicializa un nuevo juego o reinicia el existente.
+}// Inicializa un nuevo juego o reinicia el existente.*/
 
 function iniciarJuego() {
+    popoverFinJuego.hidePopover();
 
     if (!selectorTableros || !selectorTiempo || !canvas || !selectorMaterial) {
         console.error("Error: Elementos de UI necesarios no encontrados. Verifica el DOM.");
