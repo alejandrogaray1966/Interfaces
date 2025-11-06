@@ -943,6 +943,7 @@ a, a:hover, a:active, a:visited, li{
     display: flex;
     justify-content: flex-end;
     gap: 32px;
+    margin: 14px;
    
 }
 

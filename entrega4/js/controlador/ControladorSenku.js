@@ -198,7 +198,7 @@ export class ControladorSenku {
 
     verificarEstadoJuego() {
 
-    if (this.modelo.fichasRestantes === 1) { // Cuando quedan 1 fichas
+    if (this.modelo.fichasRestantes == 1) { // Cuando quedan 1 fichas
         this.finalizarJuego(true); // FORZAR LA VICTORIA
         return;
     }
