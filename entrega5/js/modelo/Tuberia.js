@@ -3,6 +3,7 @@ export class Tuberia {
         this.img = new Image();
         this.img.src = ruta;
         this.ancho = 750;
+        this.espacio = 50;
         
 
         this.x = xInicial;

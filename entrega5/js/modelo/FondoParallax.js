@@ -12,5 +12,8 @@ export class FondoParallax {
         if (this.x <= -this.img.width) {
             this.x = 0;
         }
+        
+
+
     }
 }

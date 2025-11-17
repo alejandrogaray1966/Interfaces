@@ -1,16 +1,28 @@
-@keyframe scroll{
+@keyframes scroll{
     0% {
-        background-position: 0 %;
+        background-position-x: 0px;
     }
     100% {
-        background-position: 100%;
+        background-position-x: -750px;
     }
 }
 
+.flappyBird-container{
+    z-index: 6;
+}
+
+.fondos-parallax{
+    position: absolute;
+    left: 363px;
+    top: 0px;
+    width: 750px;/*ver esto y backgrounde repeat-x*/
+    height: 422px; /*nunca ancho y alto a una imagen para que no se estire, esto es un div*/
+
+}
+
 .layer{
-    min-height: 500px;
-    width: 200%;/*ver esto y backgrounde repeat-x*/
-    height: 100%; /*nunca ancho y alto a una imagen para que no se estire, esto es un div*/
+    width: 100%;
+    height: 100%;
     position:absolute;
     top:0;
     left:0;
@@ -18,33 +30,33 @@
     background-size: cover;
 }
 
-.layer-10{
-background-image: url("./assets/1.Backround.png"); /* (10,png) */
-animation: scroll 20s infinite linear;/*va cambiando los tiempos en los distintos div, */
-z-index: 0;
+.layer-6{
+    background-image: url("../assets/1.Backround.png"); /* (10,png) */
+    animation: scroll 55s infinite linear;/*va cambiando los tiempos en los distintos div, */
+    z-index: 0;
+
 }
 
-.layer-9{
-    background-image: url("./assets/2.Trees_back.png"); /* (10,png) */
-    animation: scroll 18s infinite linear;/*va cambiando los tiempos en los distintos div, */
-    z-index: 0;
+.layer-5{
+    background-image: url("../assets/2.Trees_back.png"); /* (10,png) */
+    animation: scroll 40s infinite linear;/*va cambiando los tiempos en los distintos div, */
+    z-index: 1;
 }
     
 
-.layer-8{
-    background-image: url("./assets/3.Trees_back.png"); /* (10,png) */
-    animation: scroll 15s infinite linear;/*va cambiando los tiempos en los distintos div, */
-    z-index: 0;
+.layer-4{
+    background-image: url("../assets/3.Trees_back.png"); /* (10,png) */
+    animation: scroll 27s infinite linear;
+    z-index: 2;
 }
 
-.layer-7{
-    background-image: url("./assets/3.Trees_front.png"); /* (10,png) */
-    animation: scroll 10s infinite linear;/*va cambiando los tiempos en los distintos div, */
-    z-index: 0;
+.layer-3{
+    background-image: url("../assets/3.Trees_front.png");  
+    animation: scroll 12s infinite linear;
+    z-index: 3;
 }
-
-.layer-6{
-    background-image: url("./assets/4.Ground.png"); /* (10,png) */
+.layer-2{
+    background-image: url("../assets/4.Ground.png"); /* (10,png) */
     animation: scroll 5s infinite linear;/*va cambiando los tiempos en los distintos div, */
-    z-index: 0;
+    z-index: 4;
 }
