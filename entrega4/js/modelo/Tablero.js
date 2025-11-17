@@ -170,6 +170,12 @@ export class Tablero {
         }
         return destinosValidos;
     }
+
+    //funcion para resaltar fichas como comen las damas
+
+
+
+
     
     hayMovimientosDisponibles() {
         // Recorremos solo las posiciones de juego válidas para optimizar

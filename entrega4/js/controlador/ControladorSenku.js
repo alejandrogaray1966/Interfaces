@@ -112,12 +112,29 @@ export class ControladorSenku {
             // Ahora la actualización de posición SÓLO ocurre si no se está en una esquina no jugable.
             this.vista.actualizarPosicionArrastre(x, y);
         }
-            
 
-            // Animación fluida
+            // Animación fluida    
             this.redibujarJuego(); 
-        }
+          
+            
     }
+
+     
+    }  
+
+    /*for (const destino of this.pistasActivas) {
+                alert("primer for")
+                // Calcula el centro de la celda de destino
+                if (fila==destino.fila && columna== destino.columna ){
+                   const nuevosMovimientos = obtenerMovimientosPosibles(destino.fila, destino.columna); 
+                   
+                    for(const nuevodestino of nuevosMovimientos ) {
+                        this.vista.resaltarPistas(nuevodestino); // Resalta la pista
+                        alert("entre al for");
+                    }
+        
+                }  
+            }*/
 
     //El botón del mouse es liberado y ejecuta el movimiento si es válido.
      

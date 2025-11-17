@@ -1,0 +1,1586 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+
+/*ESTILOS GENERALES*/
+*{
+    margin: 0;
+    box-sizing: border-box;
+}
+.body-home{ 
+    width: 100%;
+    height: 100vh;
+    background-image: url('../assets/backgroundJuego.png');
+    background-size: cover;
+    overflow-x: hidden;
+    position: relative;
+
+}
+.body-home::before{
+    content:"";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 8000px;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: -1;
+}
+
+h1, h2{
+    color: white;
+    font-family: 'Raleway', 'sans-serif';
+}
+h1{
+    font-size: 4rem;
+    font-weight: 700;
+}
+h2{
+    font-size: 2rem;
+}
+
+p, a, span{
+    color: white;
+    font-family:'Roboto','sans-serif';
+}
+p,a{
+    font-size: 1.5rem;
+}
+a {
+    text-decoration: none;
+
+}
+span{
+    font-size: 1.2rem;
+}
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+
+/*NAVBAR*/
+
+.navbar,.menuToggle, .menuDesplegable, .perfilDesplegable{
+    background-color: #484648; 
+
+}
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+    width: 100%;
+    height: auto;
+    position: sticky; 
+    top: 0;
+    z-index: 1000;
+    padding: 0.5%;
+    position: fixed;
+}
+.nav-Menu, .contentRedes, .iconosMenu,.navBusqueda{
+    display: flex;
+    position: relative;
+    align-items: center;
+
+
+}
+.nav-Menu{
+    gap: 8%;
+    margin-left: 1.5rem;
+}
+.menuDesplegable,
+.perfilDesplegable{
+    display: none;
+    position: absolute;
+
+}
+.menuDesplegable.mostrar,
+.perfilDesplegable.mostrar {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+}
+
+.menuDesplegable {
+    top: 100%;
+    left: -20%;
+    border-bottom-right-radius: 20px;    
+}
+.menuDesplegable li a {
+    display: block;
+}
+
+.itemsCat{
+    margin: 0.2rem 0.5rem 0.5rem 4rem;
+  
+}
+.itemsMenu{
+    margin: 1rem 3rem 0.5rem 2rem;
+}
+.contentRedes{
+    gap: 12%;
+    padding: 8% 4% 4% 14%;
+}
+
+.navLogo{
+    left: -16%;
+}
+.navLogo img {
+    height: 24px; 
+    display: block;
+}
+
+/* Contenedor de búsqueda */
+.navBusqueda {
+    left: -34%;
+}
+.navBusqueda{
+    width: 134%;
+    border-radius: 4px;
+    background-color: white; 
+}
+
+.inputBuscador {
+    border: none;
+    width: 100%;
+    padding: 4%;
+    border-radius: 4px;
+
+}
+
+.navBusqueda button[type="submit"] {
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.navBusqueda button[type="submit"]:hover {
+    background-color: #484648;
+}
+
+/* NavBar de Iconos y Perfil */
+
+.iconosMenu{
+    gap: 32%;
+    right: 100%;
+}
+
+
+.iconosMenu img, .menuToggle img {
+    height: 24px; 
+
+}
+
+.iconosMenu button.menuPerfil {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+
+.perfilDesplegable {
+    border-bottom-left-radius: 20px;
+    top: 94%;
+    right: 0%;
+    padding-top: 14px;
+}
+.XCerrar{
+    align-self: end;
+    padding: 1rem;
+   
+}
+.imgPerfil{
+    align-self: center;
+}
+.imgPerfil img{
+    height: 60px;
+
+}
+.perfilNombre{
+    align-self: center;
+    margin-bottom: 1rem;
+}
+.userName {
+
+    font-weight: bold;
+}
+.item-perfil{
+    margin-top: 0.3rem;
+}
+
+.perfilDesplegable li a {
+    display: block;
+    margin: 0rem 1rem 0.5rem 2rem;
+}
+
+.perfilDesplegable li a:hover {
+    background-color: #4a4a4a;
+}
+
+
+
+
+
+/* HOME */
+
+/*HERO CAROUSEL */
+
+.hero-carousel {
+    position: relative;
+    width: 100%;
+    height: 75vh; 
+}
+
+
+/*Hero slides*/
+.carousel-slides{
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+.carousel-slide{
+    position: absolute; /* APILA las tres diapositivas una encima de la otra */
+    width: 100%;
+    height: 100%;
+    list-style: none; /* Asegura que no haya viñetas */
+    opacity: 0.5; 
+    z-index: 1; /* Bajo, para que la activa esté por encima */
+   /* transition: opacity 0.5s;  Transición suave al cambiar */
+}
+.carousel-slide.active{
+    opacity: 1;
+    z-index: 5;
+}
+
+
+/*Hero slides img/circulo*/
+.carousel-slide .circulo,
+.carousel-slide .circulo img {
+    width: 100%;
+    height: 75vh;
+    position: absolute;
+}
+
+.carousel-slide .circulo{
+    pointer-events: none;
+    user-select: none;
+    overflow: hidden;
+    z-index: 2;
+}
+.carousel-slide .circulo img {
+    object-fit: cover;
+    transform: rotate(0deg);
+    filter: brightness(0.5) saturate(1); 
+    opacity: 0;
+    transition: transform 0s, opacity 2s;
+}
+.carousel-slide.active .circulo img{
+    transition: transform 1s cubic-bezier(0.645, 0.045, 0.355, 1), opacity 1s cubic-bezier(0.645, 0.045, 0.355, 1);
+    transform: rotate(360deg);
+    opacity: 1;
+}
+
+.carousel-slide.active .circulo.grande img{
+ transition-delay: 0.9s;
+}
+.carousel-slide.active .circulo.mediano img{
+ transition-delay: 0.6s;
+}
+.carousel-slide.active .circulo.pequenio img{
+ transition-delay: 0.3s;
+}
+
+
+
+.carousel-slide .circulo.mediano{
+    clip-path: circle(50% at 50% 50%);
+    z-index: 3;
+}
+.carousel-slide .circulo.pequenio{
+    clip-path: circle(30% at 50% 50%);
+    z-index: 4;
+}
+
+
+.hero-contenido h1,
+.hero-contenido span,
+.hero-contenido p,
+.hero-contenido .btn-primario{
+    margin-bottom: 14px;
+    opacity: 0;
+    transition: opacity 1s;
+}
+.hero-contenido .calificacion{
+    opacity: 0;
+    transition: opacity 1s;
+
+}
+
+.carousel-slide.active .hero-contenido .circulo img,
+.carousel-slide.active .hero-contenido .calificacion,
+.carousel-slide.active .hero-contenido h1, 
+.carousel-slide.active .hero-contenido span, 
+.carousel-slide.active .hero-contenido p,
+.carousel-slide.active .hero-contenido .btn-primario{
+    opacity: 1;
+    transition: opacity 1.2s ease-in;
+    transition-delay: 1.2s
+}
+
+
+
+
+/* Hero de Texto y Botón */
+.hero-contenido {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: absolute;
+    bottom: 10%; 
+    left: 4%;
+    text-align: left;
+    z-index: 11;
+    width: 54vw;
+
+}
+.hero-contenido p{
+    width: 35vw;
+}
+
+.btn-primario {
+    background-color: #9700CC; 
+    width: 248px;
+    height: 46px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.3rem; 
+    margin-top: 15px;
+}
+
+
+
+
+/* 3. PAGINACIÓN dot */
+
+.carousel-paginacion {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 10;
+}
+
+.paginacion-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 1px solid white;
+    padding: 0;
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.4);
+    /* Transición al estado activo */
+    transition: all 0.3s ease;
+}
+
+.paginacion-dot.active {
+    background-color: #00FFB2;
+    transform: scale(1.3);
+    border: none;
+}
+
+/* CALIFICACION */ 
+.hero-contenido .calificacion span {
+    /* Color dorado que usabas para la estrella marcada */
+    color: #ffa723; 
+    
+    /* Tamaño de fuente para el icono de estrella */
+    font-size: 30px; 
+}
+
+.hero-contenido .hero-span{
+    background-color: #484648;
+    padding: 8px;
+}
+    
+/*HOME seccion CARDS*/  
+.home-cards{
+    display: grid;
+    justify-content: center;
+
+}  
+
+/*CARDS Horizontales*/
+
+.contenedor.cards-horizontales{
+    height: 710px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+
+}
+.categoria-verMas{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    margin-bottom: 14px;
+    align-self: center;
+
+}
+
+.cards-lista{
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+    justify-content: center;
+    transition: all .3s;
+}
+
+.card-horizontal{
+    height: 270px;
+    width: 465px;
+    overflow: hidden;
+    transition: all 0.2s;
+}
+.card-horizontal .card-img-horizontal img{
+    opacity: 0.6;
+}
+.card-horizontal .card-img-horizontal img:hover{
+    opacity: 1;
+}
+
+.card-horizontal:hover{
+    transform: scale(1.05);
+    box-shadow: 0px 0px 30px 1px #00eba4;
+    border-radius: 20px;
+}
+.card-contenido-horizontal{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 12px 32px;
+    width: 466px;
+    background-color: #9700ccb3;
+    border-radius: 20px;
+    position: relative;
+    bottom: 70px;
+    align-items: center;
+
+}
+.nombre-categoria{
+    position: relative;
+    right: 561px;
+}
+
+.span-verMas{
+    position: relative;
+    left: 579px;
+    width: 90px;
+}
+
+/*CARDS Verticales*/
+/* Cantidad: 9 */
+
+.contenedor.cards-verticales {
+    width: 1426px;
+    height: 622px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* CLAVE: Oculta las tarjetas que se están moviendo fuera del área */
+    /* Opcional: Máscara de desvanecimiento para entrada/salida */
+    mask-image: linear-gradient(to right, transparent, #00eba4 4% 90%, transparent);
+}
+
+
+.cards-verticales .categoria {
+    position: relative;
+    left: 237px;
+    top: 24px;
+}
+
+.cards-lista-verticales {
+  display: flex;
+  flex-direction: row;
+  min-width: 3042px; 
+  position: relative;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 569px;
+}
+
+.card-vertical {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  width: 338px; 
+  height: 499px; 
+  border-radius: 20px;
+  position: absolute;
+  animation: autoRun-base 20s linear infinite;
+  transition: filter 1s;
+
+}
+.card-vertical .card-img-vetical img{
+  width: 338px;
+  height: 499px;
+  border-radius: 20px;
+}
+
+
+@keyframes autoRun-base {
+  from {
+    left: 100%;
+  }
+  to {
+    /* left: -338px */
+    left: -338px; 
+  }
+}
+
+.cards-lista-verticales .card-vertical:nth-child(1) {
+  animation-delay: -20s;
+}
+
+.cards-lista-verticales .card-vertical:nth-child(2) {
+  animation-delay: -17.7778s;
+}
+
+.cards-lista-verticales .card-vertical:nth-child(3) {
+  animation-delay: -15.5556s;
+}
+
+.cards-lista-verticales .card-vertical:nth-child(4) {
+  animation-delay: -13.3333s;
+}
+
+.cards-lista-verticales .card-vertical:nth-child(5) {
+  animation-delay: -11.1111s;
+}
+
+.cards-lista-verticales .card-vertical:nth-child(6) {
+  animation-delay: -8.8889s;
+}
+
+.cards-lista-verticales .card-vertical:nth-child(7) {
+  animation-delay: -6.6667s;
+}
+
+.cards-lista-verticales .card-vertical:nth-child(8) {
+  animation-delay: -4.4444s;
+}
+
+.cards-lista-verticales .card-vertical:nth-child(9) {
+  animation-delay:-2.2222s;
+}
+/* --- Estilos de Hover (Se mantienen) --- */
+.contenedor.cards-verticales:hover .card-vertical {
+  animation-play-state: paused;
+  filter: grayscale(1);
+}
+
+.contenedor.cards-verticales .card-vertical:hover {
+  filter: grayscale(0);
+}
+
+
+
+.card-contenido-vertical {
+    padding: 12px 20px;
+    width: 338px;
+    background-color: #9700ccb3;
+    border-radius: 20px;
+    position: relative;
+    bottom: 122px;
+     align-items: baseline;;
+}
+
+
+
+/* CARDS GRANDES*/
+
+.contenedor.cards-grande{
+    display: grid;
+    justify-content: center;
+}
+.card-grande{
+    display: grid;
+    justify-content: center;
+    width: 1448px;
+    height: 814px;
+}
+
+.cards-lista-grande{
+    height: 944px;
+}
+
+.contenedor.cards-grande .nombre-categoria{
+    left: 24px;
+}
+
+
+.card-contenido-grande{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    position: relative;
+    bottom: 211px;
+    padding-right: 32px;
+}
+
+
+.card-grande .card-img-grande img{
+    border-radius: 20px;
+    filter: brightness(0.5) saturate(1); 
+}
+.card-grande:hover {
+    border-radius: 20px;
+    /*transform: scale(1.02); lo quito para blocka*/
+    background: #ffffff80;
+    color: #000;
+    box-shadow:  0 0 80px whitesmoke, inset 20px 0 80px rgba(255, 0, 255, 0.747),
+        inset -20px 0 80px #0ff, inset 20px 0 300px #f0f, inset -20px 0 300px #0ff,
+        0 0 50px #fff, -10px 0 80px #f0f, 10px 0 80px #0ff;
+    transition: all ease-in-out 0.3s;
+
+
+}
+ /*.card-grande .card-img-grande:hover{
+    border-radius: 20px;
+    transform: scale(1.02);
+    background: #ffffff80;
+    color: #000;
+    box-shadow:  0 0 80px whitesmoke, inset 20px 0 80px rgba(255, 0, 255, 0.747),
+        inset -20px 0 80px #0ff, inset 20px 0 300px #f0f, inset -20px 0 300px #0ff,
+        0 0 50px #fff, -10px 0 80px #f0f, 10px 0 80px #0ff;
+    transition: all ease-in-out 0.3s;
+}*/
+.iconos-juego{
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+    bottom: 135px;
+    height: 64px;
+    padding: 4px;
+}
+
+
+
+/* FOOTER */
+.fat-footer{
+    background-color: #484648; 
+    display:flex;
+    width: 100%;
+    font-family: 'Roboto', 'sans-serif';
+}
+
+.fat-footer>ul{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+    margin: 70px 100px 60px 100px;
+}
+
+.fat-footer .footer-title{
+    color:  #00FFB2;
+    font-weight: 600;
+    margin-bottom: 10px;
+    font-size: 24px;
+
+}
+
+.fat-footer>ul>li{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.footer-lista-navegacion, .footer-lista-legal, .footer-lista-sobreNosotros{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    font-weight: 300;
+}
+.footer-lista-redes{
+    margin-top: 16px;
+    display: flex;
+    flex-direction: row;
+    gap: 36px;
+    
+}
+
+.footer-lista-redes img{
+    width: 24px;
+    height: 24px;
+    object-fit: cover;
+    box-shadow:#0000001a 0px 1px 3px 0px, #0000001a 0px 1px 2px 0px;
+}
+
+
+.footer>ul :last-child>div{
+    height: 70px;
+    object-fit: cover;
+}
+
+.inputSuscripcion {
+    width: 92%; 
+    padding: 12px 16px;
+    font-size: 18px; 
+    border-radius: 8px; 
+    border: none;
+    box-shadow: #0000001a 0px 1px 3px 0px, #0000001a 0px 1px 2px 0px; /* Sombra suave*/  
+}
+
+.fat-footer button {
+    margin-top: 10px;
+    padding: 12px 24px; 
+    font-size: 18px; 
+    font-weight: 500; 
+    color: white; 
+    background-color: #9700CC; 
+    border: none; 
+    border-radius: 8px; 
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.fat-footer button:hover {
+    background-color: #f0f;
+    transform: scale(1.05); 
+}
+
+.fat-footer button:active {
+    transform: scale(0.95); 
+}
+.footer-suscripcion div:nth-child(2){
+    margin-top: 22px;
+}
+
+.footerLogo img {
+    margin-top: 20px;
+    height: 34px; 
+    object-fit: contain; 
+}
+
+.thin-footer{
+    background-color: #484648; 
+    display:flex;
+    width: 100%;
+    height: 70px;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: 400;
+}
+
+
+
+/*----------------------------------
+    COMIENZA ESTILOS PAGINA JUEGO
+    ---------------------------------*/
+
+.contenedor-principal{
+    max-width: 1430px; 
+    margin: 0 auto;   
+    width: 100%;      
+    padding: 0 20px;   
+    box-sizing: border-box; 
+}
+
+.game-section{
+    display: flex;
+    flex-direction: column;  
+    
+    
+}
+
+a, a:hover, a:active, a:visited, li{
+    text-decoration: none;
+}
+
+.game-body{ 
+    max-width: 100%;
+    font-family: 'Roboto', sans-serif;
+    color: white;
+    position: relative;
+    width: 100%;
+    background-image: url(../assets/backgroundJuego.png);
+    background-size:cover;
+    background-position: center;
+    overflow-x:hidden;  
+    background-attachment: scroll;
+    background-repeat: no-repeat;
+}
+
+.game-body::before{
+    content:"";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: -1;
+}
+
+.breadcrumbs{
+    display: flex;
+    align-items: first baseline;
+    justify-content:flex-start;
+    gap: 8px;
+    font-size: 24px;
+    font-weight: 400;
+    padding: 32px 0 32px 0
+}   
+
+.container-breadcrumbs{
+    margin-left: -10%;
+    margin-top: 40px;
+}
+
+.game-title{
+    font-family: 'Raleway', sans-serif;
+    font-size: 64px;
+    font-weight: 700;
+    margin-top: 20px;
+}
+
+.game-subtitle{
+    font-size: 24px;
+    font-weight: 300;
+    margin-bottom:  10px;
+}
+
+.game-container{
+    position: relative;
+    clip-path: circle(150% at 50% 50%);
+}
+
+
+.game-preview{
+  position: inherit;
+  margin-top: 20px;
+  width: 100%;
+  height: 682px;
+  object-fit: cover;
+  border-radius: 20px;
+  /*box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5); comento para el blocka*/
+  transition: ease-in-out 0.3s;
+}
+
+.game-btnPlay {/*estilos para blocka*/
+    width: 222px;
+    height: 69px;
+    font-size: 24px;
+    font-weight: 600;
+    position: absolute; 
+    bottom: 319px;         
+    right: 583px;
+    background-color: #9700CC;
+    color: white;
+    border: none;
+    border-radius: 8px;
+}
+.playing{
+    opacity: 0;
+    transform: scale(0.95);
+    transition: ease-out;
+    pointer-events: none;
+
+}
+
+.game-btnPlay:hover , .btn-primario:hover {
+    background-color: #FF00D6;
+    transform: scale(1.1);
+    transition: ease-in-out 0.3s;
+    cursor: pointer;
+}
+
+.game-btn-settings {
+    background-color: transparent;
+    position: absolute;
+    top: 56px;
+    right: 40px; 
+    z-index: 2; 
+    display: flex; 
+    gap: 24px; 
+    align-items: center;
+}
+
+.game-btn-settings button  {
+    background-color: transparent;
+    color: #fff;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    border:none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.game-btn-settings button img {
+    color: #fff;
+    width: 40px;
+    height: 40px;
+    position: relative;
+    top:-30px;
+}
+
+.game-btn-secondary{
+    display: flex;
+    justify-content: flex-end;
+    gap: 32px;
+    margin: 14px;
+   
+}
+
+.game-btn-secondary button  {
+    background-color: transparent;
+     cursor: pointer;
+     width: 32px;
+     height: 32px;
+     border:none;
+ }
+
+ .game-btn-secondary img:hover{
+    transform: scale(1.2);
+    transition: ease-in-out 0.3s;
+ }
+ 
+.howToPlay-section {
+
+    margin-top: 30px;
+    display: flex; 
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 10%;    
+}
+
+.controls-aside {
+    display: flex; 
+    align-items: flex-start; 
+    width: 45%; 
+    
+}
+
+.controls-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.controls-text{
+    width: 21vw
+}
+
+.mouse-img img {
+    margin-top: 26px;
+    width: 231px;
+    height: 80px; 
+    object-fit: contain; 
+}
+
+.diagrama-img {
+    width: 270px; 
+    height: 263px; 
+    object-fit: contain; 
+}
+
+.howToPlay-section aside p {
+    font-size: 24px; 
+    font-weight: 300; 
+    margin-top: 26px; 
+}
+
+.howToPlay-section aside:last-child ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    margin-top: 44px;
+}
+
+.howToPlay-section aside:last-child ul li {
+    display: flex; 
+    align-items:center; 
+    gap: 28px; 
+    margin-top: 44px;
+    font-size: 20px;
+    font-weight: 200;
+}
+
+.howToPlay-section aside:last-child ul li span {
+    width: 32px; 
+    height: 32px;
+    object-fit: contain;
+}
+
+.demo-title, .controls-title, .how-to-play-title .cards-title{
+    font-size: 32px;
+    font-family: Raleway, sans-serif;
+    font-weight: 500;
+    margin-bottom: 26px;
+}
+
+.demo-title{
+    max-width: 1130px;
+    margin-top: 40px;
+}
+
+.demo-container {
+   
+    width: 100%; 
+    max-width: 1230px; 
+    margin-left: 5%; 
+    aspect-ratio: 16/9; 
+    margin-bottom: 20px;
+}
+
+.community-section {
+    width: 100%;
+    margin-top: 20px;
+    border-radius:20px;
+    
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.community-title{
+    font-size: 32px;
+    font-family: Raleway, sans-serif;
+    font-weight: 500;
+    margin-bottom: 26px;
+}
+
+/* Contenedor del formulario de comentarios */
+.form-comentario {
+    position: relative;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+/*formulario de entrada de comentarios */
+.form-comentario form {
+    display: flex;
+    gap: 15px;
+    align-items: flex-start;
+    
+}
+
+.form-comentario img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.imput-comentario {
+    color: rgb(34, 33, 33);
+    width: 100%;
+    height: 64px;
+    flex-grow: 1;
+}
+
+.form-comentario textarea {
+    width:100%;
+    height: 64px;;
+    flex-grow: 1;
+    border-radius: 20px;
+    padding: 10px;
+    font-size: 14px;
+    color: rgb(34, 33, 33);
+    resize: vertical;
+    min-height: 40px;
+    box-sizing: border-box;
+    transition: opacity 0.3s ease;
+}
+
+.form-comentario textarea.loading{
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.form-comentario textarea:focus {
+    outline: none;
+    border-color: #00FFB2; /* Color al enfocar */
+    color: rgb(34, 33, 33);;
+}
+
+.loading-spinner-container {/*estilo del spinner de carga*/
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;/* Oculto por defecto */
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.loading-spinner-container.active{
+    display: flex; /* Muestra el spinner cuando está activo */
+}
+
+.spinner{
+    width:40px;
+    height:40px;
+    border: 3px solid rgba(255, 0, 221, 0.2);
+    border-top-color: #00FFB2;
+    border-radius: 50%;
+    animation: spin 0.5s linear infinite;
+}
+
+@keyframes spin {
+    from{
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Contenedor de los botones del formulario */
+.form-comentario > form > div:last-of-type {
+  display: none;
+}
+
+.form-comentario:focus-within > form > div:last-of-type {
+    display: flex; 
+    position: absolute; 
+    right: 0; 
+    margin-top: 70px; 
+    gap: 10px;
+}
+
+.form-comentario button {
+    font-size: 14px;
+    font-weight: bold;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Estilo del botón Cancelar */
+.form-comentario button:first-of-type {
+    background-color: transparent;
+    color: #666;
+}
+
+.form-comentario button:first-of-type:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+  color:#fff;
+}
+
+/* Estilo del botón Comentar */
+.form-comentario button:last-of-type {
+    background-color: #ff00dd;
+    color: #fff;
+}
+
+.form-comentario button:hover {
+    opacity: 0.8;
+}
+
+/*Deshabilita botones durante la carga*/
+.form-comentario button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+
+/* Contenedor para la lista de comentarios que permite el scroll */
+.lista-comentarios {
+    max-height: 800px; /* Altura máxima antes de que aparezca el scroll */
+    overflow-y: auto; /* Permite el scroll vertical */
+    padding-right: 10px; /* Espacio para que la barra de scroll no se pegue al contenido */
+    margin-top: 10px;
+}
+
+/* Estilo de cada comentario */
+.lista-comentarios article {
+    display: flex;
+    gap: 16px;
+    padding: 20px 0;
+    
+}
+
+.lista-comentarios article > img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Contenido del comentario (usuario, texto, botones) */
+.lista-comentarios article > div:first-of-type {
+    flex-grow: 1;
+}
+
+/* Fila del nombre de usuario y tiempo */
+.lista-comentarios article > div > div:first-of-type {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 5px;
+}
+
+.lista-comentarios span {
+    font-weight: 500;
+    font-size: 21px;
+}
+
+.lista-comentarios time {
+    font-size: 19px;
+    color: #888;
+}
+
+.lista-comentarios p {
+    font-size: 22px;
+   font-weight: 300;
+    margin: 0;
+}
+
+/* botones de interacción (likes, responder) */
+.lista-comentarios article > div > div:last-of-type {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.lista-comentarios article button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #666;
+    font-size: 19px;
+}
+
+.lista-comentarios article button img {
+    width: 16px;
+    height: 16px;
+}
+
+/* Botón de opciones (los tres puntos) */
+.lista-comentarios article > div:last-of-type {
+    align-self: flex-start;
+    margin-left: auto; /* Empuja el botón a la derecha */
+}
+
+/* Animación de entrada para nuevos comentarios */
+@keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .lista-comentarios article.new-comment {
+    animation: slideIn 0.3s ease-out;
+  }
+
+  .cards-section {
+    margin-top: 40px;
+  }
+
+  .cards-title{
+    margin-bottom: 26px;
+    font-family: 'Raleway', sans-serif;
+    font-size: 32px;
+    font-weight: 500;
+  }
+
+  .game-preview:hover {
+    border-radius: 20px;
+    /*background: #ffffff80; comento esto para el blocka
+    color: #000;
+    /*box-shadow:  0 0 80px whitesmoke, 
+>>>>>>> 727dd62 (cambio estilo hover del canvas)
+                inset 20px 0 80px rgba(255, 0, 255, 0.2),
+                inset -20px 0 80px #0ff, 
+                inset 20px 0 300px #f0f, 
+                inset -20px 0 300px #0ff,
+                0 0 50px #fff, 
+                -10px 0 80px #f0f, 
+                10px 0 80px #0ff;*/
+    transition: ease-in-out 0.3s;
+    /*transform: scale(1.1);*/
+  }
+
+  /* Escala el botón "Jugar" cuando el contenedor game-preview está en hover 
+.game-preview:hover ~ .game-btnPlay {
+    transform: scale(1.1); 
+    transition: transform 0.3s ease-in-out;
+}no para blocka*/
+
+
+/*----------------------------------
+    FIN ESTILOS PAGINA JUEGO
+    ---------------------------------*/
+
+
+
+    @media (max-width: 1510px){
+        .body-home::before{
+            height: 7200px;
+        }
+        h1{
+          font-size: 3.5rem;
+        }
+        p, a{
+        font-size: 1.25rem;
+        }
+        .card-horizontal{
+            width: 400px;
+            height: 231px;
+        }
+        .hero-contenido{
+            width: 54vw;
+        }
+        .contenedor.cards-horizontales{
+            height: 650px;
+        }  
+        .card-img-horizontal img{
+            width: 400px;
+        }
+    
+        .card-contenido-horizontal {
+            width: 401px;
+        }
+        .nombre-categoria{
+            right: 457px;
+        }
+        .span-verMas{
+            left: 537px;
+        }
+    
+        .contenedor.cards-verticales {
+             width: 1250px;
+        }
+    
+    
+        .card-vertical {
+            animation-name: autoRun-1510;
+        }
+    
+        .card-contenido-vertical{
+            bottom: 113px;
+         }
+        
+        @keyframes autoRun-1510 {
+           from {
+              left: 100%;
+            }
+           to {
+                left: -287px; 
+              }
+        }
+        .card-grande{
+            width: 1150px;
+            height: 650px;
+        }
+        .cards-lista-grande {
+        height: 750px;
+        }
+    
+        .card-img-grande img{
+        width: 1150px;
+        }
+    
+        .iconos-juego{
+            bottom: 120px;
+            height: 48px;
+        }
+
+        .game-btnPlay{
+            bottom: 336px;
+            right: 543px;        
+        }
+    }
+    @media (max-width: 1275px){
+        .body-home::before{
+            height: 7100px;
+        }
+        .hero-contenido{
+            width: 40vw;
+        }
+        .hero-contenido h1{
+            font-size: 2rem;
+        }
+         .hero-contenido p{
+            font-size: 1rem;
+        }
+        .btn-primario{
+            width: 200px;
+        }
+    
+        .contenedor.cards-horizontales {
+        height: 850px;
+        }
+        
+        .contenedor .cards-lista{
+        grid-template-rows: 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+        }
+        .nombre-categoria {
+            right: 284px;
+            font-size: 1.5rem;
+    
+        }
+        .span-verMas {
+          left: 330px;
+          font-size: 1rem;
+        }
+        .contenedor.cards-verticales {
+            width: 850px;
+        }
+        .card-vertical {
+        animation-name: autoRun-1275;
+        }
+        
+        @keyframes autoRun-1275 {
+            from {
+               left: 100%;
+            }
+            to {
+                left: -237px;
+            }
+        }
+        .card-grande{
+            width: 750px;
+            height: 470px;
+        }
+        .cards-lista-grande {
+        height: 526px;
+        }
+        .card-img-grande img{
+            width: 750px;
+        }
+        .card-contenido-grande{
+            bottom: 180px;
+        }
+    
+        .iconos-juego{
+            bottom: 118px;
+            height: 35px;
+        }
+    
+        .fat-footer>ul{
+            gap: 46px;
+        }
+    }
+    
+    
+    @media (max-width: 850px){
+        .body-home::before{
+            height: 5672px;
+        }
+        .nav-Busqueda{
+            display: none;
+        }
+        .hero-contenido{
+            width: 55vw; 
+        }
+    
+        .hero-contenido p{
+            display: none;
+            width: 50vw;
+        }
+        .btn-primario{
+            width: 175px;
+        }
+        .contenedor.cards-horizontales {
+            height: 594px;
+        }
+        .contenedor .cards-lista {
+            grid-template-columns: 1fr;
+            grid-template-rows: 1fr 1fr;
+        }
+        .nombre-categoria {
+            right: 93px;
+        }
+        .span-verMas {
+            left: 120px;
+        }
+        .card-horizontal.card-3,
+        .card-horizontal.card-4,
+        .card-horizontal.card-5,
+        .card-horizontal.card-6{
+            display: none;
+        }
+        
+        .contenedor.cards-verticales {
+            width: 500px;
+            height: 5472x;
+        }
+        .card-vertical {
+            animation-name: autoRun-850;
+        }
+        @keyframes autoRun-850 {
+            from {
+                left: 100%;
+            }
+            to {
+                left: -169px; 
+            }
+        }
+        .card-grande{
+            width: 446px;
+            height: 285px;
+        }
+        .cards-lista-grande {
+        height: 315px;
+        }
+        .card-img-grande img{
+            width: 446px;
+        }
+        .card-contenido-grande {
+            bottom: 133px;
+        }
+    
+        .card-contenido-grande h1{
+            font-size: 2.5rem;
+        }
+    
+        .iconos-juego{
+            bottom: 108px;
+            height: 26px;
+        }
+    
+        .fat-footer>ul {
+            display: grid;
+            justify-content: space-around;
+            width: 100%;
+            margin: 30px 50px 30px 50px;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 16px;  
+        }
+    }
+
+
+
+
+
+
+
+
