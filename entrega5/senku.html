@@ -11,8 +11,8 @@ entrega3/paginaSenku.html<!DOCTYPE html>
     <!--Raleway-->
     <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="./css/senku.css">
     <link rel="stylesheet" href="./css/keyframefondo.css">
+    <link rel="stylesheet" href="./css/senku.css">
     
 </head>
 
@@ -224,10 +224,18 @@ entrega3/paginaSenku.html<!DOCTYPE html>
                             </svg>
                         </div>
                         <!--aca el canvas para mostrar el FLAPPY BIRD -->
-                        <div id="flappyBird-container">
-                            <canvas id="flappyBirdCanvas" width="750" height="500" class="canvas-hidden"></canvas>
+                        <div  class="flappyBird-container" id="flappyBird-container">
+                            <canvas id="flappyBirdCanvas" width="750" height="422" class="canvas-hidden"> </canvas>
                         </div>
-                        <div class="contenedor-Cron-Dat-Btn">
+                            <div class="fondos-parallax">
+                                <div class="layer layer-6"></div>
+                                <div class="layer layer-5"></div>
+                                <div class="layer layer-4"></div>
+                                <div class="layer layer-3"></div>
+                                <div class="layer layer-2"></div>
+                            </div>
+                        
+                        <div 4lass="contenedor-Cron-Dat-Btn">
                             <!--aca cronometro del juego iniciado-->
                             <div id="cronometro" class="cronometro">
                                 <p> Tiempo Restante: --:--</p>
