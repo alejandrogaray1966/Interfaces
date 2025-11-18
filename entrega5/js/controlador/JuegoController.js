@@ -5,7 +5,7 @@ import { JuegoView } from '../vista/JuegoView.js';
 export class JuegoController {
     constructor(canvas,tiempoInicialSegundos, actualizarCronometroUICallback, mostrarPopoverFinJuegoCallback) {
         
-        this.juegoModelo = new JuegoModel();
+        this.juegoModelo = new JuegoModel(canvas.height, canvas.width);
         this.juegoVista = new JuegoView(canvas, this.juegoModelo);
 
 
@@ -27,28 +27,46 @@ export class JuegoController {
         // vuelo del pájaro
         window.addEventListener("keydown", (e) => {
             if (e.key === " " || e.key === "ArrowUp") {
-                this.juegoModelo.pajaro.volar();
+                e.preventDefault();
+                //Solo permite volar si el juego no ha terminado
+                if (!this.juegoModelo.gameOver) { 
+                    this.juegoModelo.pajaro.volar();
+                }
             }
         });
 
         canvas.addEventListener("click", () => {
-            this.juegoModelo.pajaro.volar();
-        });
+            // Solo permite volar si el juego no ha terminado
+            if (!this.juegoModelo.gameOver) {
+               this.juegoModelo.pajaro.volar();
+           }
+       });
     }
 
-    /*iniciar() {
+    //esto estaba comentado, porque habiamos cambiado la forma de redibujar el juego VER...
+    iniciar() {
         requestAnimationFrame(this.loop);
-    }*/
+    } 
 
     loop() {
         this.juegoModelo.actualizar();
         this.juegoVista.dibujar();
 
-        if (this.juegoModelo.hayColision()) {
-            console.log("COLISIÓN!");
-            // aquí puedes reiniciar el juego si querés
+        // Chequea si la bandera 'gameOver' se activó en el modelo
+        if (this.juegoModelo.gameOver) {
+            console.log("COLISIÓN! Juego Terminado. Deteniendo el loop de animación.");
+            
+            // Llama a tu función para mostrar la ventana de fin de juego/reiniciar
+            if (this.mostrarPopoverFinJuego) {
+                 // Asumo que tu callback necesita un argumento 'false' si es derrota
+                 this.mostrarPopoverFinJuego(false); 
+            }
+            
+            // RETURN: La clave para que el juego se detenga es NO llamar a requestAnimationFrame
+            return; 
         }
 
+        // Si el juego no ha terminado, continúa el loop
         requestAnimationFrame(this.loop);
     }
 

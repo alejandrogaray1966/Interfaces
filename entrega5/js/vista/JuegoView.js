@@ -5,29 +5,25 @@ export class JuegoView {
         this.model = model;
     }
 
+   
+
     dibujar() {
         const ctx = this.ctx;
         ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-        // Fondos
-        //this.model.fondos.forEach(f => this._dibujarFondo(f));
-
-        // Tuberías
-        this.model.tuberias.forEach(t => t.dibujar(ctx));
+        // Obstaculos
+        this.model.obstaculos.forEach(obs => {obs.dibujar(ctx);});    
+        
+        // Coleccionables // <-- ¡NUEVA LÍNEA!
+        this.model.coleccionables.forEach(col => {col.dibujar(ctx);});
 
         // Pajaro
         this._dibujarPajaro(this.model.pajaro);
+
+        // Puntuación // <-- ¡NUEVA LÍNEA!
+        this._dibujarPuntuacion(this.model.score);
     }
 
-    /*_dibujarFondo(fondo) {
-        const img = fondo.img;
-        if (!img.complete) return;
-
-        const ctx = this.ctx;
-
-        ctx.drawImage(img, fondo.x, 0);
-        ctx.drawImage(img, fondo.x + img.width, 0);
-    }*/
 
     _dibujarPajaro(pajaro) {
         const img = pajaro.img;
@@ -40,5 +36,20 @@ export class JuegoView {
             pajaro.x, pajaro.y,
             pajaro.frameW, pajaro.frameH
         );
+
+        //Dibujar la caja de colisión del pájaro
+        const box = pajaro.getColisionBox();
+        this.ctx.strokeStyle = 'red';
+        this.ctx.lineWidth = 2;
+        this.ctx.strokeRect(box.x, box.y, box.w, box.h);
     }
+
+    _dibujarPuntuacion(score) { // <-- ¡NUEVO MÉTODO!
+        const ctx = this.ctx;
+        ctx.fillStyle = 'black';
+        ctx.font = 'bold 30px Arial';
+        ctx.textAlign = 'left';
+        ctx.fillText(`Puntos: ${score}`, 20, 40); 
+    }
+
 }

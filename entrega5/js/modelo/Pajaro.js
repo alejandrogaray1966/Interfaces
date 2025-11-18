@@ -17,8 +17,8 @@ export class Pajaro {
 
         // Física
         this.velY = 0;
-        this.gravedad = 0.4;
-        this.salto = -6;
+        this.gravedad = 0.2;
+        this.salto = -3;
     }
 
     actualizar() {
@@ -60,10 +60,10 @@ export class Pajaro {
     
     getColisionBox() {
         return {
-            x: this.x + 2,
-            y: this.y + 2,
-            w: this.frameW - 40,
-            h: this.frameH - 40
+            x: this.x ,
+            y: this.y +25,
+            w: this.frameW,//pico
+            h: this.frameH-40
         };
     }
 }
