@@ -46,28 +46,61 @@ export class JuegoController {
     //esto estaba comentado, porque habiamos cambiado la forma de redibujar el juego VER...
     iniciar() {
         requestAnimationFrame(this.loop);
-    } 
+    }
+    
 
     loop() {
         this.juegoModelo.actualizar();
         this.juegoVista.dibujar();
 
-        // Chequea si la bandera 'gameOver' se activó en el modelo
-        if (this.juegoModelo.gameOver) {
-            console.log("COLISIÓN! Juego Terminado. Deteniendo el loop de animación.");
-            
-            // Llama a tu función para mostrar la ventana de fin de juego/reiniciar
-            if (this.mostrarPopoverFinJuego) {
-                 // Asumo que tu callback necesita un argumento 'false' si es derrota
-                 this.mostrarPopoverFinJuego(false); 
-            }
-            
-            // RETURN: La clave para que el juego se detenga es NO llamar a requestAnimationFrame
-            return; 
+        // 1. Si el juego aún no ha terminado (gameOver = false), sigue el loop normal.
+        if (!this.juegoModelo.gameOver) {
+            requestAnimationFrame(this.loop);
+            return;
         }
 
-        // Si el juego no ha terminado, continúa el loop
-        requestAnimationFrame(this.loop);
+        // --- Lógica de Fin de Juego (Solo si this.juegoModelo.gameOver es TRUE) ---
+
+        // 2. Si el juego terminó PERO la animación de muerte/caída AÚN está en curso,
+        // continuamos el loop SOLO para la animación.
+        if (this.juegoModelo.animacionMuerteEnCurso) { 
+            requestAnimationFrame(this.loop);
+            return;
+        }
+    
+        // 3. Si el juego terminó Y la animación de muerte YA NO está en curso,
+        // detenemos el loop y mostramos el resultado.
+        console.log("COLISIÓN! Juego Terminado. Deteniendo el loop de animación.");
+        this.finalizarJuego(false); // Llama a la función que muestra el popover
+        
+        // No hay llamada a requestAnimationFrame aquí, el juego se detiene.
+    }
+
+    finalizarJuego(victoria) {
+
+        if (this.juegoTerminado) return; // Ya terminó
+        this.juegoTerminado = true;
+        
+        if (this.idCronometro) {
+            clearInterval(this.idCronometro);
+            this.idCronometro = null;
+        }
+
+        let mensaje = "";
+        if (victoria) {
+            mensaje = "¡VICTORIA! 🎉 Solo te queda una ficha.";
+
+        } else if (this.tiempoRestante <= 0) {
+            mensaje = "El tiempo se ha agotado. Intenta de nuevo con una estrategia más rápida.";
+
+        } else {
+            mensaje = "Te has quedado sin movimientos posibles. ¡Mejora tu estrategia!.";
+
+        }
+
+        if (this.mostrarPopoverFinJuego) {
+            this.mostrarPopoverFinJuego(victoria, this.juegoModelo.pajaro); // Aquí pasamos el pájaro por si necesitamos sus stats
+       }
     }
 
     inicializarCronometro() {

@@ -54,17 +54,30 @@ export class JuegoModel {
         return this.rutasColeccionables[indice];
     }
 
+    get animacionMuerteEnCurso() {
+        // El Modelo simplemente delega la pregunta al objeto Pajaro.
+        return this.pajaro.animacionMuerteEnCurso; 
+    }
+
     actualizar() {
-        if (this.gameOver) return;
     
         this.pajaro.actualizar();
 
-        //colision con el suelo o el techo
-        if(this.pajaro.fueraDelCanvas()){
-            this.gameOver = true;
-            console.log("¡Game Over! El pájaro salió del canvas.");
-            return;
+        if (this.pajaro.estado === 'muriendo') {
+            return; // Detiene el scroll y la generación
         }
+        
+        // El resto del código solo se ejecuta si el pájaro está 'volando'.
+
+        let colisionDetectada = false;
+
+        // A. Colisión con límites del canvas (piso/techo)
+        // La colisión con el suelo mientras "vuela" debe detectarse aquí.
+        if (this.pajaro.fueraDelCanvas()){ 
+            console.log("¡Colisión con límite!");
+            colisionDetectada = true;
+        }
+
 
         this.contadorTiempo++;
         
@@ -99,10 +112,15 @@ export class JuegoModel {
         // Asignar la lista filtrada de vuelta al modelo
         this.obstaculos = obstaculosSiguientes; // <--- CORRECCIÓN APLICADA
 
-        // 3. Chequear la colisión después de iterar
         if (colisionConObstaculo) {
+            colisionDetectada = true;
+       }
+
+        // 3. Chequear la colisión después de iterar
+        if (colisionDetectada) {
             this.gameOver = true; 
             console.log("¡Game Over! Colisión con obstáculo.");
+            this.pajaro.morir();
             return;
         }
 
@@ -163,4 +181,5 @@ export class JuegoModel {
     hayColision() {
         return this.obstaculos.some(t => t.colisiona(this.pajaro));
     }
+    
 }
