@@ -2,25 +2,45 @@ import { Pajaro } from "./Pajaro.js";
 import { FondoParallax } from "./FondoParallax.js";
 import { Obstaculo } from "./Obstaculo.js";
 import { Coleccionable } from "./Coleccionable.js";
+import { Tuberia } from "./Tuberia.js";
 
 export class JuegoModel {
     constructor(canvasHeight = 422, canvasWidth = 750) {
         this.canvasHeight = canvasHeight; // Para pasar a Pajaro.js y usar en límites.
         this.canvasWidth = canvasWidth;
         this.gameOver = false;
+
+        //VER SI AGREGAMOS MAS PAJAROS-----------PUCHO
         // Pajaro con spritesheet
         this.pajaro = new Pajaro("./assets/sprite-vuelo.png", this.canvasHeight);
         
 
-        this.rutasObstaculos = [
-            "./assets/nube.png",
-            "./assets/obstaculo1.png", 
-            "./assets/obstaculo2.png", 
-            "./assets/obstaculo3.png", 
-            "./assets/obstaculo4.png", 
-            "./assets/obstaculo6.png", 
-            "./assets/obstaculo7.png", 
-        ];
+        this.rutasObstaculos = {
+            'tuberia': {
+                tipo: 'tuberia',
+            },
+            'obstaculo' : {
+                tipo: 'obstaculo',
+                imgUrls:["./assets/nube.png",
+                        "./assets/obstaculo1.png", 
+                        "./assets/obstaculo2.png", 
+                        "./assets/obstaculo3.png", 
+                        "./assets/obstaculo4.png", 
+                        "./assets/obstaculo6.png", 
+                        "./assets/obstaculo7.png",]
+            }
+        };
+
+
+        this.faseActual = 'tuberias'; // Inicia con tuberías
+        this.contadorFase = 0;
+        this.MAX_TUBERIAS = 5;      // Generar 5 pares de tuberías
+        this.MAX_OBSTACULOS = 8;    // Generar 8 obstáculos simples
+        
+        // El intervalo de generación es ahora fijo para cada tipo
+        this.INTERVALO_TUBERIA = 100; // Un par de tuberías cada 100 frames
+        this.INTERVALO_OBSTACULO = 75; // Un obstáculo simple cada 75 frames
+
 
         // Obstáculos iniciales
         this.obstaculos = []; // Inicializamos vacío, la generación comienza en actualizar()
@@ -34,6 +54,8 @@ export class JuegoModel {
 
         this.score = 0; // <-- NUEVA PROPIEDAD: Puntuación del juego
         
+        //comment pucho--- this.generarTuberia = true;
+
         // --- COLECCIONABLES ---
         this.coleccionables = []; // <-- NUEVA LISTA
         this.rutasColeccionables = [
@@ -45,8 +67,19 @@ export class JuegoModel {
     }
 
     _obtenerRutaObstaculoAleatoria() {
-        const indice = Math.floor(Math.random() * this.rutasObstaculos.length);
-        return this.rutasObstaculos[indice];
+        const tipos = ['obstaculo', 'tuberia']; // Array de los tipos disponibles
+        const tipoAleatorio = tipos[Math.floor(Math.random() * tipos.length)];
+    
+    // Si es una tubería, devolvemos el tipo para instanciar la clase Tuberia
+        if (tipoAleatorio === 'tuberia') {
+            return { tipo: 'tuberia' };
+        } 
+        // Si es un obstáculo simple, elegimos una ruta de imagen aleatoria
+        else {
+            const rutas = this.rutasObstaculos.obstaculo.imgUrls;
+            const ruta = rutas[Math.floor(Math.random() * rutas.length)];
+            return { tipo: 'obstaculo', ruta: ruta };
+        }
     }
 
     _obtenerRutaColeccionableAleatoria() { 
@@ -62,6 +95,8 @@ export class JuegoModel {
     actualizar() {
     
         this.pajaro.actualizar();
+
+        this.contadorTiempo++;
 
         if (this.pajaro.estado === 'muriendo') {
             return; // Detiene el scroll y la generación
@@ -79,14 +114,13 @@ export class JuegoModel {
         }
 
 
-        this.contadorTiempo++;
         
         // Lógica de dificultad progresiva (se mantiene)
         if (this.contadorTiempo % 300 === 0) {
             this.dificultad++;
             this.generacionIntervaloBase = Math.max(
                 this.generacionIntervaloMin, 
-                this.generacionIntervaloBase - 15
+                this.generacionIntervaloBase - 10
             );
         }
 
@@ -162,20 +196,85 @@ export class JuegoModel {
         }
 
         // Lógica de generación de nuevos obstáculos (Bucle Infinito)
-        this.contadorGeneracion++;
+        /*this.contadorGeneracion++;
         if (this.contadorGeneracion >= this.generacionIntervaloBase) {
             
-            // USAR LA RUTA ALEATORIA EN LA GENERACIÓN
-            const rutaAleatoria = this._obtenerRutaObstaculoAleatoria();
-            
-            this.obstaculos.push(new Obstaculo(rutaAleatoria, // <-- Aquí está el cambio
-             this.canvasWidth + 50, 
-             this.canvasHeight));
-             
-            this.contadorGeneracion = Math.floor(Math.random() * 30); 
-        }
+            const infoGeneracion = this._obtenerRutaObstaculoAleatoria();
+            let nuevoObstaculo;
 
-     
+            if (infoGeneracion.tipo === 'tuberia') {
+                // Generar una Tuberia. La ruta de la imagen se define dentro de Tuberia.js
+                nuevoObstaculo = new Tuberia(
+                    "./assets/tuberiaInferior.png", // <--- DEBES ASEGURARTE DE USAR LA RUTA CORRECTA AQUÍ
+                    this.canvasWidth + 50, 
+                    this.canvasHeight
+                );
+            } else {
+                // Generar un Obstaculo
+                nuevoObstaculo = new Obstaculo(
+                    infoGeneracion.ruta, // Usa la ruta de la imagen simple
+                    this.canvasWidth + 50, 
+                    this.canvasHeight
+                );
+            }
+
+            this.obstaculos.push(nuevoObstaculo);
+                
+            this.contadorGeneracion = Math.floor(Math.random() * 30); 
+        }*/ 
+
+
+        this.contadorGeneracion++;
+        let nuevoObstaculo = null;
+
+        if (this.faseActual === 'tuberias') {
+            if (this.contadorFase < this.MAX_TUBERIAS) {
+                if (this.contadorGeneracion >= this.INTERVALO_TUBERIA) {
+                    // Generar Tuberia
+                    nuevoObstaculo = new Tuberia(
+                        "./assets/tuberiaSuperior.png", // Asegúrate de que esta ruta sea correcta
+                        this.canvasWidth + 50, 
+                        this.canvasHeight
+                    );
+                    this.contadorFase++; // Contar que generamos 1 de 5
+                    this.contadorGeneracion = 0;
+                }
+            } else {
+                // Transicionar a la siguiente fase
+                this.faseActual = 'obstaculos';
+                this.contadorFase = 0;
+                this.contadorGeneracion = 0;
+                console.log("Cambiando a fase: Obstáculos");
+            }
+
+        } else if (this.faseActual === 'obstaculos') {
+            if (this.contadorFase < this.MAX_OBSTACULOS) {
+                if (this.contadorGeneracion >= this.INTERVALO_OBSTACULO) {
+                    // Generar Obstáculo Simple
+                    const rutas = this.rutasObstaculos.obstaculo.imgUrls;
+                    const ruta = rutas[Math.floor(Math.random() * rutas.length)];
+                    
+                    nuevoObstaculo = new Obstaculo(
+                        ruta, 
+                        this.canvasWidth + 50, 
+                        this.canvasHeight
+                    );
+                    this.contadorFase++; // Contar que generamos 1 de 8
+                    this.contadorGeneracion = 0;
+                }
+            } else {
+                // Transicionar a la siguiente fase (vuelta a tuberías)
+                this.faseActual = 'tuberias';
+                this.contadorFase = 0;
+                this.contadorGeneracion = 0;
+                console.log("Cambiando a fase: Tuberías");
+            }
+        }
+        
+        // Agregar el nuevo obstáculo (si se generó)
+        if (nuevoObstaculo) {
+             this.obstaculos.push(nuevoObstaculo);
+        }
     }
 
     hayColision() {

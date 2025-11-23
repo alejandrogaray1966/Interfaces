@@ -24,7 +24,7 @@ export class JuegoController {
          // 5. Iniciar el cronómetro (Empieza la cuenta regresiva) <--- ¡Aquí va!
         this.inicializarCronometro();
 
-        // vuelo del pájaro
+        // vuelo del pájaro QUE EMPIECE CON UN SITETIME PARA RETRASAR EL COMIENZO????
         window.addEventListener("keydown", (e) => {
             if (e.key === " " || e.key === "ArrowUp") {
                 e.preventDefault();
@@ -76,6 +76,9 @@ export class JuegoController {
         // No hay llamada a requestAnimationFrame aquí, el juego se detiene.
     }
 
+
+    //CAMBIAR FUNCION DE POPOVER-----------------------PUCHOOOO
+
     finalizarJuego(victoria) {
 
         if (this.juegoTerminado) return; // Ya terminó
@@ -99,7 +102,7 @@ export class JuegoController {
         }
 
         if (this.mostrarPopoverFinJuego) {
-            this.mostrarPopoverFinJuego(victoria, this.juegoModelo.pajaro); // Aquí pasamos el pájaro por si necesitamos sus stats
+            this.mostrarPopoverFinJuego(mensaje, this.juegoModelo.pajaro); // Aquí pasamos el pájaro por si necesitamos sus stats
        }
     }
 
