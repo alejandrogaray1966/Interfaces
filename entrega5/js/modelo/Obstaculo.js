@@ -56,10 +56,10 @@ export class Obstaculo {
         );
 
         // Dibujar la caja de colisión del obstáculo
-        const box = this.getColisionBox();
-        ctx.strokeStyle = 'blue';
-        ctx.lineWidth = 2;
-        ctx.strokeRect(box.x, box.y, box.w, box.h);
+        //const box = this.getColisionBox();
+        //ctx.strokeStyle = 'blue';
+        //ctx.lineWidth = 2;
+        //ctx.strokeRect(box.x, box.y, box.w, box.h);
     }
     
     // Devuelve la caja de colisión para la detección.

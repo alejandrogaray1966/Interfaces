@@ -3,7 +3,7 @@ import { JuegoView } from '../vista/JuegoView.js';
 
 
 export class JuegoController {
-    constructor(canvas,tiempoInicialSegundos, actualizarCronometroUICallback, mostrarPopoverFinJuegoCallback) {
+    constructor(canvas,tiempoInicialSegundos, actualizarCronometroUICallback, mostrarPopoverFinJuegoCallback, detenerFondoCallback) {
         
         this.juegoModelo = new JuegoModel(canvas.height, canvas.width);
         this.juegoVista = new JuegoView(canvas, this.juegoModelo);
@@ -17,6 +17,7 @@ export class JuegoController {
         this.idCronometro = null; // ID del intervalo para poder detenerlo
         this.tiempoRestante = tiempoInicialSegundos;
         this.juegoTerminado = false; // Estado para bloquear movimientos al final
+        this.detenerFondo = detenerFondoCallback;
 
         //Guardar el callback para la UI
         this.actualizarCronometroUI = actualizarCronometroUICallback;
@@ -108,6 +109,11 @@ export class JuegoController {
             clearInterval(this.idCronometro);
             this.idCronometro = null;
         }
+
+        if (this.detenerFondo) { 
+            this.detenerFondo(); 
+            }
+        
 
         let mensaje = "";
         if (victoria) {

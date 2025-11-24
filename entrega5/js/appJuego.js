@@ -12,6 +12,7 @@ import {JuegoController} from "./controlador/JuegoController.js";
 
 // --- ELEMENTOS DE LA UI ---
 const canvas = document.getElementById('flappyBirdCanvas');
+const fondosDeJuego = document.querySelectorAll('.fondos-parallax .layer');
 const selectorTiempo = document.getElementById('selectorTiempo');
 const cronometroDiv = document.getElementById('cronometro'); // El div que muestra el tiempo
 const selectorTableros = document.getElementById('tableros'); // Nuevo: Selector de tablero
@@ -140,7 +141,7 @@ function iniciar() {
     if (!controlador) {
         // Primera vez que se inicia el juego
         
-        controlador = new JuegoController(canvas,tiempoSeleccionadoSegundos, actualizarCronometroUI, mostrarPopoverFinJuego);
+        controlador = new JuegoController(canvas,tiempoSeleccionadoSegundos, actualizarCronometroUI, mostrarPopoverFinJuego, detenerFondo);
 
         juegoIniciado = true;
         
@@ -148,8 +149,9 @@ function iniciar() {
 
         
     } else {
-    
+        reanudarFondo();
         controlador.iniciar();
+       
     }
         
     if (popoverFinJuego && popoverFinJuego.hidePopover) {
@@ -200,6 +202,18 @@ window.onload = function() {
         actualizarCronometroUI(parseInt(selectorTiempo.value, 10));
     }
 
+
+    function detenerFondo() {
+        fondosDeJuego.forEach(fondo => {
+            fondo.classList.add('fondo-detenido');
+        });
+    }
+
+    function reanudarFondo() {
+        fondosDeJuego.forEach(fondo => {
+            fondo.classList.remove('fondo-detenido');
+        });
+    }
 
 
 // Evita la selección de texto al arrastrar en el Canvas, lo cual puede interferir con el Drag and Drop.

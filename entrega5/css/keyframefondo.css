@@ -98,3 +98,7 @@
     animation: scroll 5s infinite linear;/*va cambiando los tiempos en los distintos div, */
     z-index: 4;
 }
+
+.fondo-detenido{
+        animation: paused;
+}

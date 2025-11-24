@@ -64,11 +64,11 @@ export class Tuberia {
             this.x, yInferior, this.ancho, alturaInferior
         );
 
-        this.getColisionBox().forEach(box => {
-            ctx.strokeStyle = 'lime';
-            ctx.lineWidth = 2;
-           ctx.strokeRect(box.x, box.y, box.w, box.h);
-         });
+        //this.getColisionBox().forEach(box => {
+         //   ctx.strokeStyle = 'lime';
+         //   ctx.lineWidth = 2;
+         //  ctx.strokeRect(box.x, box.y, box.w, box.h);
+        // });
     }
 
     getColisionBox() {
