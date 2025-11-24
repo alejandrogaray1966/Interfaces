@@ -16,7 +16,10 @@ const fondosDeJuego = document.querySelectorAll('.fondos-parallax .layer');
 const selectorTiempo = document.getElementById('selectorTiempo');
 const cronometroDiv = document.getElementById('cronometro'); // El div que muestra el tiempo
 const selectorTableros = document.getElementById('tableros'); // Nuevo: Selector de tablero
+const selectorMundos = document.getElementById('mundos'); // Nuevo: Selector de tablero
 const selectorMaterial = document.getElementById('selectorMaterial');
+const selectorPersonaje = document.getElementById('selectorPersonaje');
+
 const settingsButton = document.querySelector('.game-btn-settings'); // Nuevo: Botón de ajustes (ruedita)
 const botonPlay = document.querySelector('.game-btnPlay'); // El botón para iniciar/reiniciar
 const rankingContainer = document.querySelector('.leaderboard'); 

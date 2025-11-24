@@ -10,13 +10,12 @@
 .flappyBird-container{
     z-index: 6;
     position: relative;
-    top: 45px;
+    left: 320px;
 }
 
 .fondos-parallax{
     position: absolute;
-    left: 363px;
-    top: 45px;
+    left: 320px;
     width: 750px;/*ver esto y backgrounde repeat-x*/
     height: 422px; /*nunca ancho y alto a una imagen para que no se estire, esto es un div*/
 
