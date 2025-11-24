@@ -240,11 +240,6 @@ entrega3/paginaSenku.html<!DOCTYPE html>
                             <div id="cronometro" class="cronometro">
                                 <p> Tiempo Restante: --:--</p>
                             </div>
-                            <div class="info-juego">
-                                <h1>Juego</h1>
-                                <ul id="gameInfo"></ul>
-                            </div>
-
                             <div class="container-popover" id="id-popover" popover = "manual">
                                 <h2 id="mensajeFinJuegoTitulo"></h2>
                                 <p id="mensajeFinJuegoDescripcion"></p>
@@ -263,6 +258,18 @@ entrega3/paginaSenku.html<!DOCTYPE html>
                     </div>
                     <div class="game-settings-menu hidden">
                         <h3>Configuración</h3>
+                        <label for="mundos">Mundo:</label>
+                        <select id="mundos">
+                            <option value="bosque" selected>Bosque</option>
+                            <option value="bosqueNocturno">Bosque Nocturno</option>
+                            <option value="ciudad">Ciudad</option>
+                        </select>
+
+                        <label for="selectorPersonaje">Personaje</label>
+                        <select id="selectorPersonaje">
+                        <option value="p1" selected>Personaje 1</option>
+                        <option value="p2">Personaje 2</option>
+                         </select>
                         <!--aca elijo NIVEL-->
                         <label for="selectorTiempo">Elegir Dificultad:</label>
                         <select id="selectorTiempo">
