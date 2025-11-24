@@ -28,8 +28,8 @@ let popoverFinJuego = document.getElementById('id-popover'); // Asumo que tienes
 const canvasWrapper = document.querySelector('.canvas-wrapper'); 
 const previewImage = document.querySelector('.game-preview');
 // Necesitas IDs para los popovers/botones de reintentar si los vas a usar
-const reintentarSenku = document.getElementById('boton-reintentar');
-const inicioSenku = document.getElementById('boton-inicio');
+const reintentar = document.getElementById('boton-reintentar');
+const inicio = document.getElementById('boton-inicio');
 
 // La URL de la imagen del tablero 
 const MAPA_TABLEROS = {
@@ -144,17 +144,19 @@ function iniciar() {
 
         juegoIniciado = true;
         
-    } /*else {
-    
-        controlador.reiniciarJuego(juegoModelo, juegoVista,tiempoSeleccionadoSegundos, actualizarCronometroUI, mostrarPopoverFinJuego);
-    }*/
+        requestAnimationFrame(controlador.loop.bind(controlador));
+
         
-    if (popoverFinJuego && popoverFinJuego.open) {
+    } else {
+    
+        controlador.iniciar();
+    }
+        
+    if (popoverFinJuego && popoverFinJuego.hidePopover) {
         console.log("popover de inciarjuego" + popoverFinJuego)
         popoverFinJuego.hidePopover();
     }
 
-    requestAnimationFrame(controlador.loop.bind(controlador));
 }
 
 
@@ -173,7 +175,7 @@ window.onload = function() {
     
     if (botonReiniciar) {
         // Llama a la misma función que ya sabe cómo reiniciar el juego.
-        botonReiniciar.addEventListener('click', iniciar); 
+        botonReiniciar.addEventListener('click', iniciarJuego); 
     }
 
 
@@ -182,13 +184,13 @@ window.onload = function() {
 
 
     // Si existe el botón de reintentar (por ejemplo, en un pop-up de fin de juego)
-    if (inicioSenku) {
-            inicioSenku.addEventListener('click', () => {
+    if (inicio) {
+            inicio.addEventListener('click', () => {
            
             window.location.href = 'senku.html'; // ⬅️ Cambia 'senku.html' a la ruta correcta si es diferente
         })    }
-    if (reintentarSenku) {
-        reintentarSenku.addEventListener('click', iniciar);
+    if (reintentar) {
+        reintentar.addEventListener('click', iniciar);
     }
 
     

@@ -13,7 +13,7 @@ export class JuegoController {
 
         this.loop = this.loop.bind(this); // Asegura el contexto correcto en el loop
        
-
+        this.tiempoInicialSegundos = tiempoInicialSegundos;
         this.idCronometro = null; // ID del intervalo para poder detenerlo
         this.tiempoRestante = tiempoInicialSegundos;
         this.juegoTerminado = false; // Estado para bloquear movimientos al final
@@ -43,9 +43,28 @@ export class JuegoController {
        });
     }
 
+    reiniciar() { 
+        // 1. Detener el cronómetro si estaba activo
+        if (this.idCronometro) {
+            clearInterval(this.idCronometro);
+            this.idCronometro = null;
+        }
+
+        // 2. Resetear el estado del Modelo (Pájaro, Obstáculos, Score, Flags)
+        this.juegoModelo.reiniciar(); // <-- Llamada al nuevo método del Modelo
+
+        // 3. Resetear el estado del Controlador (Tiempo y Flags)
+        this.tiempoRestante = this.tiempoInicialSegundos; // Usamos el valor guardado
+        this.juegoTerminado = false; // Resetear la flag de fin de juego
+
+        // 4. Reiniciar el cronómetro y el loop de animación
+        this.inicializarCronometro(); // Esto llama al callback para actualizar la UI
+        requestAnimationFrame(this.loop);
+    }
+
     //esto estaba comentado, porque habiamos cambiado la forma de redibujar el juego VER...
     iniciar() {
-        requestAnimationFrame(this.loop);
+        this.reiniciar();
     }
     
 
@@ -55,6 +74,7 @@ export class JuegoController {
 
         // 1. Si el juego aún no ha terminado (gameOver = false), sigue el loop normal.
         if (!this.juegoModelo.gameOver) {
+            
             requestAnimationFrame(this.loop);
             return;
         }
