@@ -54,8 +54,9 @@ export class Coleccionable {
         // Dibujar la imagen centrada después de la rotación
         ctx.drawImage(
             this.img,
-            -this.ancho / 2, -this.alto / 2, // Dibuja desde el punto central
-            this.ancho, this.alto
+            -this.ancho * 2, 
+            -this.alto * 2, // Dibuja desde el punto central
+            this.ancho * 2, this.alto * 2
         );
         
         ctx.restore(); // Restaura el contexto para no afectar otros dibujos

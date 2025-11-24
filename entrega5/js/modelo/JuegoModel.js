@@ -13,6 +13,7 @@ export class JuegoModel {
         //VER SI AGREGAMOS MAS PAJAROS-----------PUCHO
         // Pajaro con spritesheet
         this.pajaro = new Pajaro("./assets/sprite-vuelo.png", this.canvasHeight);
+        //agregué 1 spritesheet nuevo pajaro verde
         
 
         this.rutasObstaculos = {
@@ -21,8 +22,7 @@ export class JuegoModel {
             },
             'obstaculo' : {
                 tipo: 'obstaculo',
-                imgUrls:["./assets/nube.png",
-                        "./assets/obstaculo1.png", 
+                imgUrls:["./assets/obstaculo1.png", 
                         "./assets/obstaculo2.png", 
                         "./assets/obstaculo3.png", 
                         "./assets/obstaculo4.png", 
@@ -59,8 +59,11 @@ export class JuegoModel {
         // --- COLECCIONABLES ---
         this.coleccionables = []; // <-- NUEVA LISTA
         this.rutasColeccionables = [
-            "./assets/armadura1.png", // <--- DEBES TENER ESTA IMAGEN
-            "./assets/armadura2.png" // <--- DEBES TENER ESTA IMAGEN
+            "./assets/Coleccionable1.png", // <--- DEBES TENER ESTA IMAGEN
+            "./assets/Coleccionable2.png",
+            "./assets/Coleccionable3.png",
+            "./assets/Coleccionable4.png",
+            "./assets/Coleccionable5.png" // <--- DEBES TENER ESTA IMAGEN
         ];
         this.generacionColeccionableIntervalo = 300; // Cada 300 frames (aprox 5 seg)
         this.contadorGeneracionColeccionable = 0;
@@ -232,7 +235,7 @@ export class JuegoModel {
                 if (this.contadorGeneracion >= this.INTERVALO_TUBERIA) {
                     // Generar Tuberia
                     nuevoObstaculo = new Tuberia(
-                        "./assets/tuberiaSuperior.png", // Asegúrate de que esta ruta sea correcta
+                        "./assets/tuberia-simple.png", // Asegúrate de que esta ruta sea correcta
                         this.canvasWidth + 50, 
                         this.canvasHeight
                     );

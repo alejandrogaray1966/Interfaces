@@ -119,10 +119,10 @@ export class Pajaro {
     
     getColisionBox() {
         return {
-            x: this.x ,
+            x: this.x +35,
             y: this.y +25,
-            w: this.frameW,//pico
-            h: this.frameH-40
-        };
+            w: this.frameW-50,//pico
+            h: this.frameH-50      
+        }; //hago más chico el bos de colision del pajaro
     }
 }

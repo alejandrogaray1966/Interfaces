@@ -9,12 +9,14 @@
 
 .flappyBird-container{
     z-index: 6;
+    position: relative;
+    top: 45px;
 }
 
 .fondos-parallax{
     position: absolute;
     left: 363px;
-    top: 0px;
+    top: 45px;
     width: 750px;/*ver esto y backgrounde repeat-x*/
     height: 422px; /*nunca ancho y alto a una imagen para que no se estire, esto es un div*/
 
@@ -31,32 +33,32 @@
 }
 
 .layer-6{
-    background-image: url("../assets/1.Backround.png"); /* (10,png) */
+    background-image: url("../assets/capa5-bosque_1920\ x\ 1080.png"); /* (10,png) */
     animation: scroll 55s infinite linear;/*va cambiando los tiempos en los distintos div, */
     z-index: 0;
 
 }
 
 .layer-5{
-    background-image: url("../assets/2.Trees_back.png"); /* (10,png) */
+    background-image: url("../assets/capa4-bosque_1920\ x\ 1080.png"); /* (10,png) */
     animation: scroll 40s infinite linear;/*va cambiando los tiempos en los distintos div, */
     z-index: 1;
 }
     
 
 .layer-4{
-    background-image: url("../assets/3.Trees_back.png"); /* (10,png) */
+    background-image: url("../assets/capa3-bosque_1920\ x\ 1080.png"); /* (10,png) */
     animation: scroll 27s infinite linear;
     z-index: 2;
 }
 
 .layer-3{
-    background-image: url("../assets/3.Trees_front.png");  
+    background-image: url("../assets/capa2-bosque_1920\ x\ 1080.png");  
     animation: scroll 12s infinite linear;
     z-index: 3;
 }
 .layer-2{
-    background-image: url("../assets/4.Ground.png"); /* (10,png) */
+    background-image: url("../assets/capa1-bosque_1920\ x\ 1080.png"); /* (10,png) */
     animation: scroll 5s infinite linear;/*va cambiando los tiempos en los distintos div, */
     z-index: 4;
 }
