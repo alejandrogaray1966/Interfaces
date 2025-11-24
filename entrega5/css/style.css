@@ -941,9 +941,11 @@ a, a:hover, a:active, a:visited, li{
 
 .game-btn-secondary{
     display: flex;
-    justify-content: flex-end;
+    justify-content: right;
     gap: 32px;
-    margin: 14px;
+    margin-top: 20px;
+    width: 100%;
+    
    
 }
 
@@ -962,7 +964,7 @@ a, a:hover, a:active, a:visited, li{
  
 .howToPlay-section {
 
-    margin-top: 30px;
+    margin-top: 80px;
     display: flex; 
     flex-direction: row;
     align-items: flex-start;
@@ -1331,6 +1333,35 @@ a, a:hover, a:active, a:visited, li{
     transition: transform 0.3s ease-in-out;
 }no para blocka*/
 
+
+/*estilos para flappy bird*/
+
+.coleccionable{
+    display: flex;
+    width: 80px;
+    position: relative;
+    top: -16px;
+    right: 20px;
+}
+
+.obstaculo{
+    width: 100px;
+}
+
+.controls-obstaculos{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.container-obstaculos{
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+   
+}
 
 /*----------------------------------
     FIN ESTILOS PAGINA JUEGO

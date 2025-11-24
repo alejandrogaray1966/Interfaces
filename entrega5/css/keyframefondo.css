@@ -31,33 +31,69 @@
     background-size: cover;
 }
 
-.layer-6{
+.fondo_bosque .layer-6{
     background-image: url("../assets/capa5-bosque_1920\ x\ 1080.png"); /* (10,png) */
+}
+
+.fondo_bosqueNoche .layer-6{
+    background-image: url("../assets/capa6-bosqueNoche_1920\ x\ 1080.png"); /* (10,png) */
+}
+
+.layer-6{
     animation: scroll 55s infinite linear;/*va cambiando los tiempos en los distintos div, */
     z-index: 0;
+}
 
+
+.fondo_bosque .layer-5{
+    background-image: url("../assets/capa4-bosque_1920\ x\ 1080.png"); /* (10,png) */
+}
+
+.fondo_bosqueNoche .layer-5{
+    background-image: url("../assets/capa5-bosqueNoche_1920\ x\ 1080.png"); /* (10,png) */
 }
 
 .layer-5{
-    background-image: url("../assets/capa4-bosque_1920\ x\ 1080.png"); /* (10,png) */
-    animation: scroll 40s infinite linear;/*va cambiando los tiempos en los distintos div, */
+   animation: scroll 40s infinite linear;/*va cambiando los tiempos en los distintos div, */
     z-index: 1;
 }
-    
 
-.layer-4{
+.fondo_bosque .layer-4{
     background-image: url("../assets/capa3-bosque_1920\ x\ 1080.png"); /* (10,png) */
+}
+
+.fondo_bosqueNoche .layer-4{
+    background-image: url("../assets/capa4-bosqueNoche_1920\ x\ 1080.png"); /* (10,png) */
+}
+  
+.layer-4{
     animation: scroll 27s infinite linear;
     z-index: 2;
 }
 
-.layer-3{
-    background-image: url("../assets/capa2-bosque_1920\ x\ 1080.png");  
+.fondo_bosque .layer-3{
+    background-image: url("../assets/capa2-bosque_1920\ x\ 1080.png"); 
+}
+
+.fondo_bosqueNoche .layer-3{
+    background-image: url("../assets/capa3-bosqueNoche_1920\ x\ 1080.png"); /* (10,png) */
+}
+
+.layer-3{  
     animation: scroll 12s infinite linear;
     z-index: 3;
 }
-.layer-2{
+
+
+.fondo_bosque .layer-2{
     background-image: url("../assets/capa1-bosque_1920\ x\ 1080.png"); /* (10,png) */
+}
+
+.fondo_bosqueNoche .layer-2{
+    background-image: url("../assets/capa2-bosqueNoche_1920\ x\ 1080.png"); /* (10,png) */
+}
+
+.layer-2{
     animation: scroll 5s infinite linear;/*va cambiando los tiempos en los distintos div, */
     z-index: 4;
 }

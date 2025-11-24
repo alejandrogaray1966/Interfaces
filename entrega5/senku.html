@@ -30,16 +30,17 @@ entrega3/paginaSenku.html<!DOCTYPE html>
         <div class="container-breadcrumbs">
             <ul class="breadcrumbs">
               <li class="breadcrumbs-li"><a href="index.html">Categorias</a></li>
-              <li class="breadcrumbs-li"><a href="senku.html">> Estrategia</a></li>
-              <li class="breadcrumbs-li">> ElUltimoCaballero</li>
+              <li class="breadcrumbs-li"><a href="senku.html">> Carrera</a></li>
+              <li class="breadcrumbs-li">> LaRectaFinal</li>
             </ul>
         </div>
 
-        <H1 class="game-title">EL ULTIMO CABALLERO - Peg Solitare</H1>
+        <H1 class="game-title">LA RECTA FINAL - Flappy Bird</H1>
         
-        <p class="game-subtitle">El Rey ha convocado a sus caballeros a un duelo de ingenio y estrategia; 
-            <br>sólo el vencedor será honrado como su Guardia Real.
-            <br>¿Estás listo para esta batalla?</p>
+        <p class="game-subtitle">El estudiante avanza por el último tramo de su carrera, 
+            <br>sorteando las exigencias del camino mientras recoge esas pequeñas ayudas que sostienen en las horas más críticas.
+            <br>Solo quien mantenga el ritmo y acumule más puntaje demostrará su verdadero espíritu universitario.
+            <br>¿Listo para este desafío?</p>
         
         <div><!--contenedor del juego/previsualizacion-->
             <figure class="game-container">
@@ -228,14 +229,25 @@ entrega3/paginaSenku.html<!DOCTYPE html>
                             <canvas id="flappyBirdCanvas" width="750" height="422" class="canvas-hidden"> </canvas>
                         </div>
                             <div class="fondos-parallax">
-                                <div class="layer layer-6"></div>
-                                <div class="layer layer-5"></div>
-                                <div class="layer layer-4"></div>
-                                <div class="layer layer-3"></div>
-                                <div class="layer layer-2"></div>
+                                <div class="fondo_bosque">
+                                    <div class="layer layer-6"></div>
+                                    <div class="layer layer-5"></div>
+                                    <div class="layer layer-4"></div>
+                                    <div class="layer layer-3"></div>
+                                    <div class="layer layer-2"></div>
+                                </div>
+
+                                <div class="fondo_bosqueNoche">
+                                    <div class="layer layer-6"></div>
+                                    <div class="layer layer-5"></div>
+                                    <div class="layer layer-4"></div>
+                                    <div class="layer layer-3"></div>
+                                    <div class="layer layer-2"></div>
+                                </div>
+                                
                             </div>
                         
-                        <div 4lass="contenedor-Cron-Dat-Btn">
+                        <div class="contenedor-Cron-Dat-Btn">
                             <!--aca cronometro del juego iniciado-->
                             <div id="cronometro" class="cronometro">
                                 <p> Tiempo Restante: --:--</p>
@@ -298,22 +310,34 @@ entrega3/paginaSenku.html<!DOCTYPE html>
                 <div class="controls-container">
                     <div class="controls-text">
                         <h2 class="controls-title">Controles</h2>
-                        <p>Click o Toque: Selecciona un <br>caballero, luego haz click o toca un <br>espacio vacío para moverlo.</p>
-                        <div class="mouse-img">
-                        <img src="./assets/Group 10.png" alt="imagen del mouse y botón izquierdo con dots donde se debe hacer el click">
+                        <p>Barra espaciadora, click o flecha hacia arriba.<br>Presiona cualquiera de las teclas para volar e intenta mantenerte a salvo</p>
+                        <div class="controls-obstaculos">
+                            <p>Cuidado con los obstaculos...</p>
+                            <div class="container-obstaculos">
+                            
+                                <span><img class="obstaculo" src="./assets/obstaculo1.png" alt="Obstáculo"></span>
+                                <span><img class="obstaculo" src="./assets/obstaculo2.png" alt="Otro Obstáculo"></span>
+                                <span><img class="obstaculo" src="./assets/obstaculo3.png" alt="Tercer Obstáculo"></span>
+                                
+                            
+                                    <span><img class="obstaculo" src="./assets/obstaculo4.png" alt="Cuarto Obstáculo"></span>
+                                    <span><img class="obstaculo" src="./assets/obstaculo7.png" alt="Quinto Obstáculo"></span>
+                                    <span><img class="obstaculo" src="./assets/obstaculo6.png" alt="Sexto Obstáculo"></span>
+                                
+                            </div>
                         </div>
                     </div>
-                    <img class="diagrama-img" src="./assets/diagramaJuego.png" alt="imagen del tablero de juego con la posición inicial">
                 </div>
-            </aside>
+                </aside>
+        
             
             <aside>
                 <h2 class="how-to-play-title">¿Cómo Jugar?</h2>
-                <p>El objetivo es sencillo, pero el desafío es colosal: debes <br>ser el único caballero que quede en el centro del tablero.</p>
+                <p>En el último tramo de cursada intenta tomar buenas decisiones <br> y consigue más puntos. <br>Recoge coleccionables para obtener puntos </p>
                 <ul>
-                    <li><span><img src="./assets/armadura1.png" alt="viñeta con la parte superior de una armadura"></span>Movimiento: Los caballeros solo pueden moverse saltando <br>sobre otro caballero (horizontal o verticalmente) hacia un <br>espacio vacío.</li>
-                    <li><span><img src="./assets/armadura2.png" alt="viñeta con la parte media de una armadura"></span>Captura: El caballero sobre el que saltas es "derrotado" y se retira del tablero.</li>
-                    <li><span><img src="./assets/armadura3.png" alt="viñeta con la parte inferior de una armadura"></span>Victoria: La victoria perfecta se logra cuando solo <br>queda un caballero en el centro del tablero.</li>     
+                    <li><span><img  class="coleccionable" src="./assets/Coleccionable1.png" alt="viñeta con la parte superior de una armadura"></span>Mate: Ese sorbo que acompaña cursadas y madrugadas eternas y <br>Tomarlo es recuperar aliento, claridad… <br>y unos puntos extra para seguir adelante.</li>
+                    <li><span><img class="coleccionable" src="./assets/Coleccionable5.png" alt="viñeta con la parte media de una armadura"></span>Materia Promocionada: La sensación de que el esfuerzo valió la pena… y un puñado de puntos que levantan el ánimo.</li>
+                    <li><span><img class="coleccionable" src="./assets/Coleccionable3.png" alt="viñeta con la parte inferior de una armadura"></span>Simboliza el final de la carrera. <br>Tomarlo es tocar, aunque sea por un momento, la meta que parece tan lejana… y sumar puntos que renuevan la esperanza.</li>     
                 </ul>
             </aside>
         </div>

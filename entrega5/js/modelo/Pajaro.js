@@ -48,6 +48,11 @@ export class Pajaro {
         this.velY += this.gravedad;
         this.y += this.velY;
 
+        if (this.y < 0) {
+            this.y = 0; // Lo fuerza exactamente al borde
+            this.velY = 0; // Anula la velocidad ascendente para evitar el rebote
+        }
+
         }else if (this.estado === 'muriendo') {
             // 1. Animación de muerte (rotación)
             if (!this.animacionMuerteTerminada) {
@@ -103,12 +108,8 @@ export class Pajaro {
     fueraDelCanvas(){
         const box= this.getColisionBox();
 
-        // Si colisiona con el techo o el piso (en estado 'volando')
-        if(this.estado === 'volando' && box.y < 0){
-            this.velY = 0; // Evita que siga subiendo
-            this.y = 0;
-            return false;
-        }
+
+
         if(this.estado === 'volando' && (box.y + box.h > this.canvasHeight)){
             return true;
         }
