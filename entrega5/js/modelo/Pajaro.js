@@ -121,8 +121,6 @@ export class Pajaro {
 
         return false;
     }
-
-
     
     getColisionBox() {
         return {
@@ -132,4 +130,28 @@ export class Pajaro {
             h: this.frameH-35      
         }; //hago más chico el bos de colision del pajaro
     }
+    reiniciar() {
+            // 1. Posición inicial
+            this.x = 100;
+            this.y = 200;
+
+            // 2. Física
+            this.velY = 0;
+            this.gravedad = 0.2 ; // Asegura que vuelva a la gravedad normal de vuelo/caída.
+            this.salto = -3; // Valor de impulso al saltar
+            
+            // 3. Estado de juego
+            this.estado = 'volando'; // ¡Fundamental! Vuelve al estado normal
+            this.animacionMuerteTerminada = false;
+
+            // 4. Animación de vuelo (sprite normal)
+            this.frameActual = 0;
+            this.cont = 0; 
+
+            // 5. Animación de muerte (si estaba en curso, también se resetea)
+            this.frameActualMuerte = 0;
+            this.contMuerte = 0;
+   
+        }
+
 }

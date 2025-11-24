@@ -1,5 +1,5 @@
 import { Pajaro } from "./Pajaro.js";
-import { FondoParallax } from "./FondoParallax.js";
+
 import { Obstaculo } from "./Obstaculo.js";
 import { Coleccionable } from "./Coleccionable.js";
 import { Tuberia } from "./Tuberia.js";
@@ -93,6 +93,10 @@ export class JuegoModel {
     get animacionMuerteEnCurso() {
         // El Modelo simplemente delega la pregunta al objeto Pajaro.
         return this.pajaro.animacionMuerteEnCurso; 
+    }
+
+    hayColision() {
+        return this.obstaculos.some(t => t.colisiona(this.pajaro));
     }
 
     actualizar() {
@@ -199,33 +203,6 @@ export class JuegoModel {
         }
 
         // Lógica de generación de nuevos obstáculos (Bucle Infinito)
-        /*this.contadorGeneracion++;
-        if (this.contadorGeneracion >= this.generacionIntervaloBase) {
-            
-            const infoGeneracion = this._obtenerRutaObstaculoAleatoria();
-            let nuevoObstaculo;
-
-            if (infoGeneracion.tipo === 'tuberia') {
-                // Generar una Tuberia. La ruta de la imagen se define dentro de Tuberia.js
-                nuevoObstaculo = new Tuberia(
-                    "./assets/tuberiaInferior.png", // <--- DEBES ASEGURARTE DE USAR LA RUTA CORRECTA AQUÍ
-                    this.canvasWidth + 50, 
-                    this.canvasHeight
-                );
-            } else {
-                // Generar un Obstaculo
-                nuevoObstaculo = new Obstaculo(
-                    infoGeneracion.ruta, // Usa la ruta de la imagen simple
-                    this.canvasWidth + 50, 
-                    this.canvasHeight
-                );
-            }
-
-            this.obstaculos.push(nuevoObstaculo);
-                
-            this.contadorGeneracion = Math.floor(Math.random() * 30); 
-        }*/ 
-
 
         this.contadorGeneracion++;
         let nuevoObstaculo = null;
@@ -279,9 +256,28 @@ export class JuegoModel {
              this.obstaculos.push(nuevoObstaculo);
         }
     }
+    reiniciar() {
+        this.gameOver = false;
+        this.pajaro.reiniciar(); 
+        this.obstaculos = [];
+        this.coleccionables = [];
 
-    hayColision() {
-        return this.obstaculos.some(t => t.colisiona(this.pajaro));
+        // ----------------------------------------------------
+        // ✅ CORRECCIÓN CLAVE: Resetear dificultad y tiempo
+        // ----------------------------------------------------
+        this.dificultad = 0; 
+        this.contadorTiempo = 0; 
+        // Resetear el intervalo de generación a su valor inicial (del constructor)
+        this.generacionIntervaloBase = 150; // <-- Usa el valor que definiste en tu constructor
+        // ----------------------------------------------------
+
+        // Resetear la lógica de generación por fases (ya lo tenías)
+        this.faseActual = 'tuberias';
+        this.contadorFase = 0;
+        this.contadorGeneracion = 0; 
+
+        this.score = 0;;
     }
+
     
 }

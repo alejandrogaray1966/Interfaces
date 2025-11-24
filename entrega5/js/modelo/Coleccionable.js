@@ -42,6 +42,11 @@ export class Coleccionable {
         // Opcional: Implementar una animación de rotación en el canvas
         ctx.save();
         
+        ctx.shadowBlur = 20; // Ajusta la intensidad (20 píxeles de desenfoque)
+        ctx.shadowColor = 'rgba(255, 255, 0, 1)'; // Color amarillo brillante o blanco
+        ctx.shadowOffsetX = 0; // No queremos offset horizontal
+        ctx.shadowOffsetY = 0; // No queremos offset vertical
+
         // Mover el punto de referencia al centro del coleccionable
         const centerX = this.x + this.ancho / 2;
         const centerY = this.y + this.alto / 2;
@@ -56,7 +61,8 @@ export class Coleccionable {
             this.img,
             -this.ancho * 2, 
             -this.alto * 2, // Dibuja desde el punto central
-            this.ancho * 2, this.alto * 2
+            this.ancho * 2, 
+            this.alto * 2
         );
         
         ctx.restore(); // Restaura el contexto para no afectar otros dibujos
