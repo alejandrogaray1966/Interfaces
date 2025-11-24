@@ -1332,6 +1332,35 @@ a, a:hover, a:active, a:visited, li{
 }no para blocka*/
 
 
+/*estilos para flappy bird*/
+
+.coleccionable{
+    display: flex;
+    width: 80px;
+    position: relative;
+    top: -16px;
+    right: 20px;
+}
+
+.obstaculo{
+    width: 100px;
+}
+
+.controls-obstaculos{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.container-obstaculos{
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+   
+}
+
 /*----------------------------------
     FIN ESTILOS PAGINA JUEGO
     ---------------------------------*/
