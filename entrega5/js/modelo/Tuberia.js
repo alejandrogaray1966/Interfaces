@@ -2,7 +2,7 @@ export class Tuberia {
     constructor(ruta, xInicial, canvasHeight) {
         this.img = new Image();
         this.img.src = ruta;
-        this.ancho = 80;
+        this.ancho = 120;
         this.espacio = 180;
         this.canvasHeight = canvasHeight;
         

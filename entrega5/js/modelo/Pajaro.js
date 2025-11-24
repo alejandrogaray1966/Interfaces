@@ -83,6 +83,7 @@ export class Pajaro {
         if (this.estado === 'volando') {
             this.velY = this.salto;
         }
+
     }
 
     get animacionMuerteEnCurso() {
@@ -103,7 +104,11 @@ export class Pajaro {
         const box= this.getColisionBox();
 
         // Si colisiona con el techo o el piso (en estado 'volando')
-        if(this.estado === 'volando' && (box.y < 0 || box.y + box.h > this.canvasHeight)){
+        if(this.estado === 'volando' && box.y < 0){
+            this.velY = 0; // Evita que siga subiendo
+        }
+
+        if(this.estado === 'volando' && (box.y + box.h > this.canvasHeight)){
             return true;
         }
 
@@ -121,8 +126,8 @@ export class Pajaro {
         return {
             x: this.x +35,
             y: this.y +25,
-            w: this.frameW-50,//pico
-            h: this.frameH-50      
+            w: this.frameW-40,//pico
+            h: this.frameH-35      
         }; //hago más chico el bos de colision del pajaro
     }
 }

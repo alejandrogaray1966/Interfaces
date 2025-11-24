@@ -4,8 +4,8 @@ export class Obstaculo {
         this.img.src = ruta;
         
         // Asumiendo que el obstáculo es un cuadrado o un rectángulo simple.
-        this.ancho = 100; // Ancho del obstáculo
-        this.alto = 100;  // Alto del obstáculo
+        this.ancho = 130; // Ancho del obstáculo
+        this.alto = 130;  // Alto del obstáculo
         
         this.x = xInicial;
         this.velocidadBase = 2.5; // Ajusta la velocidad para el scroll (un poco más rápido)
@@ -65,10 +65,10 @@ export class Obstaculo {
     // Devuelve la caja de colisión para la detección.
     getColisionBox() {
         return {
-            x: this.x+15,
-            y: this.y+20,
-            w: this.ancho-40,
-            h: this.alto-40
+            x: this.x+30,
+            y: this.y+30,
+            w: this.ancho-60,
+            h: this.alto-60
         };
     }
 

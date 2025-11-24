@@ -87,3 +87,5 @@ export class Coleccionable {
         return false;
     }
 }
+
+

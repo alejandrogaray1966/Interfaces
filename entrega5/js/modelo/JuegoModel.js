@@ -38,8 +38,8 @@ export class JuegoModel {
         this.MAX_OBSTACULOS = 8;    // Generar 8 obstáculos simples
         
         // El intervalo de generación es ahora fijo para cada tipo
-        this.INTERVALO_TUBERIA = 100; // Un par de tuberías cada 100 frames
-        this.INTERVALO_OBSTACULO = 75; // Un obstáculo simple cada 75 frames
+        this.INTERVALO_TUBERIA = 120; // Un par de tuberías cada 100 frames
+        this.INTERVALO_OBSTACULO = 100; // Un obstáculo simple cada 75 frames
 
 
         // Obstáculos iniciales
@@ -235,7 +235,7 @@ export class JuegoModel {
                 if (this.contadorGeneracion >= this.INTERVALO_TUBERIA) {
                     // Generar Tuberia
                     nuevoObstaculo = new Tuberia(
-                        "./assets/tuberia-simple.png", // Asegúrate de que esta ruta sea correcta
+                        "./assets/tuberia.png", // Asegúrate de que esta ruta sea correcta
                         this.canvasWidth + 50, 
                         this.canvasHeight
                     );
