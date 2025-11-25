@@ -242,13 +242,10 @@ export class ControladorSenku {
 
         let mensaje = "";
         if (victoria) {
-            mensaje = "¡VICTORIA! 🎉 Solo te queda una ficha.";
+            mensaje = "¡PERDISTE! 🎉 Vuelve a intentarlo.";
 
-        } else if (this.tiempoRestante <= 0) {
+        }else if (this.tiempoRestante <= 0) {
             mensaje = "El tiempo se ha agotado. Intenta de nuevo con una estrategia más rápida.";
-
-        } else {
-            mensaje = "Te has quedado sin movimientos posibles. ¡Mejora tu estrategia!.";
 
         }
 
