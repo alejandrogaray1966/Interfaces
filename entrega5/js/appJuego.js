@@ -119,8 +119,8 @@ function actualizarCronometroUI(segundos) {
     const descripcionElemento = document.getElementById('mensajeFinJuegoDescripcion'); 
         // --- 1. Definir Contenido ---
     if (victoria) {
-        tituloElemento.textContent = "¡VICTORIA! 🎉";
-        descripcionElemento.textContent = "¡Felicitaciones! Has ganado el Senku. Tu Ficha sera registrada.";
+        tituloElemento.textContent = "¡Perdiste! 😞";
+        descripcionElemento.textContent = "Podés volver a intentarlo...";
         startConfetti(); 
     } else {
         tituloElemento.textContent = "Juego Terminado 😞";
