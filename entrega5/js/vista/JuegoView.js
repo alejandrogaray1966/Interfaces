@@ -71,12 +71,12 @@ export class JuegoView {
         }
     
         // NO DIBUJAR LA CAJA DE COLISIÓN SI LA ANIMACIÓN TERMINÓ
-        if (pajaro.estado !== 'muriendo' || !pajaro.animacionMuerteTerminada) {
-            const box = pajaro.getColisionBox();
-            this.ctx.strokeStyle = 'red';
-            this.ctx.lineWidth = 2;
-            this.ctx.strokeRect(box.x, box.y, box.w, box.h);
-        }
+        //if (pajaro.estado !== 'muriendo' || !pajaro.animacionMuerteTerminada) {
+           // const box = pajaro.getColisionBox();
+            //this.ctx.strokeStyle = 'red';
+            //this.ctx.lineWidth = 2;
+            //this.ctx.strokeRect(box.x, box.y, box.w, box.h);
+       // }
     }
     
     _dibujarPuntuacion(score) { // <-- ¡NUEVO MÉTODO!
