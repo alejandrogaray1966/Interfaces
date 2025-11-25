@@ -17,6 +17,10 @@ const selectorTiempo = document.getElementById('selectorTiempo');
 const cronometroDiv = document.getElementById('cronometro'); // El div que muestra el tiempo
 const selectorTableros = document.getElementById('tableros'); // Nuevo: Selector de tablero
 const selectorMundos = document.getElementById('mundos'); // Nuevo: Selector de tablero
+const fondosParallaxContenedor = document.querySelector('.fondos-parallax');
+const fondoBosque = document.querySelector('.fondo_bosque');//contenedores de los diferentes fondos
+const fondoBosqueNoche = document.querySelector('.fondo_bosqueNoche');
+const fondoCiudad = document.querySelector('.fondo_ciudad');
 const selectorMaterial = document.getElementById('selectorMaterial');
 const selectorPersonaje = document.getElementById('selectorPersonaje');
 
@@ -46,6 +50,40 @@ const MAPA_TABLEROS = {
 
 let controlador = null;
 let juegoIniciado = false;
+
+function cambiarFondoParallax() {
+    const mundoSeleccionado = selectorMundos.value;
+    console.log("mundo seleccionado: " + mundoSeleccionado);
+
+    fondoBosque.style.display = 'none';
+    fondoBosqueNoche.style.display = 'none';
+    fondoCiudad.style.display = 'none';
+    
+    fondoBosque.querySelectorAll('.layer').forEach(layer => layer.classList.add('fondo-detenido'));
+    fondoBosqueNoche.querySelectorAll('.layer').forEach(layer => layer.classList.add('fondo-detenido'));
+    fondoCiudad.querySelectorAll('.layer').forEach(layer => layer.classList.add('fondo-detenido'));
+
+ 
+    switch (mundoSeleccionado) {
+        case 'bosque': console.log("entro en bosque");
+            fondoBosque.style.display = 'block'; 
+            fondoBosque.querySelectorAll('.layer').forEach(layer => layer.classList.remove('fondo-detenido'));
+            break;
+        case 'bosqueNocturno': console.log("entro en bosque nocturno");
+            fondoBosqueNoche.style.display = 'block';
+            fondoBosqueNoche.querySelectorAll('.layer').forEach(layer => layer.classList.remove('fondo-detenido'));
+            break;
+        case 'ciudad': console.log("entro en ciudad");
+            fondoCiudad.style.display = 'block'; 
+            fondoCiudad.querySelectorAll('.layer').forEach(layer => layer.classList.remove('fondo-detenido'));
+            break;
+        default:console.log("entro en default");
+            // Fondo por defecto bosque 
+            fondoBosque.style.display = 'block';
+            fondoBosque.querySelectorAll('.layer').forEach(layer => layer.classList.remove('fondo-detenido'));
+            break;
+    }
+}
 
 
 
@@ -140,6 +178,9 @@ function iniciar() {
     if (botonPlay) {
         botonPlay.classList.add('hidden'); 
     }
+    if (fondosParallaxContenedor) {
+        fondosParallaxContenedor.style.display = 'block'; 
+    }
 
     if (!controlador) {
         // Primera vez que se inicia el juego
@@ -182,6 +223,11 @@ window.onload = function() {
         // Llama a la misma función que ya sabe cómo reiniciar el juego.
         botonReiniciar.addEventListener('click', iniciarJuego); 
     }
+
+    if (selectorMundos) {
+        cambiarFondoParallax();
+        selectorMundos.addEventListener('change', cambiarFondoParallax);
+   }
 
 
     }
