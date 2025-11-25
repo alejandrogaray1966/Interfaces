@@ -81,7 +81,7 @@ export class JuegoView {
     
     _dibujarPuntuacion(score) { // <-- ¡NUEVO MÉTODO!
         const ctx = this.ctx;
-        ctx.fillStyle = 'black';
+        ctx.fillStyle = 'white';
         ctx.font = 'bold 30px Arial';
         ctx.textAlign = 'left';
         ctx.fillText(`Puntos: ${score}`, 20, 40); 

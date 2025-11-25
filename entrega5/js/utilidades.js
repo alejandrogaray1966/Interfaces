@@ -62,14 +62,14 @@ export function bloquearBotones(bloquear) {
 // el estado del ranking durante la sesión. Si usas localStorage, se inicializará desde allí.
 // Aquí la inicializamos con los valores por defecto que tenías.
 export let rankingJugadores = [
-    { nombre: 'Fabricio', fichaAcumulada: 11 },
-    { nombre: 'Belén', fichaAcumulada: 34 },
-    { nombre: 'Pamela', fichaAcumulada: 22 },
-    { nombre: 'Soledad', fichaAcumulada: 28 },
-    { nombre: 'Alejandro', fichaAcumulada: 25 }
+    { nombre: 'Fabricio', fichaAcumulada: 1105 },
+    { nombre: 'Belén', fichaAcumulada: 940 },
+    { nombre: 'Pamela', fichaAcumulada: 760 },
+    { nombre: 'Soledad', fichaAcumulada: 730 },
+    { nombre: 'Alejandro', fichaAcumulada: 710 }
 ]; 
 // Ordenamos el ranking una vez (por si acaso no lo está)
-rankingJugadores.sort((a, b) => a.fichaAcumulada - b.fichaAcumulada); 
+rankingJugadores.sort((a, b) => b.fichaAcumulada - a.fichaAcumulada); 
 
 //Muestra los datos del ranking del juego en el contenedor especificado.
 export function mostrarRanking(ranking) {
@@ -107,7 +107,7 @@ export function actualizarRanking(nombre, totalFicha) {
     rankingJugadores.push({ nombre, fichaAcumulada: totalFicha });
 
     //  Ordenar de menor a mayor tiempo
-    rankingJugadores.sort((a, b) => a.fichaAcumulada - b.fichaAcumulada);
+    rankingJugadores.sort((a, b) => b.fichaAcumulada - a.fichaAcumulada);
 
     // Limitar a 6 jugadores (o el número que desees)
     if (rankingJugadores.length > 6) {
