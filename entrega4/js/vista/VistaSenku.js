@@ -387,6 +387,10 @@ export class VistaSenku {
         }
     }
 
+  
+
+
+
      //Inicia el proceso de arrastre, elevando la ficha.
     iniciarArrastre(ficha, x, y) {
         this.fichaArrastrada = ficha;

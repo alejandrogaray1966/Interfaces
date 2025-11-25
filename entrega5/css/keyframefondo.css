@@ -1,0 +1,162 @@
+@keyframes scroll{
+    0% {
+        background-position-x: 0px;
+    }
+    100% {
+        background-position-x: -750px;
+    }
+}
+
+.flappyBird-container{
+    z-index: 6;
+    position: relative;
+    left: 320px;
+}
+
+.fondos-parallax{
+    position: absolute;
+    left: 320px;
+    width: 750px;/*ver esto y backgrounde repeat-x*/
+    height: 422px; /*nunca ancho y alto a una imagen para que no se estire, esto es un div*/
+
+}
+
+.layer{
+    width: 100%;
+    height: 100%;
+    position:absolute;
+    top:0;
+    left:0;
+    background-repeat: repeat-x;
+    background-size: cover;
+}
+
+/*FONDOS CIUDAD*/
+.fondo_ciudad .layer-8{
+    background-image: url("../assets/capa8-ciudad_1920\ x\ 1080.png"); 
+}
+
+.fondo_ciudad .layer-7{
+    background-image: url("../assets/capa7-ciudad_1920\ x\ 1080.png"); 
+}
+
+.fondo_ciudad .layer-6{
+    background-image: url("../assets/capa6-ciudad_1920\ x\ 1080.png"); 
+}
+
+.fondo_ciudad .layer-5{
+    background-image: url("../assets/capa5-ciudad_1920\ x\ 1080.png"); 
+}
+
+.fondo_ciudad .layer-4{
+    background-image: url("../assets/capa4-ciudad_1920\ x\ 1080.png"); 
+}
+
+.fondo_ciudad .layer-3{
+    background-image: url("../assets/capa3-ciudad_1920\ x\ 1080.png"); 
+}
+
+.fondo_ciudad .layer-2{
+    background-image: url("../assets/capa2-ciudad_1920\ x\ 1080.png"); 
+}
+
+.fondo_ciudad .layer-1{
+    background-image: url("../assets/capa1-ciudad_1920\ x\ 1080.png"); 
+}
+
+/*FONDOS BOSQUE*/
+
+.fondo_bosque .layer-6{
+    background-image: url("../assets/capa5-bosque_1920\ x\ 1080.png"); 
+}
+
+.fondo_bosque .layer-5{
+    background-image: url("../assets/capa4-bosque_1920\ x\ 1080.png"); 
+}
+
+.fondo_bosque .layer-4{
+    background-image: url("../assets/capa3-bosque_1920\ x\ 1080.png"); 
+}
+
+.fondo_bosque .layer-3{
+    background-image: url("../assets/capa2-bosque_1920\ x\ 1080.png"); 
+}
+
+.fondo_bosque .layer-2{
+    background-image: url("../assets/capa1-bosque_1920\ x\ 1080.png"); 
+}
+
+/*FONDOS BOSQUE NOCHE*/
+
+.fondo_bosqueNoche .layer-6{
+    background-image: url("../assets/capa6-bosquenoche_1920\ x\ 1080.png"); 
+}
+
+.fondo_bosqueNoche .layer-5{
+    background-image: url("../assets/capa5-bosquenoche_1920\ x\ 1080.png");
+}
+
+.fondo_bosqueNoche .layer-4{
+    background-image: url("../assets/capa4-bosquenoche_1920\ x\ 1080.png"); 
+}
+
+.fondo_bosqueNoche .layer-3{
+    background-image: url("../assets/capa3-bosquenoche_1920\ x\ 1080.png") 
+}
+
+.fondo_bosqueNoche .layer-2{
+    background-image: url("../assets/capa2-bosquenoche_1920\ x\ 1080.png"); 
+}
+
+.fondo_bosqueNoche .layer-1{
+    background-image: url("../assets/capa1-bosquenoche_1920\ x\ 1080.png"); 
+}
+  
+
+/*ANIMACIONES CAPAS*/
+
+.layer-8{
+    animation: scroll  infinite linear;
+    z-index: 0;
+}
+
+.layer-7{
+    animation: scroll  infinite linear;
+    z-index: 0;
+}
+
+.layer-6{
+    animation: scroll 55s infinite linear;
+    z-index: 0;
+}
+
+.layer-5{
+   animation: scroll 40s infinite linear;/*va cambiando los tiempos en los distintos div, */
+    z-index: 1;
+}
+
+.layer-4{
+    animation: scroll 27s infinite linear;
+    z-index: 2;
+}
+
+.layer-3{  
+    animation: scroll 12s infinite linear;
+    z-index: 3;
+}
+
+
+.layer-2{
+    animation: scroll 5s infinite linear;
+    z-index: 4;
+}
+
+.layer-1{
+    animation: scroll 3s infinite linear;
+    z-index: 5;
+}
+
+
+.fondo-detenido{
+        animation: paused;
+}

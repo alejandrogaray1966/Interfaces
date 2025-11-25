@@ -1,0 +1,725 @@
+.controls-textBlocka{
+  width:30vw;
+}
+
+/* ------------------------------------------------------ */
+/* Estilo para el menú de configuración del juego BLOCKA  */
+/* ------------------------------------------------------ */
+.game-settings-menu {
+    position: absolute;
+    top: 75px;
+    right: 36px;
+    border:1px solid rgba(255, 255, 255, 0.489);
+    border-radius: 10px;
+    padding: 14px;
+    z-index: 10;
+    box-shadow: 8px rgb(0 0 0 / 48%);
+    width: 250px;
+    font-family: 'Roboto'sans-serif;
+}
+.game-settings-menu.hidden {
+    display: none;
+}
+
+.game-settings-menu label {
+    font-family: 'Roboto' sans-serif;
+    display: block;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+.game-settings-menu select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 8px;
+}
+.info-juego h1{
+ font-size: 2rem;
+ margin-bottom: 8px;
+ text-align: center;
+}
+
+/* ------------------------------------------------------ */
+/* Estilo para el CANVA                                   */
+/* ------------------------------------------------------ */
+/* ------------------------------------------------------ */
+/* Efecto para la imagen del game-preview                 */
+/* ------------------------------------------------------ */
+.hidden {
+    display: none !important;
+}
+
+
+
+.canvas-wrapper {
+    position: relative;
+
+    display: flex;
+
+    z-index: 100;
+    pointer-events: auto; /* ← permitir interacción */
+}
+
+.faded-blur {
+    opacity: 0.3;
+    filter: blur(4px);
+    transition: all 0.5s ease;
+}
+
+/* ------------------------------------------------------ */
+/* SENKU                                                  */
+/* ------------------------------------------------------ */
+
+#senku-container {
+    position: relative;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: auto; /* ← permitir interacción */
+}
+
+#senkuCanvas {
+    /* Posición normal (dentro del flujo) para evitar el desplazamiento no deseado */
+    display: block;
+    /* Asegura que no haya margen extra */
+    margin: 0; 
+    /* Define el tamaño exacto del canvas */
+    width: 630px;
+    height: 630px;
+    /* La clave es poner el fondo aquí */
+    background-color: transparent; /* Permite que el SVG se vea */
+    background-size: cover; /* Ajusta la imagen al tamaño del canvas */
+    background-repeat: no-repeat;
+    background-position: center; 
+    /* Desactiva la manipulación táctil predeterminada */
+    touch-action: none; 
+    cursor: pointer;
+}
+
+/* ------------------------------------------------------ */
+/* Contador fichas restantes                              */
+/* ------------------------------------------------------ */
+
+.contadorFicha {
+    border-radius: 20px;
+    font-size: 18pxx;
+    font-weight: bold;
+    position: absolute;
+    top: 100px;
+    z-index: 3;
+    text-align: center;
+    margin-top: 12px;
+    color: #6b7280;       /* gris similar a text-gray-500 */
+
+}
+/* Número de fichas */
+.contadorFicha span {
+    font-weight: bold;
+    color: #374151;       /* gris oscuro similar a text-gray-700 */
+}
+
+/* ------------------------------------------------------ */
+/* Mensaje para los movimientos                           */
+/* ------------------------------------------------------ */
+
+
+
+.hidden {
+    display: none;
+}
+
+
+
+
+.cronometro {
+    
+    border-radius: 20px;
+    font-size: 32px;
+    font-weight: bold;
+    position: relative;
+    left: 430px;
+    z-index: 2;
+    text-align: center;
+    height: 100px;
+    width: 200px;
+}
+
+
+
+.cronometro.shake {
+    animation: shake 0.4s;
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+}
+
+/* RANKING PRIMER PUESTO*/
+
+/* From Uiverse.io by sohoning */ 
+
+.ranking{
+    position: absolute;
+}
+.cards-ranking {
+  position: relative;
+  transition-duration: 0.5s;
+  background: none;
+  overflow: hidden;
+}
+
+.cards-ranking:hover {
+  height: 270px;
+}
+
+.cards-ranking:hover .frente-ranking{
+  box-shadow: 0 10px 15px #b1985e;
+}
+
+.cards-ranking:hover .detalle-ranking {
+  display: flex;
+}
+
+.frente-ranking {
+  position: relative;
+  background: linear-gradient(45deg, #fffbf0, #ffdd87);
+  width: 240px;
+  height: 130px;
+  border-radius: 20px;
+  transition-duration: 0.5s;
+  z-index: 2;
+}
+
+.detalle-ranking {
+  position: relative;
+  display: none;
+  width: 240px;
+  height: 120px;
+  background: white;
+  top: -20px;
+  z-index: 1;
+  transition-duration: 1s;
+  border-radius: 0 0 25px 25px;
+  overflow: hidden;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.linea {
+  position: absolute;
+  width: 200px;
+  height: 10px;
+  top: 70px;
+  background-image: linear-gradient(
+    to right,
+    transparent 10%,
+    #ffe8a0 20%,
+    #f7b733 50%,
+    #ffe8a0 70%,
+    transparent 90%
+  );
+  z-index: 1;
+}
+
+.trofeo {
+  position: absolute;
+  right: 0px;
+  top: 4px;
+  z-index: 2;
+  width :70px;
+  height : 70px;
+}
+
+.ranking-numero{
+  position: relative;
+  color: #ffc64b;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 700;
+  font-size: 50px;
+  left: 20px;
+  padding: 0;
+  margin: 0;
+  top: -5px;
+}
+
+.ranking-primero {
+  position: relative;
+  font-size: 40px;
+  color: #0f0c1f;
+}
+
+.usuario-avatar {
+  position: absolute;
+  bottom: 17px;
+  left: 20px;
+  color: #0f0c1f;
+
+}
+
+.usuario-nombre {
+  position: relative;
+  font-weight: 600;
+  color: #0f0c1f;
+  left: 55px;
+  font-size: 18px;
+  top: 24px;
+}
+
+.medalla {
+  position: absolute;
+  top: 15px;
+  right: 5px;
+}
+
+.puntuacion {
+  position: relative;
+  height: 75px;
+  top: 10px;
+  margin-right: 10px;
+  margin-left: 15px;
+}
+
+.gradesIcon {
+  position: absolute;
+  top: 16px;
+}
+
+.puntuacion-puntos {
+  position: relative;
+  display: block;
+  margin-left: 60px;
+  color: #0f0c1f;
+  letter-spacing: 6px;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-top: 20px;
+  font-weight: 800;
+  font-size: 13px;
+}
+
+.puntuacion-numero {
+  position: relative;
+  font-family: Arial, Helvetica, sans-serif;
+  display: block;
+  font-size: 25px;
+  font-weight: 800;
+  margin-left: 60px;
+  color: #ea9518;
+  top: -5px;
+}
+
+.timeNum {
+  color: #6cabf6;
+}
+
+.slide-in-top {
+  animation: slide-in-top 1s cubic-bezier(0.65, 0.05, 0.36, 1) both;
+}
+
+@keyframes slide-in-top {
+  0% {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/*ranking todos los jugadores*/
+.leaderboard {
+  position: absolute;
+   /*Mueve el elemento hacia la izquierda y arriba por la mitad de su tamaño */
+  width: 285px;
+  height: auto;
+  /* Degradado de fondo */
+  background: linear-gradient(to bottom, #47065fed, #0a0d20d1);
+  border-radius: 10px;
+  /* Sombra de caja para el efecto 3D */
+  box-shadow: 0 7px 30px rgba(62, 9, 11, 0.3);
+  margin-top: 10px;
+
+}
+
+/*
+ * --------------------------------
+ * Estilos para el título (h1)
+ * --------------------------------
+ */
+.leaderboard h1 {
+  font-size: 18px;
+  color: #e1e1e1;
+  padding: 12px 13px 18px;
+}
+
+/* Estilos para el icono SVG dentro del título */
+.leaderboard h1 svg {
+  width: 25px;
+  height: 26px;
+  position: relative;
+  top: 3px;
+  margin-right: 6px;
+  vertical-align: baseline;
+}
+
+/*
+ * --------------------------------
+ * Estilos para la lista de ranking (ol)
+ * --------------------------------
+ */
+.leaderboard ol {
+  /* Inicializa el contador para la numeración de la lista */
+    counter-reset: leaderboard;
+    list-style: none;
+    padding: 0;
+}
+
+/*
+ * --------------------------------
+ * Estilos para cada elemento de la lista (li)
+ * --------------------------------
+ */
+.leaderboard ol li {
+  position: relative;
+  z-index: 1;
+  /* Incrementa el contador para el pseudo-elemento ::before */
+  counter-increment: leaderboard;
+  padding: 14px 2px 14px 2px;
+  margin: 0;
+  cursor: pointer;
+  backface-visibility: hidden;
+  transform: translateZ(0) scale(1, 1);
+}
+
+/* Pseudo-elemento ::before para mostrar el número de posición (1, 2, 3...) */
+.leaderboard ol li::before {
+  content: counter(leaderboard);
+  position: absolute;
+  z-index: 2;
+  top: 15px;
+  left: 15px;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  color: #9700CC;
+  background: #fff;
+  border-radius: 20px;
+  text-align: center;
+}
+
+/*
+ * --------------------------------
+ * Estilos para el nombre del jugador (span)
+ * --------------------------------
+ */
+.leaderboard ol li span {
+  position: absolute;
+  z-index: 2;
+  top: 16px;
+  padding-left: 43px;
+  margin: 0;
+  background: none;
+  font-size: 1.1rem;
+}
+
+
+.leaderboard ol li p.ranking-ficha{
+  display: flex;
+    justify-content: flex-end;
+    font-size: 1rem;
+    padding-right: 14px;
+}
+
+.leaderboard ol li p::after{
+   z-index: 2;
+}
+
+/* Pseudo-elemento ::before en 'span' */
+.leaderboard ol li span::before,
+.leaderboard ol li span::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  border-top: 10px solid #4f1c65;
+  border-left: 10px solid transparent;
+  transition: all 0.1s ease-in-out;
+  opacity: 0;
+  top: 34px;
+}
+.leaderboard ol li span::before{
+    left: -8px;
+
+}
+
+/* Pseudo-elemento ::after en 'span' */
+.leaderboard ol li span::after {
+  left: auto;
+  right:-186px;
+  border-left: none;
+  border-right: 10px solid transparent;
+
+}
+
+/*
+ * --------------------------------
+ * Estilos para la puntuación (small)
+ * --------------------------------
+ */
+.leaderboard ol li small {
+  position: relative;
+  z-index: 2;
+  display: block;
+  text-align: right;
+  color:#e1e1e1;
+}
+
+/* Pseudo-elemento ::after en 'li' (para el efecto de hover/fondo) */
+.leaderboard ol li::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  top: 2;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #4f1c65;
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.08);
+  /* transform: scaleX(1.06) scaleY(1.03); */
+  transition: all 0.3s ease-in-out;
+  opacity: 0;
+
+}
+
+/*
+ * --------------------------------
+ * Estilos específicos por posición (colores)
+ * --------------------------------
+ */
+
+/* Estilos para el 1er lugar */
+.leaderboard ol li:nth-child(1) {
+  background: #0a0d201a;
+}
+
+.leaderboard ol li:nth-child(1)::after {
+  background: #4f1c65;
+}
+
+
+/* Estilos para el 2do lugar */
+.leaderboard ol li:nth-child(2) {
+  background: #0a0d204f;
+}
+
+.leaderboard ol li:nth-child(2)::after {
+  background: #4f1c65;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.08);
+
+}
+
+
+
+.leaderboard ol li:nth-child(2) span::before,
+.leaderboard ol li:nth-child(2) span::after {
+  border-top: 6px solid #4f1c65;
+}
+
+.leaderboard ol li:nth-child(2) span::after {
+  right: -190px;
+
+}
+
+/* Estilos para el 3er lugar */
+.leaderboard ol li:nth-child(3) {
+  background: #0a0d2094;
+}
+
+.leaderboard ol li:nth-child(3)::after {
+  background: #4f1c65;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.11);
+}
+
+.leaderboard ol li:nth-child(3) span::after {
+  right:  -177px;
+
+}
+
+.leaderboard ol li:nth-child(3) span::before,
+.leaderboard ol li:nth-child(3) span::after {
+  border-top: 2px solid #4f1c65;
+}
+
+/* Estilos para el 4to lugar */
+.leaderboard ol li:nth-child(4) {
+  background: #0a0d20b4;
+}
+
+
+.leaderboard ol li:nth-child(4)::after {
+  background: #4f1c65;
+  box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.15);
+}
+
+.leaderboard ol li:nth-child(4) span::before,
+.leaderboard ol li:nth-child(4) span::after {
+  top: -23px;
+  bottom: auto;
+  border-top: none;
+  border-bottom: 6px solid #4f1c65;
+}
+
+/* Estilos para el 5to lugar */
+.leaderboard ol li:nth-child(5) {
+  background: #0a0d20;
+}
+
+.leaderboard ol li:nth-child(5)::after{
+  background: #4f1c65;
+  box-shadow: 0 -2.5px 0 rgba(0, 0, 0, 0.12);
+}
+
+.leaderboard ol li:nth-child(5) span::before,
+.leaderboard ol li:nth-child(5) span::after{
+  top: -25px;
+  bottom: auto;
+  border-top: none;
+  border-bottom: 8px solid #4f1c65;
+}
+.leaderboard ol li:nth-child(5) span::after{
+  right: -208px;
+}
+
+
+
+.leaderboard ol li:last-child{
+  background: #090b1b;
+  border-radius: 0 0 10px 10px;
+
+}
+.leaderboard ol li:last-child span::before,
+.leaderboard ol li:last-child span::after{
+  top: -25px;
+  bottom: auto;
+  border-top: none;
+  border-bottom: 8px solid #4f1c65;
+
+}
+
+/*
+ * --------------------------------
+ * Estilos de HOVER (al pasar el ratón)
+ * --------------------------------
+ */
+.leaderboard ol li:hover {
+  z-index: 2;
+  overflow: visible;
+}
+
+.leaderboard ol li:hover::after {
+  opacity: 1;
+  transform: scaleX(1.06) scaleY(1.03);
+}
+
+.leaderboard ol li:hover span::before,
+.leaderboard ol li:hover span::after {
+  opacity: 1;
+  transition: all 0.35s ease-in-out;
+}
+
+.contenedor-Cron-Dat-Btn{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.container-popover{
+  background-color: #090b1b;
+  position: absolute;
+  top: 63%;
+  left: 42%;
+  width: 420px;
+  border-radius: 8px;
+  align-items: center;
+  gap: 22px;
+}
+
+.container-popover p{
+  font-size: 16px;
+
+}
+
+.container-popover p,
+.container-popover h2{
+  text-align: center;
+  padding: 4px 8px 12px 8px
+}
+
+.btn-popover{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+} 
+
+.btn-popover button{
+  width: 100px;
+  height: 24px;
+  border-radius: 4px;
+  margin: 5px;
+}
+
+/* ------------------------------------------------------ */
+/* Popover: mostrar la mano (cursor pointer) sobre botones */
+/* ------------------------------------------------------ */
+#id-popover button,
+.container-popover button,
+#id-popover .btn-popover button {
+  cursor: pointer;
+}
+
+
+.verificarBtn {
+    width: 222px;
+    height: 69px;
+    font-size: 24px;
+    font-weight: 600;
+    position: absolute; 
+    bottom: 45px;         
+    background-color: #9700CC;
+    color: white;
+    border: none;
+    border-radius: 8px;
+}
+
+.verificarBtn:hover {
+    background-color: #FF00D6;
+    transform: scale(1.1);
+    transition: ease-in-out 0.3s;
+    cursor: pointer;
+}
+
+
+.verificarBtn.shake {
+  animation: shake 0.4s;
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+  100% { transform: translateX(0); }
+}
+
+
+ @media (max-width: 1510px){
+    .container-popover{
+      left: 466px;
+    }
+ }
